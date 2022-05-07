@@ -14,8 +14,8 @@ export default function GradientCircularProgress() {
       <CircularProgress
         thickness={4}
         sx={{ "svg circle": { stroke: "url(#linearColors)" } }}
-        size={"4rem"}
-      ></CircularProgress>
+        size="4rem"
+      />
     </>
   );
 }

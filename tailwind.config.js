@@ -15,6 +15,7 @@ module.exports = {
         youtubeRed: "#FF0000",
         twitchPurple: "#6441a5",
         blurGray: "#ffffff40",
+        blurSlate: "#e2e8f080",
       },
       fontFamily: {
         sans: ['"Quicksand"', ...defaultTheme.fontFamily.sans],
@@ -94,7 +95,7 @@ module.exports = {
         "background-position-right":
           "background-position-right 10s ease-in infinite alternate",
         "background-position-center":
-          "background-position-center 10s ease-in infinite alternate",
+          "background-position-center 20s ease-in infinite alternate",
         "background-position-left":
           "background-position-left 10s ease-in infinite alternate",
       },

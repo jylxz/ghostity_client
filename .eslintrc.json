@@ -1,6 +1,15 @@
 {
-  "extends": ["airbnb-base", "next/core-web-vitals", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": { "project": ["./tsconfig.json"] },
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "next/core-web-vitals",
+    "prettier"
+  ],
   "rules": {
-    "no-underscore-dangle": "off"
-  }
+    "no-underscore-dangle": "off",
+    "no-param-reassign": "off"
+  },
+  "plugins": ["@typescript-eslint"]
 }

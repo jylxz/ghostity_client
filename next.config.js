@@ -5,9 +5,17 @@ const nextConfig = {
 
 module.exports = {
   compilier: {
-    styledComponents: true
+    styledComponents: true,
   },
   images: {
     domains: ["static-cdn.jtvnw.net", "i.ytimg.com", "yt3.ggpht.com"],
+  },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"],
+    });
+
+    return config;
   },
 };

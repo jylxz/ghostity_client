@@ -5,9 +5,9 @@ import {
   StyledEngineProvider,
   ThemeProvider,
 } from "@mui/material";
-import "tailwindcss/tailwind.css";
+import "../styles/globals.css"
 import defaultTheme from "tailwindcss/defaultTheme";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/general/Navbar";
 
 const theme = createTheme({
   typography: {
@@ -22,6 +22,7 @@ function MyApp({ Component, pageProps }) {
     <QueryClientProvider client={queryClient}>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
+          <Navbar />
           <Component {...pageProps} />
         </ThemeProvider>
       </StyledEngineProvider>

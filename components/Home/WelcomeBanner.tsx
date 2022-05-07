@@ -1,9 +1,8 @@
-import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-import GhostityLogo from "../public/images/Ghost-discovering-ghostity.svg";
+import GhostityLogo from "../../public/images/Ghost-discovering-ghostity.svg";
 
-function BannerCarousel() {
+function WelcomeBanner() {
   return (
     <section className="px-4 sm:px-36 h-[30rem] flex items-center justify-center">
       <div className="flex justify-center items-center gap-6">
@@ -20,22 +19,17 @@ function BannerCarousel() {
           </p>
 
           <Link href="/browse" passHref>
-            <button className="bg-white py-2 px-7 rounded text-gray-600 shadow hover:bg-slate-100 hover:animate-scale">
+            <button type="button" className="bg-white py-2 px-7 rounded text-gray-600 shadow hover:bg-slate-100 hover:animate-scale">
               Browse
             </button>
           </Link>
         </div>
         <div className="hidden lg:flex w-1/4 min-w-[400px] justify-center">
-          <Image
-            src={GhostityLogo}
-            alt="Ghost discovering ghostity"
-            width={400}
-            height={400}
-          ></Image>
+          <GhostityLogo className="scale-[3.5]" />
         </div>
       </div>
     </section>
   );
 }
 
-export default BannerCarousel;
+export default WelcomeBanner;

@@ -2,30 +2,27 @@ import React from "react";
 import Image from "next/image";
 import CableOutlinedIcon from "@mui/icons-material/CableOutlined";
 import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
-import SectionWrapper from "./SectionWrapper";
-import twitchLogo from "../public/images/TwitchGlitchWhite.svg";
-import youtubeLogo from "../public/images/yt_icon_mono_dark.png";
-import ghostityIcon from "../public/images/Ghostity-svg-white.svg";
+import SectionWrapper from "../general/SectionWrapper";
+import TwitchLogo from "../../public/images/TwitchGlitchWhite.svg";
+import youtubeLogo from "../../public/images/yt_icon_mono_dark.png";
+import GhostityIcon from "../../public/images/Ghostity-svg-white.svg";
 
-function InfoBar({ stats }) {
+import * as interfaces from "../../interfaces/API.interface"
+
+function Stats({ stats }: interfaces.Stats) {
   return (
-    <SectionWrapper color={"bg-slate-50"}>
+    <SectionWrapper color="bg-slate-50">
       <h2 className="text-4xl mb-8 font-thin">Ghostity Stats</h2>
       <div className="grid grid-cols-4 grid-rows-3 gap-4 sm:gap-8">
         <div className="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-[10rem] rounded text-white flex items-center justify-center shadow">
           <div className="flex flex-col items-center justify-center gap-1 w-full h-full">
             <div className="min-h-[60px] min-w-[60px] flex justify-center">
-              <Image
-                alt="Ghostity logo"
-                src={ghostityIcon}
-                height={60}
-                width={60}
-              ></Image>
+              <GhostityIcon className="h-14 w-14" />
             </div>
             <h3 className="font-bold underline underline-offset-4 text-sm">
               TOTAL
             </h3>
-            <div className="text-lg break-words">
+            <div className="text-lg mx-1 text-center">
               {stats.number_of_channels_in_db} V-Tubers
             </div>
           </div>
@@ -38,8 +35,8 @@ function InfoBar({ stats }) {
             <h3 className="font-bold underline underline-offset-4 text-sm">
               LIVE
             </h3>
-            <div className="text-lg">
-              {stats.number_of_channels_live} <span>V-Tubers</span>
+            <div className="text-lg mx-1 text-center">
+              {stats.number_of_channels_live} V-Tubers
             </div>
           </div>
         </div>
@@ -62,7 +59,8 @@ function InfoBar({ stats }) {
                 alt="Youtube logo"
                 height={60}
                 width={80}
-              ></Image>
+                draggable={false}
+              />
             </div>
             <h3 className="font-bold underline underline-offset-4">YOUTUBE</h3>
             <div className="text-lg">{stats.number_live_youtube} Channels</div>
@@ -71,12 +69,7 @@ function InfoBar({ stats }) {
         <div className="bg-twitchPurple text-white rounded col-start-3 col-end-5 shadow">
           <div className="h-full flex flex-col justify-center items-center gap-1">
             <div>
-              <Image
-                src={twitchLogo}
-                alt="Twitch logo"
-                height={60}
-                width={60}
-              ></Image>
+              <TwitchLogo className="w-14 h-14" />
             </div>
             <h3 className="font-bold underline underline-offset-4">TWITCH</h3>
             <div className="text-lg">{stats.number_live_twitch} Channels</div>
@@ -87,4 +80,4 @@ function InfoBar({ stats }) {
   );
 }
 
-export default InfoBar;
+export default Stats;

@@ -1,16 +1,18 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-unresolved */
 import { useQuery } from "react-query";
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import SectionWrapper from "./SectionWrapper";
-import GradientCircularProgress from "./GradientCircularProgress";
-import ProblemLoading from "./ProblemLoading";
-import LivestreamCard from "./LivestreamCard";
+import SectionWrapper from "../general/SectionWrapper";
+import GradientCircularProgress from "../general/GradientCircularProgress";
+import ProblemLoading from "../general/ProblemLoading";
+import LivestreamCard from "../general/LivestreamCard";
+
+import { Stream } from "../../interfaces/API.interface";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -22,15 +24,13 @@ function PopularLiveChannels() {
       .then((res) => res.data)
   );
 
-  const navigationNextRef = useRef(null);
-  const navigationPrevRef = useRef(null);
+  const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
+  const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
 
   if (isLoading) {
     return (
-      <SectionWrapper color={"bg-slate-100"}>
-        <h2 className="text-4xl mb-8 font-thin">
-          Popular Live Channels
-        </h2>
+      <SectionWrapper color="bg-slate-100">
+        <h2 className="text-4xl mb-8 font-thin">Popular Live Channels</h2>
         <div className="flex justify-center items-center h-[17rem]">
           <GradientCircularProgress />
         </div>
@@ -40,10 +40,8 @@ function PopularLiveChannels() {
 
   if (error) {
     return (
-      <SectionWrapper color={"bg-slate-100"}>
-        <h2 className="text-4xl mb-8 font-thin">
-          Popular Live Channels
-        </h2>
+      <SectionWrapper color="bg-slate-100">
+        <h2 className="text-4xl mb-8 font-thin">Popular Live Channels</h2>
         <div className="flex justify-center items-center h-[17rem]">
           <ProblemLoading />
         </div>
@@ -52,21 +50,28 @@ function PopularLiveChannels() {
   }
 
   return (
-    <SectionWrapper color={"bg-slate-100"}>
-      <h2 className="text-4xl mb-8 font-thin">
-        Popular Live Channels
-      </h2>
+    <SectionWrapper color="bg-slate-100">
+      <h2 className="text-4xl mb-8 font-thin">Popular Live Channels</h2>
       <div className="flex">
         <span className="my-auto">
-          <button className="disabled:opacity-40" ref={navigationPrevRef}>
+          <button
+            type="button"
+            className="disabled:opacity-40"
+            ref={(node) => setPrevEl(node)}
+          >
             <ChevronLeftIcon className="text-4xl lg:text-5xl text-gray-600" />
           </button>
         </span>
         <Swiper
           modules={[Navigation]}
+          allowTouchMove={false}
           spaceBetween={20}
           slidesPerView={2}
           slidesPerGroup={2}
+          navigation={{
+            prevEl,
+            nextEl,
+          }}
           breakpoints={{
             768: { slidesPerGroup: 3, slidesPerView: 3 },
             1024: { slidesPerGroup: 4, slidesPerView: 4 },
@@ -80,24 +85,20 @@ function PopularLiveChannels() {
             },
           }}
           updateOnWindowResize
-          onInit={(swiper) => {
-            setTimeout(() => {
-              swiper.params.navigation.prevEl = navigationPrevRef.current;
-              swiper.params.navigation.nextEl = navigationNextRef.current;
-              swiper.navigation.init();
-              swiper.navigation.update();
-            });
-          }}
           className="py-4"
         >
-          {data.map((stream) => (
+          {data.results.map((stream: Stream) => (
             <SwiperSlide key={stream.channel_id}>
-              <LivestreamCard stream={stream}></LivestreamCard>
+              <LivestreamCard stream={stream} />
             </SwiperSlide>
           ))}
         </Swiper>
         <span className="my-auto">
-          <button className="disabled:opacity-40" ref={navigationNextRef}>
+          <button
+            type="button"
+            className="disabled:opacity-40"
+            ref={(node) => setNextEl(node)}
+          >
             <ChevronRightIcon className="text-4xl lg:text-5xl text-gray-600" />
           </button>
         </span>

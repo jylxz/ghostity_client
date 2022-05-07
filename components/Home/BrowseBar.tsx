@@ -1,7 +1,6 @@
 /* eslint-disable import/no-unresolved */
-import { useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -10,22 +9,22 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined";
 import GamesOutlinedIcon from "@mui/icons-material/GamesOutlined";
 
-import SectionWrapper from "./SectionWrapper";
-import GhostityLogo from "../public/images/Ghostity-svg-white.svg";
+import SectionWrapper from "../general/SectionWrapper";
+import GhostityLogo from "../../public/images/Ghostity-svg-white.svg";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
 function BrowseBar() {
-  const navigationNextRef = useRef(null);
-  const navigationPrevRef = useRef(null);
+  const [prevEl, setPrevEl] = useState<HTMLElement | null>(null)
+  const [nextEl, setNextEl] = useState<HTMLElement | null>(null)
 
   return (
-    <SectionWrapper color={"bg-slate-200"}>
+    <SectionWrapper color="bg-slate-200">
       <h2 className="text-4xl mb-10 font-thin">Browse</h2>
       <div className="flex">
         <span className="my-auto">
-          <button className="disabled:opacity-40" ref={navigationPrevRef}>
+          <button type="button" className="disabled:opacity-40" ref={(node) => setPrevEl(node)}>
             <ChevronLeftIcon className="text-4xl lg:text-5xl text-gray-600" />
           </button>
         </span>
@@ -33,6 +32,10 @@ function BrowseBar() {
           spaceBetween={40}
           slidesPerView={1}
           slidesPerGroup={1}
+          navigation={{
+            prevEl,
+            nextEl
+          }}
           breakpoints={{
             768: {
               slidesPerGroup: 2,
@@ -45,33 +48,14 @@ function BrowseBar() {
           }}
           updateOnWindowResize
           modules={[Navigation]}
-          onInit={(swiper) => {
-            setTimeout(() => {
-              swiper.params.navigation.prevEl = navigationPrevRef.current;
-              swiper.params.navigation.nextEl = navigationNextRef.current;
-              swiper.navigation.init();
-              swiper.navigation.update();
-            });
-          }}
           className="child:text-white"
         >
           <SwiperSlide>
             <Link href="/browse" passHref>
               <div className="bg-[length:300%_300%] bg-left bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 flex flex-col justify-center items-center h-36 shadow cursor-pointer rounded animate-background-position-left">
                 <div className="flex gap-2">
-                  <Image
-                    src={GhostityLogo}
-                    alt="Ghostity logo"
-                    height={40}
-                    width={40}
-                  ></Image>
-                  <Image
-                    src={GhostityLogo}
-                    alt="Ghostity logo"
-                    height={40}
-                    width={40}
-                    className="scale-x-[-1]"
-                  ></Image>
+                  <GhostityLogo className="h-10 w-10" />
+                  <GhostityLogo className="h-10 w-10 -scale-x-[1]" />
                 </div>
                 <div className="text-white text-2xl font-semibold">
                   All Streams
@@ -99,7 +83,7 @@ function BrowseBar() {
           </SwiperSlide>
         </Swiper>
         <span className="my-auto">
-          <button className="disabled:opacity-40" ref={navigationNextRef}>
+          <button type="button" className="disabled:opacity-40" ref={(node) => setNextEl(node)}>
             <ChevronRightIcon className="text-4xl lg:text-5xl text-gray-600" />
           </button>
         </span>
