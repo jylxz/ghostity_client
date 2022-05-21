@@ -7,8 +7,12 @@ import BrowseStreamsOptions from "./BrowseStreamsOptions";
 import GradientCircularProgress from "../general/GradientCircularProgress";
 import ProblemLoading from "../general/ProblemLoading";
 
-import { Filters } from "./Browse.interface";
-import { Stream, Streams } from "../../interfaces/API.interface";
+interface Filters {
+  sort?: string;
+  platform?: string;
+  language?: string;
+  exclude?: string;
+}
 
 function BrowseStreams() {
   const [params, setParams] = useState<Filters>({});
@@ -40,16 +44,11 @@ function BrowseStreams() {
     return axios.get(baseUrl).then((res) => res.data);
   };
 
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isLoading,
-  } = useInfiniteQuery<Streams, Error>(["allStreams", params], fetchStreams, {
-    getNextPageParam: (lastPage) =>
-      lastPage.next ? lastPage.next.page : false,
-  });
+  const { data, error, fetchNextPage, hasNextPage, isLoading } =
+    useInfiniteQuery<Streams, Error>(["allStreams", params], fetchStreams, {
+      getNextPageParam: (lastPage) =>
+        lastPage.next ? lastPage.next.page : false,
+    });
 
   useEffect(() => {
     if (inView) {
@@ -80,7 +79,7 @@ function BrowseStreams() {
   return (
     <div className="bg-slate-50 overflow-auto h-[calc(100vh_-_7rem)] px-4 sm:px-14 pb-7">
       <BrowseStreamsOptions setParams={setParams} />
-      <div className="grid grid-cols-[repeat(auto-fit,_minmax(220px,_1fr))] gap-7 justify-items-center">
+      <div className="grid grid-flow-row auto-rows-fr grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-7 justify-items-center">
         {data?.pages.map((group) => (
           <Fragment key={group.results.length}>
             {group.results.map((stream: Stream) => (

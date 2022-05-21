@@ -1,6 +1,6 @@
 import React from "react";
-import Link from "next/link";
 import GhostityLogo from "../../public/images/Ghost-discovering-ghostity.svg";
+import LinkTo from "../general/LinkTo";
 
 function WelcomeBanner() {
   return (
@@ -11,18 +11,20 @@ function WelcomeBanner() {
             Welcome to{" "}
             <span className="text-white animate-fade-out-2">ghostity</span> !
           </h2>
-          <p className="lg:text-xl text-gray-100 mb-6">
+          <p className="lg:text-lg text-gray-500 mb-6">
             A comprehensive (not exhaustive!) directory for V-Tubers! Keep up
             with your favorite V-Tubers from Hololive or Nijisanji, or even
             explore and discover a new V-Tuber that you haven&apos;t even heard
             about!
           </p>
-
-          <Link href="/browse" passHref>
-            <button type="button" className="bg-white py-2 px-7 rounded text-gray-600 shadow hover:bg-slate-100 hover:animate-scale">
+          <LinkTo href="/browse">
+            <button
+              type="button"
+              className="bg-white py-2 px-7 rounded text-gray-600 shadow hover:bg-slate-100 hover:animate-scale"
+            >
               Browse
             </button>
-          </Link>
+          </LinkTo>
         </div>
         <div className="hidden lg:flex w-1/4 min-w-[400px] justify-center">
           <GhostityLogo className="scale-[3.5]" />

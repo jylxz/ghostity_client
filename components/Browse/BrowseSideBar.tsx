@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -19,11 +19,11 @@ function BrowseItem({
 }) {
   const router = useRouter();
 
-  if (router.route === href) {
+  if (router.route === href || router.route.includes(item.toLowerCase())) {
     return (
       <>
-        <div className="z-20 col-start-1 w-4 h-[2.5rem] m-auto bg-slate-50" />
-        <div className="col-start-2 my-auto flex items-center bg-slate-50 py-2">
+        <div className="z-20 col-start-1 w-4 h-full m-auto bg-gray-50" />
+        <div className="col-start-2 my-auto flex items-center bg-gray-50 h-full">
           <Link href={href} passHref>
             <button type="button" className="flex items-center">
               {icon}
@@ -40,7 +40,7 @@ function BrowseItem({
       <Link href={href} passHref>
         <button
           type="button"
-          className="text-sm flex items-center text-gray-500"
+          className="text-sm flex items-center text-gray-500 fill-gray-500"
         >
           {icon}
           {item}
@@ -50,14 +50,35 @@ function BrowseItem({
   );
 }
 
-function BrowseSideBar() {
+function BrowseSideBar({
+  show,
+  setShow,
+}: {
+  show: {user: boolean, show:boolean};
+  setShow: Dispatch<
+    SetStateAction<{
+      user: boolean;
+      show: boolean;
+    }>
+  >;
+}) {
+  if (!show.show) return null;
+
   return (
-    <div className="bg-slate-200 min-w-[12rem] w-64 h-[calc(100vh_-_3.5rem)] pl-5">
-      <h1 className="text-lg h-14 flex items-center">Browse</h1>
-      <div className="grid grid-cols-[1rem,_auto] grid-rows-[repeat(4,_minmax(3rem,_1fr))] relative">
+    <div className="fixed z-30 sm:static bg-slate-100 min-w-[14rem] h-[calc(100vh_-_3.5rem)] pl-5">
+      <div className="flex justify-between">
+        <h1 className="text-lg h-14 flex items-center">Browse</h1>
+        <button
+          type="button"
+          onClick={() => setShow({ user: !show.user, show: !show.show })}
+        >
+          Click
+        </button>
+      </div>
+      <div className="grid grid-cols-[1rem,_auto] grid-rows-[repeat(4,_minmax(2.3rem,_1fr))] relative">
         <BrowseItem
           item="Following"
-          icon={<BsHeart className="text-lg h-6 w-6 mx-2" />}
+          icon={<BsHeart className="h-5 w-6 mx-2" />}
           href="/browse/following"
         />
         <BrowseItem
@@ -71,11 +92,11 @@ function BrowseSideBar() {
           href="/browse/games"
         />
         <BrowseItem
-          item="Organization"
+          item="Organizations"
           icon={<CorporateFareOutlinedIcon className=" h-6 w-6 mx-2" />}
           href="/browse/organizations"
         />
-        <div className="z-0 mt-[-1rem] absolute bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 w-[12rem] h-[1rem] origin-bottom-left rotate-90 rounded" />
+        <div className="z-0 -mt-[1rem] absolute bg-gradient-to-r from-primary via-secondary to-secondary2 w-[9rem] h-[1rem] origin-bottom-left rotate-90 rounded border border-gray-300" />
       </div>
     </div>
   );

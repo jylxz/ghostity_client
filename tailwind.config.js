@@ -10,8 +10,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#AAF0C1",
-        secondary: "#ccfbf1",
+        primary: "#DEECFC",
+        secondary: "#E1F2FB",
+        secondary2: "#F1F9F9",
         youtubeRed: "#FF0000",
         twitchPurple: "#6441a5",
         blurGray: "#ffffff40",

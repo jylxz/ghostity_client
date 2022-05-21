@@ -249,7 +249,7 @@ function BrowseStreamsOptions({
             <button
               type="button"
               className="bg-slate-400 px-3 py-1 text-white rounded"
-              onClick={() => refetchWithFilters()}
+              onClick={() => {refetchWithFilters(); setShowFilter(false)}}
             >
               Apply
             </button>

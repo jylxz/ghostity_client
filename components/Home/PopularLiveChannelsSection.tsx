@@ -12,7 +12,6 @@ import GradientCircularProgress from "../general/GradientCircularProgress";
 import ProblemLoading from "../general/ProblemLoading";
 import LivestreamCard from "../general/LivestreamCard";
 
-import { Stream } from "../../interfaces/API.interface";
 
 import "swiper/css";
 import "swiper/css/navigation";

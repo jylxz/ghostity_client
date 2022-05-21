@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import BrowseOrganizations from "../../../components/Browse/BrowseOrganizations";
 
-function organizations() {
-  return (
-    <div>organizations</div>
-  )
+
+export async function getStaticProps() {
+  const fetchOrganizations = await fetch(
+    "https://api.ghostity.com/organizations"
+  );
+  const orgs = await fetchOrganizations.json();
+
+  return { props: { orgs } };
 }
 
-export default organizations
+function organizations({ orgs }: { orgs: Organization[] }) {
+  return <BrowseOrganizations organizations={orgs} />;
+}
+
+export default organizations;

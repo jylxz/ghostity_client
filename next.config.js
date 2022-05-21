@@ -8,7 +8,7 @@ module.exports = {
     styledComponents: true,
   },
   images: {
-    domains: ["static-cdn.jtvnw.net", "i.ytimg.com", "yt3.ggpht.com"],
+    domains: ["static-cdn.jtvnw.net", "i.ytimg.com", "yt3.ggpht.com", "images.igdb.com"],
   },
   webpack(config) {
     config.module.rules.push({

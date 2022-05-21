@@ -6,9 +6,8 @@ import Image from "next/image";
 import YoutubeIcon from "../../public/images/yt_icon_rgb.svg";
 import TwitchIcon from "../../public/images/TwitchGlitchPurple.svg";
 
-import * as interfaces from "../../interfaces/API.interface"
 
-function channelPic(stream: interfaces.Stream) {
+function channelPic(stream: Stream) {
   if (stream.platform === "twitch") {
     return (
       <div className="w-6 h-6">
@@ -44,7 +43,7 @@ function channelPic(stream: interfaces.Stream) {
   );
 }
 
-function channelName(stream: interfaces.Stream) {
+function channelName(stream: Stream) {
   if (stream.platform === "twitch") {
     return (
       <a
@@ -68,10 +67,10 @@ function channelName(stream: interfaces.Stream) {
   );
 }
 
-function platformIcon(stream: interfaces.Stream) {
+function platformIcon(stream: Stream) {
   if (stream.platform === "twitch")
     return (
-      <span className="min-w-[16px]">
+      <div className="h-5 min-w-[18px] w-[18px]">
         <a
           target="_blank"
           href={stream.stream.url}
@@ -80,11 +79,11 @@ function platformIcon(stream: interfaces.Stream) {
         >
           <TwitchIcon />
         </a>
-      </span>
+      </div>
     );
 
   return (
-    <span className="min-w-[20px]">
+    <div className="h-5 min-w-[20px] w-5">
       <a
         target="_blank"
         href={stream.stream.url}
@@ -93,11 +92,11 @@ function platformIcon(stream: interfaces.Stream) {
       >
         <YoutubeIcon />
       </a>
-    </span>
+    </div>
   );
 }
 
-function LivestreamCard({ stream }: {stream: interfaces.Stream}) {
+function LivestreamCard({ stream }: {stream: Stream}) {
   return (
     <Card className="flex flex-col max-w-[15rem] shadow">
       <div className="relative">
@@ -108,7 +107,7 @@ function LivestreamCard({ stream }: {stream: interfaces.Stream}) {
             className="max-h-[135px] object-scale-down"
           />
         </a>
-        <span className="absolute bottom-1 right-1 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 p-0.5 rounded text-white text-sm font-medium cursor-default">{`${stream.stream.viewers} viewers`}</span>
+        <span className="absolute bottom-1 right-1 bg-gradient-to-r from-primary via-secondary to-secondary2 p-0.5 rounded text-gray-500 text-sm font-medium cursor-default">{`${stream.stream.viewers} viewers`}</span>
       </div>
       <CardContent className="h-[4rem] max-h-[4rem] grow py-2.5">
         <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
@@ -126,12 +125,12 @@ function LivestreamCard({ stream }: {stream: interfaces.Stream}) {
           {platformIcon(stream)}
         </div>
         <div className="flex justify-between items-center text-gray-400 mt-0.5">
-          <Typography className="text-sm line-clamp-1">
+          <Typography className="text-sm line-clamp-1 cursor-pointer">
             <Link href={`/browse/games/${encodeURI(stream.stream.game)}`} passHref>
               <span>{stream.stream.game}</span>
             </Link>
           </Typography>
-          <Typography className="text-sm cursor-default">
+          <Typography className="text-sm cursor-default min-w-fit ml-1">
             {stream.language}
           </Typography>
         </div>

@@ -5,16 +5,15 @@ import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
 import SectionWrapper from "../general/SectionWrapper";
 import TwitchLogo from "../../public/images/TwitchGlitchWhite.svg";
 import youtubeLogo from "../../public/images/yt_icon_mono_dark.png";
-import GhostityIcon from "../../public/images/Ghostity-svg-white.svg";
+import GhostityIcon from "../../public/images/Ghostity-svg.svg";
 
-import * as interfaces from "../../interfaces/API.interface"
 
-function Stats({ stats }: interfaces.Stats) {
+function Stats({ stats }: Stats) {
   return (
     <SectionWrapper color="bg-slate-50">
       <h2 className="text-4xl mb-8 font-thin">Ghostity Stats</h2>
       <div className="grid grid-cols-4 grid-rows-3 gap-4 sm:gap-8">
-        <div className="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-[10rem] rounded text-white flex items-center justify-center shadow">
+        <div className="bg-gradient-to-r from-primary via-secondary to-secondary2 h-[10rem] rounded flex items-center justify-center shadow">
           <div className="flex flex-col items-center justify-center gap-1 w-full h-full">
             <div className="min-h-[60px] min-w-[60px] flex justify-center">
               <GhostityIcon className="h-14 w-14" />
@@ -22,7 +21,7 @@ function Stats({ stats }: interfaces.Stats) {
             <h3 className="font-bold underline underline-offset-4 text-sm">
               TOTAL
             </h3>
-            <div className="text-lg mx-1 text-center">
+            <div className="text-lg mx-1 text-center text-gray-500">
               {stats.number_of_channels_in_db} V-Tubers
             </div>
           </div>

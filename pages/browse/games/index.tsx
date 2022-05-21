@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import BrowseGames from "../../../components/Browse/BrowseGames";
 
 function games() {
-  return (
-    <div>games</div>
-  )
+  return <BrowseGames />;
 }
 
-export default games
+export default games;
