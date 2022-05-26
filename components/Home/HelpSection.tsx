@@ -2,6 +2,7 @@ import React from "react";
 import GhostityLogo from "../../public/images/Ghostity-svg.svg";
 
 import SectionWrapper from "../general/SectionWrapper";
+import LinkTo from "../general/LinkTo";
 
 function Help() {
   return (
@@ -22,12 +23,14 @@ function Help() {
             Check the FAQ page for help!
           </p>
           <div>
-            <button
-              type="button"
-              className="bg-gradient-to-r from-primary via-secondary to-secondary2 shadow-sm lg:text-lg px-4 py-1 rounded"
-            >
-              FAQ Page
-            </button>
+            <LinkTo href="/faq">
+              <button
+                type="button"
+                className="bg-gradient-to-r from-primary via-secondary to-secondary2 shadow-sm lg:text-lg px-4 py-1 rounded"
+              >
+                FAQ Page
+              </button>
+            </LinkTo>
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@ export default function GameStreams({ game }: { game: string }) {
 
   return (
     <div>
-      <div className="grid grid-flow-row auto-rows-fr grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-7 justify-items-center py-7">
+      <div className="grid grid-flow-row auto-rows-fr grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-x-2.5 gap-y-7 justify-items-center py-7">
         {data?.pages.map((group) => (
           <Fragment key={group.results.length}>
             {group.results.map((stream) => (

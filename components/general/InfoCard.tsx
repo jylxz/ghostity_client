@@ -1,6 +1,6 @@
 import React from "react";
 
-import Link from "next/link";
+import LinkTo from "./LinkTo";
 
 export default function InfoCard({
   image,
@@ -13,11 +13,10 @@ export default function InfoCard({
 }) {
   return (
     <div>
-      <Link
+      <LinkTo
         href={`/browse/organizations/${encodeURIComponent(
           title.toLowerCase()
         )}`}
-        passHref
       >
         <div className="bg-white flex justify-center h-32 w-32 items-center p-5 rounded-full border-2 shadow-md cursor-pointer">
           <img
@@ -27,16 +26,15 @@ export default function InfoCard({
             draggable={false}
           />
         </div>
-      </Link>
+      </LinkTo>
       <div className="mt-2 flex flex-col justify-center items-center ">
-        <Link
+        <LinkTo
           href={`/browse/organizations/${encodeURIComponent(
             title.toLowerCase()
           )}`}
-          passHref
         >
           <div className="font-medium cursor-pointer">{title}</div>
-        </Link>
+        </LinkTo>
         <div className="text-gray-500">
           {languages?.map((language) => (
             <span key={language} className="mx-0.5 text-xs">

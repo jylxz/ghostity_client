@@ -26,7 +26,7 @@ export default function OrganizationMain({
       .get(`https://api.ghostity.com/organizations/streams?name=${org.name}`)
       .then((streams) => streams.data);
 
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data } = useQuery<Stream[], Error>(
     `${org.name}`,
     fetchOrganizationStreams
   );
@@ -150,6 +150,7 @@ export default function OrganizationMain({
       ) : null}
       {currentTab === "members" ? (
         <OrganizationMembers
+          organization={org.name}
           profiles={profiles}
           branches={org.branches}
           members={org.members}

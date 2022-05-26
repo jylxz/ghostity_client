@@ -1,8 +1,9 @@
 import React from 'react'
+import FollowingMain from '../../components/Following/FollowingMain'
 
 function following() {
   return (
-    <div>following</div>
+    <FollowingMain/>
   )
 }
 

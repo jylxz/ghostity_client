@@ -1,19 +1,24 @@
 import React, { useState } from "react";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import useHandleFollows from "../../hooks/useHandleFollows";
 import MemberCard from "../general/MemberCard";
 
 export default function OrganizationMembers({
+  organization,
   branches,
   members,
   profiles,
 }: {
+  organization: string;
   branches: { name: string; id: number }[];
   members: Member[];
   profiles: Profile[];
 }) {
   const [currentBranch, setCurrentBranch] = useState(-1);
+  const [followState, setFollowState] = useState(false);
 
   const profileImage = (id: string) => {
-    let image = ""
+    let image = "";
 
     profiles.forEach((profile) => {
       if (id === profile._id) {
@@ -25,28 +30,84 @@ export default function OrganizationMembers({
   };
 
   const channels = (id: string) => {
-    let allChannels: Channel[] = []
+    let allChannels: Channel[] = [];
 
     profiles.forEach((profile) => {
       if (id === profile._id) {
-        allChannels = profile.channels
-      }
-    })
-
-    return allChannels
-  }
-
-  const socialMedia = (id: string) => {
-    let socials: {platform: string, url: string}[]  = []
-
-    profiles.forEach((profile) => {
-      if (id === profile._id) {
-        socials = profile.profile.social_media
+        allChannels = profile.channels;
       }
     });
 
-    return socials
-  }
+    return allChannels;
+  };
+
+  const socialMedia = (id: string) => {
+    let socials: { platform: string; url: string }[] = [];
+
+    profiles.forEach((profile) => {
+      if (id === profile._id) {
+        socials = profile.profile.social_media;
+      }
+    });
+
+    return socials;
+  };
+
+  const branchMemberChannels = () => {
+    const branchId: Channel[] = [];
+
+    if (currentBranch === -1) {
+      members.map((member) =>
+        channels(member.profile_id).map((channel) => branchId.push(channel))
+      );
+    } else {
+      members.map((member) =>
+        member.branch_id === currentBranch
+          ? channels(member.profile_id).map((channel) => branchId.push(channel))
+          : undefined
+      );
+    }
+
+    return branchId;
+  };
+
+  const [follow, followed] = useHandleFollows(branchMemberChannels());
+
+  const followButton = () => {
+    let currentBranchName = "";
+
+    if (currentBranch < 0) {
+      currentBranchName = organization;
+    } else {
+      branches.forEach((branch) => {
+        if (branch.id === currentBranch) {
+          currentBranchName = branch.name;
+        }
+      });
+    }
+
+    return (
+      <button
+        type="button"
+        onClick={() => follow()}
+        onMouseEnter={() => setFollowState(true)}
+        onMouseLeave={() => setFollowState(false)}
+        className="flex items-center gap-2 bg-gray-300 px-2 py-0.5 text-sm  text-gray-50 rounded"
+      >
+        {followed ? (
+          <>
+            {followState ? <AiOutlineHeart /> : <AiFillHeart />}
+            Unfollow {currentBranchName}
+          </>
+        ) : (
+          <>
+            {followState ? <AiFillHeart /> : <AiOutlineHeart />}
+            Follow {currentBranchName}
+          </>
+        )}
+      </button>
+    );
+  };
 
   return (
     <>
@@ -73,6 +134,7 @@ export default function OrganizationMembers({
           </button>
         ))}
       </div>
+      <div className="self-end my-3">{followButton()}</div>
       <div className="grid grid-cols-[repeat(auto-fit,_minmax(170px,_1fr))] gap-8 justify-items-center py-4">
         {members.map((member) =>
           member.branch_id === currentBranch ? (

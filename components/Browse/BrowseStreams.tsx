@@ -79,7 +79,7 @@ function BrowseStreams() {
   return (
     <div className="bg-slate-50 overflow-auto h-[calc(100vh_-_7rem)] px-4 sm:px-14 pb-7">
       <BrowseStreamsOptions setParams={setParams} />
-      <div className="grid grid-flow-row auto-rows-fr grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-7 justify-items-center">
+      <div className="grid grid-flow-row auto-rows-fr grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-x-7 gap-y-7 justify-items-center">
         {data?.pages.map((group) => (
           <Fragment key={group.results.length}>
             {group.results.map((stream: Stream) => (

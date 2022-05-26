@@ -1,6 +1,5 @@
 /* eslint-disable import/no-unresolved */
 import { useState } from "react";
-import Link from "next/link";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -8,6 +7,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined";
 import GamesOutlinedIcon from "@mui/icons-material/GamesOutlined";
+import LinkTo from "../general/LinkTo";
 
 import SectionWrapper from "../general/SectionWrapper";
 import GhostityLogo from "../../public/images/Ghostity-svg.svg";
@@ -16,8 +16,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 function BrowseBar() {
-  const [prevEl, setPrevEl] = useState<HTMLElement | null>(null)
-  const [nextEl, setNextEl] = useState<HTMLElement | null>(null)
+  const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
+  const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
 
   return (
     <SectionWrapper color="bg-slate-200">
@@ -55,7 +55,7 @@ function BrowseBar() {
           className="child:text-white"
         >
           <SwiperSlide>
-            <Link href="/browse" passHref>
+            <LinkTo href="/browse">
               <div className="bg-[length:300%_300%] bg-left bg-gradient-to-r from-primary via-secondary to-secondary2 flex flex-col justify-center items-center h-36 shadow-sm cursor-pointer rounded animate-background-position-left text-gray-500 ">
                 <div className="flex gap-2">
                   <GhostityLogo className="h-10 w-10" />
@@ -63,23 +63,23 @@ function BrowseBar() {
                 </div>
                 <div className="text-2xl">Streams</div>
               </div>
-            </Link>
+            </LinkTo>
           </SwiperSlide>
           <SwiperSlide>
-            <Link href="/browse/games" passHref>
+            <LinkTo href="/browse/games">
               <div className="bg-[length:300%_300%] bg-center bg-gradient-to-r from-primary via-secondary to-secondary2 flex flex-col justify-center items-center h-36 shadow-sm rounded animate-background-position-center cursor-pointer ">
                 <GamesOutlinedIcon className="h-10 w-10 text-black" />
                 <div className="text-2xl text-gray-500">Games</div>
               </div>
-            </Link>
+            </LinkTo>
           </SwiperSlide>
           <SwiperSlide>
-            <Link href="/browse/organizations" passHref>
+            <LinkTo href="/browse/organizations">
               <div className="bg-[length:300%_300%] bg-right bg-gradient-to-r from-primary via-secondary to-secondary2 flex flex-col justify-center items-center h-36 shadow-sm rounded animate-background-position-right cursor-pointer text-gray-500">
                 <CorporateFareOutlinedIcon className="text-black h-10 w-10" />
                 <div className="text-2xl text-gray-500">Organizations</div>
               </div>
-            </Link>
+            </LinkTo>
           </SwiperSlide>
         </Swiper>
         <span className="my-auto">

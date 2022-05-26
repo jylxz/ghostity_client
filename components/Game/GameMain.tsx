@@ -22,18 +22,20 @@ export default function GameMain({ gameData }: { gameData: Game }) {
   return (
     <BrowseWrapper>
       <BackgroundWrapper
-        image={gameData.screenshot}
+        image={gameData?.screenshot}
         altText={`${gameData.name} screenshot`}
       >
         <div className="flex p-4 gap-4">
           <div className="min-w-fit">
-            <Image
-              alt={`${gameData.name}'s cover image`}
-              src={gameData.cover_img}
-              width={140}
-              height={200}
-              className="rounded"
-            />
+            {gameData.cover_img ? (
+              <Image
+                alt={`${gameData.name}'s cover image`}
+                src={gameData.cover_img}
+                width={140}
+                height={200}
+                className="rounded"
+              />
+            ) : null}
           </div>
           <div className="flex flex-col gap-4">
             <div>
@@ -41,9 +43,11 @@ export default function GameMain({ gameData }: { gameData: Game }) {
               <span className="text-sm text-gray-600">
                 <span className="font-semibold text-black">
                   {gameData.viewers}
-                </span>
-                {" "} Viewers |{" "}
-                <span className="font-semibold text-black">{gameData.streams}</span>{" "}
+                </span>{" "}
+                Viewers |{" "}
+                <span className="font-semibold text-black">
+                  {gameData.streams}
+                </span>{" "}
                 Streams
               </span>
             </div>

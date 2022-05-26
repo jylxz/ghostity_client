@@ -12,6 +12,8 @@ export default function BackgroundWrapper({
   image?: string;
   altText?: string;
 }) {
+  console.log(image)
+
   if (!nextImage)
     return (
       <div className="w-full relative">

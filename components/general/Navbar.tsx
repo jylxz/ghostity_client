@@ -1,9 +1,9 @@
-import React from "react";
-import Link from "next/link";
+import React, { Dispatch, SetStateAction, useContext } from "react";
 import { useRouter } from "next/router";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import GhostityLogo from "../../public/images/Ghostity-svg.svg";
-import LinkTo from "./LinkTo"
+import LinkTo from "./LinkTo";
+import ProfileNavbar from "../Profile/ProfileNavbar"
+import UserContext from "../../context/UserContext";
 
 function NavbarButton(props: { text: string; href: string }) {
   const { text, href } = props;
@@ -34,15 +34,25 @@ function NavbarButton(props: { text: string; href: string }) {
   );
 }
 
-function Navbar() {
+function Navbar({
+  showAuth,
+  setShowAuth,
+}: {
+  showAuth: boolean;
+  setShowAuth: Dispatch<SetStateAction<boolean>>;
+}) {
+  const user = useContext(UserContext);
+
   return (
     <nav className="bg-gradient-to-r from-[#DEECFC] via-[#E1F2FB] to-[#F1F9F9] flex items-center justify-between px-8 py-7 text-gray-500 h-14">
       <div className="flex">
-        <LinkTo href="/" pass>
+        <LinkTo href="/">
           <button type="button" className="group py-2">
             <div className="flex gap-2 items-center text-2xl group-hover:animate-move-center">
               <GhostityLogo className="h-10 w-10 group-hover:animate-wiggle" />
-              <h1 className="group-hover:animate-fade-out text-black">ghostity</h1>
+              <h1 className="group-hover:animate-fade-out text-black">
+                ghostity
+              </h1>
             </div>
           </button>
         </LinkTo>
@@ -59,17 +69,17 @@ function Navbar() {
         </ul>
       </div>
       <div className="flex items-center gap-4">
-        <Link href="/login" passHref>
+        {!user ? (
           <button
             type="button"
             className="text-md border rounded py-1 px-3 hover:bg-blurGray hover:border-2"
+            onClick={() => setShowAuth(!showAuth)}
           >
             Login
           </button>
-        </Link>
-        <button type="button">
-          <DarkModeOutlinedIcon />
-        </button>
+        ) : (
+          <ProfileNavbar />
+        )}
       </div>
     </nav>
   );

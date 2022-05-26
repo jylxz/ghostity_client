@@ -29,14 +29,14 @@ export default function Home({
         <title>Ghostity | Home</title>
         <link rel="shortcut icon" href="favicon.svg" type="image/svg" />
       </Head>
-      <main className="bg-gradient-to-r from-[#DEECFC] via-[#E1F2FB] to-[#F1F9F9] ">
+      <div className="bg-gradient-to-r from-[#DEECFC] via-[#E1F2FB] to-[#F1F9F9]">
         <WelcomeBanner />
         <OrganizationLogoCarousel logos={logos} />
         <PopularLiveChannels />
         <BrowseBar />
         <Stats stats={stats} />
         <Help />
-      </main>
+      </div>
       <Footer />
     </>
   );

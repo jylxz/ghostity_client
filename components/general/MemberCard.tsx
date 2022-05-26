@@ -1,4 +1,6 @@
 import React from "react";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import useHandleFollows from "../../hooks/useHandleFollows";
 import TwitchIcon from "../../public/images/TwitchGlitchPurple.svg";
 import YoutubeIcon from "../../public/images/yt_icon_rgb.svg";
 import TwitterIcon from "../../public/images/TwitterBlue.svg";
@@ -18,6 +20,8 @@ export default function MemberCard({
   channels: Channel[];
   socials: { platform: string; url: string }[];
 }) {
+  const [follow, followed] = useHandleFollows(channels);
+
   const channelIcon = (channel: Channel) => {
     if (channel.platform === "twitch") {
       return (
@@ -46,6 +50,16 @@ export default function MemberCard({
     </div>
   );
 
+  const followIcon = () => (
+    <button type="button" className="rounded" onClick={() => follow()}>
+      {followed ? (
+        <AiFillHeart className="w-5 h-5" />
+      ) : (
+        <AiOutlineHeart className="w-5 h-5" />
+      )}
+    </button>
+  );
+
   return (
     <div className="grid items-center">
       <img
@@ -63,6 +77,7 @@ export default function MemberCard({
       <div className="mt-2 flex justify-center items-center gap-2">
         {channels.map((channel) => channelIcon(channel))}
         {socials ? socials.map((social) => socialsIcon(social)) : null}
+        {followIcon()}
       </div>
     </div>
   );

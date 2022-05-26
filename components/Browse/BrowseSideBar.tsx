@@ -96,7 +96,7 @@ function BrowseSideBar({
           icon={<CorporateFareOutlinedIcon className=" h-6 w-6 mx-2" />}
           href="/browse/organizations"
         />
-        <div className="z-0 -mt-[1rem] absolute bg-gradient-to-r from-primary via-secondary to-secondary2 w-[9rem] h-[1rem] origin-bottom-left rotate-90 rounded border border-gray-300" />
+        <div className="z-0 -mt-[1rem] absolute bg-gradient-to-r from-primary via-secondary to-secondary2 w-[9rem] h-[1rem] origin-bottom-left rotate-90 rounded border-2 border-white" />
       </div>
     </div>
   );

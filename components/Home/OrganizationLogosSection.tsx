@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 
 import React from "react";
-import Link from "next/link";
+import LinkTo from "../general/LinkTo"
 import { Autoplay, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -24,9 +24,8 @@ function OrganizationLogoCarousel({ logos }: OrganizationLogos) {
     >
       {logos.map((logo) => (
         <SwiperSlide key={logo._id}>
-          <Link
+          <LinkTo
             href={`/browse/organizations/${logo.name.toLowerCase()}`}
-            passHref
           >
             <div className="flex justify-center">
               <img
@@ -35,7 +34,7 @@ function OrganizationLogoCarousel({ logos }: OrganizationLogos) {
                 className="w-32 h-16 object-scale-down grayscale hover:grayscale-0 cursor-pointer"
               />
             </div>
-          </Link>
+          </LinkTo>
         </SwiperSlide>
       ))}
     </Swiper>

@@ -47,7 +47,7 @@ function Stats({ stats }: Stats) {
             <h3 className="font-bold underline underline-offset-4 text-2xl">
               WATCHING
             </h3>
-            <div className="text-4xl">{stats.total_viewers} People</div>
+            <div className="text-4xl">{stats.total_viewers} Weebs</div>
           </div>
         </div>
         <div className="bg-youtubeRed text-white rounded col-start-1 col-end-3 shadow">
