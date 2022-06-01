@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React from "react";
 import axios from "axios";
 import GameMain from "../../../components/Game/GameMain";
@@ -14,5 +15,12 @@ export async function getServerSideProps(context: { query: { game: string } }) {
 }
 
 export default function BrowseGameStreams({ gameData }: { gameData: Game }) {
-  return <GameMain gameData={gameData} />;
+  return (
+    <>
+      <Head>
+        <title>Ghostity | {gameData.name}</title>
+      </Head>
+      <GameMain gameData={gameData} />
+    </>
+  );
 }

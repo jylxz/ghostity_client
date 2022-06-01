@@ -15,7 +15,7 @@ module.exports = {
         secondary2: "#F1F9F9",
         youtubeRed: "#FF0000",
         twitchPurple: "#6441a5",
-        blurGray: "#ffffff40",
+        blurGray: "#ffffff60",
         blurSlate: "#e2e8f080",
       },
       fontFamily: {
@@ -92,7 +92,7 @@ module.exports = {
         wiggle: "wiggle 2s linear infinite",
         "fade-out": "fade-out 2s ease-out infinite",
         "move-center": "move-center 2s ease-out infinite",
-        "fade-out-2": "fade-out 10s ease-in infinite",
+        "fade-out-2": "fade-out 8s ease-in infinite",
         "background-position-right":
           "background-position-right 10s ease-in infinite alternate",
         "background-position-center":

@@ -1,12 +1,18 @@
 /* eslint-disable import/no-unresolved */
 
+// Libraries
 import React from "react";
-import LinkTo from "../general/LinkTo"
+import Image from "next/image"
 import { Autoplay, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+// Components
+import LinkTo from "../general/LinkTo"
+
+// CSS
 import "swiper/css";
 
-function OrganizationLogoCarousel({ logos }: OrganizationLogos) {
+export default function HomeOrganizations({ logos }: OrganizationLogos) {
   return (
     <Swiper
       modules={[FreeMode, Autoplay]}
@@ -24,13 +30,13 @@ function OrganizationLogoCarousel({ logos }: OrganizationLogos) {
     >
       {logos.map((logo) => (
         <SwiperSlide key={logo._id}>
-          <LinkTo
-            href={`/browse/organizations/${logo.name.toLowerCase()}`}
-          >
+          <LinkTo href={`/browse/organizations/${logo.name.toLowerCase()}`}>
             <div className="flex justify-center">
-              <img
+              <Image
                 src={logo.logo}
-                alt="An organization's logo"
+                alt={`${logo.name}'s logo`}
+                height={64}
+                width={128}
                 className="w-32 h-16 object-scale-down grayscale hover:grayscale-0 cursor-pointer"
               />
             </div>
@@ -40,5 +46,3 @@ function OrganizationLogoCarousel({ logos }: OrganizationLogos) {
     </Swiper>
   );
 }
-
-export default OrganizationLogoCarousel;

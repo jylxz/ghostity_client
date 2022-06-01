@@ -8,13 +8,17 @@ import { CgProfile } from "react-icons/cg";
 import { RiLockPasswordLine, RiLockPasswordFill } from "react-icons/Ri";
 import { AiOutlineMail } from "react-icons/ai";
 import LoadingButton from "../general/LoadingButton";
-import {auth} from "../../firebase/clientApp";
+import { auth } from "../../firebase/clientApp";
 import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+import { motion } from "framer-motion";
+import { BsArrowLeftShort } from "react-icons/bs";
 
 export default function SignUp({
   setShowAuth,
+  setCurrentTab,
 }: {
   setShowAuth: Dispatch<SetStateAction<boolean>>;
+  setCurrentTab: Dispatch<SetStateAction<string>>;
 }) {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
@@ -58,7 +62,22 @@ export default function SignUp({
   };
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center gap-6">
+    <motion.div
+      key="signup"
+      initial={{ translateX: 400, opacity: 0 }}
+      animate={{ translateX: 0, opacity: 1 }}
+      exit={{ translateX: 400, opacity: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="flex-1 flex flex-col items-center gap-6 w-full"
+    >
+      <button
+        type="button"
+        onClick={() => setCurrentTab("login")}
+        className="self-start text-sm flex items-center underline decoration-1 underline-offset-2"
+      >
+        <BsArrowLeftShort className="text-lg" />
+        Go Back
+      </button>
       <div className="w-16 h-16 bg-primary rounded-full p-4">
         <GhostityIcon />
       </div>
@@ -125,6 +144,6 @@ export default function SignUp({
           Register
         </button>
       )}
-    </div>
+    </motion.div>
   );
 }

@@ -22,7 +22,7 @@ function channelPic(stream: Stream) {
         >
           <img
             src={stream.channel_img}
-            alt={`${stream.channel_name}'s profile img`}
+            // alt={`${stream.channel_name}'s profile img`}
             className="rounded-full min-w-[24px] min-h-[24px]"
           />
         </a>
@@ -39,7 +39,7 @@ function channelPic(stream: Stream) {
       >
         <img
           src={stream.channel_img}
-          alt={`${stream.channel_name}'s profile img`}
+          // alt={`${stream.channel_name}'s profile img`}
           className="rounded-full min-w-[24px] min-h-[24px]"
         />
       </a>

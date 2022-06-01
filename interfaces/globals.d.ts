@@ -42,6 +42,7 @@ declare global {
     stats: {
       possible_languages: { [key: string]: number }[];
       total_viewers: number;
+      total_organizations: number;
       number_of_channels_live: number;
       number_of_channels_in_db: number;
       number_live_twitch: number;

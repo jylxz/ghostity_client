@@ -92,7 +92,7 @@ export default function OrganizationMembers({
         onClick={() => follow()}
         onMouseEnter={() => setFollowState(true)}
         onMouseLeave={() => setFollowState(false)}
-        className="flex items-center gap-2 bg-gray-300 px-2 py-0.5 text-sm  text-gray-50 rounded"
+        className="flex items-center gap-2 bg-slate-100 px-2 py-0.5 text-sm  text-gray-800 rounded"
       >
         {followed ? (
           <>

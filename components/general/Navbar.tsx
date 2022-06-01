@@ -1,40 +1,57 @@
-import React, { Dispatch, SetStateAction, useContext } from "react";
+// Libraries
+import React, {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useRouter } from "next/router";
-import GhostityLogo from "../../public/images/Ghostity-svg.svg";
+import { motion, AnimateSharedLayout } from "framer-motion";
+
+// Components
 import LinkTo from "./LinkTo";
-import ProfileNavbar from "../Profile/ProfileNavbar"
+import ProfileNavbar from "../Profile/ProfileNavbar";
+
+// Contexts
 import UserContext from "../../context/UserContext";
 
-function NavbarButton(props: { text: string; href: string }) {
-  const { text, href } = props;
-  const router = useRouter();
+// Images
+import GhostityLogo from "../../public/images/Ghostity-svg.svg";
 
-  if (router.route === href) {
-    return (
-      <LinkTo href={href}>
-        <button
-          type="button"
-          className="text-gray-600 px-2 py-2 underline underline-offset-[6px] hover:underline hover:underline-offset-4  hover:decoration-2 hover:bg-blurGray hover:rounded"
-        >
-          {text}
-        </button>
-      </LinkTo>
-    );
-  }
+function NavbarButton({ text, href }: { text: string; href: string }) {
+  const router = useRouter();
+  const spring = {
+    type: "spring",
+    stiffness: 500,
+    damping: 30,
+  };
 
   return (
     <LinkTo href={href}>
-      <button
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.9 }}
         type="button"
-        className="text-gray-600  px-2 py-2 hover:underline hover:underline-offset-[6px] hover:decoration-2 hover:bg-blurGray hover:rounded"
+        className="text-gray-600 px-2 py-1 hover:bg-blurGray hover:rounded"
       >
-        {text}
-      </button>
+        <div className="relative">
+          {text}
+          {href === router.route ? (
+            <motion.div
+              initial={false}
+              layoutId="underline-navbar"
+              className="underline-navbar"
+              transition={spring}
+            />
+          ) : null}
+        </div>
+      </motion.button>
     </LinkTo>
   );
 }
 
-function Navbar({
+export default function Navbar({
   showAuth,
   setShowAuth,
 }: {
@@ -43,30 +60,66 @@ function Navbar({
 }) {
   const user = useContext(UserContext);
 
+  const animateCenter = {
+    initial: { translateX: 0 },
+    animate: {
+      translateX: 70,
+      transition: { duration: 1, repeat: Infinity, repeatType: "mirror" },
+    },
+  };
+
+  const wiggle = {
+    initial: { rotate: 0 },
+    animate: {
+      rotate: [0, 10, -10, 10],
+      transition: { duration: 1, repeat: Infinity, repeatType: "mirror" },
+    },
+  };
+
+  const fadeOut = {
+    initial: { opacity: 1 },
+    animate: {
+      opacity: 0,
+      transition: { duration: 1, repeat: Infinity, repeatType: "mirror" },
+    },
+  };
+
   return (
     <nav className="bg-gradient-to-r from-[#DEECFC] via-[#E1F2FB] to-[#F1F9F9] flex items-center justify-between px-8 py-7 text-gray-500 h-14">
       <div className="flex">
         <LinkTo href="/">
-          <button type="button" className="group py-2">
-            <div className="flex gap-2 items-center text-2xl group-hover:animate-move-center">
-              <GhostityLogo className="h-10 w-10 group-hover:animate-wiggle" />
-              <h1 className="group-hover:animate-fade-out text-black">
+          <motion.button
+            initial="initial"
+            whileHover="animate"
+            type="button"
+            className="group py-2"
+          >
+            <motion.div
+              variants={animateCenter}
+              className="flex gap-2 items-center text-2xl "
+            >
+              <motion.div variants={wiggle}>
+                <GhostityLogo className="h-10 w-10 " />
+              </motion.div>
+              <motion.h1 variants={fadeOut} className=" text-black">
                 ghostity
-              </h1>
-            </div>
-          </button>
+              </motion.h1>
+            </motion.div>
+          </motion.button>
         </LinkTo>
-        <ul className="flex gap-2 items-center before:content-['|'] before:text-3xl before:mx-4">
-          <li>
-            <NavbarButton text="Home" href="/" />
-          </li>
-          <li>
-            <NavbarButton text="Browse" href="/browse" />
-          </li>
-          <li>
-            <NavbarButton text="FAQ" href="/faq" />
-          </li>
-        </ul>
+        <AnimateSharedLayout>
+          <ul className="flex gap-2 items-center before:content-['|'] before:text-3xl before:mx-4">
+            <li>
+              <NavbarButton text="Home" href="/" />
+            </li>
+            <li>
+              <NavbarButton text="Browse" href="/browse" />
+            </li>
+            <li>
+              <NavbarButton text="FAQ" href="/faq" />
+            </li>
+          </ul>
+        </AnimateSharedLayout>
       </div>
       <div className="flex items-center gap-4">
         {!user ? (
@@ -84,5 +137,3 @@ function Navbar({
     </nav>
   );
 }
-
-export default Navbar;

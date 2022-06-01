@@ -19,7 +19,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Raleway:light,regular,medium,thin,semibold,bold&display=swap"
           />
         </Head>
-        <body style={{overscrollBehavior: "none"}}>
+        <body style={{ overscrollBehavior: "none" }}>
           <Main />
           <NextScript />
         </body>

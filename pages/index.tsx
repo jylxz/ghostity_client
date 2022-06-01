@@ -1,16 +1,21 @@
+// Libraries
 import Head from "next/head";
+import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
-import WelcomeBanner from "../components/Home/WelcomeSection";
-import Stats from "../components/Home/StatsSection";
-import Footer from "../components/general/Footer";
-import PopularLiveChannels from "../components/Home/PopularLiveChannelsSection";
-import OrganizationLogoCarousel from "../components/Home/OrganizationLogosSection";
-import BrowseBar from "../components/Home/BrowseSection";
-import Help from "../components/Home/HelpSection";
 
+// Components
+import HomeWelcome from "../components/Home/HomeWelcome";
+import HomeStats from "../components/Home/HomeStats";
+import Footer from "../components/general/Footer";
+import HomeLive from "../components/Home/HomeLive";
+import HomeOrganizations from "../components/Home/HomeOrganizations";
+import HomeBrowse from "../components/Home/HomeBrowse";
+import HomeHelp from "../components/Home/HomeHelp";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const fetchLogos = await fetch("https://api.ghostity.com/organizations/logos");
+  const fetchLogos = await fetch(
+    "https://api.ghostity.com/organizations/logos"
+  );
   const logos = await fetchLogos.json();
 
   const fetchStats = await fetch("https://api.ghostity.com/general/stats");
@@ -19,25 +24,19 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: { logos, stats }, revalidate: 6000 };
 };
 
-export default function Home({
-  logos,
-  stats,
-}: OrganizationLogos & Stats) {
+export default function Home({ logos, stats }: OrganizationLogos & Stats) {
   return (
-    <>
+    <motion.div key="home" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} transition={{duration: 3}}>
       <Head>
         <title>Ghostity | Home</title>
-        <link rel="shortcut icon" href="favicon.svg" type="image/svg" />
       </Head>
-      <div className="bg-gradient-to-r from-[#DEECFC] via-[#E1F2FB] to-[#F1F9F9]">
-        <WelcomeBanner />
-        <OrganizationLogoCarousel logos={logos} />
-        <PopularLiveChannels />
-        <BrowseBar />
-        <Stats stats={stats} />
-        <Help />
-      </div>
+      <HomeWelcome />
+      <HomeOrganizations logos={logos} />
+      <HomeLive />
+      <HomeBrowse />
+      <HomeStats stats={stats} />
+      <HomeHelp /> 
       <Footer />
-    </>
+    </motion.div>
   );
 }

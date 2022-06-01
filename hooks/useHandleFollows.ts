@@ -8,29 +8,29 @@ export default function useHandleFollows(channelIds: string | Channel[]) {
 
   if (typeof channelIds !== "string") {
     channelIds.forEach((channel) => {
-      if (!follows?.data()?.channel_ids.includes(channel.id))
+      if (!follows?.channels?.includes(channel.id))
         currentlyFollowing = false;
     });
   } else {
-    currentlyFollowing = follows?.data()?.channel_ids.includes(channelIds);
+    currentlyFollowing = follows?.channels?.includes(channelIds);
   }
 
   const handleFollow = async () => {
     if (typeof channelIds === "string") {
       if (currentlyFollowing) {
-        return updateDoc(follows!.ref, {
+        return updateDoc(follows!.follows!.ref, {
           channel_ids: arrayRemove(channelIds),
         });
       }
 
-      return updateDoc(follows!.ref, {
+      return updateDoc(follows!.follows!.ref, {
         channel_ids: arrayUnion(channelIds),
       });
     }
     if (currentlyFollowing) {
       return Promise.all(
         channelIds.map((channel) =>
-          updateDoc(follows!.ref, {
+          updateDoc(follows!.follows!.ref, {
             channel_ids: arrayRemove(channel.id),
           })
         )
@@ -39,7 +39,7 @@ export default function useHandleFollows(channelIds: string | Channel[]) {
 
     return Promise.all(
       channelIds.map((channel) =>
-        updateDoc(follows!.ref, {
+        updateDoc(follows!.follows!.ref, {
           channel_ids: arrayUnion(channel.id),
         })
       )

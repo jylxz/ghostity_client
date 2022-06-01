@@ -14,11 +14,11 @@ export default function MemberCard({
   socials,
 }: {
   name: string;
-  altName: string;
-  image: string;
-  language: string;
+  altName?: string;
+  image?: string;
+  language?: string;
   channels: Channel[];
-  socials: { platform: string; url: string }[];
+  socials?: { platform: string; url: string }[];
 }) {
   const [follow, followed] = useHandleFollows(channels);
 
@@ -62,19 +62,21 @@ export default function MemberCard({
 
   return (
     <div className="grid items-center">
-      <img
-        src={image}
-        alt={`${name}'s profile pic`}
-        className="rounded-full w-24 h-24 shadow-md mx-auto"
-      />
-      <div className="mt-1 mx-auto">{name}</div>
+      {image ? (
+        <img
+          src={image}
+          alt={`${name}'s profile pic`}
+          className="rounded-full w-24 h-24 shadow-md mx-auto"
+        />
+      ) : null}
+      <div className="mt-1 text-center">{name}</div>
       <div className="flex flex-col items-center">
         {altName ? (
           <div className="text-xs text-gray-500">{`(${altName})`}</div>
         ) : null}
         <div className="text-xs text-gray-500">{language}</div>
       </div>
-      <div className="mt-2 flex justify-center items-center gap-2">
+      <div className={`flex justify-center items-center gap-2 ${language ? "mt-2" : ""}`}>
         {channels.map((channel) => channelIcon(channel))}
         {socials ? socials.map((social) => socialsIcon(social)) : null}
         {followIcon()}

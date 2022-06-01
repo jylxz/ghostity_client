@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, Fragment, SetStateAction, useContext } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -6,7 +6,12 @@ import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined
 import { BsHeart } from "react-icons/bs";
 import { CgGames } from "react-icons/cg";
 import { IconType } from "react-icons";
+import axios from "axios";
+import { useInfiniteQuery } from "react-query";
+import UserContext from "../../context/UserContext";
 import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+import UserFollowContext from "../../context/UserFollowContext";
+import SmallLivestreamCard from "../general/SmallLivestreamCard";
 
 function BrowseItem({
   item,
@@ -54,7 +59,7 @@ function BrowseSideBar({
   show,
   setShow,
 }: {
-  show: {user: boolean, show:boolean};
+  show: { user: boolean; show: boolean };
   setShow: Dispatch<
     SetStateAction<{
       user: boolean;
@@ -62,10 +67,32 @@ function BrowseSideBar({
     }>
   >;
 }) {
+  const user = useContext(UserContext);
+  const follows = useContext(UserFollowContext);
+
+  const channelIds: string = follows?.data()?.channel_ids.join(",");
+
+  const fetchStreams = ({ pageParam = 1 }) =>
+    axios
+      .get(
+        `https://api.ghostity.com/streams?page=${pageParam}&channels=${channelIds}`
+      )
+      .then((res) => res.data);
+
+  const streams = useInfiniteQuery<Streams, Error>(
+    ["userFollows", channelIds],
+    fetchStreams,
+    {
+      enabled: !!user?.uid,
+      getNextPageParam: (lastPage) =>
+        lastPage.next ? lastPage.next.page : false,
+    }
+  );
+
   if (!show.show) return null;
 
   return (
-    <div className="fixed z-30 sm:static bg-slate-100 min-w-[14rem] h-[calc(100vh_-_3.5rem)] pl-5">
+    <div className="fixed z-30 sm:static bg-slate-100 min-w-[15rem] w-[15.5rem] h-[calc(100vh_-_3.5rem)] pl-5 overflow-auto">
       <div className="flex justify-between">
         <h1 className="text-lg h-14 flex items-center">Browse</h1>
         <button
@@ -97,6 +124,10 @@ function BrowseSideBar({
           href="/browse/organizations"
         />
         <div className="z-0 -mt-[1rem] absolute bg-gradient-to-r from-primary via-secondary to-secondary2 w-[9rem] h-[1rem] origin-bottom-left rotate-90 rounded border-2 border-white" />
+      </div>
+      <div className="grid pr-5 gap-3 mt-5">
+        <h1 className="text-lg">Followed</h1>
+        {streams ? streams.data?.pages[0].results.slice(0,7).map((stream) => <SmallLivestreamCard key={stream._id} stream={stream} /> ) : null}
       </div>
     </div>
   );
