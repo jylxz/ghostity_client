@@ -43,7 +43,6 @@ export default function BrowseGames() {
   return (
     <div className="bg-slate-50 overflow-auto h-[calc(100vh_-_7rem)] px-4 sm:px-14 py-7">
       <div className="grid grid-cols-[repeat(auto-fill,_minmax(160px,_1fr))] gap-8">
-        {console.log(data?.pages)}
         {data?.pages.map((group) => (
           <Fragment key={group.results.length}>
             {group.results.map((game) => (
