@@ -1,124 +1,36 @@
-import React, {
-  createRef,
-  Dispatch,
-  Fragment,
-  SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-
-import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined";
-import { BsHeart, BsArrowBarLeft } from "react-icons/bs";
-import { CgGames, CgPushChevronLeft } from "react-icons/cg";
-import { IconType } from "react-icons";
-import { BiSearchAlt, BiArrowToLeft, BiArrowFromLeft } from "react-icons/bi";
+// Libraries
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
 import { useInfiniteQuery } from "react-query";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import UserContext from "../../context/UserContext";
-import GhostityIcon from "../../public/images/Ghostity-svg.svg";
-import UserFollowContext from "../../context/UserFollowContext";
-import SmallLivestreamCard from "../general/SmallLivestreamCard";
-import browseAnimations from "./animations/browseAnimations";
-import useResponsiveBrowseBar from "../../hooks/useResponsiveBrowseBar";
 
-const animations = browseAnimations.sidebar;
+// Icons
+import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined";
+import { BsHeart } from "react-icons/bs";
+import { CgGames } from "react-icons/cg";
+import { BiSearchAlt, BiArrowToLeft, BiArrowFromLeft } from "react-icons/bi";
+import GhostityIcon from "../../../public/images/Ghostity-svg.svg";
 
-function BrowseItem({
-  item,
-  icon,
-  href,
-  minimized,
-}: {
-  item: string;
-  icon: IconType | any;
-  href: string;
-  minimized?: boolean;
-}) {
-  const router = useRouter();
-  const [selected, setSelected] = useState(
-    router.route === href || router.route.includes(item.toLowerCase())
-  );
+// Contexts
+import UserContext from "../../../context/UserContext";
+import UserFollowContext from "../../../context/UserFollowContext";
 
-  useEffect(() => {
-    setSelected(
-      router.route === href || router.route.includes(item.toLowerCase())
-    );
-  }, [router]);
+// Hooks
+import useResponsiveBrowseBar from "../../../hooks/useResponsiveBrowseBar";
 
-  return (
-    <motion.div
-      variants={animations.browseItems}
-      className={`relative ${!minimized ? "ml-5" : undefined}`}
-    >
-      {selected ? (
-        <motion.div
-          layoutId="browseItem"
-          initial={false}
-          // transition={spring}
-          className="absolute z-20 -left-5 col-start-1 w-[calc(100%_+_1.25rem)] h-full bg-white"
-        />
-      ) : null}
-      <div className="relative z-30 col-start-2 flex items-center h-full">
-        <Link href={href} passHref>
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            type="button"
-            className={`z-30 flex items-center w-full h-full ${
-              !selected ? "text-sm text-gray-500 fill-gray-500" : null
-            }`}
-          >
-            {icon}
-            {!minimized ? item : null}
-          </motion.button>
-        </Link>
-      </div>
-    </motion.div>
-  );
-}
+// Components
+import SideBarBrowseItem from "./SideBarBrowseItem";
+import SideBarButtons from "./SideBarButtons";
+import SideBarFollowingItem from "./SideBarFollowingItem";
 
-function ShowMoreButtons({
-  length,
-  showMore,
-  setShowMore,
-}: {
-  length: number;
-  showMore: boolean;
-  setShowMore: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
-  if (length > 6) {
-    return !showMore ? (
-      <button
-        type="button"
-        onClick={() => setShowMore(true)}
-        className="text-sm"
-      >
-        Show more
-      </button>
-    ) : (
-      <button
-        type="button"
-        onClick={() => setShowMore(false)}
-        className="text-sm"
-      >
-        Show less
-      </button>
-    );
-  }
-  return null;
-}
+// Animations
+import browseAnimations from "../animations/browseAnimations";
 
-export default function BrowseSideBar() {
+export default function SideBarMain() {
+  const animations = browseAnimations.sidebar;
   const user = useContext(UserContext);
   const follows = useContext(UserFollowContext);
-  const [showMore, setShowMore] = useState(false);
-  const [showChannels, setShowChannels] = useState(6);
+  const [showChannels, setShowChannels] = useState(5);
   const [
     showBrowseBar,
     setShowBrowseBar,
@@ -128,14 +40,6 @@ export default function BrowseSideBar() {
   ] = useResponsiveBrowseBar();
 
   const channelIds: string | undefined = follows?.channels?.join(",");
-
-  useMemo(() => {
-    if (showMore) {
-      setShowChannels(12);
-    } else {
-      setShowChannels(6);
-    }
-  }, [showMore]);
 
   const fetchStreams = ({ pageParam = 1 }) =>
     axios
@@ -154,28 +58,8 @@ export default function BrowseSideBar() {
     }
   );
 
-  const activeCardRef = useRef<HTMLDivElement[]>([]);
-  const parentRef = useRef<HTMLDivElement>(null);
-  const [activeCardX, setActiveCardX] = useState<number | null>(null);
-  const [activeCardIndex, setActiveCardIndex] = useState<number>(null);
-  const [activeCardY, setActiveCardY] = useState<number | null>(null);
-
-  useEffect(() => {
-    setTimeout(
-      () => {
-        activeCardRef?.current[activeCardIndex]?.scrollIntoView({
-          block: "center",
-          behavior: "smooth",
-        });
-      },
-
-      2000
-    );
-  }, [activeCardIndex, minimized]);
-
   return (
     <motion.div
-      // ref={parentRef}
       layout="size"
       layoutScroll
       className={`fixed z-30 sm:static bg-slate-100 ${
@@ -183,7 +67,11 @@ export default function BrowseSideBar() {
       } h-[calc(100vh_-_3.8rem)] overflow-auto`}
       onMouseLeave={() => (minimized ? browseBarOverride(false) : null)}
     >
-      <div className={`flex ${showBrowseBar ? "justify-between" : "justify-center"}`}>
+      <div
+        className={`flex ${
+          showBrowseBar ? "justify-between" : "justify-center"
+        }`}
+      >
         {showBrowseBar ? (
           <h1 className="text-lg my-3 flex items-center">Browse</h1>
         ) : null}
@@ -214,7 +102,7 @@ export default function BrowseSideBar() {
         animate="animate"
         className="grid grid-cols-1 grid-rows-[repeat(5,_minmax(2.3rem,_1fr))] relative w-full"
       >
-        <BrowseItem
+        <SideBarBrowseItem
           item="Following"
           minimized={!showBrowseBar}
           icon={
@@ -224,7 +112,7 @@ export default function BrowseSideBar() {
           }
           href="/browse/following"
         />
-        <BrowseItem
+        <SideBarBrowseItem
           item="Streams"
           minimized={!showBrowseBar}
           icon={
@@ -234,7 +122,7 @@ export default function BrowseSideBar() {
           }
           href="/browse"
         />
-        <BrowseItem
+        <SideBarBrowseItem
           item="Games"
           minimized={!showBrowseBar}
           icon={
@@ -244,7 +132,7 @@ export default function BrowseSideBar() {
           }
           href="/browse/games"
         />
-        <BrowseItem
+        <SideBarBrowseItem
           item="Organizations"
           minimized={!showBrowseBar}
           icon={
@@ -254,7 +142,7 @@ export default function BrowseSideBar() {
           }
           href="/browse/organizations"
         />
-        <BrowseItem
+        <SideBarBrowseItem
           item="Search"
           minimized={!showBrowseBar}
           icon={
@@ -280,23 +168,21 @@ export default function BrowseSideBar() {
           )}
           {streams.data && !streams.isLoading ? (
             <motion.div
-              key="hey"
               layout="position"
               variants={animations.streamsContainer}
               initial="initial"
               animate="animate"
-              exit="exit"
               className={`grid gap-2.5 ${showBrowseBar ? "mr-5" : ""} mb-4`}
             >
               {streams.data?.pages[0].results
                 .slice(0, showChannels)
-                .map((stream, index) => (
+                .map((stream) => (
                   <motion.div
                     key={stream._id}
                     variants={animations.streams}
                     className={!showBrowseBar ? "mx-auto" : ""}
                   >
-                    <SmallLivestreamCard
+                    <SideBarFollowingItem
                       minimized={!showBrowseBar}
                       stream={stream}
                       browseBarOverride={browseBarOverride}
@@ -305,10 +191,13 @@ export default function BrowseSideBar() {
                   </motion.div>
                 ))}
               {showBrowseBar ? (
-                <ShowMoreButtons
-                  length={streams?.data?.pages[0].results.length}
-                  showMore={showMore}
-                  setShowMore={setShowMore}
+                <SideBarButtons
+                  length={
+                    streams?.data?.pages[0].next?.total ||
+                    streams?.data?.pages[0].results.length
+                  }
+                  showChannels={showChannels}
+                  setShowChannels={setShowChannels}
                 />
               ) : null}
             </motion.div>

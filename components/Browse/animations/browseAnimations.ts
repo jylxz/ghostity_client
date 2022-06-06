@@ -22,6 +22,9 @@ const browseAnimations = {
         opacity: 1,
         
       },
+      exit: {
+        opacity: 0
+      }
     },
     browseContainer: {
       initial: {

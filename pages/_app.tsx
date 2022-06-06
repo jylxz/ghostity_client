@@ -2,11 +2,11 @@
 
 // Libraries
 import Head from "next/head";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useRouter } from "next/router";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import {
   createTheme,
   StyledEngineProvider,
@@ -28,7 +28,7 @@ import useSystemColor from "../hooks/useSystemColor";
 
 // Components
 import Navbar from "../components/general/Navbar";
-import BrowseSideBar from "../components/Browse/BrowseSideBar";
+import SideBarMain from "../components/Browse/SideBar/SideBarMain";
 import AuthMain from "../components/Auth/AuthMain";
 import PageProgress from "../components/general/PageProgress";
 
@@ -144,10 +144,7 @@ export default function MyApp({
                   router.route.includes("search") ? (
                     <div className="flex">
                       <AnimatePresence exitBeforeEnter>
-                        <BrowseSideBar
-                        // show={showBrowseBar}
-                        // setShow={setShowBrowseBar}
-                        />
+                        <SideBarMain />
                       </AnimatePresence>
                       <div className="flex-1">
                         <Component {...pageProps} />

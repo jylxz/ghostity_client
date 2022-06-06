@@ -20,10 +20,12 @@ declare global {
 
   interface Streams {
     next?: {
+      total: number;
       page: number;
       limit: number;
     };
     prev?: {
+      total: number;
       page: number;
       limit: number;
     };
@@ -121,13 +123,13 @@ declare global {
   }
 
   interface Game {
-    _id: string,
-    name: string,
-    cover_img: string,
-    screenshot: string,
-    summary: string,
-    storyline: string,
-    viewers: number,
-    streams: number
+    _id: string;
+    name: string;
+    cover_img: string;
+    screenshot: string;
+    summary: string;
+    storyline: string;
+    viewers: number;
+    streams: number;
   }
 }

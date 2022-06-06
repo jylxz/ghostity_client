@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
-export default function SmallLivestreamCard({
+export default function SideBarFollowingItem({
   stream,
   minimized,
   userPreference,
@@ -14,14 +14,16 @@ export default function SmallLivestreamCard({
   browseBarOverride: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [showTitle, setShowTitle] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [titleTimeout, setTitleTimeout] = useState<NodeJS.Timeout>();
   const [browseTimeout, setBrowseTimeout] = useState<NodeJS.Timeout>();
+  const [scrollTimeout, setScrollTimeout] = useState<NodeJS.Timeout>();
 
   const shouldAnimate = stream.stream.title.length / 15 > 1;
   const duration = stream.stream.title.length / 5;
 
   const handleShowTitle = () => {
-    setTitleTimeout(setTimeout(() => setShowTitle(true), 500));
+    setTitleTimeout(setTimeout(() => setShowTitle(true), 800));
   };
 
   const handleHideTitle = () => {
@@ -30,7 +32,14 @@ export default function SmallLivestreamCard({
   };
 
   const handleBrowseOpen = () => {
-    setBrowseTimeout(setTimeout(() => browseBarOverride(true), 1250));
+    setBrowseTimeout(setTimeout(() => browseBarOverride(true), 1500));
+
+    if (minimized) {
+      clearTimeout(scrollTimeout);
+      setScrollTimeout(
+        setTimeout(() => scrollRef.current?.scrollIntoView({behavior: "smooth", block:"nearest"}), 2000)
+      );
+    }
   };
 
   const handleBrowseClose = () => {
@@ -70,10 +79,12 @@ export default function SmallLivestreamCard({
 
   return (
     <motion.div
+      ref={scrollRef}
       whileTap={{ scale: 0.95 }}
-      onHoverStart={() => handleShowTitle()}
-      onHoverEnd={() => handleHideTitle()}
+      onMouseEnter={() => handleShowTitle()}
+      onMouseLeave={() => handleHideTitle()}
       onClick={() => handleBrowseOnClick()}
+      onScroll={() => handleHideTitle()}
       className="w-full h-full text-sm relative"
     >
       <a href={stream.stream.url} target="_blank" rel="noopener noreferrer">

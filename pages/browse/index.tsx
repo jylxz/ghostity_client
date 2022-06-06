@@ -3,7 +3,7 @@ import Head from "next/head";
 import { motion } from "framer-motion";
 
 import BrowseStreams from "../../components/Browse/BrowseStreams";
-import BrowseSideBar from "../../components/Browse/BrowseSideBar";
+import BrowseSideBar from "../../components/Browse/SideBar/SideBarMain";
 
 export default function browse() {
   return (
