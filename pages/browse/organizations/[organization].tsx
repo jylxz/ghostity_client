@@ -23,7 +23,7 @@ const getOrganizationData = async (
 
 const getProfiles = (ids: string[]): Promise<Profile[]> =>
   axios
-    .get(`https://api.ghostity.com/general/profiles`, {data: {ids}})
+    .get(`https://api.ghostity.com/general/profiles?ids=${ids}`)
     .then((res) => res.data);
 
 export async function getStaticPaths() {

@@ -12,3 +12,10 @@
   background: black;
   opacity: 0.85;
 }
+
+body {
+  /* perspective: 1px; */
+  /* backface-visibility: hidden; */
+  /* -webkit-font-smoothing: subpixel-antialiased; */
+
+}

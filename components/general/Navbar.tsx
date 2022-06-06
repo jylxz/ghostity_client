@@ -37,7 +37,7 @@ function NavbarButton({ text, href }: { text: string; href: string }) {
       >
         <div className="relative">
           {text}
-          {href === router.route ? (
+          {router.route === href || href.includes("browse") ? (
             <motion.div
               initial={false}
               layoutId="underline-navbar"
@@ -107,7 +107,6 @@ export default function Navbar({
             </motion.div>
           </motion.button>
         </LinkTo>
-        <AnimateSharedLayout>
           <ul className="flex gap-2 items-center before:content-['|'] before:text-3xl before:mx-4">
             <li>
               <NavbarButton text="Home" href="/" />
@@ -119,7 +118,6 @@ export default function Navbar({
               <NavbarButton text="FAQ" href="/faq" />
             </li>
           </ul>
-        </AnimateSharedLayout>
       </div>
       <div className="flex items-center gap-4">
         {!user ? (

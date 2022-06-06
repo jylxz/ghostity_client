@@ -2,7 +2,7 @@
 /* eslint-disable import/no-unresolved */
 
 // Libraries
-import { useQuery } from "react-query";
+import { useInfiniteQuery, useQuery } from "react-query";
 import React, { useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
@@ -25,13 +25,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 export default function HomeLive() {
-  const { isLoading, error, data } = useQuery<Streams, Error>(
-    "streams",
-    async () =>
-      axios
-        .get("https://api.ghostity.com/streams?limit=20")
-        .then((res) => res.data)
-  );
+  const fetchStreams = async ({ pageParam = 1 }) =>
+    axios.get(`https://api.ghostity.com/streams?page=${pageParam}`).then((res) => res.data)
+
+  const { data, error, isLoading } =
+    useInfiniteQuery<Streams, Error>(["allStreams", {}], fetchStreams, {
+      getNextPageParam: (lastPage) =>
+        lastPage.next ? lastPage.next.page : false,
+    });
 
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
   const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
@@ -97,7 +98,7 @@ export default function HomeLive() {
           updateOnWindowResize
           className="py-4"
         >
-          {data?.results?.map((stream: Stream, i: number) => (
+          {data?.pages[0].results.slice(0, 15).map((stream: Stream, i: number) => (
             <SwiperSlide
               key={stream.channel_id}
               className="flex justify-center"

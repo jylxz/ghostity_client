@@ -9,7 +9,7 @@ function games() {
       <Head>
         <title>Ghostity | Games</title>
       </Head>
-      <BrowseGames />;
+      <BrowseGames />
     </PageAnimateWrapper>
   );
 }

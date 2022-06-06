@@ -9,6 +9,7 @@ module.exports = {
   },
   images: {
     domains: [
+      "img.youtube.com",
       "static-cdn.jtvnw.net",
       "i.ytimg.com",
       "yt3.ggpht.com",

@@ -7,14 +7,11 @@ import BrowseSideBar from "../../components/Browse/BrowseSideBar";
 
 export default function browse() {
   return (
-    <motion.div
-     
-      exit={{ opacity: 0 }}
-    >
+    <>
       <Head>
         <title>Ghostity | Browse</title>
       </Head>
       <BrowseStreams />
-    </motion.div>
+    </>
   );
 }

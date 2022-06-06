@@ -66,7 +66,7 @@ function channelName(stream: Stream) {
       href={`https://www.youtube.com/channel/${stream.channel_id}`}
       rel="noopener noreferrer"
     >
-      {stream.channel_name}
+      <div title={stream.channel_name}>{stream.channel_name}</div>
     </a>
   );
 }

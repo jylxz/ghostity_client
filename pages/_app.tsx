@@ -25,14 +25,12 @@ import { auth, db } from "../firebase/clientApp";
 
 // Hooks
 import useSystemColor from "../hooks/useSystemColor";
-import useWindowDimensions from "../hooks/useWindowDimensions";
 
 // Components
 import Navbar from "../components/general/Navbar";
-import SearchBar from "../components/general/SearchBar";
 import BrowseSideBar from "../components/Browse/BrowseSideBar";
 import AuthMain from "../components/Auth/AuthMain";
-import PageProgress from "../components/general/PageProgress"
+import PageProgress from "../components/general/PageProgress";
 
 // Contexts
 import UserContext from "../context/UserContext";
@@ -72,25 +70,6 @@ export default function MyApp({
     }),
     [follows]
   );
-
-  // Responsive BrowseBar
-  const [showBrowseBar, setShowBrowseBar] = useState({
-    user: true,
-    show: true,
-  });
-  const size = useWindowDimensions();
-
-  useEffect(() => {
-    if (size.width) {
-      if (size.width < 640) {
-        setShowBrowseBar({ ...showBrowseBar, show: false });
-      }
-
-      if (size.width > 640 && showBrowseBar.user) {
-        setShowBrowseBar({ ...showBrowseBar, show: true });
-      }
-    }
-  }, [size]);
 
   // Etc.
   const router = useRouter();
@@ -153,7 +132,7 @@ export default function MyApp({
           <ThemeProvider theme={theme}>
             <UserContext.Provider value={user || null}>
               <UserFollowContext.Provider value={followsData || null}>
-                <PageProgress/>
+                <PageProgress />
                 <Navbar showAuth={showAuth} setShowAuth={setShowAuth} />
                 <AnimatePresence exitBeforeEnter>
                   {showAuth ? (
@@ -161,9 +140,22 @@ export default function MyApp({
                   ) : null}
                 </AnimatePresence>
                 <main>
-                  <AnimatePresence exitBeforeEnter>
+                  {router.route.includes("browse") ||
+                  router.route.includes("search") ? (
+                    <div className="flex">
+                      <AnimatePresence exitBeforeEnter>
+                        <BrowseSideBar
+                        // show={showBrowseBar}
+                        // setShow={setShowBrowseBar}
+                        />
+                      </AnimatePresence>
+                      <div className="flex-1">
+                        <Component {...pageProps} />
+                      </div>
+                    </div>
+                  ) : (
                     <Component {...pageProps} />
-                  </AnimatePresence>
+                  )}
                 </main>
               </UserFollowContext.Provider>
             </UserContext.Provider>

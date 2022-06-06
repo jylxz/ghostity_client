@@ -6,6 +6,7 @@ import LivestreamCard from "../general/LivestreamCard";
 import BrowseStreamsOptions from "./BrowseStreamsOptions";
 import GradientCircularProgress from "../general/GradientCircularProgress";
 import ProblemLoading from "../general/ProblemLoading";
+import BrowseWrapper from "../general/BrowseWrapper";
 
 interface Filters {
   sort?: string;
@@ -77,7 +78,7 @@ function BrowseStreams() {
   }
 
   return (
-    <div className="bg-slate-50 overflow-auto h-[calc(100vh_-_7rem)] px-4 sm:px-14 pb-7">
+    <BrowseWrapper>
       <BrowseStreamsOptions setParams={setParams} />
       <div className="grid grid-flow-row auto-rows-fr grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-x-7 gap-y-7 justify-items-center">
         {data?.pages.map((group) => (
@@ -96,7 +97,7 @@ function BrowseStreams() {
           <GradientCircularProgress />
         </div>
       ) : null}
-    </div>
+    </BrowseWrapper>
   );
 }
 

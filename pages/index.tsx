@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export default function Home({ logos, stats }: OrganizationLogos & Stats) {
   return (
-    <motion.div key="home" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} transition={{duration: 3}}>
+    <motion.div key="home">
       <Head>
         <title>Ghostity | Home</title>
       </Head>

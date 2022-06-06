@@ -52,7 +52,7 @@ export default function HomeHelp() {
           <motion.div variants={animations.containerVariant}>
             <motion.p
               variants={animations.textVariant}
-              className="text-sm text-gray-500"
+              className="text-sm lg:text-base text-gray-500"
             >
               Are you a V-Tuber, but don&apos;t see your channel on ghostity?
               Check the FAQ page for help!
