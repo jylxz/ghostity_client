@@ -25,6 +25,7 @@ import { auth, db } from "../firebase/clientApp";
 
 // Hooks
 import useSystemColor from "../hooks/useSystemColor";
+import useAdminCheck from "../hooks/useAdminCheck"
 
 // Components
 import Navbar from "../components/general/Navbar";
@@ -35,6 +36,9 @@ import PageProgress from "../components/general/PageProgress";
 // Contexts
 import UserContext from "../context/UserContext";
 import UserFollowContext from "../context/UserFollowContext";
+import AdminContext from "../context/AdminContext";
+import BlacklistModal from "../components/general/BlacklistModal";
+import BlacklistContext from "../context/BlacklistContext";
 
 export default function MyApp({
   Component,
@@ -70,6 +74,14 @@ export default function MyApp({
     }),
     [follows]
   );
+
+  // Admin check
+  const [admin] = useAdminCheck(user?.uid)
+
+  // Blacklisting channels
+  const [showBlacklistModal, setShowBlacklistModal] = useState(false)
+  const [blacklistChannel, setBlacklistChannel] = useState<Stream | null>(null);
+  const blacklistContextValue = useMemo(() => ({setShowBlacklistModal, setBlacklistChannel}), [])
 
   // Etc.
   const router = useRouter();
@@ -132,28 +144,39 @@ export default function MyApp({
           <ThemeProvider theme={theme}>
             <UserContext.Provider value={user || null}>
               <UserFollowContext.Provider value={followsData || null}>
-                <PageProgress />
-                <Navbar showAuth={showAuth} setShowAuth={setShowAuth} />
-                <AnimatePresence exitBeforeEnter>
-                  {showAuth ? (
-                    <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
-                  ) : null}
-                </AnimatePresence>
-                <main>
-                  {router.route.includes("browse") ||
-                  router.route.includes("search") ? (
-                    <div className="flex">
-                      <AnimatePresence exitBeforeEnter>
-                        <SideBarMain />
-                      </AnimatePresence>
-                      <div className="flex-1">
+                <AdminContext.Provider value={admin}>
+                  <PageProgress />
+                  <Navbar showAuth={showAuth} setShowAuth={setShowAuth} />
+                  <AnimatePresence exitBeforeEnter>
+                    {showAuth ? (
+                      <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
+                    ) : null}
+                  {showBlacklistModal ? (
+                    <BlacklistModal
+                    channel={blacklistChannel}
+                    setBlacklistChannel={setBlacklistChannel}
+                    setShowBlacklistModal={setShowBlacklistModal}
+                    />
+                    ) : null}
+                    </AnimatePresence>
+                  <BlacklistContext.Provider value={blacklistContextValue}>
+                    <main>
+                      {router.route.includes("browse") ||
+                      router.route.includes("search") ? (
+                        <div className="flex">
+                          <AnimatePresence exitBeforeEnter>
+                            <SideBarMain />
+                          </AnimatePresence>
+                          <div className="flex-1">
+                            <Component {...pageProps} />
+                          </div>
+                        </div>
+                      ) : (
                         <Component {...pageProps} />
-                      </div>
-                    </div>
-                  ) : (
-                    <Component {...pageProps} />
-                  )}
-                </main>
+                      )}
+                    </main>
+                  </BlacklistContext.Provider>
+                </AdminContext.Provider>
               </UserFollowContext.Provider>
             </UserContext.Provider>
           </ThemeProvider>

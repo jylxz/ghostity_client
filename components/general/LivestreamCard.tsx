@@ -2,7 +2,7 @@ import { Card, CardMedia, CardContent, Typography } from "@mui/material";
 
 import React, { useContext, useState } from "react";
 import Image from "next/image";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart, AiOutlineStop } from "react-icons/ai";
 import { updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { motion } from "framer-motion";
 import LinkTo from "./LinkTo";
@@ -11,6 +11,8 @@ import TwitchIcon from "../../public/images/TwitchGlitchPurple.svg";
 import UserContext from "../../context/UserContext";
 import UserFollowContext from "../../context/UserFollowContext";
 import useHandleFollows from "../../hooks/useHandleFollows";
+import AdminContext from "../../context/AdminContext";
+import BlacklistContext from "../../context/BlacklistContext";
 
 function channelPic(stream: Stream) {
   if (stream.platform === "twitch") {
@@ -155,6 +157,24 @@ function FollowButton({
   return null;
 }
 
+function BlacklistButton ({stream}: {stream: Stream}) {
+  const admin = useContext(AdminContext)
+  const {setShowBlacklistModal, setBlacklistChannel} = useContext(BlacklistContext)
+
+  const handleBlacklist = () => {
+    setBlacklistChannel(stream)
+    setShowBlacklistModal(true)
+  }
+
+  if (admin) return (
+    <button type="button" onClick={() => handleBlacklist()} className="absolute top-1 right-1 bg-gray-400/80 flex items-start gap-1 text-red-400 px-1 py-0.5 text-sm rounded">
+      <AiOutlineStop className="w-5 h-5"/>
+    </button>
+  );
+
+  return null
+}
+
 export default function LivestreamCard({ stream }: { stream: Stream }) {
   return (
     <Card className="flex flex-col max-w-[18rem] shadow">
@@ -171,6 +191,7 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
           channel={stream.channel_name}
           channelId={stream.channel_id}
         />
+        <BlacklistButton stream={stream}/>
         <span className="absolute bottom-1 right-1 text-primary bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default">{`${stream.stream.viewers} viewers`}</span>
       </motion.div>
       <CardContent className="grow py-2.5">
