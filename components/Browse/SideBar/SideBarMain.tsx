@@ -52,6 +52,7 @@ export default function SideBarMain() {
     ["userFollows", channelIds],
     fetchStreams,
     {
+      refetchInterval: 300000,
       enabled: !!user?.uid,
       getNextPageParam: (lastPage) =>
         lastPage.next ? lastPage.next.page : false,
@@ -180,6 +181,7 @@ export default function SideBarMain() {
                   <motion.div
                     key={stream._id}
                     variants={animations.streams}
+                    layout="position"
                     className={!showBrowseBar ? "mx-auto" : ""}
                   >
                     <SideBarFollowingItem
