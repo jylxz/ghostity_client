@@ -16,17 +16,26 @@ export default function AuthForgotPassword({
 }) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(
     auth()
   );
 
   const resetPassword = async () => {
+    setMessage("");
+
     await sendPasswordResetEmail(email);
 
-    if (error) return setMessage("Something went wrong...");
-
-    return setMessage("Email sent! Check your inbox!");
+    setMessage("Email sent! Check your inbox!");
   };
+
+  useEffect(() => {
+    if (error?.code === "auth/user-not-found") {
+      setMessage("No account associated with email!");
+    } else if (error?.code === "auth/too-many-requests") {
+      setMessage("Too many requests! Try again later!");
+    }
+  }, [error]);
 
   return (
     <motion.div
@@ -42,7 +51,7 @@ export default function AuthForgotPassword({
         onClick={() => setCurrentTab("login")}
         className="self-start text-sm flex items-center underline decoration-1 underline-offset-2"
       >
-        <BsArrowLeftShort className="text-lg"/> Go back
+        <BsArrowLeftShort className="text-lg" /> Go back
       </button>
       <div className="w-16 h-16 bg-primary rounded-full p-4">
         <GhostityIcon />
@@ -74,7 +83,9 @@ export default function AuthForgotPassword({
           Reset password
         </button>
       )}
-      <span className="text-sm">{message}</span>
+      <span className={`text-sm ${error ? "text-red-400" : ""}`}>
+        {message}
+      </span>
     </motion.div>
   );
 }

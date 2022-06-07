@@ -1,5 +1,6 @@
 import {
   useCreateUserWithEmailAndPassword,
+  useUpdateEmail,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { Box, TextField } from "@mui/material";
@@ -28,6 +29,7 @@ export default function SignUp({
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth(), { sendEmailVerification: true });
   const [updateProfile, updating, updateError] = useUpdateProfile(auth());
+    const [updateEmail, emailUpdating, emailError] = useUpdateEmail(auth());
 
   const createUser = async () => {
     if (
@@ -61,14 +63,22 @@ export default function SignUp({
     return setShowAuth(false);
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (event.key === "Enter") {
+      createUser()
+    }
+  }
+  
+
   return (
-    <motion.div
+    <motion.form
       key="signup"
       initial={{ translateX: 400, opacity: 0 }}
       animate={{ translateX: 0, opacity: 1 }}
       exit={{ translateX: 400, opacity: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="flex-1 flex flex-col items-center gap-6 w-full"
+      onKeyPress={(event) => handleKeyPress(event)}
     >
       <button
         type="button"
@@ -106,30 +116,32 @@ export default function SignUp({
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="flex items-center">
-          <RiLockPasswordLine className="w-4 h-4 mr-3 -mt-3" />
-          <TextField
-            required
-            type="password"
-            label="Password"
-            size="small"
-            variant="standard"
-            value={password}
-            helperText="Minimum 8 characters"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className="flex items-center">
-          <RiLockPasswordFill className="w-4 h-4 mr-3 mt-2" />
-          <TextField
-            required
-            type="password"
-            label="Confirm Password"
-            size="small"
-            variant="standard"
-            value={passwordConfirm}
-            onChange={(e) => setPasswordConfirm(e.target.value)}
-          />
+        <div>
+          <div className="flex items-center">
+            <RiLockPasswordLine className="w-4 h-4 mr-3 -mt-3" />
+            <TextField
+              required
+              type="password"
+              label="Password"
+              size="small"
+              variant="standard"
+              value={password}
+              helperText="Minimum 8 characters"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="flex items-center">
+            <RiLockPasswordFill className="w-4 h-4 mr-3 mt-2" />
+            <TextField
+              required
+              type="password"
+              label="Confirm Password"
+              size="small"
+              variant="standard"
+              value={passwordConfirm}
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+            />
+          </div>
         </div>
       </div>
       {signUpError}
@@ -144,6 +156,6 @@ export default function SignUp({
           Register
         </button>
       )}
-    </motion.div>
+    </motion.form>
   );
 }

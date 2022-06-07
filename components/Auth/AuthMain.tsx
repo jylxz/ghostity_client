@@ -32,10 +32,8 @@ export default function AuthMain({
     auth()
   );
 
-  const handleKeyDown = (key: string) => {
-    if (key === "Escape") return setShowAuth(false);
-
-    if (key === "Enter") return null;
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (event.key === "Enter") signInWithEmailAndPassword(email, password);
   };
 
   useEffect(() => {
@@ -55,7 +53,7 @@ export default function AuthMain({
       onClick={() => setShowAuth(false)}
       // onKeyDown={(e) => handleKeyDown(e.key)}
     >
-      <motion.form
+      <motion.div
         key="login"
         initial={{ translateY: -200, opacity: 0 }}
         animate={{ translateY: 0, opacity: 1 }}
@@ -91,7 +89,7 @@ export default function AuthMain({
                   <GhostityIcon />
                 </div>
                 <h1 className="text-xl">Sign in to ghostity</h1>
-                <div className="flex flex-col gap-2">
+                <form onKeyPress={(event) => handleKeyDown(event) } className="flex flex-col gap-2">
                   <div className="flex items-center">
                     <AiOutlineMail className="w-4 h-4 mr-3 mt-3" />
                     <TextField
@@ -119,7 +117,7 @@ export default function AuthMain({
                       Invalid email/password!
                     </span>
                   ) : null}
-                </div>
+                </form>
                 <div className="my-3">
                   {loading || loadingGoogle ? (
                     <button
@@ -172,7 +170,7 @@ export default function AuthMain({
                 <button
                   type="button"
                   className="flex items-center justify-center gap-2 border px-4 py-1 rounded-lg"
-                  onClick={() => signInWithGoogle()}
+                  onClick={async () => signInWithGoogle(["email", "profile"])}
                 >
                   <div className="max-w-[1.5rem] flex items-center justify-center">
                     <Image src={googleG} alt="Google G icon" />
@@ -194,7 +192,7 @@ export default function AuthMain({
             </motion.div>
           ) : null}
         </AnimatePresence>
-      </motion.form>
+      </motion.div>
     </motion.div>
   );
 }
