@@ -93,9 +93,9 @@ function BrowseStreamsOptions({
           <motion.div
             key="OptionsContainer"
             layout
-            initial={{ translateY: -300 }}
+            initial={{ translateY: -600 }}
             animate={{ translateY: 0 }}
-            exit={{ translateY: -400 }}
+            exit={{ translateY: -600 }}
             transition={{ duration: 0.3 }}
             className="bg-slate-50 p-4 rounded flex flex-col mt-4"
           >
@@ -113,7 +113,7 @@ function BrowseStreamsOptions({
                 <CustomSelect
                   value={language}
                   onChange={(e: string) => setLanguage(e)}
-                  className="bg-white text-black"
+                  className="bg-white text-black border"
                   componentsProps={{
                     listbox: { className: "sm:flex flex-row flex-wrap gap-2" },
                   }}
@@ -135,7 +135,7 @@ function BrowseStreamsOptions({
                 <div className="font-thin">Platform</div>
                 <CustomSelect
                   value={platform}
-                  className="bg-white text-black"
+                  className="bg-white text-black border"
                   onChange={(e) => setPlatform(e)}
                   componentsProps={{
                     listbox: { className: "sm:flex flex-wrap flex-row gap-2" },
@@ -266,7 +266,7 @@ function BrowseStreamsOptions({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.9 }}
                 type="button"
-                className="bg-white px-3 py-1 text-black rounded"
+                className="bg-white px-3 py-1 text-black rounded border"
                 onClick={() => {
                   refetchWithFilters();
                   setShowFilter(false);
