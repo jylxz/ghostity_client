@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import LinkTo from "../../general/LinkTo";
 
 export default function SideBarButtons({
@@ -9,8 +10,35 @@ export default function SideBarButtons({
   showChannels: number;
   setShowChannels: React.Dispatch<React.SetStateAction<number>>;
 }) {
+  const showMore = () => {
+    if (showChannels === 50 && length > 50) {
+      return (
+        <LinkTo href="/browse/following">
+          <button type="button" className="text-sm">
+            Show more
+          </button>
+        </LinkTo>
+      );
+    }
+
+    if (showChannels < length) {
+      return (
+        <button
+          type="button"
+          onClick={() => setShowChannels(showChannels + 5)}
+          className="text-sm"
+        >
+          Show more
+        </button>
+      );
+    }
+
+    return null
+  }
+
   return length > 5 ? (
-    <div
+    <motion.div
+    layout="position"
       className={`flex ${
         showChannels > 5 ? "justify-between" : "justify-center"
       }`}
@@ -24,21 +52,7 @@ export default function SideBarButtons({
           Show less
         </button>
       ) : null}
-      {showChannels === 50 && length > 50 ? (
-        <LinkTo href="/browse/following">
-          <button type="button" className="text-sm">
-            Show more
-          </button>
-        </LinkTo>
-      ) : (
-        <button
-          type="button"
-          onClick={() => setShowChannels(showChannels + 5)}
-          className="text-sm"
-        >
-          Show more
-        </button>
-      )}
-    </div>
+      {showMore()}
+    </motion.div>
   ) : null;
 }

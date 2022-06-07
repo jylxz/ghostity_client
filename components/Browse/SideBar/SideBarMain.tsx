@@ -61,8 +61,8 @@ export default function SideBarMain() {
   return (
     <motion.div
       layout="size"
-      layoutScroll
-      className={`fixed z-30 sm:static bg-slate-100 ${
+    layoutScroll
+      className={` z-30  bg-slate-100 ${
         showBrowseBar ? "min-w-[15.5rem] max-w-[15.5rem] pl-4" : "w-16"
       } h-[calc(100vh_-_3.8rem)] overflow-auto`}
       onMouseLeave={() => (minimized ? browseBarOverride(false) : null)}
@@ -154,7 +154,7 @@ export default function SideBarMain() {
         />
         {showBrowseBar ? (
           <motion.div
-            variants={animations.browseItems}
+            variants={animations.gradientBar}
             className="z-0 -mt-[1rem] absolute bg-gradient-to-r from-primary via-secondary to-secondary2 w-[11.5rem] h-[1rem] origin-bottom-left rotate-90 rounded border-2 border-white"
           />
         ) : null}
@@ -168,8 +168,8 @@ export default function SideBarMain() {
           )}
           {streams.data && !streams.isLoading ? (
             <motion.div
-              layout="position"
               variants={animations.streamsContainer}
+              layout="position"
               initial="initial"
               animate="animate"
               className={`grid gap-2.5 ${showBrowseBar ? "mr-5" : ""} mb-4`}

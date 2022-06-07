@@ -4,11 +4,12 @@ import React, { useContext, useState } from "react";
 import Image from "next/image";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { motion } from "framer-motion";
 import LinkTo from "./LinkTo";
 import YoutubeIcon from "../../public/images/yt_icon_rgb.svg";
 import TwitchIcon from "../../public/images/TwitchGlitchPurple.svg";
 import UserContext from "../../context/UserContext";
-import UserFollowContext from "../../context/UserFollowContext"
+import UserFollowContext from "../../context/UserFollowContext";
 import useHandleFollows from "../../hooks/useHandleFollows";
 
 function channelPic(stream: Stream) {
@@ -20,8 +21,10 @@ function channelPic(stream: Stream) {
           href={`${stream.stream.url}/about`}
           rel="noopener noreferrer"
         >
-          <img
+          <Image
             src={stream.channel_img}
+            height="24"
+            width="24"
             // alt={`${stream.channel_name}'s profile img`}
             className="rounded-full min-w-[24px] min-h-[24px]"
           />
@@ -37,8 +40,10 @@ function channelPic(stream: Stream) {
         href={`https://www.youtube.com/channel/${stream.channel_id}`}
         rel="noopener noreferrer"
       >
-        <img
+        <Image
           src={stream.channel_img}
+          height="24"
+          width="24"
           // alt={`${stream.channel_name}'s profile img`}
           className="rounded-full min-w-[24px] min-h-[24px]"
         />
@@ -55,7 +60,7 @@ function channelName(stream: Stream) {
         href={`${stream.stream.url}/about`}
         rel="noopener noreferrer"
       >
-        {stream.channel_name}
+        <span title={stream.channel_name}>{stream.channel_name}</span>
       </a>
     );
   }
@@ -66,7 +71,7 @@ function channelName(stream: Stream) {
       href={`https://www.youtube.com/channel/${stream.channel_id}`}
       rel="noopener noreferrer"
     >
-      <div title={stream.channel_name}>{stream.channel_name}</div>
+      <span title={stream.channel_name}>{stream.channel_name}</span>
     </a>
   );
 }
@@ -108,7 +113,7 @@ function FollowButton({
   channelId: string;
 }) {
   const user = useContext(UserContext);
-  const [follow, followed] = useHandleFollows(channelId)
+  const [follow, followed] = useHandleFollows(channelId);
   const [showFollowText, setShowFollowText] = useState(false);
 
   const icon = () => {
@@ -152,37 +157,54 @@ function FollowButton({
 
 export default function LivestreamCard({ stream }: { stream: Stream }) {
   return (
-    <Card className="flex flex-col max-w-[16rem] shadow">
-      <div className="relative">
+    <Card className="flex flex-col max-w-[18rem] shadow">
+      <motion.div
+        // initial={{ translateY: -200 }}
+        // animate={{ translateY: 0 }}
+        // transition={{ delay: 1 }}
+        className="relative max-h-[171px] object-scale-down"
+      >
         <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
-          <CardMedia
-            component="img"
-            image={stream.stream.thumbnail}
-            className="max-h-[144px] object-scale-down"
-          />
+          <Image src={stream.stream.thumbnail} height="171" width="288" />
         </a>
         <FollowButton
           channel={stream.channel_name}
           channelId={stream.channel_id}
         />
         <span className="absolute bottom-1 right-1 text-primary bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default">{`${stream.stream.viewers} viewers`}</span>
-      </div>
+      </motion.div>
       <CardContent className="grow py-2.5">
-        <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
-          <Typography className="text-ellipsis overflow-hidden line-clamp-1 text-sm">
-            {stream.stream.title}
-          </Typography>
-        </a>
+        <motion.div
+        // initial={{ translateY: 100 }}
+        // animate={{ translateY: 0 }}
+        // transition={{ delay: 1.3 }}
+        >
+          <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
+            <Typography className="text-ellipsis overflow-hidden line-clamp-1 text-sm">
+              {stream.stream.title}
+            </Typography>
+          </a>
+        </motion.div>
       </CardContent>
       <CardContent className="bg-slate-100 py-1">
-        <div className="flex gap-2 items-center">
+        <motion.div
+          // initial={{ translateY: 100 }}
+          // animate={{ translateY: 0 }}
+          // transition={{ delay: 1.5 }}
+          className="flex gap-2 items-center"
+        >
           {channelPic(stream)}
-          <Typography className="line-clamp-1 font-bold">
+          <Typography className="line-clamp-1 font-bold flex-1">
             {channelName(stream)}
           </Typography>
           {platformIcon(stream)}
-        </div>
-        <div className="flex justify-between items-center text-gray-400 mt-0.5">
+        </motion.div>
+        <motion.div
+          // initial={{ translateY: 100 }}
+          // animate={{ translateY: 0 }}
+          // transition={{ delay: 1.7 }}
+          className="flex justify-between items-center text-gray-400 mt-0.5"
+        >
           <Typography className="text-sm line-clamp-1 cursor-pointer">
             <LinkTo href={`/browse/games/${encodeURI(stream.stream.game)}`}>
               <span>{stream.stream.game}</span>
@@ -191,9 +213,8 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
           <Typography className="text-sm cursor-default min-w-fit ml-1">
             {stream.language}
           </Typography>
-        </div>
+        </motion.div>
       </CardContent>
     </Card>
   );
 }
-

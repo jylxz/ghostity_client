@@ -2,7 +2,7 @@
 
 // Libraries
 import Head from "next/head";
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useRouter } from "next/router";
 import { ReactQueryDevtools } from "react-query/devtools";

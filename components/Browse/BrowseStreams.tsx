@@ -2,11 +2,13 @@ import React, { Fragment, useState, useEffect } from "react";
 import axios from "axios";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
+import { LayoutGroup, motion } from "framer-motion";
 import LivestreamCard from "../general/LivestreamCard";
 import BrowseStreamsOptions from "./BrowseStreamsOptions";
 import GradientCircularProgress from "../general/GradientCircularProgress";
 import ProblemLoading from "../general/ProblemLoading";
 import BrowseWrapper from "../general/BrowseWrapper";
+import { browseStreamsAnimations } from "./animations/browseAnimations";
 
 interface Filters {
   sort?: string;
@@ -18,6 +20,7 @@ interface Filters {
 function BrowseStreams() {
   const [params, setParams] = useState<Filters>({});
   const { ref, inView } = useInView();
+  const animations = browseStreamsAnimations;
 
   const fetchStreams = async ({ pageParam = 1 }) => {
     const filters = params;
@@ -57,46 +60,61 @@ function BrowseStreams() {
     }
   }, [fetchNextPage, inView]);
 
-  if (isLoading) {
-    return (
-      <div className="bg-slate-50 overflow-auto h-[calc(100vh_-_7rem)] px-4 sm:px-14 pb-7 flex flex-col">
-        <BrowseStreamsOptions setParams={setParams} />
-        <div className="flex-grow flex items-center justify-center">
-          <GradientCircularProgress />
-        </div>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="bg-slate-50 overflow-auto h-[calc(100vh_-_7rem)] px-4 sm:px-14 pb-7 flex flex-col">
+  //       <BrowseStreamsOptions setParams={setParams} />
+  //       <div className="flex-grow flex items-center justify-center">
+  //         <GradientCircularProgress />
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
-  if (error) {
-    return (
-      <div className="bg-slate-50 flex flex-col overflow-auto h-[calc(100vh_-_7rem)] px-4 sm:px-14 pb-7">
-        <BrowseStreamsOptions setParams={setParams} />
-        <ProblemLoading />
-      </div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div className="bg-slate-50 flex flex-col overflow-auto h-[calc(100vh_-_7rem)] px-4 sm:px-14 pb-7">
+  //       <BrowseStreamsOptions setParams={setParams} />
+  //       <ProblemLoading />
+  //     </div>
+  //   );
+  // }
 
   return (
     <BrowseWrapper>
-      <BrowseStreamsOptions setParams={setParams} />
-      <div className="grid grid-flow-row auto-rows-fr grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-x-7 gap-y-7 justify-items-center">
-        {data?.pages.map((group) => (
-          <Fragment key={group.results.length}>
-            {group.results.map((stream: Stream) => (
-              <LivestreamCard key={stream.channel_id} stream={stream} />
-            ))}
-          </Fragment>
-        ))}
-      </div>
-      {hasNextPage ? (
-        <div
-          ref={ref}
-          className="flex justify-center items-center pt-10 pb-3 h-24"
-        >
-          <GradientCircularProgress />
-        </div>
-      ) : null}
+      <LayoutGroup>
+        <BrowseStreamsOptions setParams={setParams} />
+        {data && !isLoading ? (
+          <>
+            <motion.div
+              layout="position"
+              className="grid grid-flow-row auto-rows-fr grid-cols-[repeat(auto-fill,_minmax(18rem,_1fr))] gap-4 gap-y-4 lg:gap-y-7 justify-items-center"
+            >
+              {data?.pages.map((group) => (
+                <Fragment key={group.results.length}>
+                  {group.results.map((stream: Stream) => (
+                    <LivestreamCard key={stream.channel_id} stream={stream} />
+                  ))}
+                </Fragment>
+              ))}
+            </motion.div>
+            {hasNextPage ? (
+              <div
+                ref={ref}
+                className="flex justify-center items-center pt-10 pb-3 h-24"
+              >
+                <GradientCircularProgress />
+              </div>
+            ) : null}
+          </>
+        ) : null}
+        {isLoading ? (
+          <div className="flex-grow flex items-center justify-center">
+            <GradientCircularProgress />
+          </div>
+        ) : null}
+        {error ? <ProblemLoading /> : null}
+      </LayoutGroup>
     </BrowseWrapper>
   );
 }
