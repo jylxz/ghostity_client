@@ -49,10 +49,10 @@ export default function SideBarMain() {
       .then((res) => res.data);
 
   const streams = useInfiniteQuery<Streams, Error>(
-    ["userFollows", channelIds],
+    ["followStreams", channelIds],
     fetchStreams,
     {
-      refetchInterval: 300000,
+      refetchInterval: 180000,
       enabled: !!user?.uid,
       getNextPageParam: (lastPage) =>
         lastPage.next ? lastPage.next.page : false,
