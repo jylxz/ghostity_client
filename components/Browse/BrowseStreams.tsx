@@ -69,18 +69,18 @@ export default function BrowseStreams() {
           <>
             <motion.div
               layout
-              // className="grid grid-cols-[repeat(auto-fill,_minmax(18rem,_1fr))] gap-4 gap-y-4 lg:gap-y-7 justify-items-center"
+              className="grid grid-cols-[repeat(auto-fill,_minmax(17rem,_1fr))] gap-[clamp(1rem,_1.4rem,_1.8rem)]  justify-items-center"
             >
               {data?.pages.map((group) => (
-                <motion.div
-                  key={group.results.length}
-                  className="grid grid-cols-[repeat(auto-fill,_minmax(18rem,_1fr))] gap-4 gap-y-4 lg:gap-y-7 justify-items-center"
-                  layout="position"
+                <
+                  // className="grid grid-cols-[repeat(auto-fill,_minmax(16rem,_1fr))] gap-[clamp(1rem,_1.5rem,_1.8rem)] justify-items-center"
                 >
                   {group.results.map((stream: Stream) => (
-                    <LivestreamCard key={stream.channel_id} stream={stream} />
+                    <motion.span layout="position" key={stream.channel_id}>
+                      <LivestreamCard stream={stream} />
+                    </motion.span>
                   ))}
-                </motion.div>
+                </>
               ))}
             </motion.div>
             {hasNextPage ? (

@@ -202,10 +202,10 @@ function BlacklistButton({ stream }: { stream: Stream }) {
 
 export default function LivestreamCard({ stream }: { stream: Stream }) {
   return (
-    <Card className="flex flex-col max-w-[18rem] shadow">
+    <Card className="flex flex-col max-w-[19rem] shadow">
       <div className="relative max-h-[171px] object-scale-down">
         <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
-          <Image src={stream.stream.thumbnail} alt={`${stream.channel_name}'s stream thumbnail`} height="171" width="288" />
+          <Image src={stream.stream.thumbnail} alt={`${stream.channel_name}'s stream thumbnail`} height="171" width="304" />
         </a>
         <FollowButton
           channel={stream.channel_name}
