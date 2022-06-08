@@ -1,16 +1,17 @@
 // Libraries
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
+import { LayoutGroup, motion } from "framer-motion";
 
 // Components
-import { LayoutGroup, motion } from "framer-motion";
 import LivestreamCard from "../general/LivestreamCard";
 import BrowseStreamsOptions from "./BrowseStreamsOptions";
 import GradientCircularProgress from "../general/GradientCircularProgress";
 import ProblemLoading from "../general/ProblemLoading";
 import BrowseWrapper from "../general/BrowseWrapper";
+import GridWrapper from "../general/GridWrapper";
 
 interface Filters {
   sort?: string;
@@ -67,14 +68,9 @@ export default function BrowseStreams() {
         <BrowseStreamsOptions setParams={setParams} />
         {data ? (
           <>
-            <motion.div
-              layout
-              className="grid grid-cols-[repeat(auto-fill,_minmax(17rem,_1fr))] gap-[clamp(1rem,_1.4rem,_1.8rem)]  justify-items-center"
-            >
+            <GridWrapper>
               {data?.pages.map((group) => (
-                <
-                  // className="grid grid-cols-[repeat(auto-fill,_minmax(16rem,_1fr))] gap-[clamp(1rem,_1.5rem,_1.8rem)] justify-items-center"
-                >
+                <>
                   {group.results.map((stream: Stream) => (
                     <motion.span layout="position" key={stream.channel_id}>
                       <LivestreamCard stream={stream} />
@@ -82,7 +78,7 @@ export default function BrowseStreams() {
                   ))}
                 </>
               ))}
-            </motion.div>
+            </GridWrapper>
             {hasNextPage ? (
               <motion.div
                 layout="position"

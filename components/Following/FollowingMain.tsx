@@ -2,6 +2,7 @@ import React, { useContext, Fragment, useEffect, useState } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import axios from "axios";
+import { motion } from "framer-motion";
 import LivestreamCard from "../general/LivestreamCard";
 import BrowseWrapper from "../general/BrowseWrapper";
 import UserContext from "../../context/UserContext";
@@ -10,9 +11,11 @@ import ProblemLoading from "../general/ProblemLoading";
 import UserFollowContext from "../../context/UserFollowContext";
 import FollowingEmpty from "./FollowingEmpty";
 import MemberCard from "../general/MemberCard";
+import GridWrapper from "../general/GridWrapper";
+import FollowingTabButton from "./FollowingTabButton";
 
 export default function FollowingMain() {
-  const [currentTab, setCurrentTab] = useState(0);
+  const [currentTab, setCurrentTab] = useState("Live");
   const { ref, inView } = useInView();
   const user = useContext(UserContext);
   const follows = useContext(UserFollowContext);
@@ -74,57 +77,33 @@ export default function FollowingMain() {
   return (
     <BrowseWrapper>
       <div className="flex gap-4 mb-7 text-gray-400 relative">
-        {currentTab === 0 ? (
-          <>
-            <button
-              type="button"
-              onClick={() => setCurrentTab(0)}
-              className="border-black border-b-2 z-10 text-black px-2"
-            >
-              Live
-            </button>
-            <button
-              type="button"
-              onClick={() => setCurrentTab(1)}
-              className="px-2"
-            >
-              All
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              type="button"
-              onClick={() => setCurrentTab(0)}
-              className="px-2"
-            >
-              Live
-            </button>
-            <button
-              type="button"
-              onClick={() => setCurrentTab(1)}
-              className="text-black border-black border-b-2 z-10 px-2"
-            >
-              All
-            </button>
-          </>
-        )}
+        <FollowingTabButton
+          tab="Live"
+          currentTab={currentTab}
+          setCurrentTab={setCurrentTab}
+        />
+        <FollowingTabButton
+          tab="All"
+          currentTab={currentTab}
+          setCurrentTab={setCurrentTab}
+        />
         <div className="border absolute bottom-0 w-full z-0" />
       </div>
-      {currentTab === 0 ? (
-        <div className="grid grid-flow-row auto-rows-fr grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-7 justify-items-center">
+      {currentTab === "Live" ? (
+        <GridWrapper>
           {data?.pages.map((group) => (
-            <Fragment key={group.results.length}>
+            <>
               {group.results.map((stream: Stream) => (
-                <LivestreamCard key={stream.channel_id} stream={stream} />
+                <motion.span layout="position" key={stream.channel_id}>
+                  <LivestreamCard key={stream.channel_id} stream={stream} />
+                </motion.span>
               ))}
-            </Fragment>
+            </>
           ))}
-        </div>
+        </GridWrapper>
       ) : null}
-      {currentTab === 1 ? (
+      {currentTab === "All" ? (
         <div className="grid grid-flow-row auto-rows-fr grid-cols-[repeat(auto-fill,_minmax(150px,_1fr))] gap-7 justify-items-center text-sm">
-          {/* {JSON.stringify(profiles.data)} */}
           {profiles.data?.map((channel) => (
             <MemberCard
               key={channel._id}

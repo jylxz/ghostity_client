@@ -205,7 +205,12 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
     <Card className="flex flex-col max-w-[19rem] shadow">
       <div className="relative max-h-[171px] object-scale-down">
         <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
-          <Image src={stream.stream.thumbnail} alt={`${stream.channel_name}'s stream thumbnail`} height="171" width="304" />
+          <Image
+            src={stream.stream.thumbnail}
+            alt={`${stream.channel_name}'s stream thumbnail`}
+            height="171"
+            width="304"
+          />
         </a>
         <FollowButton
           channel={stream.channel_name}
@@ -217,7 +222,10 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
       <CardContent className="grow py-2.5">
         <div>
           <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
-            <Typography className="text-ellipsis overflow-hidden line-clamp-1 text-sm">
+            <Typography
+              title={stream.stream.title}
+              className="text-ellipsis overflow-hidden line-clamp-1 text-sm"
+            >
               {stream.stream.title}
             </Typography>
           </a>
@@ -229,7 +237,7 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
           <Typography className="line-clamp-1 font-bold flex-1">
             <ChannelName stream={stream} />
           </Typography>
-          <PlatformIcon stream={stream}/>
+          <PlatformIcon stream={stream} />
         </div>
         <div className="flex justify-between items-center text-gray-400 mt-0.5">
           <Typography className="text-sm line-clamp-1 cursor-pointer">
