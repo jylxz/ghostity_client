@@ -127,7 +127,7 @@ function FollowButton({
   if (user)
     return (
       <motion.button
-        layout="size"
+        layout
         className="absolute top-1 left-1 bg-gray-400/80 text-primary px-1 py-0.5 mr-1 text-sm rounded"
         onHoverStart={() => setShowFollowText(true)}
         onHoverEnd={() => setShowFollowText(false)}
@@ -137,7 +137,7 @@ function FollowButton({
           <div>
             {showFollowText ? (
               <div className="flex">
-                <motion.div layout="position">
+                <motion.div layout>
                   <AiOutlineHeart className="text-2xl h-5 min-w-[20px]" />
                 </motion.div>
                 <motion.span
@@ -146,7 +146,7 @@ function FollowButton({
                 >{`Unfollow ${channel}`}</motion.span>
               </div>
             ) : (
-              <motion.div layout="position">
+              <motion.div layout>
                 <AiFillHeart className="text-2xl h-5 min-w-[20px]" />
               </motion.div>
             )}
@@ -155,16 +155,16 @@ function FollowButton({
           <div>
             {showFollowText ? (
               <div className="flex">
-                <motion.div layout="position">
+                <motion.div layout>
                   <AiFillHeart className="text-2xl h-5 min-w-[20px]" />
                 </motion.div>
                 <motion.span
-                  layout="position"
+                  layout
                   className="self-center"
                 >{`Follow ${channel}`}</motion.span>
               </div>
             ) : (
-              <motion.div layout="position">
+              <motion.div layout>
                 <AiOutlineHeart className="text-2xl h-5 w-5" />
               </motion.div>
             )}

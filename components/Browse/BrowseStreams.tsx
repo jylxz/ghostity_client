@@ -5,6 +5,7 @@ import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 
 // Components
+import { LayoutGroup, motion } from "framer-motion";
 import LivestreamCard from "../general/LivestreamCard";
 import BrowseStreamsOptions from "./BrowseStreamsOptions";
 import GradientCircularProgress from "../general/GradientCircularProgress";
@@ -62,34 +63,44 @@ export default function BrowseStreams() {
 
   return (
     <BrowseWrapper>
-      <BrowseStreamsOptions setParams={setParams} />
-      {data && !isLoading ? (
-        <>
-          <div className="grid grid-flow-row auto-rows-fr grid-cols-[repeat(auto-fill,_minmax(18rem,_1fr))] gap-4 gap-y-4 lg:gap-y-7 justify-items-center">
-            {data?.pages.map((group) => (
-              <Fragment key={group.results.length}>
-                {group.results.map((stream: Stream) => (
-                  <LivestreamCard key={stream.channel_id} stream={stream} />
-                ))}
-              </Fragment>
-            ))}
-          </div>
-          {hasNextPage ? (
-            <div
-              ref={ref}
-              className="flex justify-center items-center pt-10 pb-3 h-24"
+      <LayoutGroup>
+        <BrowseStreamsOptions setParams={setParams} />
+        {data ? (
+          <>
+            <motion.div
+              layout
+              // className="grid grid-cols-[repeat(auto-fill,_minmax(18rem,_1fr))] gap-4 gap-y-4 lg:gap-y-7 justify-items-center"
             >
-              <GradientCircularProgress />
-            </div>
-          ) : null}
-        </>
-      ) : null}
-      {isLoading ? (
-        <div className="flex-grow flex items-center justify-center">
-          <GradientCircularProgress />
-        </div>
-      ) : null}
-      {error ? <ProblemLoading /> : null}
+              {data?.pages.map((group) => (
+                <motion.div
+                  key={group.results.length}
+                  className="grid grid-cols-[repeat(auto-fill,_minmax(18rem,_1fr))] gap-4 gap-y-4 lg:gap-y-7 justify-items-center"
+                  layout="position"
+                >
+                  {group.results.map((stream: Stream) => (
+                    <LivestreamCard key={stream.channel_id} stream={stream} />
+                  ))}
+                </motion.div>
+              ))}
+            </motion.div>
+            {hasNextPage ? (
+              <motion.div
+                layout="position"
+                ref={ref}
+                className="flex justify-center items-center pt-10 pb-3 h-24"
+              >
+                <GradientCircularProgress />
+              </motion.div>
+            ) : null}
+          </>
+        ) : null}
+        {isLoading ? (
+          <div className="flex-grow flex items-center justify-center">
+            <GradientCircularProgress />
+          </div>
+        ) : null}
+        {error ? <ProblemLoading /> : null}
+      </LayoutGroup>
     </BrowseWrapper>
   );
 }

@@ -66,7 +66,7 @@ export default function MemberCard({
         <img
           src={image}
           alt={`${name}'s profile pic`}
-          className="rounded-full w-24 h-24 shadow-md mx-auto"
+          className="rounded-full w-24 h-24 shadow-md mx-auto text-xs"
         />
       ) : null}
       <div className="mt-1 text-center">{name}</div>
