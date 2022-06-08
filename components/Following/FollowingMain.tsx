@@ -58,7 +58,7 @@ export default function FollowingMain() {
   );
 
   useEffect(() => {
-    if (inView) {
+    if (inView && followStreams.hasNextPage) {
       followStreams.fetchNextPage();
     }
   }, [followStreams, inView]);
