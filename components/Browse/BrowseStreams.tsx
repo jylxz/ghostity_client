@@ -68,7 +68,7 @@ export default function BrowseStreams() {
         <BrowseStreamsOptions setParams={setParams} />
         {data ? (
           <>
-            <GridWrapper>
+            <GridWrapper colSize="17rem">
               {data?.pages.map((group) => (
                 <>
                   {group.results.map((stream: Stream) => (

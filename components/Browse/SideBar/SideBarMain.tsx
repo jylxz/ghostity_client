@@ -170,6 +170,7 @@ export default function SideBarMain() {
           {streams.data && !streams.isLoading ? (
             <motion.div
               variants={animations.streamsContainer}
+              layoutScroll
               layout="position"
               initial="initial"
               animate="animate"

@@ -100,6 +100,20 @@ declare global {
     channels: Channel[];
   }
 
+  interface Profiles {
+    next?: {
+      total: number;
+      page: number;
+      limit: number;
+    };
+    prev?: {
+      total: number;
+      page: number;
+      limit: number;
+    };
+    results: Profile[];
+  }
+
   interface Channel {
     channel_name: string;
     platform: string;
