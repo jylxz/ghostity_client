@@ -107,7 +107,7 @@ const StyledOption = styled(OptionUnstyled)(
 
   &.${optionUnstyledClasses.highlighted} {
     background-color: ${theme.palette.mode === "dark" ? grey[800] : grey[100]};
-    color: ${theme.palette.mode === "dark" ? grey[300] : "rgb(241 245 249 )"};
+    color: ${theme.palette.mode === "dark" ? grey[300] : "rgb(248 250 252)"};
   }
 
   &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
