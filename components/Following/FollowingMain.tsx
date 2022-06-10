@@ -25,13 +25,13 @@ export default function FollowingMain() {
   const user = useContext(UserContext);
   const follows = useContext(UserFollowContext);
 
-  const channelIds: string | undefined = follows?.channels?.join(",");
+  const channelIds: string[] | undefined = follows?.channels;
 
   const fetchStreams = ({ pageParam = 1 }) =>
     axios
-      .get(
-        `https://api.ghostity.com/streams?page=${pageParam}&channels=${channelIds}`
-      )
+      .post(`https://api.ghostity.com/streams?page=${pageParam}`, {
+        channelIds,
+      })
       .then((res) => res.data);
 
   const followStreams = useInfiniteQuery<Streams, Error>(
@@ -46,9 +46,9 @@ export default function FollowingMain() {
 
   const fetchProfiles = ({ pageParam = 1 }) =>
     axios
-      .get(
-        `https://api.ghostity.com/general/profiles?page=${pageParam}&channelIds=${channelIds}`
-      )
+      .post(`https://api.ghostity.com/profiles?page=${pageParam}`, {
+        channelIds,
+      })
       .then((res) => res.data);
 
   const followProfiles = useInfiniteQuery<Profiles, Error>(
@@ -69,9 +69,9 @@ export default function FollowingMain() {
 
   useEffect(() => {
     if (inView && followProfiles.hasNextPage && currentTab === "All") {
-      followProfiles.fetchNextPage()
+      followProfiles.fetchNextPage();
     }
-  }, [currentTab, followProfiles, inView])
+  }, [currentTab, followProfiles, inView]);
 
   if (!user) return <FollowingEmpty />;
 
@@ -106,7 +106,7 @@ export default function FollowingMain() {
       {followStreams.error || followProfiles.error ? <ProblemLoading /> : null}
       {followStreams.data && currentTab === "Live" ? (
         <>
-          <GridWrapper colSize="17rem">
+          <GridWrapper colSize="normal">
             {followStreams.data?.pages.map((group) => (
               <>
                 {group.results.map((stream: Stream) => (
@@ -129,7 +129,7 @@ export default function FollowingMain() {
       ) : null}
       {followProfiles.data && currentTab === "All" ? (
         <>
-          <GridWrapper colSize="14rem">
+          <GridWrapper colSize="small">
             {followProfiles.data.pages.map((group) => (
               <>
                 {group.results.map((profile) => (

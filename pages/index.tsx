@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
   );
   const logos = await fetchLogos.json();
 
-  const fetchStats = await fetch("https://api.ghostity.com/general/stats");
+  const fetchStats = await fetch("https://api.ghostity.com/stats");
   const stats = await fetchStats.json();
 
   return { props: { logos, stats }, revalidate: 6000 };

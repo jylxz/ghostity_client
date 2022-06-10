@@ -39,13 +39,13 @@ export default function SideBarMain() {
     minimized,
   ] = useResponsiveBrowseBar();
 
-  const channelIds: string | undefined = follows?.channels?.join(",");
+  const channelIds: string[] | undefined = follows?.channels;
 
   const fetchStreams = ({ pageParam = 1 }) =>
     axios
-      .get(
-        `https://api.ghostity.com/streams?page=${pageParam}&channels=${channelIds}`
-      )
+      .post(`https://api.ghostity.com/streams?page=${pageParam}`, {
+        channelIds,
+      })
       .then((res) => res.data);
 
   const streams = useInfiniteQuery<Streams, Error>(
@@ -62,7 +62,7 @@ export default function SideBarMain() {
   return (
     <motion.div
       layout="size"
-    layoutScroll
+      layoutScroll
       className={` z-30  bg-slate-100 ${
         showBrowseBar ? "min-w-[15.5rem] max-w-[15.5rem] pl-4" : "w-16"
       } h-[calc(100vh_-_3.8rem)] overflow-auto`}

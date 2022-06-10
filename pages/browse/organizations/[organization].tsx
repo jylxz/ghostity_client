@@ -23,7 +23,7 @@ const getOrganizationData = async (
 
 const getProfiles = (ids: string[]): Promise<Profile[]> =>
   axios
-    .get(`https://api.ghostity.com/general/profiles?ids=${ids}`)
+    .post(`https://api.ghostity.com/profiles`, { ids })
     .then((res) => res.data);
 
 export async function getStaticPaths() {
@@ -64,7 +64,7 @@ function OrganizationPage({
       </Head>
       <OrganizationMain org={organization[0]} profiles={profiles} />
     </>
-  )
+  );
 }
 
 export default OrganizationPage;

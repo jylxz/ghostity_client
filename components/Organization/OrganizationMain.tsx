@@ -23,7 +23,7 @@ export default function OrganizationMain({
 
   const fetchOrganizationStreams = async () =>
     axios
-      .get(`https://api.ghostity.com/organizations/streams?name=${org.name}`)
+      .get(`https://api.ghostity.com/organizations/${org.name}/streams`)
       .then((streams) => streams.data);
 
   const { isLoading, error, data } = useQuery<Stream[], Error>(
@@ -41,6 +41,8 @@ export default function OrganizationMain({
         </div>
       );
     }
+
+    return null
   };
 
   return (

@@ -13,8 +13,8 @@ function BrowseStreamsOptions({
 }) {
   const [showFilter, setShowFilter] = useState(false);
   const [sort, setSort] = useState("desc");
-  const [language, setLanguage] = useState("all");
-  const [platform, setPlatform] = useState("all");
+  const [language, setLanguage] = useState("All");
+  const [platform, setPlatform] = useState("All");
   const [exclude, setExclude] = useState<string[]>([]);
   const initialRender = useRef(true);
 
@@ -63,7 +63,7 @@ function BrowseStreamsOptions({
     <motion.div layout="size" className="flex flex-col justify-between py-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between">
         <motion.div layout className="flex items-center gap-2 ">
-          <div>Filter</div>
+          Filter
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9 }}
@@ -75,13 +75,13 @@ function BrowseStreamsOptions({
           </motion.button>
         </motion.div>
         <motion.div layout className="flex items-center gap-2">
-          <div>Sort by</div>
+          Sort by
           <CustomSelect
             value={sort}
             onChange={(e) => {
               setSort(e);
             }}
-            className="bg-slate-100 text-gray-600 px-3 m-0"
+            className="bg-slate-100 text-gray-600 px-3 m-0 bg-slate-50"
           >
             <StyledOption value="desc">Viewers (High to Low)</StyledOption>
             <StyledOption value="asc">Viewers (Low to High)</StyledOption>
@@ -97,7 +97,7 @@ function BrowseStreamsOptions({
             animate={{ translateY: 0 }}
             exit={{ translateY: -600 }}
             transition={{ duration: 0.3 }}
-            className="bg-slate-50 p-4 rounded flex flex-col mt-4"
+            className="bg-slate-100 p-4 rounded-lg flex flex-col mt-4"
           >
             <motion.button
               whileHover={{ scale: 1.05 }}
