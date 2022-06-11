@@ -53,7 +53,7 @@ export default function SideBarMain() {
     fetchStreams,
     {
       refetchInterval: 180000,
-      enabled: !!user?.uid,
+      enabled: !!user?.uid && !!channelIds,
       getNextPageParam: (lastPage) =>
         lastPage.next ? lastPage.next.page : false,
     }

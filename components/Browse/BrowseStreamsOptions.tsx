@@ -1,9 +1,14 @@
+// Libraries
 import React, { useState, useMemo, useRef, useEffect } from "react";
-import { AiOutlineFilter } from "react-icons/ai";
+import { AnimatePresence, motion } from "framer-motion";
 import Chip from "@mui/material/Chip";
 import FormControl from "@mui/material/FormControl";
+
+// Icons
 import CloseIcon from "@mui/icons-material/Close";
-import { AnimatePresence, motion } from "framer-motion";
+import { AiOutlineFilter } from "react-icons/ai";
+
+// Components
 import { CustomSelect, StyledOption } from "../general/CustomSelect";
 
 function BrowseStreamsOptions({

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { IconType } from "react-icons";
+
 import LinkTo from "../../general/LinkTo";
 
 import browseAnimations from "../animations/browseAnimations";

@@ -1,9 +1,15 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
+// Libraries
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+
+// Hooks
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+
+// Components
 import BrowseWrapper from "../general/BrowseWrapper";
 import GameStreams from "./GameStreams";
 import BackgroundWrapper from "../general/BackgroundWrapper";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 export default function GameMain({ gameData }: { gameData: Game }) {
   const [showFullSummary, setShowFullSummary] = useState(false);
@@ -26,7 +32,7 @@ export default function GameMain({ gameData }: { gameData: Game }) {
         altText={`${gameData.name} screenshot`}
       >
         <div className="flex p-4 gap-4">
-          <div className="min-w-fit">
+          <motion.div layout className="min-w-fit max-h-full my-auto">
             {gameData.cover_img ? (
               <Image
                 alt={`${gameData.name}'s cover image`}
@@ -36,61 +42,43 @@ export default function GameMain({ gameData }: { gameData: Game }) {
                 className="rounded"
               />
             ) : null}
-          </div>
-          <div className="flex flex-col gap-4">
-            <div>
-              <h2 className="text-4xl font-semibold">{gameData.name}</h2>
-              <span className="text-sm text-gray-600">
-                <span className="font-semibold text-black">
-                  {gameData.viewers}
-                </span>{" "}
-                Viewers |{" "}
-                <span className="font-semibold text-black">
-                  {gameData.streams}
-                </span>{" "}
-                Streams
-              </span>
-            </div>
-            <div>
-              {showFullSummary ? (
-                <div>
-                  <p ref={lineClamp} className="max-w-[75ch] text-sm">
-                    {gameData.summary}
-                  </p>
-                  {showButton ? (
-                    <button
-                      className="text-sm font-semibold underline"
-                      type="button"
-                      onClick={() => setShowFullSummary(!showFullSummary)}
-                    >
-                      Show Less
-                    </button>
-                  ) : null}
-                </div>
-              ) : (
-                <div>
-                  <p
-                    ref={lineClamp}
-                    className="max-w-[75ch] line-clamp-4 text-sm"
-                  >
-                    {gameData.summary}
-                  </p>
-                  {showButton ? (
-                    <button
-                      className="text-sm font-semibold underline"
-                      type="button"
-                      onClick={() => setShowFullSummary(!showFullSummary)}
-                    >
-                      Show More
-                    </button>
-                  ) : null}
-                </div>
-              )}
-            </div>
+          </motion.div>
+          <div className="flex flex-col gap-3">
+            <motion.h2 layout className="text-4xl font-semibold">
+              {gameData.name}
+            </motion.h2>
+            <motion.span layout="position" className="text-sm text-gray-600">
+              <span className="font-semibold text-black">
+                {gameData.viewers}
+              </span>{" "}
+              Viewers |{" "}
+              <span className="font-semibold text-black">
+                {gameData.streams}
+              </span>{" "}
+              Streams
+            </motion.span>
+            <p
+              ref={lineClamp}
+              className={`my-1 max-w-[75ch] ${
+                !showFullSummary ? "line-clamp-4" : ""
+              } text-sm`}
+            >
+              {gameData.summary}
+            </p>
+            {showButton ? (
+              <motion.button
+                layout="position"
+                className="text-sm font-semibold underline self-start"
+                type="button"
+                onClick={() => setShowFullSummary(!showFullSummary)}
+              >
+                {!showFullSummary ? "Show More" : "Show Less"}
+              </motion.button>
+            ) : null}
           </div>
         </div>
       </BackgroundWrapper>
-      <div className="mt-7 border" />
+      <motion.div layout="position" className="my-7 border" />
       <GameStreams game={gameData.name} />
     </BrowseWrapper>
   );

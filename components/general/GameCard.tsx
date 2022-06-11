@@ -1,21 +1,17 @@
-import React from 'react'
-import Card from "@mui/material/Card"
-import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
-import Typography from "@mui/material/Typography"
-import LinkTo from './LinkTo'
+import React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Image from "next/image";
+import LinkTo from "./LinkTo";
 
-export default function GameCard({game}: {game: Game}) {
+export default function GameCard({ game }: { game: Game }) {
   return (
-    <Card>
-      <LinkTo href={`/browse/games/${encodeURIComponent(game.name)}`} >
-        <CardMedia
-          component="img"
-          className="cursor-pointer"
-          image={game.cover_img}
-        />
+    <Card className="w-48">
+      <LinkTo href={`/browse/games/${encodeURIComponent(game.name)}`}>
+        <Image src={game.cover_img} width="192" height="260" alt={`${game.name} cover art`}/>
       </LinkTo>
-      <CardContent className="h-16 mt-0 pt-2">
+      <CardContent className="h-16 pt-2 bg-slate-50">
         <LinkTo href={`/browse/games/${encodeURIComponent(game.name)}`}>
           <Typography className="text-sm font-semibold line-clamp-1 cursor-pointer">
             {game.name}

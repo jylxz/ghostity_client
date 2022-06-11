@@ -1,10 +1,16 @@
+// Libraries
 import axios from "axios";
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
+
+// Components
 import GameCard from "../general/GameCard";
 import ProblemLoading from "../general/ProblemLoading";
 import GradientCircularProgress from "../general/GradientCircularProgress";
+import BrowseWrapper from "../general/BrowseWrapper";
+import GridWrapper from "../general/GridWrapper";
 
 export default function BrowseGames() {
   const { ref, inView } = useInView();
@@ -26,39 +32,40 @@ export default function BrowseGames() {
     }
   }, [fetchNextPage, inView]);
 
-  if (isLoading)
-    return (
-      <div className="bg-slate-50 overflow-auto h-[calc(100vh_-_7rem)] px-4 sm:px-14 py-7 flex justify-center items-center">
-        <GradientCircularProgress />
-      </div>
-    );
-
-  if (error)
-    return (
-      <div className="bg-slate-50 overflow-auto h-[calc(100vh_-_7rem)] px-4 sm:px-14 py-7 flex justify-center items-center">
-        <ProblemLoading />
-      </div>
-    );
-
   return (
-    <div className="bg-slate-50 overflow-auto h-[calc(100vh_-_7rem)] px-4 sm:px-14 py-7">
-      <div className="grid grid-cols-[repeat(auto-fill,_minmax(160px,_1fr))] gap-8">
-        {data?.pages.map((group) => (
-          <Fragment key={group.results.length}>
-            {group.results.map((game) => (
-              <GameCard key={game._id} game={game} />
-            ))}
-          </Fragment>
-        ))}
-      </div>
-      {hasNextPage ? (
-        <div
-          ref={ref}
-          className="flex justify-center items-center pt-10 pb-3 h-24"
-        >
+    <BrowseWrapper>
+      {/* <LayoutGroup> */}
+        {data ? (
+          <>
+            <GridWrapper colSize="xsmall">
+              {data?.pages.map((group) => (
+                <>
+                  {group.results.map((game) => (
+                    <motion.span layout="position" key={game._id}>
+                      <GameCard key={game._id} game={game} />
+                    </motion.span>
+                  ))}
+                </>
+              ))}
+            </GridWrapper>
+            {hasNextPage ? (
+              <motion.div
+                layout="position"
+                ref={ref}
+                className="flex justify-center items-center pt-10 pb-3 h-24"
+              >
+                <GradientCircularProgress />
+              </motion.div>
+            ) : null}
+          </>
+        ) : null}
+      {/* </LayoutGroup> */}
+      {isLoading ? (
+        <div className="h-full flex items-center justify-center">
           <GradientCircularProgress />
         </div>
       ) : null}
-    </div>
+      {error ? <ProblemLoading /> : null}
+    </BrowseWrapper>
   );
 }

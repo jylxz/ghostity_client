@@ -1,8 +1,9 @@
 import React from "react";
 
-import Ghostity from "../../public/images/Ghostity-svg.svg";
 import BrowseWrapper from "../general/BrowseWrapper";
 import InfoCard from "../general/InfoCard";
+
+import Ghostity from "../../public/images/Ghostity-svg.svg";
 
 export default function BrowseOrganizations({
   organizations,

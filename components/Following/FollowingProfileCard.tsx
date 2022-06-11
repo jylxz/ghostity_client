@@ -1,11 +1,17 @@
+// Libraries
 import React from "react";
 import Image from "next/image";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { motion } from "framer-motion";
+
+// Icons
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import TwitchIcon from "../../public/images/TwitchGlitchPurple.svg";
 import YoutubeIcon from "../../public/images/yt_icon_rgb.svg";
 import TwitterIcon from "../../public/images/TwitterBlue.svg";
+
+// Hooks
 import useHandleFollows from "../../hooks/useHandleFollows";
+
 
 function ChannelIcon({ channel }: { channel: Channel }) {
   return (

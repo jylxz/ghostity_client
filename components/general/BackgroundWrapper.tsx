@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function BackgroundWrapper({
   children,
@@ -12,27 +13,26 @@ export default function BackgroundWrapper({
   image?: string;
   altText?: string;
 }) {
-  console.log(image)
-
   if (!nextImage)
     return (
-      <div className="w-full relative">
-          <div className="absolute h-full w-full z-0">
-            {image ? (
-              <img
-                src={image}
-                alt={altText}
-                className="blur opacity-30 w-full object-contain h-full select-none"
-                draggable={false}
-              />
-            ) : null}
-          </div>
+      <motion.div layout="size" className="w-full relative">
+        <motion.div layout className="absolute h-full w-full z-0">
+          {image ? (
+            <motion.img
+              layout
+              src={image}
+              alt={altText}
+              className="blur opacity-30 w-full object-contain h-full select-none"
+              draggable={false}
+            />
+          ) : null}
+        </motion.div>
         <div className="relative z-10">{children}</div>
-      </div>
+      </motion.div>
     );
 
   return (
-    <div className="relative">
+    <motion.div layout className="relative">
       <div className="absolute h-full w-full z-0">
         {image ? (
           <Image
@@ -44,7 +44,7 @@ export default function BackgroundWrapper({
           />
         ) : null}
       </div>
-      <div className="relative z-10">{children}</div>
-    </div>
+      <motion.div layout className="relative z-10">{children}</motion.div>
+    </motion.div>
   );
 }
