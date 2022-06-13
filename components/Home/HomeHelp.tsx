@@ -16,8 +16,8 @@ export default function HomeHelp() {
   const animations = homeAnimations.help
 
   return (
-    <SectionWrapper color="bg-slate-50">
-      <div className="grid grid-cols-2 w-4/5 mx-auto">
+    <SectionWrapper color="bg-slate-50" className="py-14">
+      <div className="grid grid-cols-2 w-3/4 mx-auto">
         <div className="text-6xl flex justify-center items-center">
           <motion.div
             initial="initial"
