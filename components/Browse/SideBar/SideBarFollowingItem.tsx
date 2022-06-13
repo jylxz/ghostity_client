@@ -15,7 +15,7 @@ export default function SideBarFollowingItem({
   browseBarOverride: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [showTitle, setShowTitle] = useState(false);
-  const window = useWindowDimensions()
+  const window = useWindowDimensions();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [titleTimeout, setTitleTimeout] = useState<NodeJS.Timeout>();
   const [browseTimeout, setBrowseTimeout] = useState<NodeJS.Timeout>();
@@ -39,7 +39,14 @@ export default function SideBarFollowingItem({
     if (minimized) {
       clearTimeout(scrollTimeout);
       setScrollTimeout(
-        setTimeout(() => scrollRef.current?.scrollIntoView({behavior: "smooth", block:"nearest"}), 2000)
+        setTimeout(
+          () =>
+            scrollRef.current?.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+            }),
+          2000
+        )
       );
     }
   };
@@ -97,7 +104,9 @@ export default function SideBarFollowingItem({
               height={28}
               width={28}
               className="rounded-full "
-              onMouseEnter={window.width > 640 ? () => handleBrowseOpen() : null}
+              onMouseEnter={
+                window.width > 640 ? () => handleBrowseOpen() : null
+              }
               onMouseLeave={() => handleBrowseClose()}
               onClick={window.width > 640 ? () => handleBrowseOnClick() : null}
             />

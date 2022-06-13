@@ -16,12 +16,12 @@ const browseAnimations = {
     },
     streams: {
       initial: {
-        translateX: 100,
+        // translateX: 100,
         opacity: 0,
       },
       animate: {
         opacity: 1,
-        translateX: 0,
+        // translateX: 0,
       },
       exit: {
         opacity: 0,

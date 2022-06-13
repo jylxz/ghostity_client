@@ -40,16 +40,15 @@ export default function SideBarMain() {
     browseBarOverride,
     minimized,
   ] = useResponsiveBrowseBar();
-  
-  
+
   const [width, setWidth] = useState<number>();
-  
+
   useEffect(() => {
     if (window.width) {
       setWidth(window.width);
     }
   }, [window]);
-  
+
   const channelIds: string[] | undefined = follows?.channels;
 
   const fetchStreams = ({ pageParam = 1 }) =>
@@ -105,7 +104,11 @@ export default function SideBarMain() {
         </motion.div>
       </div>
       {!showBrowseBar ? (
-        <div className={`mx-auto mb-1 w-10 h-0.5 border ${width && width < 640 ? "hidden" : ""}`} />
+        <div
+          className={`mx-auto mb-1 w-10 h-0.5 border ${
+            width && width < 640 ? "hidden" : ""
+          }`}
+        />
       ) : null}
       <motion.div
         variants={animations.browseContainer}
@@ -196,7 +199,6 @@ export default function SideBarMain() {
                     variants={animations.streams}
                     layout="position"
                     // layout
-                    // layoutScroll
                     className={!showBrowseBar ? "mx-auto" : ""}
                   >
                     <SideBarFollowingItem
