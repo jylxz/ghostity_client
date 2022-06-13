@@ -1,5 +1,5 @@
 // Libraries
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useInfiniteQuery } from "react-query";
@@ -17,6 +17,7 @@ import UserFollowContext from "../../../context/UserFollowContext";
 
 // Hooks
 import useResponsiveBrowseBar from "../../../hooks/useResponsiveBrowseBar";
+import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
 // Components
 import SideBarBrowseItem from "./SideBarBrowseItem";
@@ -31,6 +32,7 @@ export default function SideBarMain() {
   const user = useContext(UserContext);
   const follows = useContext(UserFollowContext);
   const [showChannels, setShowChannels] = useState(5);
+  const window = useWindowDimensions();
   const [
     showBrowseBar,
     setShowBrowseBar,
@@ -38,7 +40,16 @@ export default function SideBarMain() {
     browseBarOverride,
     minimized,
   ] = useResponsiveBrowseBar();
-
+  
+  
+  const [width, setWidth] = useState<number>();
+  
+  useEffect(() => {
+    if (window.width) {
+      setWidth(window.width);
+    }
+  }, [window]);
+  
   const channelIds: string[] | undefined = follows?.channels;
 
   const fetchStreams = ({ pageParam = 1 }) =>
@@ -52,7 +63,7 @@ export default function SideBarMain() {
     ["followStreams", channelIds],
     fetchStreams,
     {
-      refetchInterval: 180000,
+      // refetchInterval: 180000,
       enabled: !!user?.uid && !!channelIds,
       getNextPageParam: (lastPage) =>
         lastPage.next ? lastPage.next.page : false,
@@ -82,8 +93,8 @@ export default function SideBarMain() {
             whileHover={{ scale: 1.05 }}
             onClick={() => setShowBrowseBar(!showBrowseBar)}
             className={`p-1 my-3 flex items-center justify-center ${
-              !showBrowseBar ? "mx-auto" : null
-            }`}
+              !showBrowseBar ? "mx-auto" : ""
+            } ${width && width < 640 ? "hidden" : ""}`}
           >
             {showBrowseBar ? (
               <BiArrowToLeft className="h-5 w-5" />
@@ -94,7 +105,7 @@ export default function SideBarMain() {
         </motion.div>
       </div>
       {!showBrowseBar ? (
-        <div className="mx-auto mb-1 w-10 h-0.5 border" />
+        <div className={`mx-auto mb-1 w-10 h-0.5 border ${width && width < 640 ? "hidden" : ""}`} />
       ) : null}
       <motion.div
         variants={animations.browseContainer}
@@ -171,7 +182,8 @@ export default function SideBarMain() {
             <motion.div
               variants={animations.streamsContainer}
               layoutScroll
-              layout="position"
+              // layout="position"
+              layout
               initial="initial"
               animate="animate"
               className={`grid gap-2.5 ${showBrowseBar ? "mr-5" : ""} mb-4`}
@@ -183,6 +195,8 @@ export default function SideBarMain() {
                     key={stream._id}
                     variants={animations.streams}
                     layout="position"
+                    // layout
+                    // layoutScroll
                     className={!showBrowseBar ? "mx-auto" : ""}
                   >
                     <SideBarFollowingItem

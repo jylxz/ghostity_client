@@ -110,7 +110,7 @@ export default function FollowingMain() {
             {followStreams.data?.pages.map((group) => (
               <>
                 {group.results.map((stream: Stream) => (
-                  <motion.span layout="position" key={stream.channel_id}>
+                  <motion.span layout key={stream.channel_id}>
                     <LivestreamCard key={stream.channel_id} stream={stream} />
                   </motion.span>
                 ))}

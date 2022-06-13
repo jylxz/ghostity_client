@@ -37,7 +37,8 @@ function NavbarButton({ text, href }: { text: string; href: string }) {
       >
         <div className="relative">
           {text}
-          {router.route === href || href.includes("browse") ? (
+          {router.route === href ||
+          ((router.route.includes("browse") || router.route === "/search") && text === "Browse") ? (
             <motion.div
               initial={false}
               layoutId="underline-navbar"
@@ -107,17 +108,17 @@ export default function Navbar({
             </motion.div>
           </motion.button>
         </LinkTo>
-          <ul className="flex gap-2 items-center before:content-['|'] before:text-3xl before:mx-4">
-            <li>
-              <NavbarButton text="Home" href="/" />
-            </li>
-            <li>
-              <NavbarButton text="Browse" href="/browse" />
-            </li>
-            <li>
-              <NavbarButton text="FAQ" href="/faq" />
-            </li>
-          </ul>
+        <ul className="flex gap-2 items-center before:content-['|'] before:text-3xl before:mx-4">
+          <li>
+            <NavbarButton text="Home" href="/" />
+          </li>
+          <li>
+            <NavbarButton text="Browse" href="/browse" />
+          </li>
+          <li>
+            <NavbarButton text="FAQ" href="/faq" />
+          </li>
+        </ul>
       </div>
       <div className="flex items-center gap-4">
         {!user ? (

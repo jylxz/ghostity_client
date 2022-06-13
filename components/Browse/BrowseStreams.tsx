@@ -1,60 +1,46 @@
 // Libraries
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import { LayoutGroup, motion } from "framer-motion";
 
+// Hooks
+import useHandleFilters from "../../hooks/useHandleFilters";
+
 // Components
 import LivestreamCard from "../general/LivestreamCard";
-import BrowseStreamsOptions from "./BrowseStreamsOptions";
+import BrowseStreamsFilters from "./BrowseStreamsFilters";
 import GradientCircularProgress from "../general/GradientCircularProgress";
 import ProblemLoading from "../general/ProblemLoading";
 import BrowseWrapper from "../general/BrowseWrapper";
 import GridWrapper from "../general/GridWrapper";
 
-interface Filters {
-  sort?: string;
-  platform?: string;
-  language?: string;
-  exclude?: string;
-}
-
 export default function BrowseStreams() {
-  const [params, setParams] = useState<Filters>({});
   const { ref, inView } = useInView();
+  const [filterString, filters, setFilters, resetFilters] = useHandleFilters();
 
-  const fetchStreams = async ({ pageParam = 1 }) => {
-    const filters = params;
-    let baseUrl = `https://api.ghostity.com/streams?page=${pageParam}`;
+  const fetchStreams = async ({ pageParam = 1 }) =>
+    axios
+      .get(`https://api.ghostity.com/streams?page=${pageParam}${filterString}`)
+      .then((res) => res.data);
 
-    let sort: string | undefined;
-    let platform: string | undefined;
-    let language: string | undefined;
-    let exclude: string | undefined;
-
-    if (filters.sort) sort = `&sort=${filters.sort}`;
-
-    if (filters.language && filters.language !== "all")
-      language = `&lang=${filters.language}`;
-
-    if (filters.platform && filters.platform !== "all")
-      platform = `&platform=${filters.platform}`;
-
-    if (filters.exclude) exclude = `&exclude=${filters.exclude}`;
-
-    [sort, language, platform, exclude].forEach((filter) => {
-      if (filter) baseUrl += filter;
-    });
-
-    return axios.get(baseUrl).then((res) => res.data);
-  };
-
-  const { data, error, fetchNextPage, hasNextPage, isLoading } =
-    useInfiniteQuery<Streams, Error>(["allStreams", params], fetchStreams, {
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    refetch,
+    isRefetching,
+    isFetchingNextPage,
+  } = useInfiniteQuery<Streams, Error>(
+    ["allStreams", `${filters.sort}`],
+    fetchStreams,
+    {
       getNextPageParam: (lastPage) =>
         lastPage.next ? lastPage.next.page : false,
-    });
+    }
+  );
 
   useEffect(() => {
     if (inView) {
@@ -65,11 +51,17 @@ export default function BrowseStreams() {
   return (
     <BrowseWrapper>
       <LayoutGroup>
-        <BrowseStreamsOptions setParams={setParams} />
-        {data ? (
+        <BrowseStreamsFilters
+          filters={filters}
+          setFilters={setFilters}
+          resetFilters={resetFilters}
+          refetch={refetch}
+        />
+        {(data && !isRefetching ) ||
+        (data && isFetchingNextPage) ? (
           <>
             <GridWrapper colSize="normal">
-              {data?.pages.map((group) => (
+              {data.pages.map((group) => (
                 <>
                   {group.results.map((stream: Stream) => (
                     <motion.span layout="position" key={stream.channel_id}>
@@ -89,12 +81,14 @@ export default function BrowseStreams() {
               </motion.div>
             ) : null}
           </>
-        ) : null}
-        {isLoading ? (
-          <div className="flex-grow flex items-center justify-center">
+        ) : (
+          <motion.div
+            layout
+            className="flex-1 flex justify-center items-center"
+          >
             <GradientCircularProgress />
-          </div>
-        ) : null}
+          </motion.div>
+        )}
         {error ? <ProblemLoading /> : null}
       </LayoutGroup>
     </BrowseWrapper>

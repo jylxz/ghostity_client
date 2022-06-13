@@ -76,9 +76,9 @@ export default function HomeLive() {
         <Swiper
           modules={[Navigation]}
           allowTouchMove={false}
-          spaceBetween={6}
-          slidesPerView={2}
-          slidesPerGroup={2}
+          spaceBetween={24}
+          slidesPerView={1}
+          slidesPerGroup={1}
           navigation={{
             prevEl,
             nextEl,

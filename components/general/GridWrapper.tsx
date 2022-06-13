@@ -9,7 +9,7 @@ export default function GridWrapper({
   colSize: "xsmall" | "small" | "normal";
 }) {
   const column = {
-    normal: `grid-cols-[repeat(auto-fill,_minmax(17rem,_1fr))]`,
+    normal: `grid-cols-[repeat(auto-fill,_minmax(18rem,_1fr))]`,
     small: "grid-cols-[repeat(auto-fill,_minmax(14rem,_1fr))]",
     xsmall: "grid-cols-[repeat(auto-fill,_minmax(11rem,_1fr))]",
   };

@@ -60,7 +60,14 @@ export default function MyApp({
   });
 
   // React-Query
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 180000,
+        refetchInterval: 300000,
+      },
+    },
+  });
 
   // Firebase User Authentication
   const [user] = useAuthState(auth());

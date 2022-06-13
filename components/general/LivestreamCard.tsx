@@ -128,7 +128,7 @@ function FollowButton({
     return (
       <motion.button
         layout
-        className="absolute top-1 left-1 bg-gray-400/80 text-primary px-1 py-0.5 mr-1 text-sm rounded"
+        className="absolute top-1 left-1 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
         onHoverStart={() => setShowFollowText(true)}
         onHoverEnd={() => setShowFollowText(false)}
         onClick={() => follow()}
@@ -138,7 +138,7 @@ function FollowButton({
             {showFollowText ? (
               <div className="flex">
                 <motion.div layout>
-                  <AiOutlineHeart className="text-2xl h-5 min-w-[20px]" />
+                  <AiOutlineHeart className="text-2xl h-6 min-w-[20px]" />
                 </motion.div>
                 <motion.span
                   layout
@@ -147,7 +147,7 @@ function FollowButton({
               </div>
             ) : (
               <motion.div layout>
-                <AiFillHeart className="text-2xl h-5 min-w-[20px]" />
+                <AiFillHeart className="text-2xl h-6 min-w-[20px]" />
               </motion.div>
             )}
           </div>
@@ -156,7 +156,7 @@ function FollowButton({
             {showFollowText ? (
               <div className="flex">
                 <motion.div layout>
-                  <AiFillHeart className="text-2xl h-5 min-w-[20px]" />
+                  <AiFillHeart className="text-2xl h-6 min-w-[20px]" />
                 </motion.div>
                 <motion.span
                   layout
@@ -165,7 +165,7 @@ function FollowButton({
               </div>
             ) : (
               <motion.div layout>
-                <AiOutlineHeart className="text-2xl h-5 w-5" />
+                <AiOutlineHeart className="text-2xl h-6 min-w-[20px]" />
               </motion.div>
             )}
           </div>
@@ -202,14 +202,14 @@ function BlacklistButton({ stream }: { stream: Stream }) {
 
 export default function LivestreamCard({ stream }: { stream: Stream }) {
   return (
-    <Card className="flex flex-col max-w-[19rem] shadow">
-      <div className="relative max-h-[171px] object-scale-down">
+    <Card className="flex flex-col max-w-[22rem] shadow">
+      <div className="relative max-h-[198px] object-scale-down">
         <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
           <Image
             src={stream.stream.thumbnail}
             alt={`${stream.channel_name}'s stream thumbnail`}
-            height="171"
-            width="304"
+            height="198"
+            width="352"
           />
         </a>
         <FollowButton
@@ -217,7 +217,7 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
           channelId={stream.channel_id}
         />
         <BlacklistButton stream={stream} />
-        <span className="absolute bottom-1 right-1 text-primary bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default">{`${stream.stream.viewers} viewers`}</span>
+        <span className="absolute bottom-2.5 right-1 text-primary bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default">{`${stream.stream.viewers} viewers`}</span>
       </div>
       <CardContent className="grow py-2.5">
         <div>

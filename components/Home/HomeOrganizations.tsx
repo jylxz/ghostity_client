@@ -2,12 +2,12 @@
 
 // Libraries
 import React from "react";
-import Image from "next/image"
+import Image from "next/image";
 import { Autoplay, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Components
-import LinkTo from "../general/LinkTo"
+import LinkTo from "../general/LinkTo";
 
 // CSS
 import "swiper/css";

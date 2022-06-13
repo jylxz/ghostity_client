@@ -1,5 +1,5 @@
 // Libraries
-import React, { useState, useMemo, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Chip from "@mui/material/Chip";
 import FormControl from "@mui/material/FormControl";
@@ -10,62 +10,27 @@ import { AiOutlineFilter } from "react-icons/ai";
 
 // Components
 import { CustomSelect, StyledOption } from "../general/CustomSelect";
+import { Filter, Filters } from "../../hooks/useHandleFilters";
 
-function BrowseStreamsOptions({
-  setParams,
+export default function BrowseStreamsFilters({
+  filters,
+  setFilters,
+  resetFilters,
+  refetch,
 }: {
-  setParams: React.Dispatch<React.SetStateAction<{}>>;
+  filters: Filters;
+  setFilters: (filter: Filter, filterValue: any) => void;
+  resetFilters: () => void;
+  refetch: () => void;
 }) {
   const [showFilter, setShowFilter] = useState(false);
-  const [sort, setSort] = useState("desc");
-  const [language, setLanguage] = useState("All");
-  const [platform, setPlatform] = useState("All");
-  const [exclude, setExclude] = useState<string[]>([]);
-  const initialRender = useRef(true);
-
-  const excludeLanguages = (e: string) => {
-    let excludeList = [...exclude];
-
-    if (excludeList.includes(e)) {
-      excludeList = excludeList.filter((lang) => lang !== e);
-    } else {
-      excludeList.push(e);
-    }
-
-    return setExclude(excludeList);
-  };
-
-  const resetFilters = () => {
-    setSort("desc");
-    setLanguage("all");
-    setPlatform("all");
-    setExclude([]);
-  };
-
-  const filter = useMemo(
-    () => ({
-      sort,
-      language,
-      platform,
-      exclude,
-    }),
-    [exclude, language, platform, sort]
-  );
-
-  const refetchWithFilters = () => setParams(filter);
-
-  useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-      return;
-    }
-
-    refetchWithFilters();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sort]);
 
   return (
-    <motion.div layout="size" className="flex flex-col justify-between py-6">
+    <motion.div
+      layout="size"
+      layoutScroll
+      className="flex flex-col justify-between py-6"
+    >
       <div className="flex flex-col sm:flex-row sm:items-center justify-between">
         <motion.div layout className="flex items-center gap-2 ">
           Filter
@@ -82,11 +47,12 @@ function BrowseStreamsOptions({
         <motion.div layout className="flex items-center gap-2">
           Sort by
           <CustomSelect
-            value={sort}
+            value={filters.sort}
+            defaultValue="desc"
             onChange={(e) => {
-              setSort(e);
+              setFilters("sort", e);
             }}
-            className="bg-slate-100 text-gray-600 px-3 m-0 bg-slate-50"
+            className="bg-slate-100 text-gray-600 px-3 m-0"
           >
             <StyledOption value="desc">Viewers (High to Low)</StyledOption>
             <StyledOption value="asc">Viewers (Low to High)</StyledOption>
@@ -116,8 +82,8 @@ function BrowseStreamsOptions({
               <FormControl size="small">
                 <div className="font-thin">Language</div>
                 <CustomSelect
-                  value={language}
-                  onChange={(e: string) => setLanguage(e)}
+                  value={filters.language}
+                  onChange={(e) => setFilters("language", e)}
                   className="bg-white text-black border"
                   componentsProps={{
                     listbox: { className: "sm:flex flex-row flex-wrap gap-2" },
@@ -139,9 +105,9 @@ function BrowseStreamsOptions({
               <FormControl size="small">
                 <div className="font-thin">Platform</div>
                 <CustomSelect
-                  value={platform}
+                  value={filters.platform}
                   className="bg-white text-black border"
-                  onChange={(e) => setPlatform(e)}
+                  onChange={(e) => setFilters("platform", e)}
                   componentsProps={{
                     listbox: { className: "sm:flex flex-wrap flex-row gap-2" },
                   }}
@@ -158,9 +124,9 @@ function BrowseStreamsOptions({
                 <Chip
                   label="English"
                   variant="outlined"
-                  onClick={() => excludeLanguages("en")}
+                  onClick={() => setFilters("exclude", "en")}
                   className={
-                    exclude.includes("en")
+                    filters?.exclude?.includes("en")
                       ? "bg-white text-black px-1.5"
                       : "bg-gray-200 text-gray-500 px-1.5"
                   }
@@ -168,9 +134,9 @@ function BrowseStreamsOptions({
                 <Chip
                   label="Japanese"
                   variant="outlined"
-                  onClick={() => excludeLanguages("ja")}
+                  onClick={() => setFilters("exclude", "ja")}
                   className={
-                    exclude.includes("ja")
+                    filters?.exclude?.includes("ja")
                       ? "bg-white text-black px-1.5"
                       : "bg-gray-200 text-gray-500 px-1.5"
                   }
@@ -178,9 +144,9 @@ function BrowseStreamsOptions({
                 <Chip
                   label="Korean"
                   variant="outlined"
-                  onClick={() => excludeLanguages("ko")}
+                  onClick={() => setFilters("exclude", "ko")}
                   className={
-                    exclude.includes("ko")
+                    filters?.exclude?.includes("ko")
                       ? "bg-white text-black px-1.5"
                       : "bg-gray-200 text-gray-500 px-1.5"
                   }
@@ -188,9 +154,9 @@ function BrowseStreamsOptions({
                 <Chip
                   label="Indonesian"
                   variant="outlined"
-                  onClick={() => excludeLanguages("id")}
+                  onClick={() => setFilters("exclude", "id")}
                   className={
-                    exclude.includes("id")
+                    filters?.exclude?.includes("id")
                       ? "bg-white text-black px-1.5"
                       : "bg-gray-200 text-gray-500 px-1.5"
                   }
@@ -198,9 +164,9 @@ function BrowseStreamsOptions({
                 <Chip
                   label="Chinese"
                   variant="outlined"
-                  onClick={() => excludeLanguages("zh")}
+                  onClick={() => setFilters("exclude", "zh")}
                   className={
-                    exclude.includes("zh")
+                    filters?.exclude?.includes("zh")
                       ? "bg-white text-black px-1.5"
                       : "bg-gray-200 text-gray-500 px-1.5"
                   }
@@ -208,9 +174,9 @@ function BrowseStreamsOptions({
                 <Chip
                   label="Spanish"
                   variant="outlined"
-                  onClick={() => excludeLanguages("es")}
+                  onClick={() => setFilters("exclude", "es")}
                   className={
-                    exclude.includes("es")
+                    filters?.exclude?.includes("es")
                       ? "bg-white text-black px-1.5"
                       : "bg-gray-200 text-gray-500 px-1.5"
                   }
@@ -218,9 +184,9 @@ function BrowseStreamsOptions({
                 <Chip
                   label="French"
                   variant="outlined"
-                  onClick={() => excludeLanguages("fr")}
+                  onClick={() => setFilters("exclude", "fr")}
                   className={
-                    exclude.includes("fr")
+                    filters?.exclude?.includes("fr")
                       ? "bg-white text-black px-1.5"
                       : "bg-gray-200 text-gray-500 px-1.5"
                   }
@@ -228,9 +194,9 @@ function BrowseStreamsOptions({
                 <Chip
                   label="German"
                   variant="outlined"
-                  onClick={() => excludeLanguages("de")}
+                  onClick={() => setFilters("exclude", "de")}
                   className={
-                    exclude.includes("de")
+                    filters?.exclude?.includes("de")
                       ? "bg-white text-black px-1.5"
                       : "bg-gray-200 text-gray-500 px-1.5"
                   }
@@ -238,9 +204,9 @@ function BrowseStreamsOptions({
                 <Chip
                   label="Portuguese"
                   variant="outlined"
-                  onClick={() => excludeLanguages("pt")}
+                  onClick={() => setFilters("exclude", "pt")}
                   className={
-                    exclude.includes("pt")
+                    filters?.exclude?.includes("pt")
                       ? "bg-white text-black px-1.5"
                       : "bg-gray-200 text-gray-500 px-1.5"
                   }
@@ -248,9 +214,9 @@ function BrowseStreamsOptions({
                 <Chip
                   label="Other"
                   variant="outlined"
-                  onClick={() => excludeLanguages("other")}
+                  onClick={() => setFilters("exclude", "other")}
                   className={
-                    exclude.includes("other")
+                    filters?.exclude?.includes("other")
                       ? "bg-white text-black px-1.5"
                       : "bg-gray-200 text-gray-500 px-1.5"
                   }
@@ -273,7 +239,7 @@ function BrowseStreamsOptions({
                 type="button"
                 className="bg-white px-3 py-1 text-black rounded border"
                 onClick={() => {
-                  refetchWithFilters();
+                  refetch();
                   setShowFilter(false);
                 }}
               >
@@ -287,4 +253,3 @@ function BrowseStreamsOptions({
   );
 }
 
-export default BrowseStreamsOptions;

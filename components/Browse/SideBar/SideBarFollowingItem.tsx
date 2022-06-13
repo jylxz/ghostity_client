@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
 export default function SideBarFollowingItem({
   stream,
@@ -14,6 +15,7 @@ export default function SideBarFollowingItem({
   browseBarOverride: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [showTitle, setShowTitle] = useState(false);
+  const window = useWindowDimensions()
   const scrollRef = useRef<HTMLDivElement>(null);
   const [titleTimeout, setTitleTimeout] = useState<NodeJS.Timeout>();
   const [browseTimeout, setBrowseTimeout] = useState<NodeJS.Timeout>();
@@ -32,7 +34,7 @@ export default function SideBarFollowingItem({
   };
 
   const handleBrowseOpen = () => {
-    setBrowseTimeout(setTimeout(() => browseBarOverride(true), 1500));
+    setBrowseTimeout(setTimeout(() => browseBarOverride(true), 1000));
 
     if (minimized) {
       clearTimeout(scrollTimeout);
@@ -95,9 +97,9 @@ export default function SideBarFollowingItem({
               height={28}
               width={28}
               className="rounded-full "
-              onMouseEnter={() => handleBrowseOpen()}
+              onMouseEnter={window.width > 640 ? () => handleBrowseOpen() : null}
               onMouseLeave={() => handleBrowseClose()}
-              onClick={() => handleBrowseOnClick()}
+              onClick={window.width > 640 ? () => handleBrowseOnClick() : null}
             />
           </div>
           {!minimized ? (
