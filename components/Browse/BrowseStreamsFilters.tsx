@@ -1,6 +1,6 @@
 // Libraries
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import Chip from "@mui/material/Chip";
 import FormControl from "@mui/material/FormControl";
 
@@ -44,20 +44,28 @@ export default function BrowseStreamsFilters({
             <AiOutlineFilter className="h-8 w-5 text-gray-600 font-thin" />
           </motion.button>
         </motion.div>
-        <motion.div layout className="flex items-center gap-2">
-          Sort by
-          <CustomSelect
-            value={filters.sort}
-            defaultValue="desc"
-            onChange={(e) => {
-              setFilters("sort", e);
-            }}
-            className="bg-slate-100 text-gray-600 px-3 m-0"
-          >
-            <StyledOption value="desc">Viewers (High to Low)</StyledOption>
-            <StyledOption value="asc">Viewers (Low to High)</StyledOption>
-          </CustomSelect>
-        </motion.div>
+        <LayoutGroup>
+          <motion.div layout  className="flex items-center gap-2 z-20">
+            <motion.span layout>Sort by</motion.span>
+            <motion.span
+              layout="position"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 1 }}
+            >
+              <CustomSelect
+                value={filters.sort}
+                defaultValue="desc"
+                onChange={(e) => {
+                  setFilters("sort", e);
+                }}
+                className="bg-slate-100 text-gray-600 px-3 m-0"
+              >
+                <StyledOption value="desc">Viewers (High to Low)</StyledOption>
+                <StyledOption value="asc">Viewers (Low to High)</StyledOption>
+              </CustomSelect>
+            </motion.span>
+          </motion.div>
+        </LayoutGroup>
       </div>
       <AnimatePresence exitBeforeEnter>
         {showFilter ? (
@@ -68,7 +76,7 @@ export default function BrowseStreamsFilters({
             animate={{ translateY: 0 }}
             exit={{ translateY: -600 }}
             transition={{ duration: 0.3 }}
-            className="bg-slate-100 p-4 rounded-lg flex flex-col mt-4"
+            className="bg-slate-100 p-4 rounded-lg flex flex-col mt-4 z-30"
           >
             <motion.button
               whileHover={{ scale: 1.05 }}

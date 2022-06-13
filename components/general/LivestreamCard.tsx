@@ -1,7 +1,7 @@
 // Libraries
 import React, { useContext, useState } from "react";
 import { Card, CardContent, Typography } from "@mui/material";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
 // Icons
@@ -20,7 +20,7 @@ import useHandleFollows from "../../hooks/useHandleFollows";
 // Components
 import LinkTo from "./LinkTo";
 
-function ChannelPic({stream}: {stream: Stream}) {
+function ChannelPic({ stream }: { stream: Stream }) {
   if (stream.platform === "twitch") {
     return (
       <div className="w-6 h-6">
@@ -60,7 +60,7 @@ function ChannelPic({stream}: {stream: Stream}) {
   );
 }
 
-function ChannelName({stream} : {stream: Stream}) {
+function ChannelName({ stream }: { stream: Stream }) {
   if (stream.platform === "twitch") {
     return (
       <a
@@ -84,7 +84,7 @@ function ChannelName({stream} : {stream: Stream}) {
   );
 }
 
-function PlatformIcon({stream}: {stream: Stream}) {
+function PlatformIcon({ stream }: { stream: Stream }) {
   if (stream.platform === "twitch")
     return (
       <div className="h-5 min-w-[18px] w-[18px]">
@@ -128,6 +128,9 @@ function FollowButton({
     return (
       <motion.button
         layout
+        initial={{ opacity: 0, translateX: -100 }}
+        animate={{ opacity: 1, translateX: 0 }}
+        transition={{ delay: 0.8 }}
         className="absolute top-1 left-1 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
         onHoverStart={() => setShowFollowText(true)}
         onHoverEnd={() => setShowFollowText(false)}
@@ -212,12 +215,19 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
             width="352"
           />
         </a>
-        <FollowButton
-          channel={stream.channel_name}
-          channelId={stream.channel_id}
-        />
-        <BlacklistButton stream={stream} />
-        <span className="absolute bottom-2.5 right-1 text-primary bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default">{`${stream.stream.viewers} viewers`}</span>
+        <AnimatePresence exitBeforeEnter>
+          <FollowButton
+            channel={stream.channel_name}
+            channelId={stream.channel_id}
+          />
+          <BlacklistButton stream={stream} />
+          <motion.span
+            initial={{ opacity: 0, translateX: 100 }}
+            animate={{ opacity: 1, translateX: 0 }}
+            transition={{ delay: 0.8 }}
+            className="absolute bottom-2.5 right-1 text-primary bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default"
+          >{`${stream.stream.viewers} viewers`}</motion.span>
+        </AnimatePresence>
       </div>
       <CardContent className="grow py-2.5">
         <div>

@@ -7,9 +7,9 @@ import LinkTo from "./LinkTo";
 
 export default function GameCard({ game }: { game: Game }) {
   return (
-    <Card className="w-48">
+    <Card className="w-52">
       <LinkTo href={`/browse/games/${encodeURIComponent(game.name)}`}>
-        <Image src={game.cover_img} width="192" height="260" alt={`${game.name} cover art`}/>
+        <Image src={game.cover_img} width="208" height="280" alt={`${game.name} cover art`}/>
       </LinkTo>
       <CardContent className="h-16 pt-2 bg-slate-50">
         <LinkTo href={`/browse/games/${encodeURIComponent(game.name)}`}>

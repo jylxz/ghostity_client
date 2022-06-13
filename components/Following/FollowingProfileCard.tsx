@@ -12,10 +12,24 @@ import TwitterIcon from "../../public/images/TwitterBlue.svg";
 // Hooks
 import useHandleFollows from "../../hooks/useHandleFollows";
 
+const animations = {
+  icons: {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        duration: 0.6
+      }
+    },
+  },
+};
 
 function ChannelIcon({ channel }: { channel: Channel }) {
   return (
     <motion.button
+      variants={animations.icons}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       type="button"
@@ -36,6 +50,7 @@ function SocialsIcon({
 }) {
   return (
     <motion.button
+      variants={animations.icons}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       type="button"
@@ -57,6 +72,7 @@ function FollowIcon({
 }) {
   return (
     <motion.button
+      variants={animations.icons}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       type="button"
@@ -80,8 +96,8 @@ export default function FollowingProfileCard({
   const [follow, followed] = useHandleFollows(profile.channels);
 
   return (
-    <div className="relative w-56 h-32 rounded-lg border font-semibold">
-      <div className="absolute w-full h-full z-0 rounded-lg">
+    <div className="relative w-60 h-40 rounded-lg border">
+      <div className="absolute w-full h-32 z-0 rounded-lg">
         {profile.profile.img ? (
           <Image
             src={profile.profile?.img}
@@ -91,20 +107,39 @@ export default function FollowingProfileCard({
           />
         ) : null}
       </div>
-      <div className="relative z-10 h-full flex flex-col gap-0.5 items-center justify-center">
-        <div>
-          {profile.profile.img ? (
-            <Image
-              src={profile.profile?.img}
-              width={48}
-              height={48}
-              alt="profileImage"
-              className="rounded-full text-xs"
-            />
-          ) : null}
+      <div className="relative z-10 h-full flex flex-col gap-0.5">
+        <div className="h-32 flex flex-col justify-center items-center">
+          <a
+            href={profile.channels[0].link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {profile.profile.img ? (
+              <Image
+                src={profile.profile?.img}
+                width={48}
+                height={48}
+                alt="profileImage"
+                className="rounded-full text-xs"
+              />
+            ) : null}
+          </a>
+          <a
+            href={profile.channels[0].link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="line-clamp-1 px-2 text-center">
+              {profile.name}
+            </span>
+          </a>
         </div>
-        <span className="line-clamp-1 px-2 text-center">{profile.name}</span>
-        <div className="flex items-center gap-2">
+        <motion.div
+          initial="initial"
+          animate="animate"
+          transition={{ staggerChildren: 0.2, delayChildren: 0.8 }}
+          className="flex items-center gap-2 bg-white justify-center py-2 rounded-b-lg border-t"
+        >
           {profile.channels.map((channel) => (
             <ChannelIcon key={channel.id} channel={channel} />
           ))}
@@ -114,7 +149,7 @@ export default function FollowingProfileCard({
               ))
             : null}
           <FollowIcon follow={follow} followed={followed} />
-        </div>
+        </motion.div>
       </div>
     </div>
   );
