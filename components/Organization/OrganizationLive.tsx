@@ -1,13 +1,14 @@
 import React from "react";
+import GridWrapper from "../general/GridWrapper";
 import LivestreamCard from "../general/LivestreamCard";
 import NoStreams from "../general/NoStreams";
 
 export default function OrganizationLive({
   channels,
 }: {
-  channels: Stream[] | undefined;
+  channels: Stream[];
 }) {
-  if (channels?.length < 1) {
+  if (channels.length < 1) {
     return (
       <div className="flex justify-center items-center h-48">
         {" "}
@@ -17,10 +18,10 @@ export default function OrganizationLive({
   }
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] gap-7 justify-items-center py-6">
-      {channels?.map((channel) => (
-        <LivestreamCard key={channel._id} stream={channel} />
-      ))}
-    </div>
+    <GridWrapper colSize="normal">
+        {channels.map((channel) => (
+          <LivestreamCard key={channel._id} stream={channel} />
+        ))}
+    </GridWrapper>
   );
 }

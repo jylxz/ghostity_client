@@ -1,16 +1,18 @@
 import { motion } from "framer-motion";
 import React, { Dispatch, SetStateAction } from "react";
 
-export default function FollowingTabButton({
+export default function AnimatedTabButton({
   tab,
   currentTab,
   setCurrentTab,
   count,
+  layoutId
 }: {
   tab: string;
   currentTab: string;
   setCurrentTab: Dispatch<SetStateAction<string>>;
-  count: number | undefined;
+  count?: number;
+  layoutId?: string;
 }) {
   return (
     <motion.button
@@ -29,7 +31,7 @@ export default function FollowingTabButton({
       </div>
       {tab === currentTab ? (
         <motion.div
-          layoutId="FollowingTabButtons"
+          layoutId={layoutId ? `${layoutId}AnimatedTabButtons` : "AnimatedTabButton"}
           className="absolute bottom-0 w-full h-0.5 bg-black z-10"
         />
       ) : null}

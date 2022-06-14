@@ -16,8 +16,8 @@ import GradientCircularProgress from "../general/GradientCircularProgress";
 import ProblemLoading from "../general/ProblemLoading";
 import FollowingEmpty from "./FollowingEmpty";
 import GridWrapper from "../general/GridWrapper";
-import FollowingTabButton from "./FollowingTabButton";
-import FollowingProfileCard from "./FollowingProfileCard";
+import AnimateTabButton from "../general/AnimatedTabButton";
+import ProfileCard from "../general/ProfileCard";
 
 export default function FollowingMain() {
   const [currentTab, setCurrentTab] = useState("Live");
@@ -78,7 +78,7 @@ export default function FollowingMain() {
   return (
     <BrowseWrapper>
       <div className="flex gap-4 mb-7 text-gray-400 relative">
-        <FollowingTabButton
+        <AnimateTabButton
           tab="Live"
           currentTab={currentTab}
           setCurrentTab={setCurrentTab}
@@ -87,7 +87,7 @@ export default function FollowingMain() {
             followStreams.data?.pages[0].results.length
           }
         />
-        <FollowingTabButton
+        <AnimateTabButton
           tab="All"
           currentTab={currentTab}
           setCurrentTab={setCurrentTab}
@@ -134,7 +134,7 @@ export default function FollowingMain() {
               <>
                 {group.results.map((profile) => (
                   <motion.span layout="position" key={profile._id}>
-                    <FollowingProfileCard key={profile._id} profile={profile} />
+                    <ProfileCard key={profile._id} profile={profile} size="normal"/>
                   </motion.span>
                 ))}
               </>

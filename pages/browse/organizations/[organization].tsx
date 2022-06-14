@@ -21,11 +21,6 @@ const getOrganizationData = async (
     .get(`https://api.ghostity.com/organizations?name=${organization}`)
     .then((res) => res.data);
 
-const getProfiles = (ids: string[]): Promise<Profile[]> =>
-  axios
-    .post(`https://api.ghostity.com/profiles`, { ids })
-    .then((res) => res.data);
-
 export async function getStaticPaths() {
   const paths = await getAllOrganizationNames();
 
@@ -38,13 +33,10 @@ export async function getStaticProps({
   params: { organization: string };
 }) {
   const organization = await getOrganizationData(params.organization);
-  const ids = organization[0].members.map((member) => member.profile_id);
-  const profiles = await getProfiles(ids);
 
   return {
     props: {
       organization,
-      profiles,
     },
     revalidate: 10,
   };
@@ -52,17 +44,15 @@ export async function getStaticProps({
 
 function OrganizationPage({
   organization,
-  profiles,
 }: {
   organization: Organization[];
-  profiles: Profile[];
 }) {
   return (
     <>
       <Head>
         <title>Ghostity | {organization[0].name}</title>
       </Head>
-      <OrganizationMain org={organization[0]} profiles={profiles} />
+      <OrganizationMain org={organization[0]} />
     </>
   );
 }

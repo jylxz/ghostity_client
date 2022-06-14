@@ -74,6 +74,7 @@ declare global {
     social_media: {
       platform: string;
       url: string;
+      tag?: string
     }[];
     branches: {
       name: string;

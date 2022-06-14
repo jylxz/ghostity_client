@@ -1,115 +1,142 @@
-import React, { useState } from "react";
+// Libraries
+import axios from "axios";
+import React, { useMemo, useState } from "react";
+import { useQuery } from "react-query";
+
+// Icons
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+
+// Hooks
 import useHandleFollows from "../../hooks/useHandleFollows";
-import MemberCard from "../general/MemberCard";
+
+// Components
+import GradientCircularProgress from "../general/GradientCircularProgress";
+import GridWrapper from "../general/GridWrapper";
+import ProfileCard from "../general/ProfileCard";
+
+function FollowBranchButton({
+  organization,
+  profiles,
+  branches,
+  currentBranch,
+  members,
+}: {
+  organization: string;
+  profiles: Profile[];
+  currentBranch: number;
+  branches: { name: string; id: number }[];
+  members: Member[];
+}) {
+  const channels = (id: string, profilesList: Profile[]) =>
+    profilesList.flatMap((profile) =>
+      profile._id === id ? profile.channels : []
+    );
+
+  const branchMemberChannels = (profilesList: Profile[]): Channel[] => {
+    if (currentBranch === -1) {
+      return members.flatMap((member) =>
+        channels(member.profile_id, profilesList).map((channel) => channel)
+      );
+    }
+    return members.flatMap((member) =>
+      member.branch_id === currentBranch
+        ? channels(member.profile_id, profilesList).map((channel) => channel)
+        : []
+    );
+  };
+
+  const [followState, setFollowState] = useState(false);
+  const [follow, followed] = useHandleFollows(
+    branchMemberChannels(profiles || [])
+  );
+
+  let currentBranchName = "";
+
+  if (currentBranch < 0) {
+    currentBranchName = organization;
+  } else {
+    branches.forEach((branch) => {
+      if (branch.id === currentBranch) {
+        currentBranchName = branch.name;
+      }
+    });
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={() => follow()}
+      onMouseEnter={() => setFollowState(true)}
+      onMouseLeave={() => setFollowState(false)}
+      className="flex items-center gap-2 bg-slate-100 px-2 py-0.5 text-sm  text-gray-800 rounded"
+    >
+      {followed ? (
+        <>
+          {followState ? <AiOutlineHeart /> : <AiFillHeart />}
+          Unfollow {currentBranchName}
+        </>
+      ) : (
+        <>
+          {followState ? <AiFillHeart /> : <AiOutlineHeart />}
+          Follow {currentBranchName}
+        </>
+      )}
+    </button>
+  );
+}
 
 export default function OrganizationMembers({
   organization,
   branches,
   members,
-  profiles,
 }: {
   organization: string;
   branches: { name: string; id: number }[];
   members: Member[];
-  profiles: Profile[];
 }) {
   const [currentBranch, setCurrentBranch] = useState(-1);
-  const [followState, setFollowState] = useState(false);
+  
+  // Fetch Profiles
+  const ids = members.map((member) => member.profile_id);
+  const fetchProfiles = () =>
+    axios
+      .post("https://api.ghostity.com/profiles", {
+        ids,
+      })
+      .then((res) => res.data);
 
-  const profileImage = (id: string) => {
-    let image = "";
+  const profiles = useQuery<Profile[], Error>(
+    `${organization} member profiles`,
+    fetchProfiles
+  );
 
-    profiles.forEach((profile) => {
-      if (id === profile._id) {
-        image = profile.profile.img;
+  // Filter members by branch_id and sort by sub_count
+  const getProfile = (id: string, profilesList: Profile[]) =>
+    profilesList.filter((profile) => profile._id === id)[0];
+
+  const filteredMembers = useMemo(() => {
+    if (profiles.data) {
+      if (currentBranch < 0) {
+        return members.sort(
+          (a, b) =>
+            getProfile(b.profile_id, profiles.data).channels[0].sub_count -
+            getProfile(a.profile_id, profiles.data).channels[0].sub_count
+        );
       }
-    });
 
-    return image;
-  };
-
-  const channels = (id: string) => {
-    let allChannels: Channel[] = [];
-
-    profiles.forEach((profile) => {
-      if (id === profile._id) {
-        allChannels = profile.channels;
-      }
-    });
-
-    return allChannels;
-  };
-
-  const socialMedia = (id: string) => {
-    let socials: { platform: string; url: string }[] = [];
-
-    profiles.forEach((profile) => {
-      if (id === profile._id) {
-        socials = profile.profile.social_media;
-      }
-    });
-
-    return socials;
-  };
-
-  const branchMemberChannels = () => {
-    const branchId: Channel[] = [];
-
-    if (currentBranch === -1) {
-      members.map((member) =>
-        channels(member.profile_id).map((channel) => branchId.push(channel))
-      );
-    } else {
-      members.map((member) =>
-        member.branch_id === currentBranch
-          ? channels(member.profile_id).map((channel) => branchId.push(channel))
-          : undefined
-      );
+      return members
+        .filter((member) => member.branch_id === currentBranch)
+        .sort(
+          (a, b) =>
+            getProfile(b.profile_id, profiles.data).channels[0].sub_count -
+            getProfile(a.profile_id, profiles.data).channels[0].sub_count
+        );
     }
 
-    return branchId;
-  };
+    return [];
+  }, [currentBranch, members, profiles.data]);
 
-  const [follow, followed] = useHandleFollows(branchMemberChannels());
-
-  const followButton = () => {
-    let currentBranchName = "";
-
-    if (currentBranch < 0) {
-      currentBranchName = organization;
-    } else {
-      branches.forEach((branch) => {
-        if (branch.id === currentBranch) {
-          currentBranchName = branch.name;
-        }
-      });
-    }
-
-    return (
-      <button
-        type="button"
-        onClick={() => follow()}
-        onMouseEnter={() => setFollowState(true)}
-        onMouseLeave={() => setFollowState(false)}
-        className="flex items-center gap-2 bg-slate-100 px-2 py-0.5 text-sm  text-gray-800 rounded"
-      >
-        {followed ? (
-          <>
-            {followState ? <AiOutlineHeart /> : <AiFillHeart />}
-            Unfollow {currentBranchName}
-          </>
-        ) : (
-          <>
-            {followState ? <AiFillHeart /> : <AiOutlineHeart />}
-            Follow {currentBranchName}
-          </>
-        )}
-      </button>
-    );
-  };
-
-  return (
+  return !profiles.isLoading && profiles.data ? (
     <>
       <div className="flex flex-wrap justify-center text-sm py-2">
         <button type="button" onClick={() => setCurrentBranch(-1)}>
@@ -134,35 +161,31 @@ export default function OrganizationMembers({
           </button>
         ))}
       </div>
-      <div className="self-end my-3">{followButton()}</div>
-      <div className="grid grid-cols-[repeat(auto-fit,_minmax(170px,_1fr))] gap-8 justify-items-center py-4">
-        {members.map((member) =>
-          member.branch_id === currentBranch ? (
-            <MemberCard
-              key={member._id}
-              image={profileImage(member.profile_id)}
-              socials={socialMedia(member.profile_id)}
-              name={member.name}
-              altName={member.alt_name}
-              channels={channels(member.profile_id)}
-              language={member.language}
-            />
-          ) : null
-        )}
-        {currentBranch < 0
-          ? members.map((member) => (
-              <MemberCard
-                key={member._id}
-                image={profileImage(member.profile_id)}
-                socials={socialMedia(member.profile_id)}
-                name={member.name}
-                altName={member.alt_name}
-                channels={channels(member.profile_id)}
-                language={member.language}
-              />
-            ))
-          : null}
+      <div className="self-end mt-5 mb-7">
+        <FollowBranchButton
+          organization={organization}
+          profiles={profiles.data}
+          currentBranch={currentBranch}
+          branches={branches}
+          members={members}
+        />
       </div>
+      <GridWrapper colSize="small">
+        {filteredMembers.map((member) => (
+          <ProfileCard
+            key={member._id}
+            profile={getProfile(member.profile_id, profiles.data)}
+            altName={member.alt_name}
+            language={member.language}
+            size="large"
+            subCount
+          />
+        ))}
+      </GridWrapper>
     </>
+  ) : (
+    <div className="flex-1 flex justify-center items-center">
+      <GradientCircularProgress />
+    </div>
   );
 }

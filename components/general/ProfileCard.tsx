@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import numbro from "numbro";
 
 // Icons
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
@@ -15,15 +16,15 @@ import useHandleFollows from "../../hooks/useHandleFollows";
 const animations = {
   icons: {
     initial: {
-      translateY: 12,
+      scale: 0,
       opacity: 0,
     },
     animate: {
-      translateY: 0,
+      scale: 1,
       opacity: 1,
       transition: {
-        duration: 0.6
-      }
+        duration: 0.6,
+      },
     },
   },
 };
@@ -90,16 +91,41 @@ function FollowIcon({
   );
 }
 
-export default function FollowingProfileCard({
+function SubscriberCount({ subcount }: { subcount: number }) {
+    return (
+      <span className="text-sm mt-2">
+        Subscribers:
+        {" "}
+        {numbro(subcount).format({
+          thousandSeparated: true,
+          totalLength: subcount > 1000000 ? 3 : 0,
+        })}
+      </span>
+    );
+
+}
+
+export default function ProfileCard({
   profile,
+  altName,
+  language,
+  size,
+  subCount
 }: {
   profile: Profile;
+  altName?: string;
+  language?: string;
+  size: "normal" | "large"
+  subCount?: boolean
 }) {
   const [follow, followed] = useHandleFollows(profile.channels);
 
+  const cardSize = size === "large" ? {cardHeight: "h-48", imageHeight: "h-40"} : {cardHeight: "h-40", imageHeight: "h-32"}
+
+
   return (
-    <div className="relative w-60 h-40 rounded-lg border">
-      <div className="absolute w-full h-32 z-0 rounded-lg">
+    <motion.div layout className={`relative w-60 ${cardSize.cardHeight} rounded-lg border`}>
+      <div className={`absolute w-full ${cardSize.imageHeight} z-0 rounded-lg`}>
         {profile.profile.img ? (
           <Image
             src={profile.profile?.img}
@@ -110,7 +136,7 @@ export default function FollowingProfileCard({
         ) : null}
       </div>
       <div className="relative z-10 h-full flex flex-col gap-0.5">
-        <div className="h-32 flex flex-col justify-center items-center">
+        <div className={`${cardSize.imageHeight} flex flex-col justify-center items-center`}>
           <a
             href={profile.channels[0].link}
             target="_blank"
@@ -135,11 +161,16 @@ export default function FollowingProfileCard({
               {profile.name}
             </span>
           </a>
+          <span className="text-gray-600 text-xs">
+            {altName ? `(${altName})` : null}
+          </span>
+          <span className="text-gray-600 text-xs">{language || null}</span>
+          {subCount && profile.channels[0].platform === "youtube" ? <SubscriberCount subcount={profile.channels[0].sub_count}/> : null}
         </div>
         <motion.div
-          initial="initial"
-          animate="animate"
-          transition={{ staggerChildren: 0.2, delayChildren: 0.8 }}
+          // initial="initial"
+          // animate="animate"
+          // transition={{ staggerChildren: 0.2, delayChildren: 0.4 }}
           className="flex items-center gap-2 bg-white justify-center py-2 rounded-b-lg border-t"
         >
           {profile.channels.map((channel) => (
@@ -153,6 +184,6 @@ export default function FollowingProfileCard({
           <FollowIcon follow={follow} followed={followed} />
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
