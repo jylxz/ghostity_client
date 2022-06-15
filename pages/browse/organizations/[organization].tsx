@@ -38,7 +38,7 @@ export async function getStaticProps({
     props: {
       organization,
     },
-    revalidate: 10,
+    revalidate: 1000,
   };
 }
 

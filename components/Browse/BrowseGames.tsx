@@ -1,6 +1,6 @@
 // Libraries
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
@@ -38,14 +38,15 @@ export default function BrowseGames() {
         {data ? (
           <>
             <GridWrapper colSize="xsmall">
-              {data?.pages.map((group) => (
-                <>
+              {data?.pages.map((group, i) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <Fragment key={i}>
                   {group.results.map((game) => (
                     <motion.span layout="position" key={game._id}>
                       <GameCard key={game._id} game={game} />
                     </motion.span>
                   ))}
-                </>
+                </Fragment>
               ))}
             </GridWrapper>
             {hasNextPage ? (

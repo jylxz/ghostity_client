@@ -26,6 +26,7 @@ module.exports = {
       "hololive.hololivepro.com",
       "holostars.hololivepro.com",
       "neo-porte.jp",
+      "lh3.googleusercontent.com",
     ],
   },
   webpack(config) {

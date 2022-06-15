@@ -49,18 +49,18 @@ function FollowBranchButton({
   const [follow, followed] = useHandleFollows(
     branchMemberChannels(profiles || [])
   );
-
-  let currentBranchName = "";
-
-  if (currentBranch < 0) {
-    currentBranchName = organization;
-  } else {
-    branches.forEach((branch) => {
+  const currentBranchName = useMemo(() => {
+    if (currentBranch < 0) {
+      return organization;
+    }
+    return branches.flatMap((branch) => {
       if (branch.id === currentBranch) {
-        currentBranchName = branch.name;
+        return branch.name;
       }
-    });
-  }
+
+      return [];
+    })[0];
+  }, [currentBranch]);
 
   return (
     <button

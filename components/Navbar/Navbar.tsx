@@ -1,32 +1,22 @@
 // Libraries
-import React, {
-  Fragment,
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
 import { useRouter } from "next/router";
-import { motion, AnimateSharedLayout } from "framer-motion";
+import { motion } from "framer-motion";
 
 // Icons
-import { GiHamburgerMenu } from "react-icons/gi";
 import { BiMenu } from "react-icons/bi";
-import { AiOutlineHome, AiOutlineQuestion } from "react-icons/ai";
 
 // Components
-import { IconType } from "react-icons";
-import LinkTo from "./LinkTo";
-import ProfileNavbar from "../Profile/ProfileNavbar";
+import LinkTo from "../general/LinkTo";
+import ProfileNavbar from "./ProfileNavbar";
 
 // Contexts
 import UserContext from "../../context/UserContext";
 
 // Images
 import GhostityLogo from "../../public/images/Ghostity-svg.svg";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
-import AnimatedButton from "./AnimatedButton";
+import AnimatedButton from "../general/AnimatedButton";
+import useIsWindowSmall from "../../hooks/useIsWindowSmall";
 
 function NavbarButton({ text, href }: { text: string; href: string }) {
   const router = useRouter();
@@ -65,32 +55,14 @@ function NavbarButton({ text, href }: { text: string; href: string }) {
 export default function Navbar({
   showAuth,
   setShowAuth,
-  isWindowSmall,
   setShowHamburgerMenu,
 }: {
   showAuth: boolean;
   setShowAuth: Dispatch<SetStateAction<boolean>>;
-  isWindowSmal: boolean;
   setShowHamburgerMenu: Dispatch<SetStateAction<boolean>>;
 }) {
   const user = useContext(UserContext);
-  // const [showHamburgerMenu, setShowHamburgerMenu] = useState<boolean>(false);
-  // const [width, setWidth] = useState<number>();
-  // const window = useWindowDimensions();
-
-  // useEffect(() => {
-  //   if (window && window.width) {
-  //     setWidth(window.width);
-  //   }
-  // }, [window]);
-
-  // useEffect(() => {
-  //   if (width && width < 640) {
-  //     setShowHamburgerMenu(true);
-  //   } else {
-  //     setShowHamburgerMenu(false);
-  //   }
-  // }, [width]);
+  const [isWindowSmall] = useIsWindowSmall();
 
   const animateCenter = {
     initial: { translateX: 0 },
@@ -117,7 +89,7 @@ export default function Navbar({
   };
 
   return (
-    <nav className="bg-gradient-to-r from-[#DEECFC] via-[#E1F2FB] to-[#F1F9F9] flex items-center justify-between px-8 py-7 text-gray-500 h-14">
+    <nav className="bg-gradient-to-r from-[#DEECFC] via-[#E1F2FB] to-[#F1F9F9] flex items-center justify-between px-8 py-7 text-gray-500 h-14 relative z-50">
       <div className="flex">
         <LinkTo href="/">
           <motion.button
@@ -155,10 +127,10 @@ export default function Navbar({
           ) : null}
         </ul>
       </div>
-      <div className="flex items-center justify-center gap-4">
-        {!isWindowSmall ? (
-          <>
-            {!user ? (
+      {(() => {
+        if (!isWindowSmall) {
+          if (!user) {
+            return (
               <button
                 type="button"
                 className="text-md border rounded py-1 px-3 hover:bg-blurGray hover:border-2"
@@ -166,16 +138,21 @@ export default function Navbar({
               >
                 Login
               </button>
-            ) : (
-              <ProfileNavbar />
-            )}
-          </>
-        ) : (
-          <AnimatedButton className="w-9 h-9 mt-1" onClick={() => setShowHamburgerMenu(true)}>
+            );
+          }
+
+          return <ProfileNavbar />;
+        }
+
+        return (
+          <AnimatedButton
+            className="w-9 h-9 mt-1"
+            onClick={() => setShowHamburgerMenu(true)}
+          >
             <BiMenu size={34} color="black" />
           </AnimatedButton>
-        )}
-      </div>
+        );
+      })()}
     </nav>
   );
 }

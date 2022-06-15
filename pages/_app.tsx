@@ -29,7 +29,7 @@ import useAdminCheck from "../hooks/useAdminCheck";
 import useIsWindowSmall from "../hooks/useIsWindowSmall";
 
 // Components
-import Navbar from "../components/general/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import SideBarMain from "../components/SideBar/SideBarMain";
 import AuthMain from "../components/Auth/AuthMain";
 import PageProgress from "../components/general/PageProgress";
@@ -101,7 +101,6 @@ export default function MyApp({
 
   // For Navbar
   const [showAuth, setShowAuth] = useState(false);
-  const [isWindowSmall] = useIsWindowSmall();
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
 
   return (
@@ -166,7 +165,6 @@ export default function MyApp({
                     <Navbar
                       showAuth={showAuth}
                       setShowAuth={setShowAuth}
-                      isWindowSmall={isWindowSmall}
                       setShowHamburgerMenu={setShowHamburgerMenu}
                     />
                     <AnimatePresence exitBeforeEnter>
