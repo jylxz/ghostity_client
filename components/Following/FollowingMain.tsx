@@ -1,5 +1,5 @@
 // Libraries
-import React, { useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import axios from "axios";
@@ -107,14 +107,14 @@ export default function FollowingMain() {
       {followStreams.data && currentTab === "Live" ? (
         <>
           <GridWrapper colSize="normal">
-            {followStreams.data?.pages.map((group) => (
-              <>
+            {followStreams.data?.pages.map((group, i) => (
+              <Fragment key={i}>
                 {group.results.map((stream: Stream) => (
                   <motion.span layout key={stream.channel_id}>
                     <LivestreamCard key={stream.channel_id} stream={stream} />
                   </motion.span>
                 ))}
-              </>
+              </Fragment>
             ))}
           </GridWrapper>
           {followStreams.hasNextPage ? (
@@ -130,14 +130,14 @@ export default function FollowingMain() {
       {followProfiles.data && currentTab === "All" ? (
         <>
           <GridWrapper colSize="small">
-            {followProfiles.data.pages.map((group) => (
-              <>
+            {followProfiles.data.pages.map((group, i) => (
+              <Fragment key={i}>
                 {group.results.map((profile) => (
                   <motion.span layout="position" key={profile._id}>
                     <ProfileCard key={profile._id} profile={profile} size="normal"/>
                   </motion.span>
                 ))}
-              </>
+              </Fragment>
             ))}
           </GridWrapper>
           {followProfiles.hasNextPage ? (

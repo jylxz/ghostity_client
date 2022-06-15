@@ -1,6 +1,6 @@
 // Libraries
 import axios from "axios";
-import React, { useMemo, useState } from "react";
+import React, { Fragment, useMemo, useState } from "react";
 import { useQuery } from "react-query";
 
 // Icons
@@ -95,7 +95,7 @@ export default function OrganizationMembers({
   members: Member[];
 }) {
   const [currentBranch, setCurrentBranch] = useState(-1);
-  
+
   // Fetch Profiles
   const ids = members.map((member) => member.profile_id);
   const fetchProfiles = () =>
@@ -141,24 +141,29 @@ export default function OrganizationMembers({
       <div className="flex flex-wrap justify-center text-sm py-2">
         <button type="button" onClick={() => setCurrentBranch(-1)}>
           {currentBranch === -1 ? (
-            <span className="font-semibold">All</span>
+            <span className="font-semibold px-3">All</span>
           ) : (
-            <span className="text-gray-400">All</span>
+            <span className="text-gray-400 px-3">All</span>
           )}
         </button>
         {branches.map((branch) => (
-          <button
-            type="button"
-            key={branch.id}
-            onClick={() => setCurrentBranch(branch.id)}
-            className="before:content-['|'] before:px-2 text-gray-400"
-          >
-            {currentBranch === branch.id ? (
-              <span className="text-black font-semibold">{branch.name}</span>
-            ) : (
-              <span>{branch.name}</span>
-            )}
-          </button>
+          <>
+            <div className="before:content-['|'] before:px-1 text-gray-400" />
+            <button
+              type="button"
+              key={branch.id}
+              onClick={() => setCurrentBranch(branch.id)}
+              className="flex"
+            >
+              {currentBranch === branch.id ? (
+                <span className="text-black font-semibold px-1">
+                  {branch.name}
+                </span>
+              ) : (
+                <span className="text-gray-400 px-1">{branch.name}</span>
+              )}
+            </button>
+          </>
         ))}
       </div>
       <div className="self-end mt-5 mb-7">
@@ -172,14 +177,15 @@ export default function OrganizationMembers({
       </div>
       <GridWrapper colSize="small">
         {filteredMembers.map((member) => (
-          <ProfileCard
-            key={member._id}
-            profile={getProfile(member.profile_id, profiles.data)}
-            altName={member.alt_name}
-            language={member.language}
-            size="large"
-            subCount
-          />
+          <Fragment key={member._id}>
+            <ProfileCard
+              profile={getProfile(member.profile_id, profiles.data)}
+              altName={member.alt_name}
+              language={member.language}
+              size="large"
+              subCount
+            />
+          </Fragment>
         ))}
       </GridWrapper>
     </>
