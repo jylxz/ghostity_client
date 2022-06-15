@@ -129,7 +129,7 @@ function FollowButton({
       <motion.button
         layout
         initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1, transition: {delay: 0.8} }}
+        animate={{ opacity: 1, scale: 1, transition: { delay: 0.8 } }}
         className="absolute top-1 left-1 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
         onHoverStart={() => setShowFollowText(true)}
         onHoverEnd={() => setShowFollowText(false)}
@@ -214,18 +214,16 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
             width="352"
           />
         </a>
-        <AnimatePresence exitBeforeEnter>
-          <FollowButton
-            channel={stream.channel_name}
-            channelId={stream.channel_id}
-          />
-          <BlacklistButton stream={stream} />
-          <motion.span
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1, transition: {delay: 0.8} }}
-            className="absolute bottom-2.5 right-1 text-primary bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default"
-          >{`${stream.stream.viewers} viewers`}</motion.span>
-        </AnimatePresence>
+        <FollowButton
+          channel={stream.channel_name}
+          channelId={stream.channel_id}
+        />
+        <BlacklistButton stream={stream} />
+        <motion.span
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1, transition: { delay: 0.8 } }}
+          className="absolute bottom-2.5 right-1 text-primary bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default"
+        >{`${stream.stream.viewers} viewers`}</motion.span>
       </div>
       <CardContent className="grow py-2.5">
         <div>

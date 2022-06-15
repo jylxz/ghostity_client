@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import useWindowDimensions from "../../../hooks/useWindowDimensions";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 export default function SideBarFollowingItem({
   stream,

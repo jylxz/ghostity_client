@@ -1,5 +1,5 @@
 // Libraries
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import axios from "axios";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
@@ -62,13 +62,11 @@ export default function BrowseStreams() {
           <>
             <GridWrapper colSize="normal">
               {data.pages.map((group) => (
-                <>
-                  {group.results.map((stream: Stream) => (
+                  group.results.map((stream: Stream) => (
                     <motion.span layout="position" key={stream.channel_id}>
                       <LivestreamCard stream={stream} />
                     </motion.span>
-                  ))}
-                </>
+                  ))
               ))}
             </GridWrapper>
             {hasNextPage ? (

@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { IconType } from "react-icons";
 
-import LinkTo from "../../general/LinkTo";
+import LinkTo from "../general/LinkTo";
 
-import browseAnimations from "../animations/browseAnimations";
+import browseAnimations from "../Browse/animations/browseAnimations";
 
 export default function SideBarBrowseItem({
   item,

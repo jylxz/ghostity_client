@@ -50,15 +50,15 @@ export default function useHandleFilters() {
 
   const setFilters = (filter: Filter, filterValue: any) => {
     if (filter === "sort") {
-      return setSort(filterValue);
+      setSort(filterValue);
     }
 
     if (filter === "platform") {
-      return setPlatform(filterValue);
+      setPlatform(filterValue);
     }
 
     if (filter === "language") {
-      return setLanguage(filterValue);
+      setLanguage(filterValue);
     }
 
     if (filter === "exclude") {
@@ -70,7 +70,7 @@ export default function useHandleFilters() {
         excludeList.push(filterValue);
       }
 
-      return setExclude(excludeList);
+      setExclude(excludeList);
     }
   };
 
@@ -95,7 +95,7 @@ export default function useHandleFilters() {
       language,
       exclude,
     };
-  }, [setItem, sort, platform, language, exclude]);
+  }, [sort, platform, language, exclude]);
 
   const filterString = useMemo(() => {
     let queryFilterString: string = "";

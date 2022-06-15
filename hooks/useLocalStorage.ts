@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from "react";
 export default function useLocalStorage<T>(key: string, defaultValue: T) {
   const [item, setItem] = useState<T>();
   const hasWindow = typeof window !== "undefined"
-  const stringifiedItem = useMemo(() => JSON.stringify(item), [item]);
 
   useEffect(() => {
     if (hasWindow) {
@@ -19,8 +18,8 @@ export default function useLocalStorage<T>(key: string, defaultValue: T) {
   }, [hasWindow]);
 
   useEffect(() => {
-    if (item !== defaultValue) {
-      localStorage.setItem(key, stringifiedItem);
+    if (item && item !== defaultValue) {
+      localStorage.setItem(key, JSON.stringify(item));
     }
   }, [item]);
 

@@ -1,5 +1,5 @@
 // Libraries
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import Chip from "@mui/material/Chip";
 import FormControl from "@mui/material/FormControl";
@@ -24,6 +24,13 @@ export default function BrowseStreamsFilters({
   refetch: () => void;
 }) {
   const [showFilter, setShowFilter] = useState(false);
+  const [sort, setSort] = useState(filters.sort);
+
+  useEffect(() => {
+    if (filters.sort) {
+      setSort(filters.sort);
+    }
+  }, [filters]);
 
   return (
     <motion.div
@@ -37,6 +44,7 @@ export default function BrowseStreamsFilters({
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9 }}
+            transition={{duration: 0.1, type: "string"}}
             type="button"
             onClick={() => setShowFilter(!showFilter)}
             className="bg-slate-100 px-2 py-0.5 rounded h-full"
@@ -45,26 +53,27 @@ export default function BrowseStreamsFilters({
           </motion.button>
         </motion.div>
         <LayoutGroup>
-          <motion.div layout  className="flex items-center gap-2 z-20">
-            <motion.span layout>Sort by</motion.span>
-            <motion.span
-              layout="position"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 1 }}
-            >
-              <CustomSelect
-                value={filters.sort}
-                defaultValue="desc"
-                onChange={(e) => {
-                  setFilters("sort", e);
-                }}
-                className="bg-slate-100 text-gray-600 px-3 m-0"
+          {filters.sort ? (
+            <motion.div layout className="flex items-center gap-2 z-20">
+              <motion.span layout>Sort by</motion.span>
+              <motion.span
+                layout="position"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 1 }}
               >
-                <StyledOption value="desc">Viewers (High to Low)</StyledOption>
-                <StyledOption value="asc">Viewers (Low to High)</StyledOption>
-              </CustomSelect>
-            </motion.span>
-          </motion.div>
+                <CustomSelect
+                  value={filters.sort}
+                  onChange={(e) => setFilters("sort", e)}
+                  className="bg-slate-100 text-gray-600 px-3 m-0"
+                >
+                  <StyledOption value="desc">
+                    Viewers (High to Low)
+                  </StyledOption>
+                  <StyledOption value="asc">Viewers (Low to High)</StyledOption>
+                </CustomSelect>
+              </motion.span>
+            </motion.div>
+          ) : null}
         </LayoutGroup>
       </div>
       <AnimatePresence exitBeforeEnter>
@@ -260,4 +269,3 @@ export default function BrowseStreamsFilters({
     </motion.div>
   );
 }
-

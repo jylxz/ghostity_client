@@ -9,15 +9,15 @@ import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined
 import { BsHeart } from "react-icons/bs";
 import { CgGames } from "react-icons/cg";
 import { BiSearchAlt, BiArrowToLeft, BiArrowFromLeft } from "react-icons/bi";
-import GhostityIcon from "../../../public/images/Ghostity-svg.svg";
+import GhostityIcon from "../../public/images/Ghostity-svg.svg";
 
 // Contexts
-import UserContext from "../../../context/UserContext";
-import UserFollowContext from "../../../context/UserFollowContext";
+import UserContext from "../../context/UserContext";
+import UserFollowContext from "../../context/UserFollowContext";
 
 // Hooks
-import useResponsiveBrowseBar from "../../../hooks/useResponsiveBrowseBar";
-import useWindowDimensions from "../../../hooks/useWindowDimensions";
+import useResponsiveBrowseBar from "../../hooks/useResponsiveBrowseBar";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 // Components
 import SideBarBrowseItem from "./SideBarBrowseItem";
@@ -25,7 +25,7 @@ import SideBarButtons from "./SideBarButtons";
 import SideBarFollowingItem from "./SideBarFollowingItem";
 
 // Animations
-import browseAnimations from "../animations/browseAnimations";
+import browseAnimations from "../Browse/animations/browseAnimations";
 
 export default function SideBarMain() {
   const animations = browseAnimations.sidebar;

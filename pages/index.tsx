@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export default function Home({ logos, stats }: OrganizationLogos & Stats) {
   return (
-    <motion.div key="home">
+    <motion.div className="overflow-hidden">
       <Head>
         <title>Ghostity | Home</title>
       </Head>

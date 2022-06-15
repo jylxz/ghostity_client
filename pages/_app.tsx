@@ -6,7 +6,7 @@ import { useState, useEffect, useMemo } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useRouter } from "next/router";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, MotionConfig } from "framer-motion";
 import {
   createTheme,
   StyledEngineProvider,
@@ -25,19 +25,21 @@ import { auth, db } from "../firebase/clientApp";
 
 // Hooks
 import useSystemColor from "../hooks/useSystemColor";
-import useAdminCheck from "../hooks/useAdminCheck"
+import useAdminCheck from "../hooks/useAdminCheck";
+import useIsWindowSmall from "../hooks/useIsWindowSmall";
 
 // Components
 import Navbar from "../components/general/Navbar";
-import SideBarMain from "../components/Browse/SideBar/SideBarMain";
+import SideBarMain from "../components/SideBar/SideBarMain";
 import AuthMain from "../components/Auth/AuthMain";
 import PageProgress from "../components/general/PageProgress";
+import BlacklistModal from "../components/general/BlacklistModal";
+import HamburgerNavMenu from "../components/general/HamburgerNavMenu";
 
 // Contexts
 import UserContext from "../context/UserContext";
 import UserFollowContext from "../context/UserFollowContext";
 import AdminContext from "../context/AdminContext";
-import BlacklistModal from "../components/general/BlacklistModal";
 import BlacklistContext from "../context/BlacklistContext";
 
 export default function MyApp({
@@ -83,17 +85,24 @@ export default function MyApp({
   );
 
   // Admin check
-  const [admin] = useAdminCheck(user?.uid)
+  const [admin] = useAdminCheck(user?.uid);
 
   // Blacklisting channels
-  const [showBlacklistModal, setShowBlacklistModal] = useState(false)
+  const [showBlacklistModal, setShowBlacklistModal] = useState(false);
   const [blacklistChannel, setBlacklistChannel] = useState<Stream | null>(null);
-  const blacklistContextValue = useMemo(() => ({setShowBlacklistModal, setBlacklistChannel}), [])
+  const blacklistContextValue = useMemo(
+    () => ({ setShowBlacklistModal, setBlacklistChannel }),
+    []
+  );
 
   // Etc.
   const router = useRouter();
-  const [showAuth, setShowAuth] = useState(false);
   const [systemColor] = useSystemColor();
+
+  // For Navbar
+  const [showAuth, setShowAuth] = useState(false);
+  const [isWindowSmall] = useIsWindowSmall();
+  const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
 
   return (
     <>
@@ -149,43 +158,54 @@ export default function MyApp({
       <QueryClientProvider client={queryClient}>
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
-            <UserContext.Provider value={user || null}>
-              <UserFollowContext.Provider value={followsData || null}>
-                <AdminContext.Provider value={admin}>
-                  <PageProgress />
-                  <Navbar showAuth={showAuth} setShowAuth={setShowAuth} />
-                  <AnimatePresence exitBeforeEnter>
-                    {showAuth ? (
-                      <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
-                    ) : null}
-                  {showBlacklistModal ? (
-                    <BlacklistModal
-                    channel={blacklistChannel}
-                    setBlacklistChannel={setBlacklistChannel}
-                    setShowBlacklistModal={setShowBlacklistModal}
+            {/* <MotionConfig reducedMotion="always"> */}
+              <UserContext.Provider value={user || null}>
+                <UserFollowContext.Provider value={followsData || null}>
+                  <AdminContext.Provider value={admin}>
+                    <PageProgress />
+                    <Navbar
+                      showAuth={showAuth}
+                      setShowAuth={setShowAuth}
+                      isWindowSmall={isWindowSmall}
+                      setShowHamburgerMenu={setShowHamburgerMenu}
                     />
-                    ) : null}
+                    <AnimatePresence exitBeforeEnter>
+                      {showAuth ? (
+                        <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
+                      ) : null}
+                      {showHamburgerMenu ? (
+                        <HamburgerNavMenu
+                          setShowHamburgerMenu={setShowHamburgerMenu}
+                          setShowAuth={setShowAuth}
+                        />
+                      ) : null}
+                      {showBlacklistModal ? (
+                        <BlacklistModal
+                          channel={blacklistChannel}
+                          setBlacklistChannel={setBlacklistChannel}
+                          setShowBlacklistModal={setShowBlacklistModal}
+                        />
+                      ) : null}
                     </AnimatePresence>
-                  <BlacklistContext.Provider value={blacklistContextValue}>
-                    <main>
-                      {router.route.includes("browse") ||
-                      router.route.includes("search") ? (
-                        <div className="flex">
-                          <AnimatePresence exitBeforeEnter>
+                    <BlacklistContext.Provider value={blacklistContextValue}>
+                      <main>
+                        {router.route.includes("browse") ||
+                        router.route.includes("search") ? (
+                          <div className="flex">
                             <SideBarMain />
-                          </AnimatePresence>
-                          <div className="flex-1">
-                            <Component {...pageProps} />
+                            <div className="flex-1">
+                              <Component {...pageProps} />
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        <Component {...pageProps} />
-                      )}
-                    </main>
-                  </BlacklistContext.Provider>
-                </AdminContext.Provider>
-              </UserFollowContext.Provider>
-            </UserContext.Provider>
+                        ) : (
+                          <Component {...pageProps} />
+                        )}
+                      </main>
+                    </BlacklistContext.Provider>
+                  </AdminContext.Provider>
+                </UserFollowContext.Provider>
+              </UserContext.Provider>
+            {/* </MotionConfig> */}
           </ThemeProvider>
         </StyledEngineProvider>
         <ReactQueryDevtools />

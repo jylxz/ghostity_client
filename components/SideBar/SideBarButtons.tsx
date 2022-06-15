@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import LinkTo from "../../general/LinkTo";
+import LinkTo from "../general/LinkTo";
 
 export default function SideBarButtons({
   length,

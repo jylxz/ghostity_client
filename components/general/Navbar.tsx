@@ -1,5 +1,6 @@
 // Libraries
 import React, {
+  Fragment,
   Dispatch,
   SetStateAction,
   useContext,
@@ -9,7 +10,13 @@ import React, {
 import { useRouter } from "next/router";
 import { motion, AnimateSharedLayout } from "framer-motion";
 
+// Icons
+import { GiHamburgerMenu } from "react-icons/gi";
+import { BiMenu } from "react-icons/bi";
+import { AiOutlineHome, AiOutlineQuestion } from "react-icons/ai";
+
 // Components
+import { IconType } from "react-icons";
 import LinkTo from "./LinkTo";
 import ProfileNavbar from "../Profile/ProfileNavbar";
 
@@ -18,6 +25,8 @@ import UserContext from "../../context/UserContext";
 
 // Images
 import GhostityLogo from "../../public/images/Ghostity-svg.svg";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+import AnimatedButton from "./AnimatedButton";
 
 function NavbarButton({ text, href }: { text: string; href: string }) {
   const router = useRouter();
@@ -38,7 +47,8 @@ function NavbarButton({ text, href }: { text: string; href: string }) {
         <div className="relative">
           {text}
           {router.route === href ||
-          ((router.route.includes("browse") || router.route === "/search") && text === "Browse") ? (
+          ((router.route.includes("browse") || router.route === "/search") &&
+            text === "Browse") ? (
             <motion.div
               initial={false}
               layoutId="underline-navbar"
@@ -55,11 +65,32 @@ function NavbarButton({ text, href }: { text: string; href: string }) {
 export default function Navbar({
   showAuth,
   setShowAuth,
+  isWindowSmall,
+  setShowHamburgerMenu,
 }: {
   showAuth: boolean;
   setShowAuth: Dispatch<SetStateAction<boolean>>;
+  isWindowSmal: boolean;
+  setShowHamburgerMenu: Dispatch<SetStateAction<boolean>>;
 }) {
   const user = useContext(UserContext);
+  // const [showHamburgerMenu, setShowHamburgerMenu] = useState<boolean>(false);
+  // const [width, setWidth] = useState<number>();
+  // const window = useWindowDimensions();
+
+  // useEffect(() => {
+  //   if (window && window.width) {
+  //     setWidth(window.width);
+  //   }
+  // }, [window]);
+
+  // useEffect(() => {
+  //   if (width && width < 640) {
+  //     setShowHamburgerMenu(true);
+  //   } else {
+  //     setShowHamburgerMenu(false);
+  //   }
+  // }, [width]);
 
   const animateCenter = {
     initial: { translateX: 0 },
@@ -109,28 +140,40 @@ export default function Navbar({
           </motion.button>
         </LinkTo>
         <ul className="flex gap-2 items-center before:content-['|'] before:text-3xl before:mx-4">
-          <li>
-            <NavbarButton text="Home" href="/" />
-          </li>
-          <li>
-            <NavbarButton text="Browse" href="/browse" />
-          </li>
-          <li>
-            <NavbarButton text="FAQ" href="/faq" />
-          </li>
+          {!isWindowSmall ? (
+            <>
+              <li>
+                <NavbarButton text="Home" href="/" />
+              </li>
+              <li>
+                <NavbarButton text="Browse" href="/browse" />
+              </li>
+              <li>
+                <NavbarButton text="FAQ" href="/faq" />
+              </li>
+            </>
+          ) : null}
         </ul>
       </div>
-      <div className="flex items-center gap-4">
-        {!user ? (
-          <button
-            type="button"
-            className="text-md border rounded py-1 px-3 hover:bg-blurGray hover:border-2"
-            onClick={() => setShowAuth(!showAuth)}
-          >
-            Login
-          </button>
+      <div className="flex items-center justify-center gap-4">
+        {!isWindowSmall ? (
+          <>
+            {!user ? (
+              <button
+                type="button"
+                className="text-md border rounded py-1 px-3 hover:bg-blurGray hover:border-2"
+                onClick={() => setShowAuth(!showAuth)}
+              >
+                Login
+              </button>
+            ) : (
+              <ProfileNavbar />
+            )}
+          </>
         ) : (
-          <ProfileNavbar />
+          <AnimatedButton className="w-9 h-9 mt-1" onClick={() => setShowHamburgerMenu(true)}>
+            <BiMenu size={34} color="black" />
+          </AnimatedButton>
         )}
       </div>
     </nav>
