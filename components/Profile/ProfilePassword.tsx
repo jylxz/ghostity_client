@@ -9,7 +9,8 @@ import { MdEdit } from "react-icons/md";
 import { GoCheck } from "react-icons/go";
 
 // Firebase
-import { auth } from "../../firebase/clientApp";
+import { auth } from "../../firebase/ghostityFirebase";
+// import { auth } from "../../firebase/ghostityDevFirebase";
 
 // Context
 import UserContext from "../../context/UserContext";
@@ -23,25 +24,24 @@ export default function ProfilePassword() {
   const [disable, setDisable] = useState(true);
 
   const [currentPassword, setCurrentPassword] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [currentPasswordMessage, setCurrentPasswordMessage] = useState("");
+  const [currentPasswordError, setCurrentPasswordError] = useState(false);
 
   const [newPassword, setNewPassword] = useState("");
-  const [passwordMessage, setPasswordMessage] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
-
-  const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  const [confirmMessage, setConfirmMessage] = useState(
+  const [newPasswordMessage, setNewPasswordMessage] = useState(
     "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
   );
-  const [confirmError, setConfirmError] = useState(false);
+  const [newPasswordError, setNewPasswordError] = useState(false);
 
-  const [updatePassword] = useUpdatePassword(auth());
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+  const [updatePassword] = useUpdatePassword(auth);
 
   const validateCurrentPassword = async () => {
-    setPasswordError(false);
-    setPasswordMessage("");
+    setCurrentPasswordError(false);
+    setCurrentPasswordMessage("");
 
-    const { currentUser } = auth();
+    const { currentUser } = auth;
 
     if (currentUser && currentUser.email) {
       const credential = EmailAuthProvider.credential(
@@ -53,8 +53,8 @@ export default function ProfilePassword() {
         .then(() => true)
         .catch((error) => {
           if (error.code === "auth/wrong-password") {
-            setPasswordError(true);
-            setPasswordMessage("Wrong password");
+            setCurrentPasswordError(true);
+            setCurrentPasswordMessage("Wrong password");
             return false;
           }
 
@@ -66,36 +66,45 @@ export default function ProfilePassword() {
   };
 
   const validatePassword = () => {
-    setConfirmMessage("");
-    setConfirmError(false);
+    setCurrentPasswordError(false);
+    setCurrentPasswordMessage("");
+
+    setNewPasswordError(false);
+    setNewPasswordMessage("");
+
+    if (currentPassword.length === 0) {
+      setCurrentPasswordError(true);
+      setCurrentPasswordMessage("Please enter your current password");
+      return false;
+    }
 
     if (newPassword !== confirmNewPassword) {
-      setConfirmMessage("Passwords do not match");
-      setConfirmError(true);
+      setNewPasswordMessage("Passwords do not match");
+      setNewPasswordError(true);
       return false;
     }
 
     if (newPassword.length < 8) {
-      setConfirmMessage("Password is not at least 8 or more characters");
-      setConfirmError(true);
+      setNewPasswordMessage("Password is not at least 8 or more characters");
+      setNewPasswordError(true);
       return false;
     }
 
     if (newPassword.search(/[a-z]/) < 0) {
-      setConfirmMessage("Password does not have a lowercase letter");
-      setConfirmError(true);
+      setNewPasswordMessage("Password does not have a lowercase letter");
+      setNewPasswordError(true);
       return false;
     }
 
     if (newPassword.search(/[A-Z]/) < 0) {
-      setConfirmMessage("Password does not have a uppercase letter");
-      setConfirmError(true);
+      setNewPasswordMessage("Password does not have a uppercase letter");
+      setNewPasswordError(true);
       return false;
     }
 
     if (newPassword.search(/[0-9]/) < 0) {
-      setConfirmMessage("Password does not have a number");
-      setConfirmError(true);
+      setNewPasswordMessage("Password does not have a number");
+      setNewPasswordError(true);
       return false;
     }
 
@@ -104,34 +113,35 @@ export default function ProfilePassword() {
 
   const handleCancel = () => {
     setEdit(false);
+
     setCurrentPassword("");
-    setPasswordMessage("");
-    setPasswordError(false);
+    setCurrentPasswordMessage("");
+    setCurrentPasswordError(false);
+
     setNewPassword("");
-    setConfirmNewPassword("");
-    setConfirmMessage(
+    setNewPasswordMessage(
       "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
     );
-    setConfirmError(false);
+    setNewPasswordError(false);
+
+    setConfirmNewPassword("");
   };
 
   const handleChange = async () => {
-    setSuccessMessage("");
+    setCurrentPasswordMessage("");
 
-    if ((await validateCurrentPassword()) && validatePassword()) {
+    if (validatePassword() && (await validateCurrentPassword())) {
       return updatePassword(newPassword)
         .then(() => {
           setEdit(false);
           handleCancel();
-          return setSuccessMessage("Successfully changed password!");
+          return setCurrentPasswordMessage("Successfully changed password!");
         })
         .catch(() => {
-          setPasswordError(true);
-          setPasswordMessage("Password change failed!");
+          setCurrentPasswordError(true);
+          return setCurrentPasswordMessage("Password change failed!");
         });
     }
-
-    return setSuccessMessage("Password change failed!");
   };
 
   useEffect(() => {
@@ -154,7 +164,7 @@ export default function ProfilePassword() {
             type="password"
             value="password"
             label="Password"
-            helperText={successMessage}
+            helperText={currentPasswordMessage}
             size="small"
             variant="standard"
             className="flex-1"
@@ -187,8 +197,8 @@ export default function ProfilePassword() {
             value={currentPassword}
             placeholder="Enter current password"
             setValue={setCurrentPassword}
-            error={passwordError}
-            message={passwordMessage}
+            error={currentPasswordError}
+            message={currentPasswordMessage}
             autoComplete="current-password"
           />
           <ProfileUpdateField
@@ -197,8 +207,8 @@ export default function ProfilePassword() {
             value={newPassword}
             placeholder="Enter new password"
             setValue={setNewPassword}
-            error={confirmError}
-            message={confirmMessage}
+            error={newPasswordError}
+            message={newPasswordMessage}
             autoComplete="new-password"
           />
           <ProfileUpdateField
@@ -207,7 +217,7 @@ export default function ProfilePassword() {
             value={confirmNewPassword}
             placeholder="Confirm new password"
             setValue={setConfirmNewPassword}
-            error={confirmError}
+            error={newPasswordError}
             message=""
             autoComplete="new-password"
           />

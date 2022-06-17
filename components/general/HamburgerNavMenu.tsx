@@ -7,7 +7,8 @@ import {
   AiOutlineLogin,
 } from "react-icons/ai";
 import { signOut } from "firebase/auth";
-import { auth } from "../../firebase/clientApp";
+import {auth} from "../../firebase/ghostityFirebase"
+// import { auth } from "../../firebase/ghostityDevFirebase";
 import GhostityLogo from "../../public/images/Ghostity-svg.svg";
 import AnimatedButton from "./AnimatedButton";
 import DarkenBackgroundWrapper from "./DarkenBackgroundWrapper";
@@ -94,7 +95,7 @@ export default function HamburgerNavMenu({
             {user ? (
               <AnimatedButton
                 className="flex items-center gap-2"
-                onClick={() => signOut(auth())}
+                onClick={() => signOut(auth)}
               >
                 Log Out
                 <div className="border-l-2 border-gray-300 pl-3">

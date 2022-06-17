@@ -6,8 +6,10 @@ import { AiOutlineMail } from "react-icons/ai";
 import { BsArrowLeftShort } from "react-icons/bs";
 
 import LoadingButton from "../general/LoadingButton";
-import { auth } from "../../firebase/clientApp";
 import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+
+import { auth } from "../../firebase/ghostityFirebase";
+// import { auth } from "../../firebase/ghostityDevFirebase";
 
 export default function AuthForgotPassword({
   setCurrentTab,
@@ -17,9 +19,8 @@ export default function AuthForgotPassword({
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(
-    auth()
-  );
+  const [sendPasswordResetEmail, sending, error] =
+    useSendPasswordResetEmail(auth);
 
   const resetPassword = async () => {
     setMessage("");

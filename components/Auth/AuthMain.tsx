@@ -10,7 +10,13 @@ import { Box, TextField } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 import { RiLockPasswordLine } from "react-icons/Ri";
 import { AiOutlineMail } from "react-icons/ai";
-import { auth } from "../../firebase/clientApp";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  sendEmailVerification,
+} from "firebase/auth";
+import { auth } from "../../firebase/ghostityFirebase";
+// import { auth } from "../../firebase/ghostityDevFirebase";
 import GhostityIcon from "../../public/images/Ghostity-svg.svg";
 import googleG from "../../public/images/googleG.png";
 import SignUp from "./AuthSignUp";
@@ -27,10 +33,9 @@ export default function AuthMain({
   const [password, setPassword] = useState("");
   const [currentTab, setCurrentTab] = useState("login");
   const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth());
-  const [signInWithGoogle, userGoogle, loadingGoogle] = useSignInWithGoogle(
-    auth()
-  );
+    useSignInWithEmailAndPassword(auth);
+  const [signInWithGoogle, userGoogle, loadingGoogle] =
+    useSignInWithGoogle(auth);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
     if (event.key === "Enter") signInWithEmailAndPassword(email, password);
@@ -51,7 +56,6 @@ export default function AuthMain({
       tabIndex={0}
       className="fixed bg-gray-600/[.6] top-0 w-full h-full flex justify-center items-center z-50 "
       onClick={() => setShowAuth(false)}
-      // onKeyDown={(e) => handleKeyDown(e.key)}
     >
       <motion.div
         key="login"
@@ -89,7 +93,10 @@ export default function AuthMain({
                   <GhostityIcon />
                 </div>
                 <h1 className="text-xl">Sign in to ghostity</h1>
-                <form onKeyPress={(event) => handleKeyDown(event) } className="flex flex-col gap-2">
+                <form
+                  onKeyPress={(event) => handleKeyDown(event)}
+                  className="flex flex-col gap-2"
+                >
                   <div className="flex items-center">
                     <AiOutlineMail className="w-4 h-4 mr-3 mt-3" />
                     <TextField
@@ -154,7 +161,7 @@ export default function AuthMain({
                   )}
                 </div>
                 <button
-                type="button"
+                  type="button"
                   onClick={() => setCurrentTab("forgot")}
                   className="text-sm text-gray-600"
                 >

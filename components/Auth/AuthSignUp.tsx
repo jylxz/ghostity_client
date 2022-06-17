@@ -8,11 +8,13 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { RiLockPasswordLine, RiLockPasswordFill } from "react-icons/Ri";
 import { AiOutlineMail } from "react-icons/ai";
-import LoadingButton from "../general/LoadingButton";
-import { auth } from "../../firebase/clientApp";
-import GhostityIcon from "../../public/images/Ghostity-svg.svg";
 import { motion } from "framer-motion";
 import { BsArrowLeftShort } from "react-icons/bs";
+import LoadingButton from "../general/LoadingButton";
+
+import { auth } from "../../firebase/ghostityFirebase";
+// import { auth } from "../../firebase/ghostityDevFirebase";
+import GhostityIcon from "../../public/images/Ghostity-svg.svg";
 
 export default function SignUp({
   setShowAuth,
@@ -27,9 +29,9 @@ export default function SignUp({
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [signUpError, setSignUpError] = useState("");
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth(), { sendEmailVerification: true });
-  const [updateProfile, updating, updateError] = useUpdateProfile(auth());
-    const [updateEmail, emailUpdating, emailError] = useUpdateEmail(auth());
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const [updateEmail, emailUpdating, emailError] = useUpdateEmail(auth);
 
   const createUser = async () => {
     if (
@@ -58,17 +60,16 @@ export default function SignUp({
     if (error) return setSignUpError("Error creating account!");
 
     setSignUpError("");
-    await updateProfile({ displayName });
+    await updateProfile({ displayName: displayName || "An Exploring Ghost" });
 
     return setShowAuth(false);
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLFormElement>) => {
     if (event.key === "Enter") {
-      createUser()
+      createUser();
     }
-  }
-  
+  };
 
   return (
     <motion.form

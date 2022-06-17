@@ -21,7 +21,8 @@ import defaultTheme from "tailwindcss/defaultTheme";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { doc } from "firebase/firestore";
-import { auth, db } from "../firebase/clientApp";
+import { auth, db } from "../firebase/ghostityFirebase";
+// import { auth, db } from "../firebase/ghostityDevFirebase";
 
 // Hooks
 import useSystemColor from "../hooks/useSystemColor";
@@ -72,10 +73,10 @@ export default function MyApp({
   });
 
   // Firebase User Authentication
-  const [user] = useAuthState(auth());
+  const [user] = useAuthState(auth);
 
   // Firestore
-  const [follows] = useDocument(user ? doc(db(), "follow", user.uid) : null);
+  const [follows] = useDocument(user ? doc(db, "follow", user.uid) : null);
   const followsData = useMemo(
     () => ({
       follows,

@@ -126,7 +126,7 @@ function Footer() {
                 variants={animations.textVariant2}
                 className="text-lg mb-1 text-black"
               >
-                Contact
+                Contacts
               </motion.h2>
               <div className="flex flex-col gap-1">
                 <FooterItem>

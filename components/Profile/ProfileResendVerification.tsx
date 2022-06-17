@@ -1,43 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSendEmailVerification } from "react-firebase-hooks/auth";
 import { RiErrorWarningFill } from "react-icons/Ri";
-import { auth } from "../../firebase/clientApp";
+import { auth } from "../../firebase/ghostityFirebase";
+// import { auth } from "../../firebase/ghostityDevFirebase";
 
 export default function ProfileResendVerification() {
-  const [sendEmailVerification, sending, error] = useSendEmailVerification(
-    auth()
-  );
+  const [sendEmailVerification] = useSendEmailVerification(auth);
   const [showVerificationSent, setShowVerificationSent] = useState(false);
 
-  const resendVerification = async () => {
-    await sendEmailVerification();
-
-    if (!error && !sending) {
-      setShowVerificationSent(true);
-    }
-  };
+  const resendVerification = async () =>
+    sendEmailVerification()
+      .then(() => setShowVerificationSent(true))
+      .catch(() =>
+        // console.log(error)
+        // console.log(err)
+        setShowVerificationSent(false)
+      );
 
   return (
-    <div className="text-sm flex flex-col justify-center items-center gap-1">
+    <div className="text-sm flex flex-col justify-center items-center gap-3">
       <div className="flex gap-3 items-center">
         <div>
           <RiErrorWarningFill size={24} />
         </div>
-        <div className="flex flex-col">
+        <p className="max-w-[75ch]">
+          Your account has not been verified. Editing your profile and account
+          will be disabled until you are verified.{" "}
           <span>
-            Your account has not been verified. Editing your profile will be
-            disabled until you are verified.{" "}
-            <span>
-              <button
-                type="button"
-                className="font-semibold"
-                onClick={() => resendVerification()}
-              >
-                Resend Verification
-              </button>
-            </span>
+            <button
+              type="button"
+              className="font-semibold"
+              onClick={() => resendVerification()}
+            >
+              Resend Verification
+            </button>
           </span>
-        </div>
+        </p>
       </div>
       {showVerificationSent ? (
         <span className="text-green-500 self-center">

@@ -5,7 +5,8 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import UserContext from "../../context/UserContext";
-import { auth } from "../../firebase/clientApp";
+import { auth } from "../../firebase/ghostityFirebase";
+// import { auth } from "../../firebase/ghostityDevFirebase";
 import UserProfileCard from "../general/UserProfileCard";
 import HamburgerNavMenuButton from "../general/HamburgerNavMenuButton";
 
@@ -46,7 +47,7 @@ export default function ProfileNavbar() {
             <div className="flex flex-col items-end px-4 py-2 text">
               <HamburgerNavMenuButton
                 title="Logout"
-                onClick={() => signOut(auth())}
+                onClick={() => signOut(auth)}
                 icon={<AiOutlineLogout />}
               />
             </div>

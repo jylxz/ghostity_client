@@ -12,7 +12,8 @@ import { MdEdit } from "react-icons/md";
 import { GoCheck } from "react-icons/go";
 
 // Firebase
-import { auth } from "../../firebase/clientApp";
+import { auth } from "../../firebase/ghostityFirebase";
+// import { auth } from "../../firebase/ghostityDevFirebase";
 
 // Context
 import UserContext from "../../context/UserContext";
@@ -25,7 +26,7 @@ export default function ProfileEmail() {
   const [edit, setEdit] = useState(false);
   const [disable, setDisable] = useState(true);
 
-  const [email, setEmail] = useState(user?.email);
+  const [email, setEmail] = useState<string | null | undefined>(user?.email || user?.providerData[0].email || "");
   const [emailError, setEmailError] = useState(false);
   const [helperText, setHelperText] = useState("");
 
@@ -40,11 +41,17 @@ export default function ProfileEmail() {
     setPasswordError(false);
 
     if (email?.length === 0) {
+      setEmailError(true)
       return setHelperText("Email cannot be empty!");
     }
 
+    if (password.length === 0) {
+      setPasswordError(true)
+      return setPasswordHelperText("Please enter your password")
+    }
+
     if (user && user.emailVerified) {
-      const { currentUser } = auth();
+      const { currentUser } = auth;
 
       if (currentUser && email && currentUser.email) {
         const hideEmail = () => {
@@ -70,6 +77,8 @@ export default function ProfileEmail() {
                 );
               })
               .catch((err: FirebaseError) => {
+                // console.log(err)
+
                 setEmailError(true);
                 if (err.code === "auth/email-already-in-use") {
                   return setHelperText("Email already in use!");
@@ -80,6 +89,7 @@ export default function ProfileEmail() {
               })
           )
           .catch((error: FirebaseError) => {
+            // console.log(error)
             if (error.code === "auth/wrong-password") {
               setPasswordError(true);
               return setPasswordHelperText("Wrong password!");

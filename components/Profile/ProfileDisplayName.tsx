@@ -13,35 +13,45 @@ import UserContext from "../../context/UserContext";
 import ProfileUpdateField from "./ProfileUpdateField";
 
 // Firebase
-import { auth } from "../../firebase/clientApp";
+import { auth } from "../../firebase/ghostityFirebase";
+// import { auth } from "../../firebase/ghostityDevFirebase";
 
 export default function ProfileFields() {
   const user = useContext(UserContext);
   const [edit, setEdit] = useState(false);
   const [disable, setDisable] = useState(true);
+
   const [displayName, setDisplayName] = useState(user?.displayName);
   const [helperText, setHelperText] = useState("");
+  const [error, setError] = useState(false);
 
-  const [updateProfile] = useUpdateProfile(auth());
+  const [updateProfile] = useUpdateProfile(auth);
 
   const handleUpdateDisplayName = async () => {
+    setError(false);
     setHelperText("");
 
     if (displayName?.length === 0) {
+      setError(true);
       return setHelperText("Display name cannot be empty!");
     }
 
-    if (user && user.emailVerified) {
+    if (
+      user &&
+      (user.emailVerified || user.providerData[0].providerId === "google.com")
+    ) {
       return updateProfile({ displayName })
         .then(() => {
           setEdit(false);
           setHelperText("Display name successfully updated!");
         })
-        .catch(() =>
-          setHelperText("Display name cannot be updated at this moment.")
-        );
+        .catch(() => {
+          setError(true);
+          setHelperText("Display name cannot be updated at this moment.");
+        });
     }
 
+    setError(true);
     return setHelperText("Account has not been verified");
   };
 
@@ -53,9 +63,9 @@ export default function ProfileFields() {
 
   useEffect(() => {
     setDisable(
-      user?.providerData[0].providerId === "google.com" || !user?.emailVerified
+      !user?.emailVerified && user?.providerData[0].providerId !== "google.com"
     );
-  }, [edit, user]);
+  }, [user]);
 
   return (
     <form className={`flex-1 flex ${!edit ? "flex-row" : "flex-col"} gap-2`}>
@@ -64,6 +74,7 @@ export default function ProfileFields() {
         type="text"
         value={displayName}
         setValue={setDisplayName}
+        error={error}
         message={helperText}
         disabled={!edit}
       />
@@ -72,7 +83,10 @@ export default function ProfileFields() {
           type="button"
           className="px-2"
           disabled={disable}
-          onClick={() => setEdit(true)}
+          onClick={() => {
+            setEdit(true);
+            setHelperText("");
+          }}
         >
           <MdEdit size={20} color={disable ? "grey" : "black"} />
         </button>
