@@ -8,14 +8,14 @@ export default function UserProfileCard({closeParent}: {closeParent: Dispatch<Se
     const follows = useContext(UserFollowContext);
 
   return (
-    <div className="bg-white h-36 rounded flex flex-col">
-      <div className="flex-1 flex flex-col justify-center items-center  text-sm">
-        <div className="w-14 h-14 rounded-full border" />
-        <span className="line-clamp-1">
+    <div className="bg-white h-40 rounded flex flex-col">
+      <div className="flex-1 w-full flex-col justify-center items-center text-sm px-2 py-2">
+        <div className="w-14 h-14 rounded-full border mx-auto mb-2" />
+        <span className="line-clamp-1 text-center">
           {user?.displayName || "A Wandering Ghost"}
         </span>
         {user ? (
-          <span className="text-sm text-gray-500">{`Following: ${follows?.channels?.length}`}</span>
+          <div className="text-sm text-gray-500 text-center">{`Following: ${follows?.channels?.length}`}</div>
         ) : null}
       </div>
       <button type="button" className=" text-sm text-center py-1.5 border-t" onClick={() => closeParent(false)}>

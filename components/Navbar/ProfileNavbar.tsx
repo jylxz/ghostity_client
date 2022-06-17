@@ -40,7 +40,7 @@ export default function ProfileNavbar() {
               translateX: 0,
             }}
             exit={{ translateX: 300 }}
-            className="absolute top-11 -right-8 z-40 w-64 bg-slate-100 text-black px-2 py-3 rounded-bl"
+            className="absolute top-11 -right-8 z-40 w-64 bg-slate-100 text-black px-2 py-3 rounded-bl border-l-2 border-b-2 border-white"
           >
             <UserProfileCard closeParent={setShow} />
             <div className="flex flex-col items-end px-4 py-2 text">

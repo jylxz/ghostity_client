@@ -16,7 +16,7 @@ export default function BackgroundWrapper({
   if (!nextImage)
     return (
       <motion.div layout="size" className="w-full relative">
-        <motion.div layout className="absolute h-full w-full z-0">
+        <motion.div layout className="absolute h-full w-full z-0 ">
           {image ? (
             <motion.img
               layout
@@ -33,7 +33,7 @@ export default function BackgroundWrapper({
 
   return (
     <motion.div layout className="relative">
-      <div className="absolute h-full w-full z-0">
+      <div className="absolute h-full w-full z-0 bg-gray-100">
         {image ? (
           <Image
             src={image}
