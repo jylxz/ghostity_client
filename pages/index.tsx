@@ -25,6 +25,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export default function Home({ logos, stats }: OrganizationLogos & Stats) {
+
   return (
     <motion.div className="overflow-hidden">
       <Head>
@@ -35,7 +36,7 @@ export default function Home({ logos, stats }: OrganizationLogos & Stats) {
       <HomeLive />
       <HomeBrowse />
       <HomeStats stats={stats} />
-      <HomeHelp /> 
+      <HomeHelp />
       <Footer />
     </motion.div>
   );

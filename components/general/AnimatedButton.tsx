@@ -13,6 +13,7 @@ export default function AnimatedButton({
   return (
     <motion.button
       layout
+      type="button"
       // whileHover={{ scale: 1.05 }}
       // whileTap={{ scale: 0.95 }}
       className={className}

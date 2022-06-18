@@ -65,6 +65,8 @@ export default function ProfilePassword() {
     return false;
   };
 
+  useEffect(() => {});
+
   const validatePassword = () => {
     setCurrentPasswordError(false);
     setCurrentPasswordMessage("");

@@ -27,7 +27,6 @@ import { auth, db } from "../firebase/ghostityFirebase";
 // Hooks
 import useSystemColor from "../hooks/useSystemColor";
 import useAdminCheck from "../hooks/useAdminCheck";
-import useIsWindowSmall from "../hooks/useIsWindowSmall";
 
 // Components
 import Navbar from "../components/Navbar/Navbar";
@@ -36,6 +35,9 @@ import AuthMain from "../components/Auth/AuthMain";
 import PageProgress from "../components/general/PageProgress";
 import BlacklistModal from "../components/general/BlacklistModal";
 import HamburgerNavMenu from "../components/general/HamburgerNavMenu";
+import AuthVerifyEmail from "../components/Auth/AuthVerifyEmail";
+import AuthUpdateEmail from "../components/Auth/AuthUpdateEmail";
+import AuthPasswordResetMessage from "../components/Auth/AuthPasswordResetMessage";
 
 // Contexts
 import UserContext from "../context/UserContext";
@@ -53,7 +55,7 @@ export default function MyApp({
   // MUI Theme
   const theme = createTheme({
     typography: {
-      fontFamily: ['"Quicksand"', ...defaultTheme.fontFamily.sans].join(","),
+      fontFamily: ['"Quicksand"', ...defaultTheme!.fontFamily!.sans].join(","),
     },
     palette: {
       primary: {
@@ -98,6 +100,7 @@ export default function MyApp({
 
   // Etc.
   const router = useRouter();
+  const { query } = router;
   const [systemColor] = useSystemColor();
 
   // For Navbar
@@ -159,51 +162,59 @@ export default function MyApp({
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
             {/* <MotionConfig reducedMotion="always"> */}
-              <UserContext.Provider value={user || null}>
-                <UserFollowContext.Provider value={followsData || null}>
-                  <AdminContext.Provider value={admin}>
-                    <PageProgress />
-                    <Navbar
-                      showAuth={showAuth}
-                      setShowAuth={setShowAuth}
-                      setShowHamburgerMenu={setShowHamburgerMenu}
-                    />
-                    <AnimatePresence exitBeforeEnter>
-                      {showAuth ? (
-                        <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
-                      ) : null}
-                      {showHamburgerMenu ? (
-                        <HamburgerNavMenu
-                          setShowHamburgerMenu={setShowHamburgerMenu}
-                          setShowAuth={setShowAuth}
-                        />
-                      ) : null}
-                      {showBlacklistModal ? (
-                        <BlacklistModal
-                          channel={blacklistChannel}
-                          setBlacklistChannel={setBlacklistChannel}
-                          setShowBlacklistModal={setShowBlacklistModal}
-                        />
-                      ) : null}
-                    </AnimatePresence>
-                    <BlacklistContext.Provider value={blacklistContextValue}>
-                      <main>
-                        {router.route.includes("browse") ||
-                        router.route.includes("search") ? (
-                          <div className="flex">
-                            <SideBarMain />
-                            <div className="flex-1">
-                              <Component {...pageProps} />
-                            </div>
+            <UserContext.Provider value={user || null}>
+              <UserFollowContext.Provider value={followsData || null}>
+                <AdminContext.Provider value={admin}>
+                  <PageProgress />
+                  {router.route === "/" && query.mode === "verifyEmail" ? (
+                    <AuthVerifyEmail />
+                  ) : null}
+                  {router.route === "/" &&
+                  query.mode === "verifyAndChangeEmail" ? (
+                    <AuthUpdateEmail />
+                  ) : null}
+                  {query.resetPassword === "true" ? <AuthPasswordResetMessage /> : null}
+                  <Navbar
+                    showAuth={showAuth}
+                    setShowAuth={setShowAuth}
+                    setShowHamburgerMenu={setShowHamburgerMenu}
+                  />
+                  <AnimatePresence exitBeforeEnter>
+                    {showAuth ? (
+                      <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
+                    ) : null}
+                    {showHamburgerMenu ? (
+                      <HamburgerNavMenu
+                        setShowHamburgerMenu={setShowHamburgerMenu}
+                        setShowAuth={setShowAuth}
+                      />
+                    ) : null}
+                    {showBlacklistModal ? (
+                      <BlacklistModal
+                        channel={blacklistChannel}
+                        setBlacklistChannel={setBlacklistChannel}
+                        setShowBlacklistModal={setShowBlacklistModal}
+                      />
+                    ) : null}
+                  </AnimatePresence>
+                  <BlacklistContext.Provider value={blacklistContextValue}>
+                    <main>
+                      {router.route.includes("browse") ||
+                      router.route.includes("search") ? (
+                        <div className="flex">
+                          <SideBarMain />
+                          <div className="flex-1">
+                            <Component {...pageProps} />
                           </div>
-                        ) : (
-                          <Component {...pageProps} />
-                        )}
-                      </main>
-                    </BlacklistContext.Provider>
-                  </AdminContext.Provider>
-                </UserFollowContext.Provider>
-              </UserContext.Provider>
+                        </div>
+                      ) : (
+                        <Component {...pageProps} />
+                      )}
+                    </main>
+                  </BlacklistContext.Provider>
+                </AdminContext.Provider>
+              </UserFollowContext.Provider>
+            </UserContext.Provider>
             {/* </MotionConfig> */}
           </ThemeProvider>
         </StyledEngineProvider>

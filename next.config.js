@@ -37,4 +37,20 @@ module.exports = {
 
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        has: [
+          {
+            type: "query",
+            key: "mode",
+            value: "resetPassword"
+          }
+        ],
+        permanent: false,
+        destination: "/resetPassword"
+      },
+    ]
+  }
 };

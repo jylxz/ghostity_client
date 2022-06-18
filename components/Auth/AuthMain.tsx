@@ -6,15 +6,11 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import Image from "next/image";
-import { Box, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 import { RiLockPasswordLine } from "react-icons/Ri";
 import { AiOutlineMail } from "react-icons/ai";
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  sendEmailVerification,
-} from "firebase/auth";
+
 import { auth } from "../../firebase/ghostityFirebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
 import GhostityIcon from "../../public/images/Ghostity-svg.svg";
@@ -38,7 +34,8 @@ export default function AuthMain({
     useSignInWithGoogle(auth);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
-    if (event.key === "Enter") signInWithEmailAndPassword(email, password);
+    if (event.key === "Enter") return signInWithEmailAndPassword(email, password);
+
   };
 
   useEffect(() => {
@@ -104,7 +101,9 @@ export default function AuthMain({
                       label="Email"
                       size="small"
                       variant="standard"
+                      autoComplete="username email"
                       value={email}
+                      error={!!error}
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
@@ -115,15 +114,13 @@ export default function AuthMain({
                       label="Password"
                       size="small"
                       variant="standard"
+                      autoComplete="current-password"
                       value={password}
+                      error={!!error}
+                      helperText={error ? "Invalid email/password" : null}
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
-                  {error ? (
-                    <span className="text-sm text-red-400 text-center">
-                      Invalid email/password!
-                    </span>
-                  ) : null}
                 </form>
                 <div className="my-3">
                   {loading || loadingGoogle ? (
