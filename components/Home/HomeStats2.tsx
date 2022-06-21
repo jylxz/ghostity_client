@@ -9,13 +9,14 @@ import {
   Tooltip,
   Legend,
   Filler,
-  SubTitle
+  SubTitle,
 } from "chart.js";
 import CableOutlinedIcon from "@mui/icons-material/CableOutlined";
 import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
 
 import { useQuery } from "react-query";
 import axios from "axios";
+import { motion } from "framer-motion";
 import StatsLive from "../Stats/StatsLive";
 import SectionWrapper from "../general/SectionWrapper";
 import HomeSectionHeading from "../general/HomeSectionHeading";
@@ -23,6 +24,7 @@ import StatsWatching from "../Stats/StatsWatching";
 import StatsTotal from "../Stats/StatsTotal";
 import AnimatedButton from "../general/AnimatedButton";
 import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+import { homeStatsAnimations } from "./animations/homeAnimations";
 
 ChartJS.register(
   CategoryScale,
@@ -39,6 +41,7 @@ ChartJS.register(
 ChartJS.defaults.font.family = "Quicksand";
 
 export default function HomeStats2() {
+  const { buttonContainer, buttons } = homeStatsAnimations;
   const [currentTab, setCurrentTab] = useState("watching");
   const fetchLiveStats = () =>
     axios
@@ -80,8 +83,16 @@ export default function HomeStats2() {
               <StatsTotal stats={totalStats.data} />
             ) : null}
           </div>
-          <div className="flex justify-center gap-4 flex-wrap">
-            <AnimatedButton
+          <motion.div
+            variants={buttonContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="flex justify-center gap-4 flex-wrap"
+          >
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              variants={buttons}
               onClick={() => setCurrentTab("watching")}
               className="flex items-center gap-2 bg-primary px-2 py-1.5 rounded"
             >
@@ -92,8 +103,10 @@ export default function HomeStats2() {
                   watchingStats?.data.slice(-1)[0].current_watching
                 } Weebs)`}</span>
               </span>
-            </AnimatedButton>
-            <AnimatedButton
+            </motion.button>
+            <motion.button
+              variants={buttons}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setCurrentTab("live")}
               className="flex items-center gap-2 bg-secondary px-2 py-1.5 rounded"
             >
@@ -104,8 +117,10 @@ export default function HomeStats2() {
                   liveStats?.data.slice(-1)[0].current_live
                 } Channels)`}</span>
               </span>
-            </AnimatedButton>
-            <AnimatedButton
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              variants={buttons}
               onClick={() => setCurrentTab("total")}
               className="flex items-center gap-2 bg-secondary2 px-2 py-1.5 rounded"
             >
@@ -118,8 +133,8 @@ export default function HomeStats2() {
                   totalStats?.data.slice(-1)[0].current_total
                 } V-Tubers)`}</span>
               </span>
-            </AnimatedButton>
-          </div>
+            </motion.button>
+          </motion.div>
         </>
       ) : null}
     </SectionWrapper>

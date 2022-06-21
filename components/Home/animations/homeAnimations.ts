@@ -126,3 +126,29 @@ const homeAnimations = {
 };
 
 export default homeAnimations;
+
+export const homeStatsAnimations = {
+  buttonContainer: {
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.5
+      }
+    }
+  },
+  buttons: {
+    initial: {
+      translateY: 70,
+      opacity: 0
+    },
+    animate: {
+      translateY: 0,
+      opacity: 1
+    },
+
+  }
+}
