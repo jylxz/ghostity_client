@@ -22,9 +22,9 @@ export default function HomeWelcome() {
           initial="initial"
           whileInView="animate"
           viewport={{once: true}}
-          className="rounded max-w-[75ch]"
+          className="rounded max-w-[75ch] text-center sm:text-left"
         >
-          <motion.h2
+          <motion.h1
             variants={animations.textVariant}
             className="text-5xl lg:text-6xl font-medium mb-8"
           >
@@ -36,10 +36,10 @@ export default function HomeWelcome() {
               ghostity
             </motion.span>{" "}
             !
-          </motion.h2>
+          </motion.h1>
           <motion.p
             variants={animations.textVariant}
-            className="lg:text-lg text-gray-500 mb-6"
+            className="text-sm lg:text-base 2xl:text-lg text-gray-500 mb-6"
           >
             A comprehensive (not exhaustive!) directory for V-Tubers! Keep up
             with your favorite V-Tubers from Hololive or Nijisanji, or even

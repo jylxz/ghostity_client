@@ -85,6 +85,7 @@ export default function StatsLive({ stats }: { stats: LiveStat[] }) {
   });
 
   useEffect(() => {
+    const liveStats = stats.slice().reverse()
     const chart = chartRef.current;
 
     if (!chart) {
@@ -92,40 +93,42 @@ export default function StatsLive({ stats }: { stats: LiveStat[] }) {
     }
 
     const data: ChartData<"line"> = {
-      labels: stats.map((stat) => format(new Date(stat.createdAt), "p")),
+      labels: liveStats.map((stat) =>
+        format(new Date(stat.createdAt), "p | MMM d")
+      ),
       datasets: [
         {
-          label: `Live Channels (${stats.slice(-1)[0].current_live})`,
-          data: stats.map((stat) => stat.current_live) || [0],
+          label: `Live Channels (${liveStats.slice(-1)[0].current_live})`,
+          data: liveStats.map((stat) => stat.current_live) || [0],
           borderColor: "#DEECFC",
           backgroundColor: createGradient(chart.ctx),
           pointBackgroundColor: "#DEECFC",
           lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 3,
+          pointRadius: 2,
         },
         {
-          label: `Youtube (${stats.slice(-1)[0].current_youtube_live})`,
-          data: stats.map((stat) => stat.current_youtube_live) || [0],
+          label: `Youtube (${liveStats.slice(-1)[0].current_youtube_live})`,
+          data: liveStats.map((stat) => stat.current_youtube_live) || [0],
           borderColor: "#FF0000",
           backgroundColor: createYoutubeGradient(chart.ctx),
           pointBackgroundColor: "#FF0000",
           lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 3,
+          pointRadius: 2,
         },
         {
-          label: `Twitch (${stats.slice(-1)[0].current_twitch_live})`,
-          data: stats.map((stat) => stat.current_twitch_live) || [0],
+          label: `Twitch (${liveStats.slice(-1)[0].current_twitch_live})`,
+          data: liveStats.map((stat) => stat.current_twitch_live) || [0],
           borderColor: "#6441a5",
           backgroundColor: createTwitchGradient(chart.ctx),
           pointBackgroundColor: "#6441a5",
           lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 3,
+          pointRadius: 2,
         },
       ],
     };

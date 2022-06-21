@@ -72,7 +72,7 @@ export default function HomeStats2() {
       <HomeSectionHeading heading="Ghostity Stats" />
       {liveStats.data && watchingStats.data && totalStats.data ? (
         <>
-          <div>
+          <div className="select-none">
             {currentTab === "live" ? (
               <StatsLive stats={liveStats.data} />
             ) : null}
@@ -100,7 +100,7 @@ export default function HomeStats2() {
               <span className="flex items-center gap-1">
                 Watching{" "}
                 <span className="text-sm text-gray-400">{`(${
-                  watchingStats?.data.slice(-1)[0].current_watching
+                  watchingStats?.data[0].current_watching
                 } Weebs)`}</span>
               </span>
             </motion.button>
@@ -114,7 +114,7 @@ export default function HomeStats2() {
               <span className="flex items-center gap-1">
                 Live{" "}
                 <span className="text-sm text-gray-400">{`(${
-                  liveStats?.data.slice(-1)[0].current_live
+                  liveStats?.data[0].current_live
                 } Channels)`}</span>
               </span>
             </motion.button>
@@ -130,7 +130,7 @@ export default function HomeStats2() {
               <span className="flex items-center gap-1">
                 Total{" "}
                 <span className="text-sm text-gray-400">{`(${
-                  totalStats?.data.slice(-1)[0].current_total
+                  totalStats?.data[0].current_total
                 } V-Tubers)`}</span>
               </span>
             </motion.button>

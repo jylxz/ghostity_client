@@ -3,7 +3,7 @@ import {motion} from "framer-motion"
 
 export default function HomeSectionHeading({heading}: {heading: string}) {
   return (
-    <motion.div
+    <motion.h1
       initial={{ translateX: -300, opacity: 0 }}
       whileInView={{ translateX: 0, opacity: 1 }}
       viewport={{ once: true }}
@@ -11,6 +11,6 @@ export default function HomeSectionHeading({heading}: {heading: string}) {
       className="text-2xl md:text-4xl mb-10 font-thin"
     >
       {heading}
-    </motion.div>
+    </motion.h1>
   );
 }

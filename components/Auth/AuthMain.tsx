@@ -60,7 +60,7 @@ export default function AuthMain({
         animate={{ translateY: 0, opacity: 1 }}
         exit={{ translateY: -200, opacity: 0 }}
         transition={{ ease: "easeOut", duration: 0.6 }}
-        className="min-w-[24rem] w-1/4 max-w-[26rem] max-h-[40rem] h-4/5 bg-slate-50 rounded flex flex-col items-center gap-4 py-4 px-6 overflow-x-hidden overflow-y-auto"
+        className="min-w-[20rem] w-1/4 max-w-[26rem] max-h-[40rem] bg-slate-50 rounded flex flex-col items-center gap-4 py-4 px-6 overflow-x-hidden overflow-y-auto"
         onClick={(e: { stopPropagation: () => void }) => e.stopPropagation()}
       >
         <button

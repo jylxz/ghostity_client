@@ -43,7 +43,7 @@ const homeAnimations = {
 
   browse: {
     ghostVariant: {
-      initial: { translateX: -200, opacity: 0 },
+      initial: { translateX: -400, opacity: 0 },
       animate: { translateX: 0, opacity: 1 },
     },
     ghostVariant2: {

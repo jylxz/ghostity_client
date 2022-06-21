@@ -1,7 +1,7 @@
 // Libraries
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import { useRouter } from "next/router";
-import { motion } from "framer-motion";
+import { AnimationProps, motion } from "framer-motion";
 
 // Icons
 import { BiMenu } from "react-icons/bi";
@@ -13,10 +13,11 @@ import ProfileNavbar from "./ProfileNavbar";
 // Contexts
 import UserContext from "../../context/UserContext";
 
+// Hooks
+import useIsWindowSmall from "../../hooks/useIsWindowSmall";
+
 // Images
 import GhostityLogo from "../../public/images/Ghostity-svg.svg";
-import AnimatedButton from "../general/AnimatedButton";
-import useIsWindowSmall from "../../hooks/useIsWindowSmall";
 
 function NavbarButton({ text, href }: { text: string; href: string }) {
   const router = useRouter();
@@ -64,7 +65,7 @@ export default function Navbar({
   const user = useContext(UserContext);
   const [isWindowSmall] = useIsWindowSmall();
 
-  const animateCenter = {
+  const animateCenter: AnimationProps["variants"] = {
     initial: { translateX: 0 },
     animate: {
       translateX: 70,
@@ -72,7 +73,7 @@ export default function Navbar({
     },
   };
 
-  const wiggle = {
+  const wiggle: AnimationProps["variants"] = {
     initial: { rotate: 0 },
     animate: {
       rotate: [0, 10, -10, 10],
@@ -80,7 +81,7 @@ export default function Navbar({
     },
   };
 
-  const fadeOut = {
+  const fadeOut: AnimationProps["variants"] = {
     initial: { opacity: 1 },
     animate: {
       opacity: 0,
@@ -89,7 +90,7 @@ export default function Navbar({
   };
 
   return (
-    <nav className="bg-gradient-to-r from-[#DEECFC] via-[#E1F2FB] to-[#F1F9F9] flex items-center justify-between px-8 py-7 text-gray-500 h-14 relative z-50">
+    <nav className="bg-gradient-to-r from-primary via-secondary to-secondary2 flex items-center justify-between px-8 py-7 text-gray-500 h-14 relative z-50">
       <div className="flex">
         <LinkTo href="/">
           <motion.button
@@ -112,32 +113,32 @@ export default function Navbar({
           </motion.button>
         </LinkTo>
         <ul className="flex gap-2 items-center before:content-['|'] before:text-3xl before:mx-4">
-          {!isWindowSmall ? (
-            <>
-              <li>
-                <NavbarButton text="Home" href="/" />
-              </li>
-              <li>
-                <NavbarButton text="Browse" href="/browse" />
-              </li>
-              <li>
-                <NavbarButton text="FAQ" href="/faq" />
-              </li>
-            </>
-          ) : null}
+          <div className="hidden sm:flex">
+            <li>
+              <NavbarButton text="Home" href="/" />
+            </li>
+            <li>
+              <NavbarButton text="Browse" href="/browse" />
+            </li>
+            <li>
+              <NavbarButton text="FAQ" href="/faq" />
+            </li>
+          </div>
         </ul>
       </div>
       {(() => {
         if (!isWindowSmall) {
           if (!user) {
             return (
-              <button
+              <motion.button
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
                 type="button"
-                className="text-md border rounded py-1 px-3 hover:bg-blurGray hover:border-2"
+                className="hidden sm:block text-md border rounded py-1 px-3 hover:bg-blurGray hover:border-2"
                 onClick={() => setShowAuth(!showAuth)}
               >
                 Login
-              </button>
+              </motion.button>
             );
           }
 
@@ -145,12 +146,14 @@ export default function Navbar({
         }
 
         return (
-          <AnimatedButton
+          <motion.button
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
             className="w-9 h-9 mt-1"
             onClick={() => setShowHamburgerMenu(true)}
           >
             <BiMenu size={34} color="black" />
-          </AnimatedButton>
+          </motion.button>
         );
       })()}
     </nav>

@@ -18,10 +18,14 @@ export default function UserProfileCard({
         {/* <div className="w-14 h-14 rounded-full border mx-auto mb-2" /> */}
         <div className="flex justify-center mb-2">
           <Image
-            src={user?.photoURL}
+            src={
+              user?.photoURL ||
+              "https://res.cloudinary.com/ghostity/image/upload/v1655696219/profile-icons/ghostity-pfp-blue_cp5ctv.png"
+            }
             width={56}
             height={56}
             className="rounded-full "
+            alt="Ghostity profile image"
           />
         </div>
         <span className="line-clamp-1 text-center">

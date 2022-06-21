@@ -41,8 +41,8 @@ function BrowseCardAnimation({
     animate: {
       opacity: 1,
       transition: staggerOrder
-        ? { duration: 1, delay: staggerOrder * 0.4, delayChildren: 2 }
-        : { duration: 1, delayChildren: 2 },
+        ? { delay: staggerOrder * 0.2, delayChildren: 1 }
+        : { delayChildren: 1 },
     },
   };
 

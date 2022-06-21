@@ -9,7 +9,7 @@ const options: ChartOptions<"line"> = {
     x: {
       ticks: {
         callback(val, index) {
-          return index % 2 === 0 ? this.getLabelForValue(val as number) : "";
+          return index % 3 === 0 ? this.getLabelForValue(val as number) : "";
         },
       },
       grid: {
@@ -27,7 +27,7 @@ const options: ChartOptions<"line"> = {
     },
     title: {
       display: true,
-      text: "Total V-Tubers",
+      text: "Total V-Tubers (On Ghostity)",
     },
     subtitle: {
       display: true,
@@ -84,49 +84,50 @@ export default function StatsTotal({ stats }: { stats: TotalStat[] }) {
   const [chartData, setChartData] = useState<ChartData<"line">>({
     datasets: [],
   });
-
+  
   useEffect(() => {
+    const totalStats = stats.slice().reverse()
     const chart = chartRef.current;
-
+    
     if (!chart) {
       return;
     }
-
+    
     const data: ChartData<"line"> = {
-      labels: stats.map((stat) => format(new Date(stat.createdAt), "p")),
+      labels: totalStats.map((stat) => format(new Date(stat.createdAt), "p | MMM d")),
       datasets: [
         {
-          label: `V-Tubers (${stats.slice(-1)[0].current_total})`,
-          data: stats.map((stat) => stat.current_total) || [0],
+          label: `V-Tubers (${totalStats.slice(-1)[0].current_total})`,
+          data: totalStats.map((stat) => stat.current_total) || [0],
           borderColor: "#DEECFC",
           backgroundColor: createGradient(chart.ctx),
           pointBackgroundColor: "#DEECFC",
           lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 3,
+          pointRadius: 2,
         },
         {
-          label: `Youtube (${stats.slice(-1)[0].current_youtube})`,
-          data: stats.map((stat) => stat.current_youtube) || [0],
+          label: `Youtube (${totalStats.slice(-1)[0].current_youtube})`,
+          data: totalStats.map((stat) => stat.current_youtube) || [0],
           borderColor: "#FF0000",
           backgroundColor: createYoutubeGradient(chart.ctx),
           pointBackgroundColor: "#FF0000",
           lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 3,
+          pointRadius: 2,
         },
         {
-          label: `Twitch (${stats.slice(-1)[0].current_twitch})`,
-          data: stats.map((stat) => stat.current_twitch) || [0],
+          label: `Twitch (${totalStats.slice(-1)[0].current_twitch})`,
+          data: totalStats.map((stat) => stat.current_twitch) || [0],
           borderColor: "#6441a5",
           backgroundColor: createTwitchGradient(chart.ctx),
           pointBackgroundColor: "#6441a5",
           lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 3,
+          pointRadius: 2,
         },
       ],
     };

@@ -54,7 +54,7 @@ function FooterItem({ children }: { children: React.ReactNode }) {
 function Footer() {
   return (
     <footer className="pt-16 pb-28 bg-gradient-to-r from-primary via-secondary to-secondary2 flex justify-center items-center">
-      <div className="sm:flex gap-10 sm:gap-20">
+      <div className="sm:flex gap-10 sm:gap-20 px-6">
         <div className="mb-10 sm:mb-0">
           <div className="flex gap-2 items-center text-2xl border-b border-black pb-2 mb-2">
             <div>

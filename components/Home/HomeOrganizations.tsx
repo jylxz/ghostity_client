@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 
 // Libraries
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Autoplay, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,8 +11,20 @@ import LinkTo from "../general/LinkTo";
 
 // CSS
 import "swiper/css";
+import useIsWindowSmall from "../../hooks/useIsWindowSmall";
 
 export default function HomeOrganizations({ logos }: OrganizationLogos) {
+  const [isWindowSmall] = useIsWindowSmall()
+  const [slides, setSlide] = useState(5)
+
+  useEffect(() => {
+    if (isWindowSmall) {
+      setSlide(3)
+    } else {
+      setSlide(5)
+    }
+  }, [isWindowSmall])
+
   return (
     <Swiper
       modules={[FreeMode, Autoplay]}
@@ -22,7 +34,7 @@ export default function HomeOrganizations({ logos }: OrganizationLogos) {
         pauseOnMouseEnter: true,
       }}
       speed={5000}
-      slidesPerView={5}
+      slidesPerView={slides}
       spaceBetween={30}
       loop
       freeMode

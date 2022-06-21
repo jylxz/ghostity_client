@@ -103,9 +103,20 @@ export default function MyApp({
   const { query } = router;
   const [systemColor] = useSystemColor();
 
-  // For Navbar
+  // For Navbar and Login
   const [showAuth, setShowAuth] = useState(false);
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
+
+  useEffect(() => {
+    if (showAuth || showHamburgerMenu) {
+      document.body.style.overflowY = "hidden"
+      document.body.style.position = "fixed"
+      document.body.style.width = "100%"
+    } else {
+      document.body.style.overflowY = "scroll"
+      document.body.style.position = "unset";
+    }
+  }, [showAuth, showHamburgerMenu])
 
   return (
     <>
@@ -198,7 +209,7 @@ export default function MyApp({
                     ) : null}
                   </AnimatePresence>
                   <BlacklistContext.Provider value={blacklistContextValue}>
-                    <main>
+                    <main className={showAuth ? "overflow-hidden": ""}>
                       {router.route.includes("browse") ||
                       router.route.includes("search") ? (
                         <div className="flex">
@@ -218,7 +229,7 @@ export default function MyApp({
             {/* </MotionConfig> */}
           </ThemeProvider>
         </StyledEngineProvider>
-        <ReactQueryDevtools />
+        {/* <ReactQueryDevtools /> */}
       </QueryClientProvider>
     </>
   );

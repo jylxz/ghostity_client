@@ -66,8 +66,9 @@ export default function StatsWatching({ stats }: { stats: WatchingStat[] }) {
   const [chartData, setChartData] = useState<ChartData<"line">>({
     datasets: [],
   });
-
+  
   useEffect(() => {
+    const watchingStats = stats.slice().reverse()
     const chart = chartRef.current;
 
     if (!chart || !stats) {
@@ -75,18 +76,20 @@ export default function StatsWatching({ stats }: { stats: WatchingStat[] }) {
     }
 
     const data: ChartData<"line"> = {
-      labels: stats.map((stat) => format(new Date(stat.createdAt), "p")),
+      labels: watchingStats.map((stat) =>
+        format(new Date(stat.createdAt), "p | MMM d")
+      ),
       datasets: [
         {
-          label: `Weebs (${stats.slice(-1)[0].current_watching})`,
-          data: stats.map((stat) => stat.current_watching) || [0],
+          label: `Weebs (${watchingStats.slice(-1)[0].current_watching})`,
+          data: watchingStats.map((stat) => stat.current_watching) || [0],
           borderColor: "#DEECFC",
           backgroundColor: createGradient(chart.ctx),
           pointBackgroundColor: "#DEECFC",
           lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 3,
+          pointRadius: 2,
         },
       ],
     };

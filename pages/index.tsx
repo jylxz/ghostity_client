@@ -22,17 +22,24 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export default function Home({ logos }: OrganizationLogos) {
-
   return (
     <motion.div className="overflow-hidden">
       <Head>
         <title>Ghostity | Home</title>
+        <meta
+          name="description"
+          content="A comprehensive (not exhaustive!) directory for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
+        />
+        <meta 
+          name="keywords"
+          content="V-Tubers, VTubers, virtual youtubers, Hololive, Nijisanji, VShojo, VSPO, Twitch, Youtube, V-Tuber directory, livestreams, games"
+        />
       </Head>
       <HomeWelcome />
       <HomeOrganizations logos={logos} />
       <HomeLive />
       <HomeBrowse />
-      <HomeStats2/>
+      <HomeStats2 />
       <HomeHelp />
       <Footer />
     </motion.div>
