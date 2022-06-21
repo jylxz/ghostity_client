@@ -27,6 +27,7 @@ module.exports = {
       "holostars.hololivepro.com",
       "neo-porte.jp",
       "lh3.googleusercontent.com",
+      "res.cloudinary.com",
     ],
   },
   webpack(config) {
@@ -45,12 +46,12 @@ module.exports = {
           {
             type: "query",
             key: "mode",
-            value: "resetPassword"
-          }
+            value: "resetPassword",
+          },
         ],
         permanent: false,
-        destination: "/resetPassword"
+        destination: "/resetPassword",
       },
-    ]
-  }
+    ];
+  },
 };

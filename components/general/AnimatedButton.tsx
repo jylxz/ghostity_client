@@ -8,7 +8,7 @@ export default function AnimatedButton({
 }: {
   children: React.ReactNode;
   className?: string;
-  onClick?: () => void
+  onClick?: () => void | Promise<void>
 }) {
   return (
     <motion.button

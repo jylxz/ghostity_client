@@ -16,10 +16,10 @@ export default function DarkenBackgroundWrapper({
       transition={{ duration: 0.5 }}
       role="menu"
       tabIndex={0}
-      className="fixed bg-gray-600/[.6] top-0 z-50 h-screen w-screen"
+      className="fixed bg-gray-600/[.6] top-0 left-0 z-50 h-full w-full"
       onClick={onClick}
     >
-      <motion.div onClick={(e) => e.stopPropagation()} className="relative">{children}</motion.div>
+      <motion.div onClick={(e) => e.stopPropagation()} className="">{children}</motion.div>
     </motion.div>
   );
 }

@@ -74,7 +74,7 @@ declare global {
     social_media: {
       platform: string;
       url: string;
-      tag?: string
+      tag?: string;
     }[];
     branches: {
       name: string;
@@ -146,5 +146,41 @@ declare global {
     storyline: string;
     viewers: number;
     streams: number;
+  }
+
+  interface LiveStat {
+    current_live: number;
+    previous_live: number;
+    difference: number;
+    current_youtube_live: number;
+    previous_youtube_live: number;
+    difference_youtube: number;
+    current_twitch_live: number;
+    previous_twitch_live: number;
+    difference_twitch: number;
+    updatedAt: Date;
+    createdAt: Date;
+  }
+
+  interface WatchingStat {
+    current_watching: number;
+    previous_watching: number;
+    difference: number;
+    updatedAt: Date;
+    createdAt: Date;
+  }
+
+  interface TotalStat {
+    current_total: number;
+    previous_total: number;
+    difference: number;
+    current_twitch: number;
+    previous_twitch: number;
+    difference_twitch: number;
+    current_youtube: number;
+    previous_youtube: number;
+    difference_youtube: number;
+    updatedAt: Date;
+    createdAt: Date;
   }
 }

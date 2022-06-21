@@ -5,12 +5,12 @@ import { GetStaticProps } from "next";
 
 // Components
 import HomeWelcome from "../components/Home/HomeWelcome";
-import HomeStats from "../components/Home/HomeStats";
 import Footer from "../components/general/Footer";
 import HomeLive from "../components/Home/HomeLive";
 import HomeOrganizations from "../components/Home/HomeOrganizations";
 import HomeBrowse from "../components/Home/HomeBrowse";
 import HomeHelp from "../components/Home/HomeHelp";
+import HomeStats2 from "../components/Home/HomeStats2";
 
 export const getStaticProps: GetStaticProps = async () => {
   const fetchLogos = await fetch(
@@ -18,13 +18,10 @@ export const getStaticProps: GetStaticProps = async () => {
   );
   const logos = await fetchLogos.json();
 
-  const fetchStats = await fetch("https://api.ghostity.com/stats");
-  const stats = await fetchStats.json();
-
-  return { props: { logos, stats }, revalidate: 6000 };
+  return { props: { logos }, revalidate: 6000 };
 };
 
-export default function Home({ logos, stats }: OrganizationLogos & Stats) {
+export default function Home({ logos }: OrganizationLogos) {
 
   return (
     <motion.div className="overflow-hidden">
@@ -35,7 +32,7 @@ export default function Home({ logos, stats }: OrganizationLogos & Stats) {
       <HomeOrganizations logos={logos} />
       <HomeLive />
       <HomeBrowse />
-      <HomeStats stats={stats} />
+      <HomeStats2/>
       <HomeHelp />
       <Footer />
     </motion.div>

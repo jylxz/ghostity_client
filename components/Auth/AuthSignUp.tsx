@@ -15,6 +15,8 @@ import LoadingButton from "../general/LoadingButton";
 import { auth } from "../../firebase/ghostityFirebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
 import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+import useRandomProfileIcon from "../../hooks/useRandomProfileIcon";
+import useValidatePassword from "../../hooks/useValidatePassword";
 
 export default function SignUp({
   setShowAuth,
@@ -28,8 +30,14 @@ export default function SignUp({
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [signUpError, setSignUpError] = useState("");
+  const [validatePassword, valid, validateError] = useValidatePassword(
+    password,
+    passwordConfirm
+  );
+
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+  const [profileLink] = useRandomProfileIcon();
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const [updateEmail, emailUpdating, emailError] = useUpdateEmail(auth);
 
@@ -41,11 +49,33 @@ export default function SignUp({
     )
       return setSignUpError("All required fields have not been filled!");
 
-    if (password.length < 8)
-      return setSignUpError("Password not at least 8 characters!");
+    if (validatePassword()) {
+      console.log(profileLink)
+      await createUserWithEmailAndPassword(email, password);
 
-    if (password !== passwordConfirm)
-      return setSignUpError("Passwords does not match!");
+      if (error?.code === "auth/invalid-email")
+        return setSignUpError("Invalid email!");
+
+      if (error?.code === "auth/email-already-in-use")
+        return setSignUpError("Account already created with email!");
+
+      if (error) return setSignUpError("Error creating account!");
+
+      setSignUpError("");
+      await updateProfile({
+        displayName: displayName || "An Exploring Ghost",
+        photoURL: profileLink,
+      });
+
+      return setShowAuth(false);
+    }
+    return setSignUpError(validateError);
+
+    // if (password.length < 8)
+    //   return setSignUpError("Password not at least 8 characters!");
+
+    // if (password !== passwordConfirm)
+    //   return setSignUpError("Passwords does not match!");
 
     setSignUpError("");
 
@@ -60,7 +90,10 @@ export default function SignUp({
     if (error) return setSignUpError("Error creating account!");
 
     setSignUpError("");
-    await updateProfile({ displayName: displayName || "An Exploring Ghost" });
+    await updateProfile({
+      displayName: displayName || "An Exploring Ghost",
+      photoURL: profileLink,
+    });
 
     return setShowAuth(false);
   };
@@ -113,6 +146,7 @@ export default function SignUp({
             label="Email"
             size="small"
             variant="standard"
+            autoComplete="username email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -126,6 +160,7 @@ export default function SignUp({
               label="Password"
               size="small"
               variant="standard"
+              autoComplete="new-password"
               value={password}
               helperText="Minimum 8 characters"
               onChange={(e) => setPassword(e.target.value)}
@@ -139,6 +174,7 @@ export default function SignUp({
               label="Confirm Password"
               size="small"
               variant="standard"
+              autoComplete="new-password"
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
             />

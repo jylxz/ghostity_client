@@ -212,6 +212,7 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
             alt={`${stream.channel_name}'s stream thumbnail`}
             height="198"
             width="352"
+            priority
           />
         </a>
         <FollowButton
