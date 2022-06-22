@@ -31,6 +31,7 @@ function ChannelPic({ stream }: { stream: Stream }) {
         >
           <Image
             src={stream.channel_img}
+            priority="true"
             height="24"
             width="24"
             alt={`${stream.channel_name}'s profile img`}

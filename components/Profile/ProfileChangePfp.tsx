@@ -39,7 +39,7 @@ export default function ProfileChangePfp({
   const user = useContext(UserContext);
   const [currentPfp, setCurrentPfp] = useState<string>(user?.photoURL as string);
   const profileIconLinks =
-    process.env.NEXT_PUBLIC_PROFILE_ICON_LINKS?.split(",");
+    process.env.NEXT_PUBLIC_ALT_PROFILE_ICON_LINKS?.split(",");
   const [updateProfile] = useUpdateProfile(auth);
 
   const changePfp = () =>

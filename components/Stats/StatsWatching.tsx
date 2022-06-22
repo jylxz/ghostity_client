@@ -9,7 +9,7 @@ const options: ChartOptions<"line"> = {
     x: {
       ticks: {
         callback(val, index) {
-          return index % 3 === 0 ? this.getLabelForValue(val as number) : "";
+          return index % 6 === 0 ? this.getLabelForValue(val as number) : "";
         },
       },
       grid: {

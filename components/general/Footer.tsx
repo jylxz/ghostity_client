@@ -103,7 +103,7 @@ function Footer() {
                   <LinkTo href="/browse/following">Following</LinkTo>
                 </FooterItem>
                 <FooterItem>
-                  <LinkTo href="/browse/streams">Streams</LinkTo>
+                  <LinkTo href="/browse">Streams</LinkTo>
                 </FooterItem>
                 <FooterItem>
                   <LinkTo href="/browse/games">Games</LinkTo>

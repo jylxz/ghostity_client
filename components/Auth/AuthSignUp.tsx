@@ -15,7 +15,6 @@ import LoadingButton from "../general/LoadingButton";
 import { auth } from "../../firebase/ghostityFirebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
 import GhostityIcon from "../../public/images/Ghostity-svg.svg";
-import useRandomProfileIcon from "../../hooks/useRandomProfileIcon";
 import useValidatePassword from "../../hooks/useValidatePassword";
 
 export default function SignUp({
@@ -37,9 +36,7 @@ export default function SignUp({
 
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
-  const [profileLink] = useRandomProfileIcon();
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-  const [updateEmail, emailUpdating, emailError] = useUpdateEmail(auth);
 
   const createUser = async () => {
     if (
@@ -50,7 +47,6 @@ export default function SignUp({
       return setSignUpError("All required fields have not been filled!");
 
     if (validatePassword()) {
-      console.log(profileLink)
       await createUserWithEmailAndPassword(email, password);
 
       if (error?.code === "auth/invalid-email")
@@ -64,43 +60,18 @@ export default function SignUp({
       setSignUpError("");
       await updateProfile({
         displayName: displayName || "An Exploring Ghost",
-        photoURL: profileLink,
+        photoURL:
+          "https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-primary_jg3evf.png",
       });
 
       return setShowAuth(false);
     }
     return setSignUpError(validateError);
-
-    // if (password.length < 8)
-    //   return setSignUpError("Password not at least 8 characters!");
-
-    // if (password !== passwordConfirm)
-    //   return setSignUpError("Passwords does not match!");
-
-    setSignUpError("");
-
-    await createUserWithEmailAndPassword(email, password);
-
-    if (error?.code === "auth/invalid-email")
-      return setSignUpError("Invalid email!");
-
-    if (error?.code === "auth/email-already-in-use")
-      return setSignUpError("Account already created with email!");
-
-    if (error) return setSignUpError("Error creating account!");
-
-    setSignUpError("");
-    await updateProfile({
-      displayName: displayName || "An Exploring Ghost",
-      photoURL: profileLink,
-    });
-
-    return setShowAuth(false);
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLFormElement>) => {
     if (event.key === "Enter") {
-      createUser();
+      return createUser()
     }
   };
 

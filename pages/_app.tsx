@@ -34,7 +34,7 @@ import SideBarMain from "../components/SideBar/SideBarMain";
 import AuthMain from "../components/Auth/AuthMain";
 import PageProgress from "../components/general/PageProgress";
 import BlacklistModal from "../components/general/BlacklistModal";
-import HamburgerNavMenu from "../components/general/HamburgerNavMenu";
+import HamburgerNavMenu from "../components/Navbar/HamburgerNavMenu";
 import AuthVerifyEmail from "../components/Auth/AuthVerifyEmail";
 import AuthUpdateEmail from "../components/Auth/AuthUpdateEmail";
 import AuthPasswordResetMessage from "../components/Auth/AuthPasswordResetMessage";

@@ -4,6 +4,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import Image from "next/image";
 import { TextField } from "@mui/material";
@@ -29,6 +30,7 @@ export default function AuthMain({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [currentTab, setCurrentTab] = useState("login");
+  const [updateProfile] = useUpdateProfile(auth);
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const [signInWithGoogle, userGoogle, loadingGoogle] =
@@ -38,6 +40,14 @@ export default function AuthMain({
     if (event.key === "Enter")
       return signInWithEmailAndPassword(email, password);
   };
+
+  const handleSignInWithGoogle = () =>
+    signInWithGoogle([email, profile]).then(() =>
+      updateProfile({
+        photoURL:
+          "https://res.cloudinary.com/ghostity/image/upload/v1655696219/profile-icons/ghostity-pfp-periwinkle_m9cece.png",
+      })
+    );
 
   useEffect(() => {
     if (user || userGoogle) setShowAuth(false);
@@ -50,7 +60,7 @@ export default function AuthMain({
         initial={{ translateX: "-50%", translateY: "-300%" }}
         animate={{ translateY: "-50%" }}
         exit={{ translateY: "-300%" }}
-        transition={{duration: 0.5}}
+        transition={{ duration: 0.5 }}
         className="fixed left-1/2 top-1/2 z-50"
       >
         <div className=" min-w-[20rem] w-1/4 max-w-[26rem] max-h-[40rem] bg-slate-50 rounded flex flex-col items-center gap-4 py-4 px-6 overflow-x-hidden overflow-y-auto z-50">
@@ -140,7 +150,7 @@ export default function AuthMain({
                       <button
                         type="button"
                         className="bg-primary w-20 py-1 rounded"
-                        onClick={() =>
+                        onClick={async () =>
                           signInWithEmailAndPassword(email, password)
                         }
                       >

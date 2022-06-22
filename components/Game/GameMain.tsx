@@ -31,8 +31,8 @@ export default function GameMain({ gameData }: { gameData: Game }) {
         image={gameData?.screenshot}
         altText={`${gameData.name} screenshot`}
       >
-        <div className="flex p-4 gap-4">
-          <motion.div layout className="min-w-fit max-h-full my-auto">
+        <div className="flex flex-col sm:flex-row p-4 gap-4">
+          <motion.div layout className="min-w-fit max-h-full my-auto mx-auto sm:mx-0">
             {gameData.cover_img ? (
               <Image
                 alt={`${gameData.name}'s cover image`}

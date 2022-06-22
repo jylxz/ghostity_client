@@ -7,8 +7,8 @@ import { useRouter } from "next/router";
 import UserContext from "../../context/UserContext";
 import { auth } from "../../firebase/ghostityFirebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
-import UserProfileCard from "../general/UserProfileCard";
-import HamburgerNavMenuButton from "../general/HamburgerNavMenuButton";
+import UserProfileCard from "./UserProfileCard";
+import HamburgerNavMenuButton from "./HamburgerNavMenuButton";
 
 export default function ProfileNavbar() {
   const router = useRouter();

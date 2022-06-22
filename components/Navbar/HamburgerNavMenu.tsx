@@ -10,9 +10,9 @@ import { signOut } from "firebase/auth";
 import {auth} from "../../firebase/ghostityFirebase"
 // import { auth } from "../../firebase/ghostityDevFirebase";
 import GhostityLogo from "../../public/images/Ghostity-svg.svg";
-import AnimatedButton from "./AnimatedButton";
-import DarkenBackgroundWrapper from "./DarkenBackgroundWrapper";
-import LinkTo from "./LinkTo";
+import AnimatedButton from "../general/AnimatedButton";
+import DarkenBackgroundWrapper from "../general/DarkenBackgroundWrapper";
+import LinkTo from "../general/LinkTo";
 import UserContext from "../../context/UserContext";
 import UserFollowContext from "../../context/UserFollowContext";
 import UserProfileCard from "./UserProfileCard";
@@ -63,7 +63,7 @@ export default function HamburgerNavMenu({
                 </div>
               </AnimatedButton>
             </LinkTo>
-            <div className="mt-2 text-sm flex flex-col items-end gap-1.5">
+            <div className="mt-2 text-base text-gray-600 flex flex-col items-end gap-1.5">
               <AnimatedButton onClick={() => setShowHamburgerMenu(false)}>
                 <LinkTo href="/browse/following">Following</LinkTo>
               </AnimatedButton>

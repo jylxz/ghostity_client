@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import UserContext from "../../context/UserContext";
 import UserFollowContext from "../../context/UserFollowContext";
-import LinkTo from "./LinkTo";
+import LinkTo from "../general/LinkTo";
 
 export default function UserProfileCard({
   closeParent,
@@ -32,7 +32,7 @@ export default function UserProfileCard({
           {user?.displayName || "A Wandering Ghost"}
         </span>
         {user ? (
-          <div className="text-sm text-gray-500 text-center">{`Following: ${follows?.channels?.length}`}</div>
+          <div className="text-sm text-gray-500 text-center">{`Following: ${follows?.channels?.length || 0}`}</div>
         ) : null}
       </div>
         <LinkTo href="/profile" className="w-full">
