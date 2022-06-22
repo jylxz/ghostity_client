@@ -124,7 +124,7 @@ export default function ProfileCard({
 
 
   return (
-    <motion.div layout className={`relative w-60 ${cardSize.cardHeight} rounded-lg border`}>
+    <motion.div layout className={`relative w-80 sm:w-[17rem] ${cardSize.cardHeight} rounded-lg border`}>
       <div className={`absolute w-full ${cardSize.imageHeight} z-0 rounded-lg`}>
         {profile.profile.img ? (
           <Image

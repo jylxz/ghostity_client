@@ -175,7 +175,7 @@ export default function OrganizationMembers({
           members={members}
         />
       </div>
-      <GridWrapper colSize="small">
+      <GridWrapper colSize="normal">
         {filteredMembers.map((member) => (
           <Fragment key={member._id}>
             <ProfileCard

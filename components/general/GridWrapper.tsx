@@ -6,12 +6,13 @@ export default function GridWrapper({
   colSize,
 }: {
   children: React.ReactNode;
-  colSize: "xsmall" | "small" | "normal";
+  colSize: "xsmall" | "small" | "normal" | "xxsmall";
 }) {
   const column = {
     normal: `grid-cols-[repeat(auto-fill,_minmax(18rem,_1fr))]`,
     small: "grid-cols-[repeat(auto-fill,_minmax(14rem,_1fr))]",
     xsmall: "grid-cols-[repeat(auto-fill,_minmax(12rem,_1fr))]",
+    xxsmall: "grid-cols-[repeat(auto-fill,_minmax(10rem,_1fr))]",
   };
 
   return (

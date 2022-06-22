@@ -35,13 +35,15 @@ export default function UserProfileCard({
           <div className="text-sm text-gray-500 text-center">{`Following: ${follows?.channels?.length}`}</div>
         ) : null}
       </div>
-      <button
-        type="button"
-        className=" text-sm text-center py-1.5 border-t"
-        onClick={() => closeParent(false)}
-      >
-        <LinkTo href="/profile">View Profile</LinkTo>
-      </button>
+        <LinkTo href="/profile" className="w-full">
+          <button
+            type="button"
+            className=" text-sm text-center py-1.5 border-t w-full"
+            onClick={() => closeParent(false)}
+          >
+            View Profile
+          </button>
+        </LinkTo>
     </div>
   );
 }

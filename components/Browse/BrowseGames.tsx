@@ -11,9 +11,11 @@ import ProblemLoading from "../general/ProblemLoading";
 import GradientCircularProgress from "../general/GradientCircularProgress";
 import BrowseWrapper from "../general/BrowseWrapper";
 import GridWrapper from "../general/GridWrapper";
+import useIsWindowSmall from "../../hooks/useIsWindowSmall";
 
 export default function BrowseGames() {
   const { ref, inView } = useInView();
+  const [isWindowSmall] = useIsWindowSmall()
 
   const fetchGames = async ({ pageParam = 1 }) =>
     axios
@@ -37,7 +39,7 @@ export default function BrowseGames() {
       {/* <LayoutGroup> */}
         {data ? (
           <>
-            <GridWrapper colSize="xsmall">
+            <GridWrapper colSize={isWindowSmall ? "xxsmall" : "xsmall"}>
               {data?.pages.map((group, i) => (
                 // eslint-disable-next-line react/no-array-index-key
                 <Fragment key={i}>

@@ -41,7 +41,12 @@ export default function ProfileMain() {
             <div className="flex flex-col justify-center items-center h-96">
               <div
                 className="relative"
-                onMouseEnter={() => user.emailVerified || user.providerData[0].providerId === "google.com" ? setHoverEditPfp(true) : null}
+                onMouseEnter={() =>
+                  user.emailVerified ||
+                  user.providerData[0].providerId === "google.com"
+                    ? setHoverEditPfp(true)
+                    : null
+                }
                 onMouseLeave={() => setHoverEditPfp(false)}
               >
                 <Image
@@ -123,13 +128,15 @@ export default function ProfileMain() {
             </div>
           </div>
         </div>
-      ) : null}
+      ) : (
+        <div className="min-h-screen" />
+      )}
       {!user ? (
-        <div className="w-full top-1/3 absolute flex flex-col justify-center items-center">
-          <div className="h-36 w-36">
+        <div className="w-full top-1/3 absolute flex flex-col justify-center items-center text-center gap-4">
+          <div className="h-20 w-20">
             <GhostityLogo />
           </div>
-          Please Login to view your profile
+          Please Login or Create an Account to view your profile
         </div>
       ) : null}
     </div>

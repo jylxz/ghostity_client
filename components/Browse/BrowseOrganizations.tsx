@@ -12,18 +12,16 @@ export default function BrowseOrganizations({
 }) {
   return (
     <BrowseWrapper>
-      <div className="grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] gap-7 justify-items-center">
-        <div className="col-span-full text-xl flex items-center gap-2">
-          <h2>
-            Organizations currently on{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400">
-              ghostity
-            </span>
-          </h2>
+      <div className="w-full flex flex-wrap text-xl  justify-center gap-2 mb-4">
+        <h2 className="flex">Organizations currently on</h2>
+        <span className=" bg-clip-text text-transparent bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 flex gap-2">
+          ghostity
           <div className="w-8 h-8 -scale-x-100">
             <Ghostity />
           </div>
-        </div>
+        </span>
+      </div>
+      <div className="grid grid-cols-[repeat(auto-fit,_minmax(160px,_1fr))] gap-7 justify-items-center">
         {organizations.map((org) => (
           <InfoCard
             key={org._id}

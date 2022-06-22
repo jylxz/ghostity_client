@@ -33,7 +33,7 @@ function SocialMedia({ social, isWindowSmall }: { social: Organization["social_m
         className="flex items-center gap-1"
         
       >
-        <div className="w-5 h-5 flex items-center">
+        <div className="w-5 h-5 flex">
           <TwitterIcon />
         </div>
         {!isWindowSmall ? (social.tag || "Twitter") : null}
