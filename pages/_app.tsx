@@ -44,6 +44,8 @@ import UserContext from "../context/UserContext";
 import UserFollowContext from "../context/UserFollowContext";
 import AdminContext from "../context/AdminContext";
 import BlacklistContext from "../context/BlacklistContext";
+import LiveFollowingBar from "../components/general/LiveFollowingBar";
+import useIsWindowSmall from "../hooks/useIsWindowSmall";
 
 export default function MyApp({
   Component,
@@ -102,6 +104,7 @@ export default function MyApp({
   const router = useRouter();
   const { query } = router;
   const [systemColor] = useSystemColor();
+  const [isWindowSmall] = useIsWindowSmall();
 
   // For Navbar and Login
   const [showAuth, setShowAuth] = useState(false);
@@ -109,14 +112,15 @@ export default function MyApp({
 
   useEffect(() => {
     if (showAuth || showHamburgerMenu) {
-      document.body.style.overflowY = "hidden"
-      document.body.style.position = "fixed"
-      document.body.style.width = "100%"
+      document.getElementsByTagName("main")[0].style.touchAction = "none"
+      document.body.style.touchAction = "none";
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflowY = "scroll"
-      document.body.style.position = "unset";
+      document.getElementsByTagName("main")[0].style.touchAction = "auto";
+      document.body.style.touchAction = "auto";
+      document.body.style.overflow = "scroll";
     }
-  }, [showAuth, showHamburgerMenu])
+  }, [showAuth, showHamburgerMenu]);
 
   return (
     <>
@@ -176,7 +180,6 @@ export default function MyApp({
             <UserContext.Provider value={user || null}>
               <UserFollowContext.Provider value={followsData || null}>
                 <AdminContext.Provider value={admin}>
-                  <PageProgress />
                   {router.route === "/" && query.mode === "verifyEmail" ? (
                     <AuthVerifyEmail />
                   ) : null}
@@ -184,12 +187,25 @@ export default function MyApp({
                   query.mode === "verifyAndChangeEmail" ? (
                     <AuthUpdateEmail />
                   ) : null}
-                  {query.resetPassword === "true" ? <AuthPasswordResetMessage /> : null}
-                  <Navbar
-                    showAuth={showAuth}
-                    setShowAuth={setShowAuth}
-                    setShowHamburgerMenu={setShowHamburgerMenu}
-                  />
+                  {query.resetPassword === "true" ? (
+                    <AuthPasswordResetMessage />
+                  ) : null}
+                  <div className="fixed sm:relative top-0 z-50 w-full">
+                    <PageProgress />
+                    <Navbar
+                      showAuth={showAuth}
+                      setShowAuth={setShowAuth}
+                      setShowHamburgerMenu={setShowHamburgerMenu}
+                    />
+                    <AnimatePresence exitBeforeEnter>
+                      {isWindowSmall &&
+                      user &&
+                      (router.route.includes("/browse") ||
+                        router.route === "/search") ? (
+                        <LiveFollowingBar />
+                      ) : null}
+                    </AnimatePresence>
+                  </div>
                   <AnimatePresence exitBeforeEnter>
                     {showAuth ? (
                       <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
@@ -209,7 +225,7 @@ export default function MyApp({
                     ) : null}
                   </AnimatePresence>
                   <BlacklistContext.Provider value={blacklistContextValue}>
-                    <main className={showAuth ? "overflow-hidden": ""}>
+                    <main className={showAuth ? "overflow-hidden" : ""}>
                       {router.route.includes("browse") ||
                       router.route.includes("search") ? (
                         <div className="flex">

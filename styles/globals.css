@@ -14,8 +14,5 @@
 }
 
 body {
-  /* perspective: 1px; */
-  /* backface-visibility: hidden; */
-  /* -webkit-font-smoothing: subpixel-antialiased; */
-
+  position: relative;
 }

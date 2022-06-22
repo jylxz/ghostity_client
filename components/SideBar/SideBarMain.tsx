@@ -73,9 +73,10 @@ export default function SideBarMain() {
     <motion.div
       layout="size"
       layoutScroll
+
       className={` z-30  bg-slate-100 ${
         showBrowseBar ? "min-w-[15.5rem] max-w-[15.5rem] pl-4" : "w-16"
-      } h-[calc(100vh_-_3.8rem)] overflow-auto`}
+      } h-[calc(100vh_-_3.8rem)] overflow-auto hidden sm:block`}
       onMouseLeave={() => (minimized ? browseBarOverride(false) : null)}
     >
       <div

@@ -36,11 +36,11 @@ export default function BrowseStreamsFilters({
     <motion.div
       layout="size"
       layoutScroll
-      className="flex flex-col justify-between py-6"
+      className="flex flex-col justify-between pb-6"
     >
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+      <div className="flex sm:items-center justify-between">
         <motion.div layout className="flex items-center gap-2 ">
-          Filter
+          <span className="hidden md:block">Filter</span>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9 }}
@@ -55,7 +55,7 @@ export default function BrowseStreamsFilters({
         <LayoutGroup>
           {filters.sort ? (
             <motion.div layout className="flex items-center gap-2 z-20">
-              <motion.span layout>Sort by</motion.span>
+              <motion.span className="hidden md:block" layout>Sort by</motion.span>
               <motion.span
                 layout="position"
                 whileHover={{ scale: 1.05 }}

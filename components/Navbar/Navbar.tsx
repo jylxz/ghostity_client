@@ -90,7 +90,7 @@ export default function Navbar({
   };
 
   return (
-    <nav className="bg-gradient-to-r from-primary via-secondary to-secondary2 flex items-center justify-between px-8 py-7 text-gray-500 h-14 relative z-50">
+    <nav className="sm:relative w-full bg-gradient-to-r from-primary via-secondary to-secondary2 flex items-center justify-between px-8 py-7 text-gray-500 h-14 z-50">
       <div className="flex">
         <LinkTo href="/">
           <motion.button
