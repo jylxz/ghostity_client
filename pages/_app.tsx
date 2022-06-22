@@ -46,6 +46,7 @@ import AdminContext from "../context/AdminContext";
 import BlacklistContext from "../context/BlacklistContext";
 import LiveFollowingBar from "../components/general/LiveFollowingBar";
 import useIsWindowSmall from "../hooks/useIsWindowSmall";
+import AuthModalMain from "../components/Auth/AuthModalMain";
 
 export default function MyApp({
   Component,
@@ -208,7 +209,8 @@ export default function MyApp({
                   </div>
                   <AnimatePresence exitBeforeEnter>
                     {showAuth ? (
-                      <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
+                      // <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
+                    <AuthModalMain showAuth={showAuth} setShowAuth={setShowAuth}/>
                     ) : null}
                     {showHamburgerMenu ? (
                       <HamburgerNavMenu

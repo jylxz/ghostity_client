@@ -3,7 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
 import UserContext from "../../context/UserContext";
-import DarkenBackgroundWrapper from "../general/DarkenBackgroundWrapper";
+import DarkenBackgroundWrapper from "../general/ModalWrapper";
 import AnimatedButton from "../general/AnimatedButton";
 import { auth } from "../../firebase/ghostityFirebase";
 

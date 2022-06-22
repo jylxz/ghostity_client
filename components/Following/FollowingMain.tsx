@@ -19,6 +19,8 @@ import GridWrapper from "../general/GridWrapper";
 import AnimateTabButton from "../general/AnimatedTabButton";
 import ProfileCard from "../general/ProfileCard";
 
+import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+
 export default function FollowingMain() {
   const [currentTab, setCurrentTab] = useState("Live");
   const { ref, inView } = useInView();
@@ -104,7 +106,7 @@ export default function FollowingMain() {
         </div>
       ) : null}
       {followStreams.error || followProfiles.error ? <ProblemLoading /> : null}
-      {followStreams.data && currentTab === "Live" ? (
+      {followStreams.data && currentTab === "Live" && channelIds?.length > 0 ? (
         <>
           <GridWrapper colSize="normal">
             {followStreams.data?.pages.map((group, i) => (
@@ -134,7 +136,11 @@ export default function FollowingMain() {
               <Fragment key={i}>
                 {group.results.map((profile) => (
                   <motion.span layout="position" key={profile._id}>
-                    <ProfileCard key={profile._id} profile={profile} size="normal"/>
+                    <ProfileCard
+                      key={profile._id}
+                      profile={profile}
+                      size="normal"
+                    />
                   </motion.span>
                 ))}
               </Fragment>

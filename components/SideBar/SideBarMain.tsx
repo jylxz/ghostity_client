@@ -73,7 +73,6 @@ export default function SideBarMain() {
     <motion.div
       layout="size"
       layoutScroll
-
       className={` z-30  bg-slate-100 ${
         showBrowseBar ? "min-w-[15.5rem] max-w-[15.5rem] pl-4" : "w-16"
       } h-[calc(100vh_-_3.8rem)] overflow-auto hidden sm:block`}
@@ -182,7 +181,9 @@ export default function SideBarMain() {
           ) : (
             <div className="mx-auto mt-1 mb-2 w-10 h-0.5 border" />
           )}
-          {streams.data && !streams.isLoading ? (
+          {streams.data &&
+          !streams.isLoading &&
+          streams.data.pages[0].results.length > 0 ? (
             <motion.div
               variants={animations.streamsContainer}
               layoutScroll

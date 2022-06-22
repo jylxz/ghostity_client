@@ -10,7 +10,13 @@
   "rules": {
     "no-underscore-dangle": "off",
     "no-param-reassign": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "@typescript-eslint/no-misused-promises": [
+    "error",
+    {
+      "checksVoidReturn": false
+    }
+  ]
   },
   "overrides": [
     {

@@ -1,78 +1,93 @@
-import {
-  useCreateUserWithEmailAndPassword,
-  useUpdateEmail,
-  useUpdateProfile,
-} from "react-firebase-hooks/auth";
-import { Box, TextField } from "@mui/material";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { CgProfile } from "react-icons/cg";
-import { RiLockPasswordLine, RiLockPasswordFill } from "react-icons/Ri";
-import { AiOutlineMail } from "react-icons/ai";
+// Libraries
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { TextField } from "@mui/material";
 import { motion } from "framer-motion";
-import { BsArrowLeftShort } from "react-icons/bs";
-import LoadingButton from "../general/LoadingButton";
 
+// Icons
+import { RiLockPasswordLine, RiLockPasswordFill } from "react-icons/Ri";
+import { CgProfile } from "react-icons/cg";
+import { AiOutlineMail } from "react-icons/ai";
+import { BsArrowLeftShort } from "react-icons/bs";
+
+// Firebase
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { useUpdateProfile } from "react-firebase-hooks/auth";
+import { FirebaseError } from "firebase/app";
 import { auth } from "../../firebase/ghostityFirebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
-import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+
+// Hooks
 import useValidatePassword from "../../hooks/useValidatePassword";
 
-export default function SignUp({
+// Components
+import LoadingButton from "../general/LoadingButton";
+import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+
+export default function AuthSignUp({
   setShowAuth,
   setCurrentTab,
 }: {
   setShowAuth: Dispatch<SetStateAction<boolean>>;
   setCurrentTab: Dispatch<SetStateAction<string>>;
 }) {
+  const [updateProfile] = useUpdateProfile(auth);
+  const [loading, setLoading] = useState(false);
+
   const [displayName, setDisplayName] = useState("");
+
   const [email, setEmail] = useState("");
+  const [emailValid, setEmailValid] = useState(true);
+  const [emailError, setEmailError] = useState("");
+
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [signUpError, setSignUpError] = useState("");
   const [validatePassword, valid, validateError] = useValidatePassword(
     password,
     passwordConfirm
   );
 
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
-  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const createUser = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
 
-  const createUser = async () => {
     if (
       email.length === 0 ||
       password.length === 0 ||
       passwordConfirm.length === 0
     )
-      return setSignUpError("All required fields have not been filled!");
+      return setEmailError("All required fields have not been filled!");
 
     if (validatePassword()) {
-      await createUserWithEmailAndPassword(email, password);
+      return createUserWithEmailAndPassword(auth, email, password)
+        .then(async (user) => {
+          setEmailError("");
 
-      if (error?.code === "auth/invalid-email")
-        return setSignUpError("Invalid email!");
+          await sendEmailVerification(user.user)
+          await updateProfile({
+            displayName: displayName || "An Exploring Ghost",
+            photoURL:
+              "https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-primary_jg3evf.png",
+          });
 
-      if (error?.code === "auth/email-already-in-use")
-        return setSignUpError("Account already created with email!");
+          return setShowAuth(false);
+        })
+        .catch((err: FirebaseError) => {
+          if (err?.code === "auth/invalid-email") {
+            setEmailValid(false);
+            return setEmailError("Invalid email!");
+          }
 
-      if (error) return setSignUpError("Error creating account!");
+          if (err?.code === "auth/email-already-in-use") {
+            setEmailValid(false);
+            return setEmailError("Account already created with email!");
+          }
 
-      setSignUpError("");
-      await updateProfile({
-        displayName: displayName || "An Exploring Ghost",
-        photoURL:
-          "https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-primary_jg3evf.png",
-      });
-
-      return setShowAuth(false);
+          setEmailValid(false);
+          return setEmailError("Error creating account!");
+        })
+        .finally(() => setLoading(false));
     }
-    return setSignUpError(validateError);
-  };
-
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLFormElement>) => {
-    if (event.key === "Enter") {
-      return createUser()
-    }
+    return setEmailError(validateError);
   };
 
   return (
@@ -82,8 +97,8 @@ export default function SignUp({
       animate={{ translateX: 0, opacity: 1 }}
       exit={{ translateX: 400, opacity: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="flex-1 flex flex-col items-center gap-6 w-full"
-      onKeyPress={(event) => handleKeyPress(event)}
+      className="flex-1 flex flex-col items-center gap-6 w-full "
+      onSubmit={(e) => createUser(e)}
     >
       <button
         type="button"
@@ -97,9 +112,11 @@ export default function SignUp({
         <GhostityIcon />
       </div>
       <h1 className="text-xl">Create an account</h1>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2 mx-8">
         <div className="flex items-center">
-          <CgProfile className="w-4 h-4 mr-3 mt-2" />
+          <div className="mr-3 mt-2">
+            <CgProfile className="w-4 h-4 " />
+          </div>
           <TextField
             type="text"
             label="Display name"
@@ -107,10 +124,13 @@ export default function SignUp({
             variant="standard"
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
+            className="flex-1"
           />
         </div>
         <div className="flex items-center">
-          <AiOutlineMail className="w-4 h-4 mr-3 mt-3" />
+          <div className="mr-3 mt-3">
+            <AiOutlineMail className="w-4 h-4" />
+          </div>
           <TextField
             required
             type="email"
@@ -119,47 +139,54 @@ export default function SignUp({
             variant="standard"
             autoComplete="username email"
             value={email}
+            error={!emailValid}
+            helperText={emailError}
             onChange={(e) => setEmail(e.target.value)}
+            className="flex-1"
           />
         </div>
-        <div>
-          <div className="flex items-center">
-            <RiLockPasswordLine className="w-4 h-4 mr-3 -mt-3" />
-            <TextField
-              required
-              type="password"
-              label="Password"
-              size="small"
-              variant="standard"
-              autoComplete="new-password"
-              value={password}
-              helperText="Minimum 8 characters"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+        <div className="flex">
+          <div className="mt-5 mr-3">
+            <RiLockPasswordLine className="w-4 h-4" />
           </div>
-          <div className="flex items-center">
-            <RiLockPasswordFill className="w-4 h-4 mr-3 mt-2" />
-            <TextField
-              required
-              type="password"
-              label="Confirm Password"
-              size="small"
-              variant="standard"
-              autoComplete="new-password"
-              value={passwordConfirm}
-              onChange={(e) => setPasswordConfirm(e.target.value)}
-            />
+          <TextField
+            required
+            type="password"
+            label="Password"
+            size="small"
+            variant="standard"
+            autoComplete="new-password"
+            error={!valid}
+            value={password}
+            helperText={validateError}
+            onChange={(e) => setPassword(e.target.value)}
+            className="flex-1"
+          />
+        </div>
+        <div className="flex items-center">
+          <div className="mr-3 mt-2">
+            <RiLockPasswordFill className="w-4 h-4" />
           </div>
+          <TextField
+            required
+            type="password"
+            label="Confirm Password"
+            size="small"
+            variant="standard"
+            autoComplete="new-password"
+            error={!valid}
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+            className="flex-1"
+          />
         </div>
       </div>
-      {signUpError}
       {loading ? (
         <LoadingButton />
       ) : (
         <button
-          type="button"
+          type="submit"
           className="bg-primary w-20 py-1 rounded"
-          onClick={() => createUser()}
         >
           Register
         </button>

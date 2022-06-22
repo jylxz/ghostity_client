@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
 
-export default function DarkenBackgroundWrapper({
+export default function ModelWrapper({
   children,
   onClick,
 }: {
   children: React.ReactNode;
-  onClick: () => void ;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }) {
   return (
     <motion.div
@@ -16,10 +16,11 @@ export default function DarkenBackgroundWrapper({
       transition={{ duration: 0.5 }}
       role="menu"
       tabIndex={0}
-      className="fixed bg-gray-600/[.6] top-0 left-0 z-50 h-full w-full"
+      className="absolute bg-gray-600/[.6] top-0 left-0 z-50 h-screen w-full flex items-center justify-center overflow-y-hidden"
       onClick={onClick}
     >
-      <motion.div onClick={(e) => e.stopPropagation()} className="">{children}</motion.div>
+      {/* <motion.div onClick={(e) => e.stopPropagation()} className="">{children}</motion.div> */}
+      {children}
     </motion.div>
   );
 }

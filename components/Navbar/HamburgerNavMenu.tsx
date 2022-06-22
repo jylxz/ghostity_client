@@ -11,7 +11,7 @@ import {auth} from "../../firebase/ghostityFirebase"
 // import { auth } from "../../firebase/ghostityDevFirebase";
 import GhostityLogo from "../../public/images/Ghostity-svg.svg";
 import AnimatedButton from "../general/AnimatedButton";
-import DarkenBackgroundWrapper from "../general/DarkenBackgroundWrapper";
+import DarkenBackgroundWrapper from "../general/ModalWrapper";
 import LinkTo from "../general/LinkTo";
 import UserContext from "../../context/UserContext";
 import UserFollowContext from "../../context/UserFollowContext";

@@ -20,7 +20,7 @@ import ProfileDisplayName from "./ProfileDisplayName";
 import ProfileEmail from "./ProfileEmail";
 import ProfilePassword from "./ProfilePassword";
 import ProfileGoogleNotice from "./ProfileGoogleNotice";
-import DarkenBackgroundWrapper from "../general/DarkenBackgroundWrapper";
+import DarkenBackgroundWrapper from "../general/ModalWrapper";
 import ProfileChangePfp from "./ProfileChangePfp";
 
 export default function ProfileMain() {
