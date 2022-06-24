@@ -3,7 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
 import UserContext from "../../context/UserContext";
-import DarkenBackgroundWrapper from "../general/ModalWrapper";
+import ModelWrapper from "../general/ModalWrapper";
 import AnimatedButton from "../general/AnimatedButton";
 import { auth } from "../../firebase/ghostityFirebase";
 
@@ -48,12 +48,13 @@ export default function ProfileChangePfp({
       .catch(() => {});
 
   return (
-    <DarkenBackgroundWrapper onClick={() => setEditPfp(false)}>
+    <ModelWrapper onClick={() => setEditPfp(false)}>
       <motion.div
         initial={{ translateX: "-50%", translateY: "-300%" }}
         animate={{ translateY: "-50%" }}
         exit={{ translateY: "-300%" }}
         className="absolute left-1/2 top-1/2 text-white"
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="bg-black/50 rounded w-96 p-8">
           <div className="flex flex-col justify-center items-center">
@@ -90,6 +91,6 @@ export default function ProfileChangePfp({
           </div>
         </div>
       </motion.div>
-    </DarkenBackgroundWrapper>
+    </ModelWrapper>
   );
 }

@@ -31,7 +31,7 @@ function ChannelPic({ stream }: { stream: Stream }) {
         >
           <Image
             src={stream.channel_img}
-            priority="true"
+            // priority
             height="24"
             width="24"
             alt={`${stream.channel_name}'s profile img`}
@@ -129,8 +129,10 @@ function FollowButton({
     return (
       <motion.button
         layout
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1, transition: { delay: 0.8 } }}
+        layoutId={channelId}
+        // initial={{ opacity: 0, scale: 0 }}
+        // animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, delay: 1 } }}
+        // exit={{opacity: 0}}
         className="absolute top-1 left-1 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
         onHoverStart={() => setShowFollowText(true)}
         onHoverEnd={() => setShowFollowText(false)}
@@ -213,7 +215,7 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
             alt={`${stream.channel_name}'s stream thumbnail`}
             height="198"
             width="352"
-            priority
+            // priority
           />
         </a>
         <FollowButton
@@ -222,8 +224,9 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
         />
         <BlacklistButton stream={stream} />
         <motion.span
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1, transition: { delay: 0.8 } }}
+          // initial={{ opacity: 0, scale: 0 }}
+          // animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, delay: 0.8 } }}
+          // exit={{opacity: 0}}
           className="absolute bottom-2.5 right-1 text-primary bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default"
         >{`${stream.stream.viewers} viewers`}</motion.span>
       </div>

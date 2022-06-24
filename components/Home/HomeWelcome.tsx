@@ -1,6 +1,6 @@
 // Libraries
 import React from "react";
-import { motion } from "framer-motion";
+import { AnimationProps, motion } from "framer-motion";
 
 // Components
 import LinkTo from "../general/LinkTo";
@@ -30,7 +30,7 @@ export default function HomeWelcome() {
           >
             Welcome to{" "}
             <motion.span
-              variants={animations.ghostityVariant}
+              variants={animations.ghostityVariant as AnimationProps["variants"]}
               className="text-white"
             >
               ghostity

@@ -19,7 +19,7 @@ export default function BrowseGames() {
 
   const fetchGames = async ({ pageParam = 1 }) =>
     axios
-      .get(`https://api.ghostity.com/games?page=${pageParam}`)
+      .get<Games>(`https://api.ghostity.com/games?page=${pageParam}`)
       .then((res) => res.data);
 
   const { data, error, fetchNextPage, hasNextPage, isLoading } =
@@ -30,7 +30,7 @@ export default function BrowseGames() {
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      fetchNextPage().catch(() => {});
     }
   }, [fetchNextPage, inView]);
 

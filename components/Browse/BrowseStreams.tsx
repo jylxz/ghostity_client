@@ -1,9 +1,9 @@
 // Libraries
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
-import { LayoutGroup, motion } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 // Hooks
 import useHandleFilters from "../../hooks/useHandleFilters";
@@ -18,11 +18,12 @@ import GridWrapper from "../general/GridWrapper";
 
 export default function BrowseStreams() {
   const { ref, inView } = useInView();
+  const [loading, setLoading] = useState(false)
   const [filterString, filters, setFilters, resetFilters] = useHandleFilters();
 
   const fetchStreams = async ({ pageParam = 1 }) =>
     axios
-      .get(`https://api.ghostity.com/streams?page=${pageParam}${filterString}`)
+      .get<Streams>(`https://api.ghostity.com/streams?page=${pageParam}&limit=30${filterString}`)
       .then((res) => res.data);
 
   const {
@@ -34,43 +35,66 @@ export default function BrowseStreams() {
     isRefetching,
     isFetchingNextPage,
   } = useInfiniteQuery<Streams, Error>(
-    ["allStreams", `${filters.sort}`],
+    ["allStreams", `${filters.sort || ""}`],
     fetchStreams,
     {
       getNextPageParam: (lastPage) =>
         lastPage.next ? lastPage.next.page : false,
+      cacheTime: 0
     }
   );
 
+  const refetchWithFilters =  async () => {
+    setLoading(true)
+    return refetch().then(() => setLoading(false))
+  }
+
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      fetchNextPage().catch(() => {})
     }
   }, [fetchNextPage, inView]);
 
   return (
     <BrowseWrapper>
-      <LayoutGroup>
+      <LayoutGroup id="browse-streams">
         <BrowseStreamsFilters
           filters={filters}
           setFilters={setFilters}
           resetFilters={resetFilters}
-          refetch={refetch}
+          refetch={refetchWithFilters}
         />
-        {
-        (data && !isRefetching ) ||
-        (data && isFetchingNextPage) 
-        ? (
+        {data && !loading ? (
           <>
-            <GridWrapper colSize="normal">
-              {data.pages.map((group) => (
-                  group.results.map((stream: Stream) => (
-                    <motion.span layout="position" key={stream.channel_id}>
+            {/* <AnimatePresence exitBeforeEnter> */}
+            <GridWrapper
+              colSize="normal"
+              key="streams-wrapper"
+              transition={{
+                layout: {
+                  duration: 0.4,
+                },
+              }}
+            >
+              {data.pages.map((group, i) => (
+                <Fragment key={i}>
+                  {group.results.map((stream: Stream) => (
+                    <motion.div
+                      key={stream.channel_id}
+                      layout="position"
+                      // transition={{
+                      //   layout: {
+                      //     duration: 0.3,
+                      //   },
+                      // }}
+                    >
                       <LivestreamCard stream={stream} />
-                    </motion.span>
-                  ))
+                    </motion.div>
+                  ))}
+                </Fragment>
               ))}
             </GridWrapper>
+            {/* </AnimatePresence> */}
             {hasNextPage ? (
               <motion.div
                 layout="position"

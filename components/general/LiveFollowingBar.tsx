@@ -28,7 +28,7 @@ export default function LiveFollowingBar() {
 
   const fetchStreams = ({ pageParam = 1 }) =>
     axios
-      .post(`https://api.ghostity.com/streams?page=${pageParam}`, {
+      .post<Streams>(`https://api.ghostity.com/streams?page=${pageParam}`, {
         channelIds,
       })
       .then((res) => res.data);
@@ -55,7 +55,7 @@ export default function LiveFollowingBar() {
     >
       <Swiper
         modules={[Navigation, Mousewheel, FreeMode]}
-        slidesPerView={streams.data?.pages[0].results?.length < 5 ? streams.data?.pages[0].results.length : 5}
+        slidesPerView={streams.data && streams.data?.pages[0].results?.length < 5 ? streams.data?.pages[0].results.length : 5}
         spaceBetween={10}
         freeMode
         mousewheel={{

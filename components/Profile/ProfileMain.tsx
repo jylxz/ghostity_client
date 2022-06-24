@@ -50,7 +50,10 @@ export default function ProfileMain() {
                 onMouseLeave={() => setHoverEditPfp(false)}
               >
                 <Image
-                  src={user?.photoURL}
+                  src={
+                    user?.photoURL ||
+                    "https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-primary_jg3evf.png"
+                  }
                   height={144}
                   width={144}
                   className="rounded-full"
@@ -68,7 +71,7 @@ export default function ProfileMain() {
               <div className="flex flex-col items-center gap-3">
                 <div className="flex flex-col items-center">
                   <span className="text-2xl">{user?.displayName}</span>
-                  <span className="">{`Following: ${follow?.channels?.length}`}</span>
+                  <span className="">{`Following: ${follow?.channels?.length || 0}`}</span>
                 </div>
                 <div className="flex flex-col items-center text-gray-600">
                   <span className="text-sm ">

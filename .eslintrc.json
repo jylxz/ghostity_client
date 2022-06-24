@@ -12,11 +12,14 @@
     "no-param-reassign": "off",
     "react/require-default-props": "off",
     "@typescript-eslint/no-misused-promises": [
-    "error",
-    {
-      "checksVoidReturn": false
-    }
-  ]
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "consistent-return": "warn",
+    "react/no-array-index-key": "warn"
   },
   "overrides": [
     {

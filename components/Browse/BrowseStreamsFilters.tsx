@@ -21,7 +21,7 @@ export default function BrowseStreamsFilters({
   filters: Filters;
   setFilters: (filter: Filter, filterValue: any) => void;
   resetFilters: () => void;
-  refetch: () => void;
+  refetch: () => Promise<void>;
 }) {
   const [showFilter, setShowFilter] = useState(false);
   const [sort, setSort] = useState(filters.sort);
@@ -35,7 +35,13 @@ export default function BrowseStreamsFilters({
   return (
     <motion.div
       layout="size"
-      layoutScroll
+      // layoutId="browse-streams"
+      // layoutScroll
+      // transition={{
+      //   layout: {
+      //     duration: 0.3,
+      //   },
+      // }}
       className="flex flex-col justify-between pb-6"
     >
       <div className="flex sm:items-center justify-between">
@@ -44,7 +50,7 @@ export default function BrowseStreamsFilters({
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9 }}
-            transition={{duration: 0.1, type: "string"}}
+            transition={{ duration: 0.1, type: "string" }}
             type="button"
             onClick={() => setShowFilter(!showFilter)}
             className="bg-slate-100 px-2 py-0.5 rounded h-full"
@@ -55,11 +61,14 @@ export default function BrowseStreamsFilters({
         <LayoutGroup>
           {filters.sort ? (
             <motion.div layout className="flex items-center gap-2 z-20">
-              <motion.span className="hidden md:block" layout>Sort by</motion.span>
+              <motion.span className="hidden md:block" layout>
+                Sort by
+              </motion.span>
               <motion.span
                 layout="position"
+                layoutId="sort-by-button"
                 // whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                // whileTap={{ scale: 0.95 }}
               >
                 <CustomSelect
                   value={filters.sort}
@@ -84,7 +93,7 @@ export default function BrowseStreamsFilters({
             initial={{ translateY: -600 }}
             animate={{ translateY: 0 }}
             exit={{ translateY: -600 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="bg-slate-100 p-4 rounded-lg flex flex-col mt-4 z-30"
           >
             <motion.button
@@ -255,10 +264,7 @@ export default function BrowseStreamsFilters({
                 whileTap={{ scale: 0.9 }}
                 type="button"
                 className="bg-white px-3 py-1 text-black rounded border"
-                onClick={() => {
-                  refetch();
-                  setShowFilter(false);
-                }}
+                onClick={async () => refetch().then(() => setShowFilter(false))}
               >
                 Apply
               </motion.button>

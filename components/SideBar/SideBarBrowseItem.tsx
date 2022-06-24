@@ -48,7 +48,7 @@ export default function SideBarBrowseItem({
             whileTap={{ scale: 0.95 }}
             type="button"
             className={`z-30 flex items-center w-full h-full ${
-              !selected ? "text-sm text-gray-500 fill-gray-500" : null
+              !selected ? "text-sm text-gray-500 fill-gray-500" : ""
             }`}
           >
             {icon}

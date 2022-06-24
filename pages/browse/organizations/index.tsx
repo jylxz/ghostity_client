@@ -1,12 +1,16 @@
 import React from "react";
 import Head from "next/head";
+import axios from "axios";
 import BrowseOrganizations from "../../../components/Browse/BrowseOrganizations";
 
 export async function getStaticProps() {
-  const fetchOrganizations = await fetch(
-    "https://api.ghostity.com/organizations"
-  );
-  const orgs = await fetchOrganizations.json();
+  const orgs = await axios
+    .get<Organization[]>("https://api.ghostity.com/organizations")
+    .then((allOrgs) => allOrgs.data);
+  // const fetchOrganizations = await fetch(
+  //   "https://api.ghostity.com/organizations"
+  // );
+  // const orgs = await fetchOrganizations.json();
 
   return { props: { orgs } };
 }

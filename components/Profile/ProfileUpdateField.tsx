@@ -14,8 +14,8 @@ export default function ProfileUpdateField({
 }: {
   label: string;
   type: "text" | "password" | "email";
-  value: any;
-  setValue: Dispatch<SetStateAction<any>>;
+  value?: string | null;
+  setValue: Dispatch<SetStateAction<string>>;
   message?: string;
   placeholder?: string;
   autoComplete?: string;

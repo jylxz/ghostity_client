@@ -33,6 +33,7 @@ export default function HamburgerNavMenu({
         initial={{ translateX: 300 }}
         animate={{ translateX: 0 }}
         exit={{ translateX: 300 }}
+        onClick={(e) => e.stopPropagation()}
       >
         <UserProfileCard closeParent={setShowHamburgerMenu} />
         <div className="flex flex-col items-end grid-rows-3 p-4 text-lg gap-4 justify-items-end">

@@ -183,4 +183,6 @@ declare global {
     updatedAt: Date;
     createdAt: Date;
   }
+
+
 }

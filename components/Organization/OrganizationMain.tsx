@@ -57,7 +57,7 @@ export default function OrganizationMain({ org }: { org: Organization }) {
 
   const fetchOrganizationStreams = async () =>
     axios
-      .get(`https://api.ghostity.com/organizations/${org.name}/streams`)
+      .get<Stream[]>(`https://api.ghostity.com/organizations/${org.name}/streams`)
       .then((streams) => streams.data);
 
   const { isLoading, error, data } = useQuery<Stream[], Error>(

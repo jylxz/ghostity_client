@@ -26,7 +26,7 @@ import "swiper/css/navigation";
 
 export default function HomeLive() {
   const fetchStreams = async ({ pageParam = 1 }) =>
-    axios.get(`https://api.ghostity.com/streams?page=${pageParam}`).then((res) => res.data)
+    axios.get<Streams>(`https://api.ghostity.com/streams?page=${pageParam}`).then((res) => res.data)
 
   const { data, error, isLoading } =
     useInfiniteQuery<Streams, Error>(["allStreams", {}], fetchStreams, {

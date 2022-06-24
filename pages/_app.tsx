@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable react/jsx-props-no-spreading */
 
 // Libraries
@@ -31,10 +33,10 @@ import useAdminCheck from "../hooks/useAdminCheck";
 // Components
 import Navbar from "../components/Navbar/Navbar";
 import SideBarMain from "../components/SideBar/SideBarMain";
-import AuthMain from "../components/Auth/AuthMain";
 import PageProgress from "../components/general/PageProgress";
 import BlacklistModal from "../components/general/BlacklistModal";
 import HamburgerNavMenu from "../components/Navbar/HamburgerNavMenu";
+import AuthModalMain from "../components/Auth/AuthModalMain";
 import AuthVerifyEmail from "../components/Auth/AuthVerifyEmail";
 import AuthUpdateEmail from "../components/Auth/AuthUpdateEmail";
 import AuthPasswordResetMessage from "../components/Auth/AuthPasswordResetMessage";
@@ -46,7 +48,6 @@ import AdminContext from "../context/AdminContext";
 import BlacklistContext from "../context/BlacklistContext";
 import LiveFollowingBar from "../components/general/LiveFollowingBar";
 import useIsWindowSmall from "../hooks/useIsWindowSmall";
-import AuthModalMain from "../components/Auth/AuthModalMain";
 import useScrollRestoration from "../hooks/useScrollRestoration";
 
 export default function MyApp({
@@ -59,7 +60,19 @@ export default function MyApp({
   // MUI Theme
   const theme = createTheme({
     typography: {
-      fontFamily: ['"Quicksand"', ...defaultTheme!.fontFamily!.sans].join(","),
+      fontFamily: [
+        '"Quicksand"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
     },
     palette: {
       primary: {
@@ -69,14 +82,16 @@ export default function MyApp({
   });
 
   // React-Query
-  const [queryClient] = useState(new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 180000,
-        refetchInterval: 300000,
+  const [queryClient] = useState(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 180000,
+          refetchInterval: 300000,
+        },
       },
-    },
-  }));
+    })
+  );
 
   // Firebase User Authentication
   const [user] = useAuthState(auth);
@@ -86,7 +101,7 @@ export default function MyApp({
   const followsData = useMemo(
     () => ({
       follows,
-      channels: follows?.data()?.channel_ids,
+      channels: follows?.data()?.channel_ids as string[],
     }),
     [follows]
   );
@@ -115,7 +130,7 @@ export default function MyApp({
 
   useEffect(() => {
     if (showAuth || showHamburgerMenu) {
-      document.getElementsByTagName("main")[0].style.touchAction = "none"
+      document.getElementsByTagName("main")[0].style.touchAction = "none";
       document.body.style.touchAction = "none";
       document.body.style.overflow = "hidden";
     } else {
@@ -214,7 +229,6 @@ export default function MyApp({
                       {showAuth ? (
                         // <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
                         <AuthModalMain
-                          showAuth={showAuth}
                           setShowAuth={setShowAuth}
                         />
                       ) : null}
@@ -254,7 +268,7 @@ export default function MyApp({
             </ThemeProvider>
           </StyledEngineProvider>
         </Hydrate>
-          <ReactQueryDevtools />
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </>
   );

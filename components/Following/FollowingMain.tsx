@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+
 // Libraries
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useInfiniteQuery } from "react-query";
@@ -31,7 +33,7 @@ export default function FollowingMain() {
 
   const fetchStreams = ({ pageParam = 1 }) =>
     axios
-      .post(`https://api.ghostity.com/streams?page=${pageParam}`, {
+      .post<Streams>(`https://api.ghostity.com/streams?page=${pageParam}`, {
         channelIds,
       })
       .then((res) => res.data);
@@ -48,7 +50,7 @@ export default function FollowingMain() {
 
   const fetchProfiles = ({ pageParam = 1 }) =>
     axios
-      .post(`https://api.ghostity.com/profiles?page=${pageParam}`, {
+      .post<Profiles>(`https://api.ghostity.com/profiles?page=${pageParam}`, {
         channelIds,
       })
       .then((res) => res.data);
@@ -65,13 +67,13 @@ export default function FollowingMain() {
 
   useEffect(() => {
     if (inView && followStreams.hasNextPage && currentTab === "Live") {
-      followStreams.fetchNextPage();
+      followStreams.fetchNextPage().catch(() => {});
     }
   }, [currentTab, followStreams, inView]);
 
   useEffect(() => {
     if (inView && followProfiles.hasNextPage && currentTab === "All") {
-      followProfiles.fetchNextPage();
+      followProfiles.fetchNextPage().catch(() => {});
     }
   }, [currentTab, followProfiles, inView]);
 
@@ -108,7 +110,10 @@ export default function FollowingMain() {
       {followStreams.error || followProfiles.error ? <ProblemLoading /> : null}
       {followStreams.data && currentTab === "Live" ? (
         <>
-          <GridWrapper colSize="normal">
+          <GridWrapper
+            colSize="normal"
+
+          >
             {followStreams.data?.pages.map((group, i) => (
               <Fragment key={i}>
                 {group.results.map((stream: Stream) => (
@@ -131,7 +136,17 @@ export default function FollowingMain() {
       ) : null}
       {followProfiles.data && currentTab === "All" ? (
         <>
-          <GridWrapper colSize="small">
+          <GridWrapper
+            colSize="small"
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: {
+                duration: 0.5,
+                delay: 1.5,
+              },
+            }}
+          >
             {followProfiles.data.pages.map((group, i) => (
               <Fragment key={i}>
                 {group.results.map((profile) => (

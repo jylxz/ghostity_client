@@ -41,7 +41,7 @@ export default function BlacklistModal({
         <AiOutlineExclamationCircle className="h-6 w-6" />
       </div>
       <div className="flex-1 flex flex-col items-center text-sm">
-        <span className="line-clamp-1">{`BLACKLIST ${channel?.channel_name}?`}</span>
+        <span className="line-clamp-1">{`BLACKLIST ${channel?.channel_name || ""}?`}</span>
         <div className="flex gap-6">
           <button
             type="button"

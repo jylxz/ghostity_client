@@ -100,7 +100,7 @@ export default function OrganizationMembers({
   const ids = members.map((member) => member.profile_id);
   const fetchProfiles = () =>
     axios
-      .post("https://api.ghostity.com/profiles", {
+      .post<Profile[]>("https://api.ghostity.com/profiles", {
         ids,
       })
       .then((res) => res.data);

@@ -103,12 +103,18 @@ export default function SideBarFollowingItem({
               src={stream.channel_img}
               height={28}
               width={28}
-              className="rounded-full "
+              className="rounded-full text-xs"
               onMouseEnter={
-                window.width > 640 ? () => handleBrowseOpen() : null
+                window.width && window?.width > 640
+                  ? () => handleBrowseOpen()
+                  : undefined
               }
               onMouseLeave={() => handleBrowseClose()}
-              onClick={window.width > 640 ? () => handleBrowseOnClick() : null}
+              onClick={
+                window.width && window.width > 640
+                  ? () => handleBrowseOnClick()
+                  : undefined
+              }
             />
           </div>
           {!minimized ? (

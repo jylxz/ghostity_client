@@ -2,6 +2,7 @@
 import Head from "next/head";
 import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
+import axios from "axios"
 
 // Components
 import HomeWelcome from "../components/Home/HomeWelcome";
@@ -13,10 +14,11 @@ import HomeHelp from "../components/Home/HomeHelp";
 import HomeStats2 from "../components/Home/HomeStats2";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const fetchLogos = await fetch(
-    "https://api.ghostity.com/organizations/logos"
-  );
-  const logos = await fetchLogos.json();
+  const logos = await axios.get<OrganizationLogos>("https://api.ghostity.com/organizations/logos").then((orgLogos) => orgLogos.data)
+  // const fetchLogos = await fetch(
+  //   "https://api.ghostity.com/organizations/logos"
+  // );
+  // const logos = await fetchLogos.json<OrganizationLogos>();
 
   return { props: { logos }, revalidate: 6000 };
 };

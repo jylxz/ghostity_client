@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 // Libraries
 import React, { Fragment, useEffect } from "react";
 import axios from "axios";
@@ -16,7 +17,7 @@ export default function GameStreams({ game }: { game: string }) {
 
   const fetchGameStreams = async ({ pageParam = 1 }) =>
     axios
-      .get(
+      .get<Streams>(
         `https://api.ghostity.com/games/${encodeURIComponent(
           game
         )}/streams?page=${pageParam}`
@@ -31,7 +32,7 @@ export default function GameStreams({ game }: { game: string }) {
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
+      fetchNextPage().catch(() => {});
     }
   }, [fetchNextPage, inView]);
 
@@ -51,7 +52,10 @@ export default function GameStreams({ game }: { game: string }) {
 
   return (
     <>
-      <GridWrapper colSize="normal">
+      <GridWrapper
+        colSize="normal"
+        
+      >
         {data?.pages.map((group, i) => (
           <Fragment key={i}>
             {group.results.map((stream) => (

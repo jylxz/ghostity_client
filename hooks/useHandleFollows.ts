@@ -4,7 +4,7 @@ import UserFollowContext from "../context/UserFollowContext";
 
 export default function useHandleFollows(channelIds: string | Channel[]) {
   const follows = useContext(UserFollowContext);
-  let currentlyFollowing: boolean = true;
+  let currentlyFollowing = true;
 
   if (typeof channelIds !== "string") {
     channelIds.forEach((channel) => {
@@ -12,7 +12,7 @@ export default function useHandleFollows(channelIds: string | Channel[]) {
         currentlyFollowing = false;
     });
   } else {
-    currentlyFollowing = follows?.channels?.includes(channelIds);
+    currentlyFollowing = follows?.channels?.includes(channelIds) || false;
   }
 
   const handleFollow = async () => {

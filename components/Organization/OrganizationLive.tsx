@@ -18,10 +18,13 @@ export default function OrganizationLive({
   }
 
   return (
-    <GridWrapper colSize="normal">
-        {channels.map((channel) => (
-          <LivestreamCard key={channel._id} stream={channel} />
-        ))}
+    <GridWrapper
+      colSize="normal"
+      
+    >
+      {channels.map((channel) => (
+        <LivestreamCard key={channel._id} stream={channel} />
+      ))}
     </GridWrapper>
   );
 }

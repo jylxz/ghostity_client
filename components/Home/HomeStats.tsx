@@ -54,7 +54,7 @@ function HomeStatCard({
   return (
     <motion.div
       variants={listItem}
-      className={`${backgroundColor} ${className} h-[10rem] rounded flex flex-col items-center justify-center shadow`}
+      className={`${backgroundColor} ${className || ""} h-[10rem] rounded flex flex-col items-center justify-center shadow`}
     >
       <div className="min-h-[40px] min-w-[40px] max-h-[56px] max-w-[56px] flex justify-center">
         {image}

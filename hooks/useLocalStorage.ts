@@ -12,7 +12,7 @@ export default function useLocalStorage<T>(key: string, defaultValue: T) {
         localStorage.setItem(key, JSON.stringify(defaultValue));
         setItem(defaultValue)
       } else {
-        setItem(JSON.parse(getItem));
+        setItem(JSON.parse(getItem) as T);
       }
     }
   }, [hasWindow]);

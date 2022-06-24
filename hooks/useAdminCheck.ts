@@ -11,8 +11,8 @@ export default function useAdminCheck(UID: string | undefined) {
 
   const checkAdmin = async () => {
     if (UID) {
-      const adminCheck: Admin = await axios
-        .get(`https://api.ghostity.com/admin?uid=${UID}`)
+      const adminCheck = await axios
+        .get<Admin>(`https://api.ghostity.com/admin?uid=${UID}`)
         .then((res) => res.data);
 
       if (adminCheck.admin) {
@@ -27,7 +27,7 @@ export default function useAdminCheck(UID: string | undefined) {
   };
 
   useEffect(() => {
-    checkAdmin();
+    checkAdmin().catch(() => {});
   }, [UID]);
 
   return [admin] as const;

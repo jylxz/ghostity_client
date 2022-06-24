@@ -16,10 +16,9 @@ export default function ModelWrapper({
       transition={{ duration: 0.5 }}
       role="menu"
       tabIndex={0}
-      className="absolute bg-gray-600/[.6] top-0 left-0 z-50 h-screen w-full flex items-center justify-center overflow-y-hidden"
+      className="fixed bg-gray-600/[.6] top-0 left-0 z-50 h-full  w-full flex items-center justify-center overflow-y-hidden"
       onClick={onClick}
     >
-      {/* <motion.div onClick={(e) => e.stopPropagation()} className="">{children}</motion.div> */}
       {children}
     </motion.div>
   );

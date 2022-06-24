@@ -1,3 +1,4 @@
+/* eslint-disable no-promise-executor-return */
 import { useEffect } from "react";
 import Router, { NextRouter } from "next/router";
 

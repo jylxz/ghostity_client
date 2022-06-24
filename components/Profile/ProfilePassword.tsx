@@ -9,6 +9,7 @@ import { MdEdit } from "react-icons/md";
 import { GoCheck } from "react-icons/go";
 
 // Firebase
+import { FirebaseError } from "firebase/app";
 import { auth } from "../../firebase/ghostityFirebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
 
@@ -51,7 +52,7 @@ export default function ProfilePassword() {
 
       return reauthenticateWithCredential(currentUser, credential)
         .then(() => true)
-        .catch((error) => {
+        .catch((error: FirebaseError) => {
           if (error.code === "auth/wrong-password") {
             setCurrentPasswordError(true);
             setCurrentPasswordMessage("Wrong password");

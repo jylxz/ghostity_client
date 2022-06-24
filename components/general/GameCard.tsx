@@ -12,7 +12,7 @@ export default function GameCard({ game }: { game: Game }) {
         <Image src={game.cover_img} width="208" height="280" alt={`${game.name} cover art`}/>
       </LinkTo>
       <CardContent className="h-16 pt-2 bg-slate-50">
-        <LinkTo href={`/#browse/games/${encodeURIComponent(game.name)}`}>
+        <LinkTo href={`/browse/games/${encodeURIComponent(game.name)}`}>
           <Typography className="text-sm font-semibold line-clamp-1 cursor-pointer">
             {game.name}
           </Typography>

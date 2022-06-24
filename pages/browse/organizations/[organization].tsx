@@ -4,21 +4,23 @@ import axios from "axios";
 import OrganizationMain from "../../../components/Organization/OrganizationMain";
 
 const getAllOrganizationNames = async () =>
-  axios.get("https://api.ghostity.com/organizations").then((res) => {
-    const organizations: Organization[] = res.data;
-
-    return organizations.map((org) => ({
-      params: {
-        organization: org.name.toLowerCase(),
-      },
-    }));
-  });
-
-const getOrganizationData = async (
-  organization: string
-): Promise<Organization[]> =>
   axios
-    .get(`https://api.ghostity.com/organizations?name=${organization}`)
+    .get<Organization[]>("https://api.ghostity.com/organizations")
+    .then((res) => {
+      const organizations = res.data;
+
+      return organizations.map((org) => ({
+        params: {
+          organization: org.name.toLowerCase(),
+        },
+      }));
+    });
+
+const getOrganizationData = async (organization: string) =>
+  axios
+    .get<Organization>(
+      `https://api.ghostity.com/organizations?name=${organization}`
+    )
     .then((res) => res.data);
 
 export async function getStaticPaths() {
@@ -42,11 +44,7 @@ export async function getStaticProps({
   };
 }
 
-function OrganizationPage({
-  organization,
-}: {
-  organization: Organization[];
-}) {
+function OrganizationPage({ organization }: { organization: Organization[] }) {
   return (
     <>
       <Head>

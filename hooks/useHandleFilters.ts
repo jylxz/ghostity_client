@@ -48,26 +48,26 @@ export default function useHandleFilters() {
     }
   }, [item]);
 
-  const setFilters = (filter: Filter, filterValue: any) => {
+  const setFilters = (filter: Filter, filterValue: string) => {
     if (filter === "sort") {
-      setSort(filterValue);
+      setSort(filterValue as Sort);
     }
 
     if (filter === "platform") {
-      setPlatform(filterValue);
+      setPlatform(filterValue as Platform);
     }
 
     if (filter === "language") {
-      setLanguage(filterValue);
+      setLanguage(filterValue as Languages);
     }
 
     if (filter === "exclude") {
       let excludeList = exclude ? [...exclude] : [];
 
-      if (excludeList.includes(filterValue)) {
+      if (excludeList.includes(filterValue as Languages)) {
         excludeList = excludeList.filter((lang) => lang !== filterValue);
       } else {
-        excludeList.push(filterValue);
+        excludeList.push(filterValue as Languages);
       }
 
       setExclude(excludeList);
@@ -98,18 +98,18 @@ export default function useHandleFilters() {
   }, [sort, platform, language, exclude]);
 
   const filterString = useMemo(() => {
-    let queryFilterString: string = "";
+    let queryFilterString = "";
 
     if (sort) {
       queryFilterString += `&sort=${sort}`;
     }
 
     if (platform !== "all") {
-      queryFilterString += `&platform=${platform}`;
+      queryFilterString += `&platform=${platform || "all"}`;
     }
 
     if (language !== "all") {
-      queryFilterString += `&lang=${language}`;
+      queryFilterString += `&lang=${language || "all"}`;
     }
 
     if (exclude && exclude.length > 0) {

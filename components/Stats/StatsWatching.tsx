@@ -86,7 +86,7 @@ export default function StatsWatching({ stats }: { stats: WatchingStat[] }) {
           borderColor: "#DEECFC",
           backgroundColor: createGradient(chart.ctx),
           pointBackgroundColor: "#DEECFC",
-          lineTension: 0,
+          // lineTension: 0,
           fill: true,
           borderWidth: 2,
           pointRadius: 2,
