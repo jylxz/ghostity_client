@@ -91,6 +91,7 @@ export default function HomeStats2() {
             className="flex justify-center gap-4 flex-wrap"
           >
             <motion.button
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               variants={buttons}
               onClick={() => setCurrentTab("watching")}
@@ -99,13 +100,12 @@ export default function HomeStats2() {
               <LiveTvOutlinedIcon className="w-6 h-6" />
               <span className="flex items-center gap-1">
                 Watching{" "}
-                <span className="text-sm text-gray-400">{`(${
-                  watchingStats?.data[0].current_watching
-                } Weebs)`}</span>
+                <span className="text-sm text-gray-400">{`(${watchingStats?.data[0].current_watching} Weebs)`}</span>
               </span>
             </motion.button>
             <motion.button
               variants={buttons}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setCurrentTab("live")}
               className="flex items-center gap-2 bg-secondary px-2 py-1.5 rounded"
@@ -113,12 +113,11 @@ export default function HomeStats2() {
               <CableOutlinedIcon className="w-6 h-6" />
               <span className="flex items-center gap-1">
                 Live{" "}
-                <span className="text-sm text-gray-400">{`(${
-                  liveStats?.data[0].current_live
-                } Channels)`}</span>
+                <span className="text-sm text-gray-400">{`(${liveStats?.data[0].current_live} Channels)`}</span>
               </span>
             </motion.button>
             <motion.button
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               variants={buttons}
               onClick={() => setCurrentTab("total")}
@@ -129,9 +128,7 @@ export default function HomeStats2() {
               </div>
               <span className="flex items-center gap-1">
                 Total{" "}
-                <span className="text-sm text-gray-400">{`(${
-                  totalStats?.data[0].current_total
-                } V-Tubers)`}</span>
+                <span className="text-sm text-gray-400">{`(${totalStats?.data[0].current_total} V-Tubers)`}</span>
               </span>
             </motion.button>
           </motion.div>

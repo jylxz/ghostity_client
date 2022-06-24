@@ -17,7 +17,7 @@ export default function HomeHelp() {
 
   return (
     <SectionWrapper color="bg-slate-50" className="py-14">
-      <div className="grid grid-cols-2 gap-8 sm:w-3/4 mx-auto">
+      <div className="grid grid-cols-2 gap-8 sm:w-1/2 mx-auto">
         <div className="text-6xl flex justify-center items-center">
           <motion.div
             initial="initial"

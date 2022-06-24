@@ -30,8 +30,8 @@ function NavbarButton({ text, href }: { text: string; href: string }) {
   return (
     <LinkTo href={href}>
       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.9 }}
+        // whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         type="button"
         className="text-gray-600 px-2 py-1 hover:bg-blurGray hover:rounded"
       >
@@ -63,7 +63,7 @@ export default function Navbar({
   setShowHamburgerMenu: Dispatch<SetStateAction<boolean>>;
 }) {
   const user = useContext(UserContext);
-  const [isWindowSmall] = useIsWindowSmall();
+  const isWindowSmall = useIsWindowSmall();
 
   const animateCenter: AnimationProps["variants"] = {
     initial: { translateX: 0 },
@@ -130,15 +130,13 @@ export default function Navbar({
         if (!isWindowSmall) {
           if (!user) {
             return (
-              <motion.button
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
+              <button
                 type="button"
                 className="hidden sm:block text-md border rounded py-1 px-3 hover:bg-blurGray hover:border-2"
                 onClick={() => setShowAuth(!showAuth)}
               >
                 Login
-              </motion.button>
+              </button>
             );
           }
 

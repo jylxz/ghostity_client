@@ -32,7 +32,10 @@ export default function GameMain({ gameData }: { gameData: Game }) {
         altText={`${gameData.name} screenshot`}
       >
         <div className="flex flex-col sm:flex-row p-4 gap-4">
-          <motion.div layout className="min-w-fit max-h-full my-auto mx-auto sm:mx-0">
+          <motion.div
+            layout
+            className="min-w-fit max-h-full my-auto mx-auto sm:mx-0"
+          >
             {gameData.cover_img ? (
               <Image
                 alt={`${gameData.name}'s cover image`}
@@ -44,10 +47,16 @@ export default function GameMain({ gameData }: { gameData: Game }) {
             ) : null}
           </motion.div>
           <div className="flex flex-col gap-3">
-            <motion.h2 layout className="text-4xl font-semibold">
+            <motion.h2
+              layout
+              className="text-center sm:text-start text-4xl font-semibold"
+            >
               {gameData.name}
             </motion.h2>
-            <motion.span layout="position" className="text-sm text-gray-600">
+            <motion.span
+              layout="position"
+              className="text-center sm:text-start text-sm text-gray-600"
+            >
               <span className="font-semibold text-black">
                 {gameData.viewers}
               </span>{" "}
@@ -68,7 +77,7 @@ export default function GameMain({ gameData }: { gameData: Game }) {
             {showButton ? (
               <motion.button
                 layout="position"
-                className="text-sm font-semibold underline self-start"
+                className="text-sm font-semibold underline self-center sm:self-start"
                 type="button"
                 onClick={() => setShowFullSummary(!showFullSummary)}
               >

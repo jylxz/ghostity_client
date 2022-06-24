@@ -11,7 +11,7 @@ export default function LinkTo({
   className?: string
 }) {
   return (
-    <Link href={href} passHref className={className}>
+    <Link href={href} passHref className={className} scroll={false} shallow>
       <a href="dummy">{children}</a>
     </Link>
   );

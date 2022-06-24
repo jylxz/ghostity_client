@@ -16,7 +16,7 @@ export default function AnimatedTabButton({
 }) {
   return (
     <motion.button
-      whileHover={{ scale: 1.05 }}
+      // whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={() => setCurrentTab(tab)}
       className={`relative z-10 px-2 flex flex-col items-center ${

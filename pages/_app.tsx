@@ -3,7 +3,7 @@
 // Libraries
 import Head from "next/head";
 import { useState, useEffect, useMemo } from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { useRouter } from "next/router";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { AnimatePresence, MotionConfig } from "framer-motion";
@@ -47,6 +47,7 @@ import BlacklistContext from "../context/BlacklistContext";
 import LiveFollowingBar from "../components/general/LiveFollowingBar";
 import useIsWindowSmall from "../hooks/useIsWindowSmall";
 import AuthModalMain from "../components/Auth/AuthModalMain";
+import useScrollRestoration from "../hooks/useScrollRestoration";
 
 export default function MyApp({
   Component,
@@ -68,14 +69,14 @@ export default function MyApp({
   });
 
   // React-Query
-  const queryClient = new QueryClient({
+  const [queryClient] = useState(new QueryClient({
     defaultOptions: {
       queries: {
         staleTime: 180000,
         refetchInterval: 300000,
       },
     },
-  });
+  }));
 
   // Firebase User Authentication
   const [user] = useAuthState(auth);
@@ -105,7 +106,8 @@ export default function MyApp({
   const router = useRouter();
   const { query } = router;
   const [systemColor] = useSystemColor();
-  const [isWindowSmall] = useIsWindowSmall();
+  const isWindowSmall = useIsWindowSmall();
+  useScrollRestoration(router, ["#browse-games-wrapper", "window"]);
 
   // For Navbar and Login
   const [showAuth, setShowAuth] = useState(false);
@@ -175,79 +177,84 @@ export default function MyApp({
         )}
       </Head>
       <QueryClientProvider client={queryClient}>
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            {/* <MotionConfig reducedMotion="always"> */}
-            <UserContext.Provider value={user || null}>
-              <UserFollowContext.Provider value={followsData || null}>
-                <AdminContext.Provider value={admin}>
-                  {router.route === "/" && query.mode === "verifyEmail" ? (
-                    <AuthVerifyEmail />
-                  ) : null}
-                  {router.route === "/" &&
-                  query.mode === "verifyAndChangeEmail" ? (
-                    <AuthUpdateEmail />
-                  ) : null}
-                  {query.resetPassword === "true" ? (
-                    <AuthPasswordResetMessage />
-                  ) : null}
-                  <div className="fixed sm:relative top-0 z-50 w-full">
-                    <PageProgress />
-                    <Navbar
-                      showAuth={showAuth}
-                      setShowAuth={setShowAuth}
-                      setShowHamburgerMenu={setShowHamburgerMenu}
-                    />
+        <Hydrate state={pageProps.dehydratedState}>
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              {/* <MotionConfig reducedMotion="always"> */}
+              <UserContext.Provider value={user || null}>
+                <UserFollowContext.Provider value={followsData || null}>
+                  <AdminContext.Provider value={admin}>
+                    {router.route === "/" && query.mode === "verifyEmail" ? (
+                      <AuthVerifyEmail />
+                    ) : null}
+                    {router.route === "/" &&
+                    query.mode === "verifyAndChangeEmail" ? (
+                      <AuthUpdateEmail />
+                    ) : null}
+                    {query.resetPassword === "true" ? (
+                      <AuthPasswordResetMessage />
+                    ) : null}
+                    <div className="fixed sm:relative top-0 z-50 w-full">
+                      <PageProgress />
+                      <Navbar
+                        showAuth={showAuth}
+                        setShowAuth={setShowAuth}
+                        setShowHamburgerMenu={setShowHamburgerMenu}
+                      />
+                      <AnimatePresence exitBeforeEnter>
+                        {isWindowSmall &&
+                        user &&
+                        (router.route.includes("/browse") ||
+                          router.route === "/search") ? (
+                          <LiveFollowingBar />
+                        ) : null}
+                      </AnimatePresence>
+                    </div>
                     <AnimatePresence exitBeforeEnter>
-                      {isWindowSmall &&
-                      user &&
-                      (router.route.includes("/browse") ||
-                        router.route === "/search") ? (
-                        <LiveFollowingBar />
+                      {showAuth ? (
+                        // <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
+                        <AuthModalMain
+                          showAuth={showAuth}
+                          setShowAuth={setShowAuth}
+                        />
+                      ) : null}
+                      {showHamburgerMenu ? (
+                        <HamburgerNavMenu
+                          setShowHamburgerMenu={setShowHamburgerMenu}
+                          setShowAuth={setShowAuth}
+                        />
+                      ) : null}
+                      {showBlacklistModal ? (
+                        <BlacklistModal
+                          channel={blacklistChannel}
+                          setBlacklistChannel={setBlacklistChannel}
+                          setShowBlacklistModal={setShowBlacklistModal}
+                        />
                       ) : null}
                     </AnimatePresence>
-                  </div>
-                  <AnimatePresence exitBeforeEnter>
-                    {showAuth ? (
-                      // <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
-                    <AuthModalMain showAuth={showAuth} setShowAuth={setShowAuth}/>
-                    ) : null}
-                    {showHamburgerMenu ? (
-                      <HamburgerNavMenu
-                        setShowHamburgerMenu={setShowHamburgerMenu}
-                        setShowAuth={setShowAuth}
-                      />
-                    ) : null}
-                    {showBlacklistModal ? (
-                      <BlacklistModal
-                        channel={blacklistChannel}
-                        setBlacklistChannel={setBlacklistChannel}
-                        setShowBlacklistModal={setShowBlacklistModal}
-                      />
-                    ) : null}
-                  </AnimatePresence>
-                  <BlacklistContext.Provider value={blacklistContextValue}>
-                    <main className={showAuth ? "overflow-hidden" : ""}>
-                      {router.route.includes("browse") ||
-                      router.route.includes("search") ? (
-                        <div className="flex">
-                          <SideBarMain />
-                          <div className="flex-1">
-                            <Component {...pageProps} />
+                    <BlacklistContext.Provider value={blacklistContextValue}>
+                      <main className={showAuth ? "overflow-hidden" : ""}>
+                        {router.route.includes("browse") ||
+                        router.route.includes("search") ? (
+                          <div className="flex">
+                            <SideBarMain />
+                            <div className="flex-1">
+                              <Component {...pageProps} />
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        <Component {...pageProps} />
-                      )}
-                    </main>
-                  </BlacklistContext.Provider>
-                </AdminContext.Provider>
-              </UserFollowContext.Provider>
-            </UserContext.Provider>
-            {/* </MotionConfig> */}
-          </ThemeProvider>
-        </StyledEngineProvider>
-        {/* <ReactQueryDevtools /> */}
+                        ) : (
+                          <Component {...pageProps} />
+                        )}
+                      </main>
+                    </BlacklistContext.Provider>
+                  </AdminContext.Provider>
+                </UserFollowContext.Provider>
+              </UserContext.Provider>
+              {/* </MotionConfig> */}
+            </ThemeProvider>
+          </StyledEngineProvider>
+        </Hydrate>
+          <ReactQueryDevtools />
       </QueryClientProvider>
     </>
   );

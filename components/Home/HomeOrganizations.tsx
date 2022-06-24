@@ -14,7 +14,7 @@ import "swiper/css";
 import useIsWindowSmall from "../../hooks/useIsWindowSmall";
 
 export default function HomeOrganizations({ logos }: OrganizationLogos) {
-  const [isWindowSmall] = useIsWindowSmall()
+  const isWindowSmall = useIsWindowSmall()
   const [slides, setSlide] = useState(5)
 
   useEffect(() => {

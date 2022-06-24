@@ -58,8 +58,8 @@ export default function BrowseStreamsFilters({
               <motion.span className="hidden md:block" layout>Sort by</motion.span>
               <motion.span
                 layout="position"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 1 }}
+                // whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <CustomSelect
                   value={filters.sort}
@@ -88,8 +88,8 @@ export default function BrowseStreamsFilters({
             className="bg-slate-100 p-4 rounded-lg flex flex-col mt-4 z-30"
           >
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9 }}
+              // whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setShowFilter(!showFilter)}
               className="self-end"
             >

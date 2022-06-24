@@ -15,7 +15,7 @@ import useIsWindowSmall from "../../hooks/useIsWindowSmall";
 
 export default function BrowseGames() {
   const { ref, inView } = useInView();
-  const [isWindowSmall] = useIsWindowSmall()
+  const isWindowSmall = useIsWindowSmall();
 
   const fetchGames = async ({ pageParam = 1 }) =>
     axios
@@ -35,34 +35,32 @@ export default function BrowseGames() {
   }, [fetchNextPage, inView]);
 
   return (
-    <BrowseWrapper>
-      {/* <LayoutGroup> */}
-        {data ? (
-          <>
-            <GridWrapper colSize={isWindowSmall ? "xxsmall" : "xsmall"}>
-              {data?.pages.map((group, i) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <Fragment key={i}>
-                  {group.results.map((game) => (
-                    <motion.span layout="position" key={game._id}>
-                      <GameCard key={game._id} game={game} />
-                    </motion.span>
-                  ))}
-                </Fragment>
-              ))}
-            </GridWrapper>
-            {hasNextPage ? (
-              <motion.div
-                layout="position"
-                ref={ref}
-                className="flex justify-center items-center pt-10 pb-3 h-24"
-              >
-                <GradientCircularProgress />
-              </motion.div>
-            ) : null}
-          </>
-        ) : null}
-      {/* </LayoutGroup> */}
+    <BrowseWrapper id="browse-games-wrapper">
+      {data ? (
+        <>
+          <GridWrapper colSize={isWindowSmall ? "xxsmall" : "xsmall"}>
+            {data?.pages.map((group, i) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <Fragment key={i}>
+                {group.results.map((game) => (
+                  <motion.span layout="position" key={game._id}>
+                    <GameCard key={game._id} game={game} />
+                  </motion.span>
+                ))}
+              </Fragment>
+            ))}
+          </GridWrapper>
+          {hasNextPage ? (
+            <motion.div
+              layout="position"
+              ref={ref}
+              className="flex justify-center items-center pt-10 pb-3 h-24"
+            >
+              <GradientCircularProgress />
+            </motion.div>
+          ) : null}
+        </>
+      ) : null}
       {isLoading ? (
         <div className="h-full flex items-center justify-center">
           <GradientCircularProgress />

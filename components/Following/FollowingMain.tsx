@@ -106,7 +106,7 @@ export default function FollowingMain() {
         </div>
       ) : null}
       {followStreams.error || followProfiles.error ? <ProblemLoading /> : null}
-      {followStreams.data && currentTab === "Live" && channelIds?.length > 0 ? (
+      {followStreams.data && currentTab === "Live" ? (
         <>
           <GridWrapper colSize="normal">
             {followStreams.data?.pages.map((group, i) => (

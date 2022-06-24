@@ -57,8 +57,10 @@ export default function BrowseStreams() {
           resetFilters={resetFilters}
           refetch={refetch}
         />
-        {(data && !isRefetching ) ||
-        (data && isFetchingNextPage) ? (
+        {
+        (data && !isRefetching ) ||
+        (data && isFetchingNextPage) 
+        ? (
           <>
             <GridWrapper colSize="normal">
               {data.pages.map((group) => (

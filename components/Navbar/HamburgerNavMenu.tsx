@@ -29,12 +29,12 @@ export default function HamburgerNavMenu({
   return (
     <DarkenBackgroundWrapper onClick={() => setShowHamburgerMenu(false)}>
       <motion.div
-        className="fixed right-0 text-black bg-slate-100 z-50 h-full w-64 border-l-4 border-white flex flex-col px-2 py-8"
+        className="fixed top-0 right-0 text-black bg-slate-100 z-50 h-full w-64 border-l-4 border-white flex flex-col px-2 py-8"
         initial={{ translateX: 300 }}
         animate={{ translateX: 0 }}
         exit={{ translateX: 300 }}
       >
-        <UserProfileCard closeParent={setShowHamburgerMenu}/>
+        <UserProfileCard closeParent={setShowHamburgerMenu} />
         <div className="flex flex-col items-end grid-rows-3 p-4 text-lg gap-4 justify-items-end">
           <div className="">
             <LinkTo href="/">
@@ -75,6 +75,9 @@ export default function HamburgerNavMenu({
               </AnimatedButton>
               <AnimatedButton onClick={() => setShowHamburgerMenu(false)}>
                 <LinkTo href="/browse/organizations">Organizations</LinkTo>
+              </AnimatedButton>
+              <AnimatedButton onClick={() => setShowHamburgerMenu(false)}>
+                <LinkTo href="/search">Search</LinkTo>
               </AnimatedButton>
             </div>
           </div>
