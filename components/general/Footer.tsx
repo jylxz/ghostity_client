@@ -62,7 +62,12 @@ function Footer() {
             </div>
             <h1 className="text-3xl sm:text-4xl text-black">ghostity</h1>
           </div>
-          <motion.div initial="initial" whileInView="animate" viewport={{once: true}} className="flex text-sm">
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="flex text-sm"
+          >
             <motion.div variants={animations.textVariant}>
               Made by
               <span className="bg-[length:160%_160%] bg-left bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 bg-clip-text text-transparent font-bold animate-background-position-left text-sm">
@@ -146,6 +151,9 @@ function Footer() {
                   >
                     Twitter
                   </a>
+                </FooterItem>
+                <FooterItem>
+                  <a href="mailto:jylx@ghostity.com">Email</a>
                 </FooterItem>
               </div>
             </motion.div>

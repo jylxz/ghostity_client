@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 // Libraries
-import Head from "next/head";
+import { AppProps } from "next/app";
 import { useState, useEffect, useMemo } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { useRouter } from "next/router";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { AnimatePresence, MotionConfig } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import {
   createTheme,
   StyledEngineProvider,
@@ -17,7 +16,6 @@ import {
 
 // Tailwind & CSS
 import "../styles/globals.css";
-import defaultTheme from "tailwindcss/defaultTheme";
 
 // Firebase
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -27,8 +25,8 @@ import { auth, db } from "../firebase/ghostityFirebase";
 // import { auth, db } from "../firebase/ghostityDevFirebase";
 
 // Hooks
-import useSystemColor from "../hooks/useSystemColor";
 import useAdminCheck from "../hooks/useAdminCheck";
+import useScrollRestoration from "../hooks/useScrollRestoration";
 
 // Components
 import Navbar from "../components/Navbar/Navbar";
@@ -47,16 +45,9 @@ import UserFollowContext from "../context/UserFollowContext";
 import AdminContext from "../context/AdminContext";
 import BlacklistContext from "../context/BlacklistContext";
 import LiveFollowingBar from "../components/general/LiveFollowingBar";
-import useIsWindowSmall from "../hooks/useIsWindowSmall";
-import useScrollRestoration from "../hooks/useScrollRestoration";
+import Favicons from "../components/Head/Favicons";
 
-export default function MyApp({
-  Component,
-  pageProps,
-}: {
-  Component: any;
-  pageProps: any;
-}) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   // MUI Theme
   const theme = createTheme({
     typography: {
@@ -119,9 +110,6 @@ export default function MyApp({
 
   // Etc.
   const router = useRouter();
-  const { query } = router;
-  const [systemColor] = useSystemColor();
-  const isWindowSmall = useIsWindowSmall();
   useScrollRestoration(router, ["#browse-games-wrapper", "window"]);
 
   // For Navbar and Login
@@ -142,74 +130,19 @@ export default function MyApp({
 
   return (
     <>
-      <Head>
-        {systemColor === "light" ? (
-          <>
-            <link
-              rel="icon"
-              href="/images/Ghostity-svg.svg"
-              sizes="any"
-              type="image/svg+xml"
-              color="#000000"
-            />
-            <link
-              rel="apple-touch-icon"
-              href="/images/Ghostity-svg.svg"
-              sizes="any"
-              type="image/svg+xml"
-            />
-            <link
-              rel="mask-icon"
-              href="/images/Ghostity-svg.svg"
-              sizes="any"
-              type="image/svg+xml"
-              color="#000000"
-            />
-          </>
-        ) : (
-          <>
-            <link
-              rel="icon"
-              href="/images/Ghostity-svg-white.svg"
-              sizes="any"
-              type="image/svg+xml"
-              color="#ffffff"
-            />
-            <link
-              rel="apple-touch-icon"
-              href="/images/Ghostity-svg-white.svg"
-              sizes="any"
-              type="image/svg+xml"
-            />
-            <link
-              rel="mask-icon"
-              href="/images/Ghostity-svg-white.svg"
-              sizes="any"
-              type="image/svg+xml"
-              color="#ffffff"
-            />
-          </>
-        )}
-      </Head>
+      <Favicons />
+
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <StyledEngineProvider injectFirst>
             <ThemeProvider theme={theme}>
-              {/* <MotionConfig reducedMotion="always"> */}
               <UserContext.Provider value={user || null}>
                 <UserFollowContext.Provider value={followsData || null}>
                   <AdminContext.Provider value={admin}>
-                    {router.route === "/" && query.mode === "verifyEmail" ? (
-                      <AuthVerifyEmail />
-                    ) : null}
-                    {router.route === "/" &&
-                    query.mode === "verifyAndChangeEmail" ? (
-                      <AuthUpdateEmail />
-                    ) : null}
-                    {query.resetPassword === "true" ? (
-                      <AuthPasswordResetMessage />
-                    ) : null}
-                    <div className="fixed sm:relative top-0 z-50 w-full">
+                    <AuthVerifyEmail />
+                    <AuthUpdateEmail />
+                    <AuthPasswordResetMessage />
+                    <div className="sticky sm:relative top-0 z-50 w-full">
                       <PageProgress />
                       <Navbar
                         showAuth={showAuth}
@@ -217,35 +150,24 @@ export default function MyApp({
                         setShowHamburgerMenu={setShowHamburgerMenu}
                       />
                       <AnimatePresence exitBeforeEnter>
-                        {isWindowSmall &&
-                        user &&
-                        (router.route.includes("/browse") ||
-                          router.route === "/search") ? (
-                          <LiveFollowingBar />
-                        ) : null}
+                        <LiveFollowingBar />
                       </AnimatePresence>
                     </div>
-                    <AnimatePresence exitBeforeEnter>
-                      {showAuth ? (
-                        // <AuthMain showAuth={showAuth} setShowAuth={setShowAuth} />
-                        <AuthModalMain
-                          setShowAuth={setShowAuth}
-                        />
-                      ) : null}
-                      {showHamburgerMenu ? (
-                        <HamburgerNavMenu
-                          setShowHamburgerMenu={setShowHamburgerMenu}
-                          setShowAuth={setShowAuth}
-                        />
-                      ) : null}
-                      {showBlacklistModal ? (
-                        <BlacklistModal
-                          channel={blacklistChannel}
-                          setBlacklistChannel={setBlacklistChannel}
-                          setShowBlacklistModal={setShowBlacklistModal}
-                        />
-                      ) : null}
-                    </AnimatePresence>
+                    <AuthModalMain
+                      showAuth={showAuth}
+                      setShowAuth={setShowAuth}
+                    />
+                    <HamburgerNavMenu
+                      showHamburgerMenu={showHamburgerMenu}
+                      setShowHamburgerMenu={setShowHamburgerMenu}
+                      setShowAuth={setShowAuth}
+                    />
+                    <BlacklistModal
+                      channel={blacklistChannel}
+                      setBlacklistChannel={setBlacklistChannel}
+                      showBlacklistModal={showBlacklistModal}
+                      setShowBlacklistModal={setShowBlacklistModal}
+                    />
                     <BlacklistContext.Provider value={blacklistContextValue}>
                       <main className={showAuth ? "overflow-hidden" : ""}>
                         {router.route.includes("browse") ||
@@ -264,7 +186,6 @@ export default function MyApp({
                   </AdminContext.Provider>
                 </UserFollowContext.Provider>
               </UserContext.Provider>
-              {/* </MotionConfig> */}
             </ThemeProvider>
           </StyledEngineProvider>
         </Hydrate>

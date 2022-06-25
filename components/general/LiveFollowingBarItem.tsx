@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
-import AnimatedButton from "./AnimatedButton";
 
 export default function LiveFollowingBarItem({ stream }: { stream: Stream }) {
   return (
-    // <a href={stream.stream.url} target="_blank" rel="noopener noreferrer">
+    <a href={stream.stream.url} target="_blank" rel="noopener noreferrer">
       <button
         type="button"
         className="flex flex-col items-center justify-center max-w-[5rem] relative mx-auto"
@@ -24,6 +23,6 @@ export default function LiveFollowingBarItem({ stream }: { stream: Stream }) {
           {stream.channel_name}
         </span>
       </button>
-    // </a>
+    </a>
   );
 }

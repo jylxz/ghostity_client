@@ -20,7 +20,7 @@ export default function AuthVerifyEmail() {
     }
   }, [query.oobCode]);
 
-  return !loading ? (
+  return !loading && router.route === "/" && query.mode === "verifyEmail" ? (
     <div className="text-center bg-gray-500/50 text-white py-1 flex items-center justify-center gap-2">
       {!error ? (
         <>
