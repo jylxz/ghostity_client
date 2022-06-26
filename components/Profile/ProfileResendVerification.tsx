@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSendEmailVerification } from "react-firebase-hooks/auth";
-import { RiErrorWarningFill } from "react-icons/Ri";
+import { RiErrorWarningFill } from "react-icons/ri";
 import { auth } from "../../firebase/ghostityFirebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
 

@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 import { motion } from "framer-motion";
 
 // Icons
-import { RiLockPasswordLine, RiLockPasswordFill } from "react-icons/Ri";
+import { RiLockPasswordLine, RiLockPasswordFill } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsArrowLeftShort } from "react-icons/bs";

@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 // Icons
 import { AiOutlineMail } from "react-icons/ai";
-import { RiLockPasswordLine } from "react-icons/Ri";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 // Firebase
 import {

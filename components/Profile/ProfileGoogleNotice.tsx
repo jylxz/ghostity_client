@@ -1,5 +1,5 @@
 import React from 'react'
-import { RiErrorWarningFill } from 'react-icons/Ri';
+import { RiErrorWarningFill } from 'react-icons/ri';
 
 export default function ProfileGoogleNotice() {
   return (
