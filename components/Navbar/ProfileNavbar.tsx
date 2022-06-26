@@ -44,7 +44,7 @@ export default function ProfileNavbar() {
             className="absolute top-[46px] -right-8 z-40 w-64 bg-slate-100 text-black px-2 py-3 rounded-bl "
           >
             <UserProfileCard closeParent={setShow} />
-            <div className="flex flex-col items-end px-4 py-2 text">
+            <div className="flex flex-col items-end px-4 py-2 text font-medium">
               <HamburgerNavMenuButton
                 title="Logout"
                 onClick={() => signOut(auth)}

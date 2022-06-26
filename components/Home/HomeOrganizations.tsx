@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-
 // Libraries
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
@@ -9,9 +7,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Components
 import LinkTo from "../general/LinkTo";
 
+// Hooks
+import useIsWindowSmall from "../../hooks/useIsWindowSmall";
+
 // CSS
 import "swiper/css";
-import useIsWindowSmall from "../../hooks/useIsWindowSmall";
 
 export default function HomeOrganizations({ logos }: OrganizationLogos) {
   const isWindowSmall = useIsWindowSmall()

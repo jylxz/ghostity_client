@@ -7,13 +7,20 @@ import SectionWrapper from "../general/SectionWrapper";
 import LinkTo from "../general/LinkTo";
 
 // Animations
-import homeAnimations from "./animations/homeAnimations"
+import { homeHelpAnimations } from "./animations/homeAnimations";
 
 // Images
 import GhostityLogo from "../../public/images/Ghostity-svg.svg";
 
 export default function HomeHelp() {
-  const animations = homeAnimations.help
+  const {
+    ghostVariant,
+    questionMarkVariant,
+    questionHeadingVariant,
+    containerVariant,
+    textVariant,
+    buttonVariant,
+  } = homeHelpAnimations;
 
   return (
     <SectionWrapper color="bg-slate-50" className="py-14">
@@ -22,14 +29,14 @@ export default function HomeHelp() {
           <motion.div
             initial="initial"
             whileInView="animate"
-            viewport={{once: true}}
+            viewport={{ once: true }}
             className="relative"
           >
-            <motion.div variants={animations.ghostVariant}>
+            <motion.div variants={ghostVariant}>
               <GhostityLogo className="h-24 w-24" />
             </motion.div>
             <motion.span
-              variants={animations.questionMarkVariant}
+              variants={questionMarkVariant}
               className="absolute -top-[1rem] -right-[2rem] select-none cursor-default"
             >
               ?
@@ -40,28 +47,28 @@ export default function HomeHelp() {
           initial="initial"
           whileInView="animate"
           whileTap="tap"
-          viewport={{once: true}}
+          viewport={{ once: true }}
           className="flex flex-col gap-4 max-w-[75ch]"
         >
           <motion.h2
-            variants={animations.questionHeadingVariant}
+            variants={questionHeadingVariant}
             className="text-xl lg:text-2xl"
           >
             Questions?
           </motion.h2>
-          <motion.div variants={animations.containerVariant}>
+          <motion.div variants={containerVariant}>
             <motion.p
-              variants={animations.textVariant}
+              variants={textVariant}
               className="text-sm lg:text-base text-gray-500"
             >
               Are you a V-Tuber, but don&apos;t see your channel on ghostity?
               Check the FAQ page for help!
             </motion.p>
-            <motion.div variants={animations.textVariant} className="mt-3">
+            <motion.div variants={textVariant} className="mt-3">
               <LinkTo href="/faq">
                 <motion.button
                   type="button"
-                  variants={animations.buttonVariant}
+                  variants={buttonVariant}
                   whileHover="hover"
                   className="bg-gradient-to-r from-primary via-secondary to-secondary2 shadow-sm px-4 py-1 rounded"
                 >

@@ -7,10 +7,6 @@ export async function getStaticProps() {
   const orgs = await axios
     .get<Organization[]>("https://api.ghostity.com/organizations")
     .then((allOrgs) => allOrgs.data);
-  // const fetchOrganizations = await fetch(
-  //   "https://api.ghostity.com/organizations"
-  // );
-  // const orgs = await fetchOrganizations.json();
 
   return { props: { orgs } };
 }

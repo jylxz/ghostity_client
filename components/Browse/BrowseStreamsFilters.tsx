@@ -46,7 +46,7 @@ export default function BrowseStreamsFilters({
     >
       <div className="flex sm:items-center justify-between">
         <motion.div layout className="flex items-center gap-2 ">
-          <span className="hidden md:block">Filter</span>
+          <span className="hidden md:block font-medium">Filter</span>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9 }}
@@ -61,7 +61,7 @@ export default function BrowseStreamsFilters({
         <LayoutGroup>
           {filters.sort ? (
             <motion.div layout className="flex items-center gap-2 z-20">
-              <motion.span className="hidden md:block" layout>
+              <motion.span className="hidden md:block font-medium" layout>
                 Sort by
               </motion.span>
               <motion.span
@@ -89,7 +89,7 @@ export default function BrowseStreamsFilters({
         {showFilter ? (
           <motion.div
             key="OptionsContainer"
-            layout
+            layout={!showFilter}
             initial={{ translateY: -600 }}
             animate={{ translateY: 0 }}
             exit={{ translateY: -600 }}
@@ -106,7 +106,7 @@ export default function BrowseStreamsFilters({
             </motion.button>
             <div className="mb-4 grid sm:grid-cols-2 gap-4 sm:gap-8">
               <FormControl size="small">
-                <div className="font-thin">Language</div>
+                <div className="font-medium">Language</div>
                 <CustomSelect
                   value={filters.language}
                   onChange={(e) => setFilters("language", e)}
@@ -129,7 +129,7 @@ export default function BrowseStreamsFilters({
                 </CustomSelect>
               </FormControl>
               <FormControl size="small">
-                <div className="font-thin">Platform</div>
+                <div className="font-medium">Platform</div>
                 <CustomSelect
                   value={filters.platform}
                   className="bg-white text-black border"
@@ -145,7 +145,7 @@ export default function BrowseStreamsFilters({
               </FormControl>
             </div>
             <div className="mb-4">
-              <div className="mb-2 font-thin">Exclude</div>
+              <div className="mb-2 font-medium">Exclude</div>
               <div className="flex flex-wrap gap-4">
                 <Chip
                   label="English"
@@ -263,7 +263,7 @@ export default function BrowseStreamsFilters({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.9 }}
                 type="button"
-                className="bg-white px-3 py-1 text-black rounded border"
+                className="bg-white px-3 py-1 text-black rounded border font-medium"
                 onClick={async () => refetch().then(() => setShowFilter(false))}
               >
                 Apply

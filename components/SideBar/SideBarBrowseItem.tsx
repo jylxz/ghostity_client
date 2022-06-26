@@ -42,13 +42,19 @@ export default function SideBarBrowseItem({
           className="absolute z-20 -left-5 col-start-1 w-[calc(100%_+_1.25rem)] h-full bg-white"
         />
       ) : null}
-      <div className={`relative z-30 col-start-2 flex ${minimized ? "justify-center" : ""} items-center h-full`}>
+      <div
+        className={`relative z-30 col-start-2 flex ${
+          minimized ? "justify-center" : ""
+        } items-center h-full`}
+      >
         <LinkTo href={href}>
           <motion.button
             whileTap={{ scale: 0.95 }}
             type="button"
             className={`z-30 flex items-center w-full h-full ${
-              !selected ? "text-sm text-gray-500 fill-gray-500" : ""
+              !selected
+                ? "text-sm text-gray-500 fill-gray-500 "
+                : "font-medium"
             }`}
           >
             {icon}

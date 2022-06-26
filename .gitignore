@@ -30,3 +30,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+__tests__
+__mocks__

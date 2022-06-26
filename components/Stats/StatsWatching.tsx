@@ -25,10 +25,7 @@ const options: ChartOptions<"line"> = {
     legend: {
       position: "top" as const,
     },
-    title: {
-      display: true,
-      text: "Watching",
-    },
+    title: { color: "black", display: true, text: "Watching" },
     subtitle: {
       display: true,
       text: "Updates Every 10 Minutes",
@@ -66,9 +63,9 @@ export default function StatsWatching({ stats }: { stats: WatchingStat[] }) {
   const [chartData, setChartData] = useState<ChartData<"line">>({
     datasets: [],
   });
-  
+
   useEffect(() => {
-    const watchingStats = stats.slice().reverse()
+    const watchingStats = stats.slice().reverse();
     const chart = chartRef.current;
 
     if (!chart || !stats) {
@@ -89,7 +86,7 @@ export default function StatsWatching({ stats }: { stats: WatchingStat[] }) {
           // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 2,
+          pointRadius: 1,
         },
       ],
     };

@@ -28,7 +28,7 @@ export default function UserProfileCard({
             alt="Ghostity profile image"
           />
         </div>
-        <span className="line-clamp-1 text-center">
+        <span className="line-clamp-1 text-center font-medium">
           {user?.displayName || "A Wandering Ghost"}
         </span>
         {user ? (
@@ -38,7 +38,7 @@ export default function UserProfileCard({
         <LinkTo href="/profile" className="w-full">
           <button
             type="button"
-            className=" text-sm text-center py-1.5 border-t w-full"
+            className=" text-sm text-center py-1.5 border-t w-full font-medium"
             onClick={() => closeParent(false)}
           >
             View Profile

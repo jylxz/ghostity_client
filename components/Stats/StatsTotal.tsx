@@ -26,6 +26,7 @@ const options: ChartOptions<"line"> = {
       position: "top" as const,
     },
     title: {
+      color: "black",
       display: true,
       text: "Total V-Tubers (On Ghostity)",
     },
@@ -84,17 +85,19 @@ export default function StatsTotal({ stats }: { stats: TotalStat[] }) {
   const [chartData, setChartData] = useState<ChartData<"line">>({
     datasets: [],
   });
-  
+
   useEffect(() => {
-    const totalStats = stats.slice().reverse()
+    const totalStats = stats.slice().reverse();
     const chart = chartRef.current;
-    
+
     if (!chart) {
       return;
     }
-    
+
     const data: ChartData<"line"> = {
-      labels: totalStats.map((stat) => format(new Date(stat.createdAt), "p | MMM d")),
+      labels: totalStats.map((stat) =>
+        format(new Date(stat.createdAt), "p | MMM d")
+      ),
       datasets: [
         {
           label: `V-Tubers (${totalStats.slice(-1)[0].current_total})`,
@@ -105,7 +108,7 @@ export default function StatsTotal({ stats }: { stats: TotalStat[] }) {
           // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 2,
+          pointRadius: 1,
         },
         {
           label: `Youtube (${totalStats.slice(-1)[0].current_youtube})`,
@@ -116,7 +119,7 @@ export default function StatsTotal({ stats }: { stats: TotalStat[] }) {
           // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 2,
+          pointRadius: 1,
         },
         {
           label: `Twitch (${totalStats.slice(-1)[0].current_twitch})`,
@@ -127,13 +130,14 @@ export default function StatsTotal({ stats }: { stats: TotalStat[] }) {
           // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 2,
+          pointRadius: 1,
         },
       ],
     };
     setChartData(data);
   }, [stats]);
 
-
-  return <Line ref={chartRef} options={options} data={chartData} height={600} />;
+  return (
+    <Line ref={chartRef} options={options} data={chartData} height={600} />
+  );
 }

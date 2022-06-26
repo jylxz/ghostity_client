@@ -12,7 +12,7 @@ export default function BrowseWrapper({
     <motion.div
       id={id}
       layoutScroll
-      className="overflow-scroll sm:h-[calc(100vh_-_3.8rem)] px-6 sm:px-10 py-7 flex flex-col"
+      className="overflow-y-auto overflow-x-hidden sm:h-[calc(100vh_-_3.8rem)] px-6 sm:px-10 py-7 flex flex-col"
     >
       {children}
     </motion.div>

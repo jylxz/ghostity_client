@@ -235,7 +235,7 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
           <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
             <Typography
               title={stream.stream.title}
-              className="text-ellipsis overflow-hidden line-clamp-1 text-sm"
+              className="text-ellipsis overflow-hidden line-clamp-1 text-sm font-medium text-gray-700"
             >
               {stream.stream.title}
             </Typography>

@@ -28,10 +28,11 @@ const options: ChartOptions<"line"> = {
     title: {
       display: true,
       text: "Live Channels",
+      color: "black",
     },
     subtitle: {
-      display:true,
-      text: "Updates Every 10 Minutes"
+      display: true,
+      text: "Updates Every 10 Minutes",
     },
     tooltip: {
       mode: "index",
@@ -39,15 +40,15 @@ const options: ChartOptions<"line"> = {
       position: "nearest",
       callbacks: {
         label(context) {
-          let label = context.dataset.label || ""
+          let label = context.dataset.label || "";
 
           if (/\d/.test(label)) {
             label = label.replace(/[0-9]/g, "").replace(/\(|\)/g, "");
           }
 
-          return `${label}: ${context.parsed.y} Channels`
-        }
-      }
+          return `${label}: ${context.parsed.y} Channels`;
+        },
+      },
     },
   },
 };
@@ -106,7 +107,7 @@ export default function StatsLive({ stats }: { stats: LiveStat[] }) {
           // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 2,
+          pointRadius: 1,
         } ,
         {
           label: `Youtube (${liveStats.slice(-1)[0].current_youtube_live})`,
@@ -117,7 +118,7 @@ export default function StatsLive({ stats }: { stats: LiveStat[] }) {
           // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 2,
+          pointRadius: 1,
         },
         {
           label: `Twitch (${liveStats.slice(-1)[0].current_twitch_live})`,
@@ -128,7 +129,7 @@ export default function StatsLive({ stats }: { stats: LiveStat[] }) {
           // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 2,
+          pointRadius: 1,
         },
       ],
     };

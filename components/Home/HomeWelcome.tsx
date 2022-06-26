@@ -9,7 +9,7 @@ import LinkTo from "../general/LinkTo";
 import homeAnimations from "./animations/homeAnimations"
 
 // Images
-import GhostityDiscovering from "../../public/images/Ghost-discovering-ghostity.svg";
+import GhostityDiscovering from "../../public/images/Ghost-discovering-ghostity.svg?component";
 
 export default function HomeWelcome() {
   const animations = homeAnimations.welcome

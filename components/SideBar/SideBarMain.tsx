@@ -1,7 +1,7 @@
 // Libraries
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useInfiniteQuery } from "react-query";
 
 // Icons
@@ -26,6 +26,7 @@ import SideBarFollowingItem from "./SideBarFollowingItem";
 
 // Animations
 import browseAnimations from "../Browse/animations/browseAnimations";
+import useIsWindowSmall from "../../hooks/useIsWindowSmall";
 
 export default function SideBarMain() {
   const animations = browseAnimations.sidebar;
@@ -33,6 +34,7 @@ export default function SideBarMain() {
   const follows = useContext(UserFollowContext);
   const [showChannels, setShowChannels] = useState(5);
   const window = useWindowDimensions();
+  const isWindowSmall = useIsWindowSmall();
   const [
     showBrowseBar,
     setShowBrowseBar,
@@ -73,9 +75,11 @@ export default function SideBarMain() {
     <motion.div
       layout="size"
       layoutScroll
+      initial={{ translateX: -300 }}
+      animate={{ translateX: 0 }}
       className={` z-30  bg-slate-100 ${
         showBrowseBar ? "min-w-[15.5rem] max-w-[15.5rem] pl-4" : "w-16"
-      } h-[calc(100vh_-_3.8rem)] overflow-auto hidden sm:block`}
+      } h-[calc(100vh_-_3.8rem)] overflow-x-hidden overflow-y-auto hidden sm:block sm-custom-scroll`}
       onMouseLeave={() => (minimized ? browseBarOverride(false) : null)}
     >
       <div
@@ -84,7 +88,9 @@ export default function SideBarMain() {
         }`}
       >
         {showBrowseBar ? (
-          <h1 className="text-lg my-3 flex items-center">Browse</h1>
+          <h1 className="text-lg my-3 flex items-center font-medium">
+            Browse
+          </h1>
         ) : null}
         <motion.div layout="position" className="flex justify-between">
           <motion.button
@@ -93,7 +99,7 @@ export default function SideBarMain() {
             onClick={() => setShowBrowseBar(!showBrowseBar)}
             className={`p-1 my-3 flex items-center justify-center ${
               !showBrowseBar ? "mx-auto" : ""
-            } ${width && width < 640 ? "hidden" : ""}`}
+            } ${isWindowSmall ? "hidden" : ""}`}
           >
             {showBrowseBar ? (
               <BiArrowToLeft className="h-5 w-5" />
@@ -177,7 +183,7 @@ export default function SideBarMain() {
       {user ? (
         <>
           {showBrowseBar ? (
-            <h1 className="text-lg my-3">Followed</h1>
+            <h1 className="text-lg my-3 font-medium">Followed</h1>
           ) : (
             <div className="mx-auto mt-1 mb-2 w-10 h-0.5 border" />
           )}

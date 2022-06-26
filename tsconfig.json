@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["@honkhonk/vite-plugin-svgr/client"],
     "target": "es2021",
     "lib": [
       "dom",

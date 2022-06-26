@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,6 +25,7 @@ import StatsTotal from "../Stats/StatsTotal";
 import AnimatedButton from "../general/AnimatedButton";
 import GhostityIcon from "../../public/images/Ghostity-svg.svg";
 import { homeStatsAnimations } from "./animations/homeAnimations";
+import GradientCircularProgress from "../general/GradientCircularProgress";
 
 ChartJS.register(
   CategoryScale,
@@ -43,33 +44,70 @@ ChartJS.defaults.font.family = "Quicksand";
 export default function HomeStats2() {
   const { buttonContainer, buttons } = homeStatsAnimations;
   const [currentTab, setCurrentTab] = useState("watching");
+  const [time, setTime] = useState("1day");
   const fetchLiveStats = () =>
     axios
-      .get<LiveStat[]>("https://api.ghostity.com/stats/live")
+      .get<LiveStat[]>(`https://api.ghostity.com/stats/live?time=${time}`)
       .then((res) => res.data);
-  const liveStats = useQuery<LiveStat[], Error>("liveStats", fetchLiveStats);
+  const liveStats = useQuery<LiveStat[], Error>(
+    `liveStats, ${time}`,
+    fetchLiveStats
+  );
 
   const fetchWatchingStats = () =>
     axios
-      .get<WatchingStat[]>("https://api.ghostity.com/stats/watching")
+      .get<WatchingStat[]>(
+        `https://api.ghostity.com/stats/watching?time=${time}`
+      )
       .then((res) => res.data);
   const watchingStats = useQuery<WatchingStat[], Error>(
-    "watchingStats",
+    `watchingStats, ${time}`,
     fetchWatchingStats
   );
 
   const fetchTotalStats = () =>
     axios
-      .get<TotalStat[]>("https://api.ghostity.com/stats/total")
+      .get<TotalStat[]>(`https://api.ghostity.com/stats/total?time=${time}`)
       .then((res) => res.data);
   const totalStats = useQuery<TotalStat[], Error>(
-    "totalStats",
+    `totalStats, ${time}`,
     fetchTotalStats
+  );
+
+  const loading = useMemo(
+    () => (!!liveStats.isLoading || !!watchingStats.isLoading || !!totalStats.isLoading),
+    [liveStats, watchingStats, totalStats]
   );
 
   return (
     <SectionWrapper color="white">
       <HomeSectionHeading heading="Ghostity Stats" />
+      <div className="flex gap-2 text-sm justify-end">
+        <AnimatedButton
+          onClick={() => setTime("1day")}
+          className="bg-gray-100 px-2 py-0.5 rounded"
+        >
+          1 Day
+        </AnimatedButton>
+        <AnimatedButton
+          onClick={() => setTime("3day")}
+          className="bg-gray-100 px-2 py-0.5 rounded"
+        >
+          3 Day
+        </AnimatedButton>
+        <AnimatedButton
+          onClick={() => setTime("week")}
+          className="bg-gray-100 px-2 py-0.5 rounded"
+        >
+          Week
+        </AnimatedButton>
+        <AnimatedButton
+          onClick={() => setTime("month")}
+          className="bg-gray-100 px-2 py-0.5 rounded"
+        >
+          Month
+        </AnimatedButton>
+      </div>
       {liveStats.data && watchingStats.data && totalStats.data ? (
         <>
           <div className="select-none">

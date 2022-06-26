@@ -1,8 +1,12 @@
 import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export default function GradientCircularProgress() {
-  return (
+export default function GradientCircularProgress({
+  loading = true,
+}: {
+  loading?: boolean;
+}) {
+  return loading ? (
     <>
       <svg className="w-0 h-0">
         <linearGradient id="linearColors" x1="0" y1="0" x2="1" y2="1">
@@ -16,5 +20,5 @@ export default function GradientCircularProgress() {
         size="4rem"
       />
     </>
-  );
+  ) : null;
 }

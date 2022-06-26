@@ -39,7 +39,7 @@ export default function SideBarButtons({
   return length > 5 ? (
     <motion.div
     layout="position"
-      className={`flex ${
+      className={`flex font-medium text-gray-600 ${
         showChannels > 5 ? "justify-between" : "justify-center"
       }`}
     >

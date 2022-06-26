@@ -124,7 +124,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     } else {
       document.getElementsByTagName("main")[0].style.touchAction = "auto";
       document.body.style.touchAction = "auto";
-      document.body.style.overflow = "scroll";
+      document.body.style.overflow = "hidden auto";
     }
   }, [showAuth, showHamburgerMenu]);
 

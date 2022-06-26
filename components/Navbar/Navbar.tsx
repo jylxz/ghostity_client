@@ -33,7 +33,7 @@ function NavbarButton({ text, href }: { text: string; href: string }) {
         // whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         type="button"
-        className="text-gray-600 px-2 py-1 hover:bg-blurGray hover:rounded"
+        className="text-gray-600 px-2 py-1 hover:bg-blurGray hover:rounded font-medium"
       >
         <div className="relative">
           {text}
@@ -106,7 +106,7 @@ export default function Navbar({
               <motion.div variants={wiggle}>
                 <GhostityLogo className="h-10 w-10 " />
               </motion.div>
-              <motion.h1 variants={fadeOut} className=" text-black">
+              <motion.h1 variants={fadeOut} className=" text-black font-medium">
                 ghostity
               </motion.h1>
             </motion.div>

@@ -1,7 +1,7 @@
 import GhostitySurprise from "../../public/images/GhostitySurprise.svg";
 
-function ProblemLoading() {
-  return (
+export default function ProblemLoading({ error = true }: { error?: boolean}) {
+  return error ? (
     <div className="flex-1 flex flex-col sm:flex-row items-center justify-center">
       <GhostitySurprise className="h-2/5 w-40" />
       <div>
@@ -11,7 +11,5 @@ function ProblemLoading() {
         <div className="text-gray-600">Refresh or Try Again Later!</div>
       </div>
     </div>
-  );
+  ) : null;
 }
-
-export default ProblemLoading;

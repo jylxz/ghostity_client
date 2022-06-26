@@ -43,7 +43,7 @@ export default function SideBarFollowingItem({
           () =>
             scrollRef.current?.scrollIntoView({
               behavior: "smooth",
-              block: "nearest",
+              block: "center",
             }),
           2000
         )
@@ -124,7 +124,7 @@ export default function SideBarFollowingItem({
                   <motion.span
                     key="title"
                     variants={opacity}
-                    className=" overflow-hidden inline-block w-[10.5rem] align-text-bottom whitespace-nowrap text-sm"
+                    className=" overflow-hidden inline-block w-[10.5rem] align-text-bottom whitespace-nowrap text-sm font-medium text-gray-700"
                   >
                     {shouldAnimate ? (
                       <motion.span variants={text} className="inline-block">
@@ -135,7 +135,10 @@ export default function SideBarFollowingItem({
                     )}
                   </motion.span>
                 ) : (
-                  <motion.span variants={opacity} className="line-clamp-1">
+                  <motion.span
+                    variants={opacity}
+                    className="line-clamp-1 font-bold"
+                  >
                     {stream.channel_name}
                   </motion.span>
                 )}

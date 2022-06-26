@@ -19,7 +19,7 @@ import LinkTo from "../general/LinkTo";
 import GhostityLogo from "../../public/images/Ghostity-svg.svg";
 
 // Animations
-import homeAnimations from "./animations/homeAnimations";
+import { homeBrowseAnimations } from "./animations/homeAnimations";
 
 // CSS
 import "swiper/css";
@@ -34,37 +34,11 @@ function BrowseCardAnimation({
   staggerOrder?: number;
   title: string;
 }) {
-  const cardVariant = {
-    initial: {
-      opacity: 0,
-    },
-    animate: {
-      opacity: 1,
-      transition: staggerOrder
-        ? { delay: staggerOrder * 0.2, delayChildren: 1 }
-        : { delayChildren: 1 },
-    },
-  };
-
-  const hoverVariant = {
-    hover: {
-      scale: 1.15,
-    },
-  };
-
-  const titleVariant = {
-    initial: {
-      y: 100,
-      opacity: 0,
-    },
-    animate: {
-      y: 0,
-      opacity: 1,
-    },
-  };
+  const {cardVariant, hoverVariant, titleVariant} = homeBrowseAnimations.card
 
   return (
     <motion.div
+      custom={staggerOrder}
       variants={cardVariant}
       initial="initial"
       whileInView="animate"
@@ -88,7 +62,8 @@ function BrowseCardAnimation({
 export default function BrowseBar() {
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
   const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
-  const animations = homeAnimations.browse
+  const { ghostVariant, ghostVariant2, organizationVariant, gamesVariant } =
+    homeBrowseAnimations;
 
   return (
     <SectionWrapper color="bg-slate-50">
@@ -124,16 +99,15 @@ export default function BrowseBar() {
           }}
           updateOnWindowResize
           modules={[Navigation]}
-          className="child:text-white"
         >
           <SwiperSlide>
             <LinkTo href="/browse">
               <BrowseCardAnimation staggerOrder={1} title="Streams">
                 <div className="flex gap-2">
-                  <motion.div variants={animations.ghostVariant} className="h-10 w-10">
+                  <motion.div variants={ghostVariant} className="h-10 w-10">
                     <GhostityLogo className="h-10 w-10" />
                   </motion.div>
-                  <motion.div variants={animations.ghostVariant2} className="h-10 w-10">
+                  <motion.div variants={ghostVariant2} className="h-10 w-10">
                     <GhostityLogo className="h-10 w-10 -scale-x-100" />
                   </motion.div>
                 </div>
@@ -143,7 +117,7 @@ export default function BrowseBar() {
           <SwiperSlide>
             <LinkTo href="/browse/games">
               <BrowseCardAnimation staggerOrder={2} title="Games">
-                <motion.div variants={animations.gamesVariant} className="flex flex-col">
+                <motion.div variants={gamesVariant} className="flex flex-col">
                   <GamesOutlinedIcon className="mx-auto h-10 w-10 text-black" />
                 </motion.div>
               </BrowseCardAnimation>
@@ -153,8 +127,7 @@ export default function BrowseBar() {
             <LinkTo href="/browse/organizations">
               <BrowseCardAnimation staggerOrder={3} title="Organizations">
                 <motion.div
-                key="organization"
-                  variants={animations.organizationVariant}
+                  variants={organizationVariant}
                   className="flex flex-col items-center"
                 >
                   <CorporateFareOutlinedIcon className="text-black h-10 w-10" />
