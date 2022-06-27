@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -45,12 +45,15 @@ export default function HomeStats2() {
   const { buttonContainer, buttons } = homeStatsAnimations;
   const [currentTab, setCurrentTab] = useState("watching");
   const [time, setTime] = useState("1day");
+  const [currentLive, setCurrentLive] = useState<number>(0)
+  const [currentWatching, setCurrentWatching] = useState<number>(0);
+  const [currentTotal, setCurrentTotal] = useState<number>(0);
   const fetchLiveStats = () =>
     axios
       .get<LiveStat[]>(`https://api.ghostity.com/stats/live?time=${time}`)
       .then((res) => res.data);
   const liveStats = useQuery<LiveStat[], Error>(
-    `liveStats, ${time}`,
+    `liveStats, ${time} ${currentTab}`,
     fetchLiveStats
   );
 
@@ -61,7 +64,7 @@ export default function HomeStats2() {
       )
       .then((res) => res.data);
   const watchingStats = useQuery<WatchingStat[], Error>(
-    `watchingStats, ${time}`,
+    `watchingStats, ${time} ${currentTab}`,
     fetchWatchingStats
   );
 
@@ -70,108 +73,123 @@ export default function HomeStats2() {
       .get<TotalStat[]>(`https://api.ghostity.com/stats/total?time=${time}`)
       .then((res) => res.data);
   const totalStats = useQuery<TotalStat[], Error>(
-    `totalStats, ${time}`,
+    `totalStats, ${time} ${currentTab}`,
     fetchTotalStats
   );
 
-  const loading = useMemo(
-    () => (!!liveStats.isLoading || !!watchingStats.isLoading || !!totalStats.isLoading),
-    [liveStats, watchingStats, totalStats]
-  );
+  useEffect(() => {
+    if (watchingStats.data) {
+      setCurrentWatching(watchingStats.data[0].current_watching);
+    }
+
+    if (liveStats.data) {
+      setCurrentLive(liveStats.data[0].current_live);
+    }
+
+    if (totalStats.data) {
+      setCurrentTotal(totalStats.data[0].current_total);
+    }
+  }, [watchingStats, liveStats, totalStats])
 
   return (
-    <SectionWrapper color="white">
+    <SectionWrapper color="white" className="">
       <HomeSectionHeading heading="Ghostity Stats" />
-      <div className="flex gap-2 text-sm justify-end">
+      <div className="flex gap-2 text-sm justify-center sm:justify-end ">
         <AnimatedButton
           onClick={() => setTime("1day")}
-          className="bg-gray-100 px-2 py-0.5 rounded"
+          className={`px-2 py-0.5 rounded border-2 ${
+            time === "1day"
+              ? "text-black border-primary bg-white font-medium"
+              : "text-gray-400 bg-gray-100 "
+          }`}
         >
           1 Day
         </AnimatedButton>
         <AnimatedButton
           onClick={() => setTime("3day")}
-          className="bg-gray-100 px-2 py-0.5 rounded"
+          className={`px-2 py-0.5 rounded border-2 ${
+            time === "3day"
+              ? "text-black border-primary bg-white font-medium"
+              : "text-gray-400 bg-gray-100"
+          }`}
         >
           3 Day
         </AnimatedButton>
         <AnimatedButton
           onClick={() => setTime("week")}
-          className="bg-gray-100 px-2 py-0.5 rounded"
+          className={` px-2 py-0.5 rounded border-2 ${
+            time === "week"
+              ? "text-black border-primary bg-white font-medium"
+              : "text-gray-400 bg-gray-100"
+          }`}
         >
           Week
         </AnimatedButton>
         <AnimatedButton
           onClick={() => setTime("month")}
-          className="bg-gray-100 px-2 py-0.5 rounded"
+          className={`px-2 py-0.5 rounded border-2 ${
+            time === "month"
+              ? "text-black border-primary bg-white font-medium"
+              : "text-gray-400 bg-gray-100 "
+          }`}
         >
           Month
         </AnimatedButton>
       </div>
-      {liveStats.data && watchingStats.data && totalStats.data ? (
-        <>
-          <div className="select-none">
-            {currentTab === "live" ? (
-              <StatsLive stats={liveStats.data} />
-            ) : null}
-            {currentTab === "watching" ? (
-              <StatsWatching stats={watchingStats.data} />
-            ) : null}
-            {currentTab === "total" ? (
-              <StatsTotal stats={totalStats.data} />
-            ) : null}
+      <div className="select-none">
+        <StatsLive stats={liveStats.data} currentTab={currentTab} />
+        <StatsWatching stats={watchingStats.data} currentTab={currentTab} />
+        <StatsTotal stats={totalStats.data} currentTab={currentTab} />
+      </div>
+      <motion.div
+        variants={buttonContainer}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        className="flex justify-center gap-4 flex-wrap"
+      >
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          variants={buttons}
+          onClick={() => setCurrentTab("watching")}
+          className="flex items-center gap-2 bg-primary px-2 py-1.5 rounded"
+        >
+          <LiveTvOutlinedIcon className="w-6 h-6" />
+          <span className="flex items-center gap-1 font-medium">
+            Watching{" "}
+            <span className="text-sm text-gray-400 font-normal">{`(${currentWatching} Weebs)`}</span>
+          </span>
+        </motion.button>
+        <motion.button
+          variants={buttons}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setCurrentTab("live")}
+          className="flex items-center gap-2 bg-secondary px-2 py-1.5 rounded"
+        >
+          <CableOutlinedIcon className="w-6 h-6" />
+          <span className="flex items-center gap-1 font-medium">
+            Live{" "}
+            <span className="text-sm text-gray-400 font-normal">{`(${currentLive} Channels)`}</span>
+          </span>
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          variants={buttons}
+          onClick={() => setCurrentTab("total")}
+          className="flex items-center gap-2 bg-secondary2 px-2 py-1.5 rounded"
+        >
+          <div className="w-6 h-6">
+            <GhostityIcon />
           </div>
-          <motion.div
-            variants={buttonContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            className="flex justify-center gap-4 flex-wrap"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              variants={buttons}
-              onClick={() => setCurrentTab("watching")}
-              className="flex items-center gap-2 bg-primary px-2 py-1.5 rounded"
-            >
-              <LiveTvOutlinedIcon className="w-6 h-6" />
-              <span className="flex items-center gap-1">
-                Watching{" "}
-                <span className="text-sm text-gray-400">{`(${watchingStats?.data[0].current_watching} Weebs)`}</span>
-              </span>
-            </motion.button>
-            <motion.button
-              variants={buttons}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setCurrentTab("live")}
-              className="flex items-center gap-2 bg-secondary px-2 py-1.5 rounded"
-            >
-              <CableOutlinedIcon className="w-6 h-6" />
-              <span className="flex items-center gap-1">
-                Live{" "}
-                <span className="text-sm text-gray-400">{`(${liveStats?.data[0].current_live} Channels)`}</span>
-              </span>
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              variants={buttons}
-              onClick={() => setCurrentTab("total")}
-              className="flex items-center gap-2 bg-secondary2 px-2 py-1.5 rounded"
-            >
-              <div className="w-6 h-6">
-                <GhostityIcon />
-              </div>
-              <span className="flex items-center gap-1">
-                Total{" "}
-                <span className="text-sm text-gray-400">{`(${totalStats?.data[0].current_total} V-Tubers)`}</span>
-              </span>
-            </motion.button>
-          </motion.div>
-        </>
-      ) : null}
+          <span className="flex items-center gap-1 font-medium">
+            Total{" "}
+            <span className="text-sm text-gray-400 font-normal">{`(${currentTotal} V-Tubers)`}</span>
+          </span>
+        </motion.button>
+      </motion.div>
     </SectionWrapper>
   );
 }

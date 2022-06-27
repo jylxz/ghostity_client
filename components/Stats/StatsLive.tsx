@@ -24,15 +24,34 @@ const options: ChartOptions<"line"> = {
   plugins: {
     legend: {
       position: "top" as const,
+      labels: {
+        color: "black",
+        font: {
+          size: 13,
+        },
+      },
     },
     title: {
       display: true,
       text: "Live Channels",
       color: "black",
+      font: {
+        size: 20,
+      },
+      padding: {
+        bottom: 0,
+      },
     },
     subtitle: {
       display: true,
       text: "Updates Every 10 Minutes",
+      padding: {
+        top: 2,
+        bottom: 10,
+      },
+      font: {
+        size: 14,
+      },
     },
     tooltip: {
       mode: "index",
@@ -79,13 +98,17 @@ const createYoutubeGradient = (ctx: CanvasRenderingContext2D) => {
   return gradient;
 };
 
-export default function StatsLive({ stats }: { stats: LiveStat[] }) {
+export default function StatsLive({ stats, currentTab }: { stats?: LiveStat[], currentTab: string }) {
   const chartRef = useRef<ChartJS<"line">>(null);
   const [chartData, setChartData] = useState<ChartData<"line">>({
     datasets: [],
   });
 
   useEffect(() => {
+    if (!stats) {
+      return
+    }
+
     const liveStats = stats.slice().reverse()
     const chart = chartRef.current;
 
@@ -107,7 +130,7 @@ export default function StatsLive({ stats }: { stats: LiveStat[] }) {
           // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 1,
+          pointRadius: 0,
         } ,
         {
           label: `Youtube (${liveStats.slice(-1)[0].current_youtube_live})`,
@@ -118,7 +141,7 @@ export default function StatsLive({ stats }: { stats: LiveStat[] }) {
           // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 1,
+          pointRadius: 0,
         },
         {
           label: `Twitch (${liveStats.slice(-1)[0].current_twitch_live})`,
@@ -129,7 +152,7 @@ export default function StatsLive({ stats }: { stats: LiveStat[] }) {
           // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 1,
+          pointRadius: 0,
         },
       ],
     };
@@ -137,5 +160,5 @@ export default function StatsLive({ stats }: { stats: LiveStat[] }) {
     setChartData(data);
   }, [stats]);
 
-  return <Line ref={chartRef} options={options} data={chartData} height={600} />;
+  return currentTab === "live" ? <Line ref={chartRef} options={options} data={chartData} height={600} /> : null;
 }

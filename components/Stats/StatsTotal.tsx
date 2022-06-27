@@ -24,15 +24,34 @@ const options: ChartOptions<"line"> = {
   plugins: {
     legend: {
       position: "top" as const,
+      labels: {
+        color: "black",
+        font: {
+          size: 13,
+        },
+      },
     },
     title: {
       color: "black",
       display: true,
       text: "Total V-Tubers (On Ghostity)",
+      font: {
+        size: 20,
+      },
+      padding: {
+        bottom: 0,
+      },
     },
     subtitle: {
       display: true,
       text: "Updates Every 30 Minutes",
+      padding: {
+        top: 2,
+        bottom: 10,
+      },
+      font: {
+        size: 14,
+      },
     },
     tooltip: {
       mode: "index",
@@ -80,13 +99,23 @@ const createYoutubeGradient = (ctx: CanvasRenderingContext2D) => {
   return gradient;
 };
 
-export default function StatsTotal({ stats }: { stats: TotalStat[] }) {
+export default function StatsTotal({
+  stats,
+  currentTab,
+}: {
+  stats?: TotalStat[];
+  currentTab: string;
+}) {
   const chartRef = useRef<ChartJS<"line">>(null);
   const [chartData, setChartData] = useState<ChartData<"line">>({
     datasets: [],
   });
 
   useEffect(() => {
+    if (!stats) {
+      return
+    }
+
     const totalStats = stats.slice().reverse();
     const chart = chartRef.current;
 
@@ -105,10 +134,9 @@ export default function StatsTotal({ stats }: { stats: TotalStat[] }) {
           borderColor: "#DEECFC",
           backgroundColor: createGradient(chart.ctx),
           pointBackgroundColor: "#DEECFC",
-          // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 1,
+          pointRadius: 0,
         },
         {
           label: `Youtube (${totalStats.slice(-1)[0].current_youtube})`,
@@ -116,10 +144,9 @@ export default function StatsTotal({ stats }: { stats: TotalStat[] }) {
           borderColor: "#FF0000",
           backgroundColor: createYoutubeGradient(chart.ctx),
           pointBackgroundColor: "#FF0000",
-          // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 1,
+          pointRadius: 0,
         },
         {
           label: `Twitch (${totalStats.slice(-1)[0].current_twitch})`,
@@ -127,17 +154,14 @@ export default function StatsTotal({ stats }: { stats: TotalStat[] }) {
           borderColor: "#6441a5",
           backgroundColor: createTwitchGradient(chart.ctx),
           pointBackgroundColor: "#6441a5",
-          // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 1,
+          pointRadius: 0,
         },
       ],
     };
     setChartData(data);
   }, [stats]);
 
-  return (
-    <Line ref={chartRef} options={options} data={chartData} height={600} />
-  );
+  return currentTab === "total" ? <Line ref={chartRef} options={options} data={chartData} height={600} /> : null;
 }

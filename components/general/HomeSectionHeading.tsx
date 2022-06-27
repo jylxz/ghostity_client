@@ -8,7 +8,7 @@ export default function HomeSectionHeading({heading}: {heading: string}) {
       whileInView={{ translateX: 0, opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 1 }}
-      className="text-2xl md:text-4xl mb-10 font-thin"
+      className="text-2xl md:text-4xl mb-10"
     >
       {heading}
     </motion.h1>

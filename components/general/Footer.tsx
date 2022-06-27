@@ -99,7 +99,7 @@ function Footer() {
             >
               <motion.h2
                 variants={animations.textVariant2}
-                className="text-lg mb-1"
+                className="text-lg mb-1 font-medium"
               >
                 Browse
               </motion.h2>
@@ -129,7 +129,7 @@ function Footer() {
             >
               <motion.h2
                 variants={animations.textVariant2}
-                className="text-lg mb-1 text-black"
+                className="text-lg mb-1 text-black font-medium"
               >
                 Contacts
               </motion.h2>
@@ -168,7 +168,7 @@ function Footer() {
             >
               <motion.h2
                 variants={animations.textVariant2}
-                className="text-lg mb-1 text-black"
+                className="text-lg mb-1 text-black font-medium"
               >
                 Help
               </motion.h2>
@@ -187,7 +187,7 @@ function Footer() {
             >
               <motion.h2
                 variants={animations.textVariant2}
-                className="text-lg mb-1 text-black"
+                className="text-lg mb-1 text-black font-medium"
               >
                 Status
               </motion.h2>

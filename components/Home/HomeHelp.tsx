@@ -52,7 +52,7 @@ export default function HomeHelp() {
         >
           <motion.h2
             variants={questionHeadingVariant}
-            className="text-xl lg:text-2xl"
+            className="text-xl font-medium lg:text-2xl"
           >
             Questions?
           </motion.h2>
@@ -70,7 +70,7 @@ export default function HomeHelp() {
                   type="button"
                   variants={buttonVariant}
                   whileHover="hover"
-                  className="bg-gradient-to-r from-primary via-secondary to-secondary2 shadow-sm px-4 py-1 rounded"
+                  className="bg-gradient-to-r from-primary via-secondary to-secondary2 shadow-sm px-4 py-1 rounded font-medium"
                 >
                   FAQ Page
                 </motion.button>

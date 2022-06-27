@@ -149,9 +149,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                         setShowAuth={setShowAuth}
                         setShowHamburgerMenu={setShowHamburgerMenu}
                       />
-                      <AnimatePresence exitBeforeEnter>
-                        <LiveFollowingBar />
-                      </AnimatePresence>
+                      <LiveFollowingBar />
                     </div>
                     <AuthModalMain
                       showAuth={showAuth}

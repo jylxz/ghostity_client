@@ -68,10 +68,10 @@ export default function LiveFollowingBar() {
       {showLiveFollowingBar ? (
         <motion.div
           key="live-following-bar"
-          initial={{ translateX: "100%" }}
-          animate={{ translateX: 0 }}
-          exit={{ translateX: "100%" }}
-          className=" h-20 w-full bg-slate-100 flex items-center"
+          initial={{  translateY: -100, opacity: 0 }}
+          animate={{  translateY: 0, opacity: 1 }}
+          // exit={{  translateY: -100, opacity: 0 }}
+          className={`${!showLiveFollowingBar ? "hidden" : "block" } px-3 h-20 w-full bg-slate-100 flex items-center`}
           onMouseEnter={() => setDisableBodyScroll(true)}
           onMouseLeave={() => setDisableBodyScroll(false)}
         >
@@ -82,7 +82,7 @@ export default function LiveFollowingBar() {
                 ? streams.data?.pages[0].results.length
                 : 5
             }
-            spaceBetween={10}
+            spaceBetween={12}
             freeMode
             mousewheel={{
               sensitivity: 1,

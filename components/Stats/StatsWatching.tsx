@@ -24,11 +24,34 @@ const options: ChartOptions<"line"> = {
   plugins: {
     legend: {
       position: "top" as const,
+      labels: {
+        color: "black",
+        font: {
+          size: 13
+        }
+      }
     },
-    title: { color: "black", display: true, text: "Watching" },
+    title: {
+      color: "black",
+      display: true,
+      text: "Watching",
+      font: {
+        size: 20,
+      },
+      padding: {
+        bottom: 0
+      }
+    },
     subtitle: {
       display: true,
       text: "Updates Every 10 Minutes",
+      padding: {
+        top: 2,
+        bottom: 10
+      },
+      font: {
+        size: 14
+      }
     },
     tooltip: {
       mode: "index",
@@ -58,13 +81,17 @@ const createGradient = (ctx: CanvasRenderingContext2D) => {
   return gradient;
 };
 
-export default function StatsWatching({ stats }: { stats: WatchingStat[] }) {
+export default function StatsWatching({ stats, currentTab }: { stats?: WatchingStat[], currentTab: string }) {
   const chartRef = useRef<ChartJS<"line">>(null);
   const [chartData, setChartData] = useState<ChartData<"line">>({
     datasets: [],
   });
 
   useEffect(() => {
+    if (!stats) {
+      return
+    }
+
     const watchingStats = stats.slice().reverse();
     const chart = chartRef.current;
 
@@ -86,7 +113,7 @@ export default function StatsWatching({ stats }: { stats: WatchingStat[] }) {
           // lineTension: 0,
           fill: true,
           borderWidth: 2,
-          pointRadius: 1,
+          pointRadius: 0,
         },
       ],
     };
@@ -94,7 +121,5 @@ export default function StatsWatching({ stats }: { stats: WatchingStat[] }) {
     setChartData(data);
   }, [stats]);
 
-  return (
-    <Line ref={chartRef} options={options} data={chartData} height={600} />
-  );
+  return currentTab === "watching" ? <Line ref={chartRef} options={options} data={chartData} height={600} /> : null
 }

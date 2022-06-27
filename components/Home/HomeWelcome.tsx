@@ -53,7 +53,7 @@ export default function HomeWelcome() {
                 whileHover="hover"
                 whileTap="tap"
                 type="button"
-                className="bg-white py-2 px-7 rounded text-gray-600 shadow hover:bg-slate-100 hover:animate-scale"
+                className="bg-white py-2 px-7 rounded text-gray-600 shadow font-medium hover:bg-slate-100 hover:animate-scale"
               >
                 Browse
               </motion.button>
