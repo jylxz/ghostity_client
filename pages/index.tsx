@@ -28,11 +28,21 @@ export default function Home({ logos }: OrganizationLogos) {
         <title>Ghostity | Home</title>
         <meta
           name="description"
-          content="A comprehensive (not exhaustive!) directory for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
+          content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
         />
         <meta
           name="keywords"
-          content="V-Tubers, VTubers, virtual youtubers, Hololive, Nijisanji, VShojo, VSPO, Twitch, Youtube, V-Tuber directory, livestreams, games"
+          content="V-Tubers, VTubers, virtual youtubers, Hololive, Nijisanji, VShojo, VSPO, Twitch, Youtube, V-Tuber directory, VTuber app, livestreams, games"
+        />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Ghostity | Home" />
+        <meta
+          name="twitter:description"
+          content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
+        />
+        <meta
+          name="twitter:image"
+          content="https://res.cloudinary.com/ghostity/image/upload/v1655696219/profile-icons/ghostity-pfp-blue_cp5ctv.png"
         />
       </Head>
       <HomeWelcome />

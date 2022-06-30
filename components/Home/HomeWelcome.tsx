@@ -41,7 +41,7 @@ export default function HomeWelcome() {
             variants={animations.textVariant}
             className="text-sm lg:text-base 2xl:text-lg text-gray-500 mb-6"
           >
-            A comprehensive (not exhaustive!) directory for V-Tubers! Keep up
+            A comprehensive (not exhaustive!) app for V-Tubers! Keep up
             with your favorite V-Tubers from Hololive or Nijisanji, or even
             explore and discover a new V-Tuber that you haven&apos;t even heard
             about!
