@@ -18,7 +18,7 @@ export default function GameMain({ gameData }: { gameData: Game }) {
   const size = useWindowDimensions();
 
   useEffect(() => {
-    if (lineClamp.current!.scrollHeight > lineClamp.current!.clientHeight) {
+    if (lineClamp.current && lineClamp.current.scrollHeight > lineClamp.current.clientHeight) {
       setShowButton(true);
     } else {
       setShowButton(false);
@@ -55,7 +55,7 @@ export default function GameMain({ gameData }: { gameData: Game }) {
             </motion.h2>
             <motion.span
               layout="position"
-              className="text-center sm:text-start text-sm text-gray-600"
+              className="text-center sm:text-start text-sm font-medium text-gray-600"
             >
               <span className="font-semibold text-black">
                 {gameData.viewers}
@@ -68,7 +68,7 @@ export default function GameMain({ gameData }: { gameData: Game }) {
             </motion.span>
             <p
               ref={lineClamp}
-              className={`my-1 max-w-[75ch] ${
+              className={`my-1 max-w-[75ch] font-medium ${
                 !showFullSummary ? "line-clamp-4" : ""
               } text-sm`}
             >

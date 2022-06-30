@@ -7,6 +7,7 @@ import { useUpdatePassword } from "react-firebase-hooks/auth";
 // Icons
 import { MdEdit } from "react-icons/md";
 import { GoCheck } from "react-icons/go";
+import {RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 
 // Firebase
 import { FirebaseError } from "firebase/app";
@@ -145,6 +146,8 @@ export default function ProfilePassword() {
           return setCurrentPasswordMessage("Password change failed!");
         });
     }
+
+    return Promise.resolve()
   };
 
   useEffect(() => {
@@ -154,7 +157,7 @@ export default function ProfilePassword() {
   }, [edit, user]);
 
   return (
-    <form className={`flex-1 flex ${!edit ? "flex-row" : "flex-col"} gap-2`}>
+    <form className={`flex-1 flex ${!edit ? "flex-row" : "flex-col bg-gray-100 p-4 rounded mt-4 gap-3"}`}>
       {!edit ? (
         <>
           <input
@@ -163,6 +166,9 @@ export default function ProfilePassword() {
             defaultValue={user && user.email ? user?.email : undefined}
             hidden
           />
+          <div className="mt-5 mr-3">
+            <RiLockPasswordLine className="w-4 h-4" />
+          </div>
           <TextField
             type="password"
             value="password"
@@ -194,37 +200,53 @@ export default function ProfilePassword() {
             defaultValue={user && user.email ? user?.email : undefined}
             hidden
           />
-          <ProfileUpdateField
-            label="Current Password"
-            type="password"
-            value={currentPassword}
-            placeholder="Enter current password"
-            setValue={setCurrentPassword}
-            error={currentPasswordError}
-            message={currentPasswordMessage}
-            autoComplete="current-password"
-          />
-          <ProfileUpdateField
-            label="New Password"
-            type="password"
-            value={newPassword}
-            placeholder="Enter new password"
-            setValue={setNewPassword}
-            error={newPasswordError}
-            message={newPasswordMessage}
-            autoComplete="new-password"
-          />
-          <ProfileUpdateField
-            label="Confirm New Password"
-            type="password"
-            value={confirmNewPassword}
-            placeholder="Confirm new password"
-            setValue={setConfirmNewPassword}
-            error={newPasswordError}
-            message=""
-            autoComplete="new-password"
-          />
-          <div className="flex justify-end items-center gap-3">
+          <h2 className="text-lg">Changing Password</h2>
+          <div className="flex items-center">
+            <div className="mr-3 mt-1">
+              <RiLockPasswordLine className="w-4 h-4" />
+            </div>
+            <ProfileUpdateField
+              label="Current Password"
+              type="password"
+              value={currentPassword}
+              placeholder="Enter current password"
+              setValue={setCurrentPassword}
+              error={currentPasswordError}
+              message={currentPasswordMessage}
+              autoComplete="current-password"
+            />
+          </div>
+          <div className="flex items-center">
+            <div className="mr-3 self-start mt-[1.1rem]">
+              <RiLockPasswordLine className="w-4 h-4" />
+            </div>
+            <ProfileUpdateField
+              label="New Password"
+              type="password"
+              value={newPassword}
+              placeholder="Enter new password"
+              setValue={setNewPassword}
+              error={newPasswordError}
+              message={newPasswordMessage}
+              autoComplete="new-password"
+            />
+          </div>
+          <div className="flex items-center">
+            <div className="mr-3 mt-2">
+              <RiLockPasswordFill className="w-4 h-4" />
+            </div>
+            <ProfileUpdateField
+              label="Confirm New Password"
+              type="password"
+              value={confirmNewPassword}
+              placeholder="Confirm new password"
+              setValue={setConfirmNewPassword}
+              error={newPasswordError}
+              message=""
+              autoComplete="new-password"
+            />
+          </div>
+          <div className="flex justify-end items-center gap-3 mt-2">
             <button
               type="button"
               className="w-8"

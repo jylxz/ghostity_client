@@ -14,7 +14,7 @@ export default function SideBarBrowseItem({
   minimized,
 }: {
   item: string;
-  icon: IconType | any;
+  icon: IconType | unknown;
   href: string;
   minimized?: boolean;
 }) {

@@ -48,7 +48,9 @@ export default function ResetPassword({ email }: { email: string }) {
     confirmNewPassword
   );
 
-  const handleResetPassword = () => {
+  const handleResetPassword = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (validatePassword()) {
       setLoading(true);
       confirmPasswordReset(auth, actionCode as string, newPassword)
@@ -62,13 +64,13 @@ export default function ResetPassword({ email }: { email: string }) {
       <Head>
         <title>Ghostity | Reset Password</title>
       </Head>
-      <div className="h-screen flex flex-col">
+      <div className="h-screen flex flex-col font-medium">
         <div className="flex-1 w-96 mx-auto flex flex-col justify-center gap-8">
           <div className="w-16 h-16 bg-primary rounded-full p-4 mx-auto">
             <GhostityLogo />
           </div>
           <h1 className="text-center">{`Reset password for ${email}`}</h1>
-          <form className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4" onSubmit={(e) => handleResetPassword(e)}>
             <input autoComplete="username email" defaultValue={email} hidden />
             <TextField
               label="New Password"
@@ -91,11 +93,10 @@ export default function ResetPassword({ email }: { email: string }) {
               error={!valid}
               className="w-full"
             />
-          </form>
           <div className="mx-auto">
             {!loading ? (
               <AnimatedButton
-                onClick={() => handleResetPassword()}
+                type="submit"
                 className="bg-primary px-2 py-1 rounded"
               >
                 Reset Password
@@ -104,6 +105,7 @@ export default function ResetPassword({ email }: { email: string }) {
               <LoadingButton />
             )}
           </div>
+          </form>
         </div>
         <Footer />
       </div>

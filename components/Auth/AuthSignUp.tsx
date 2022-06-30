@@ -87,7 +87,8 @@ export default function AuthSignUp({
         })
         .finally(() => setLoading(false));
     }
-    return setEmailError(validateError);
+    return setLoading(false)
+    // return setEmailError(validateError);
   };
 
   return (

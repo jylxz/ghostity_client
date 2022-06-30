@@ -19,7 +19,7 @@ export default function BrowseStreamsFilters({
   refetch,
 }: {
   filters: Filters;
-  setFilters: (filter: Filter, filterValue: any) => void;
+  setFilters: (filter: Filter, filterValue: unknown) => void;
   resetFilters: () => void;
   refetch: () => Promise<void>;
 }) {

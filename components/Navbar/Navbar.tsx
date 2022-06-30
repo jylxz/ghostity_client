@@ -112,11 +112,8 @@ export default function Navbar({
             </motion.div>
           </motion.button>
         </LinkTo>
-        <ul className="flex gap-2 items-center before:content-['|'] before:text-3xl before:mx-4">
+        <ul className="flex items-center before:content-['|'] before:text-3xl before:mx-4">
           <div className="hidden sm:flex">
-            <li>
-              <NavbarButton text="Home" href="/" />
-            </li>
             <li>
               <NavbarButton text="Browse" href="/browse" />
             </li>

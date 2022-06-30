@@ -16,6 +16,10 @@ function organizations({ orgs }: { orgs: Organization[] }) {
     <>
       <Head>
         <title>Ghostity | Organizations</title>
+        <meta
+          name="keywords"
+          content="V-Tubers, VTubers, virtual youtubers, Vtuber agency, Vtuber organization, Hololive, Nijisanji, VShojo, VSPO, 774inc., NoriPro,"
+        />
       </Head>
       <BrowseOrganizations organizations={orgs} />
     </>

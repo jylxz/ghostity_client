@@ -5,6 +5,7 @@ import { useUpdateProfile } from "react-firebase-hooks/auth";
 // Icons
 import { MdEdit } from "react-icons/md";
 import { GoCheck } from "react-icons/go";
+import { CgProfile } from "react-icons/cg";
 
 // Contexts
 import UserContext from "../../context/UserContext";
@@ -69,15 +70,20 @@ export default function ProfileFields() {
 
   return (
     <form className={`flex-1 flex ${!edit ? "flex-row" : "flex-col"} gap-2`}>
-      <ProfileUpdateField
-        label="Display Name"
-        type="text"
-        value={displayName}
-        setValue={setDisplayName}
-        error={error}
-        message={helperText}
-        disabled={!edit}
-      />
+      <div className="flex-1 flex">
+        <div className="mr-3 mt-5">
+          <CgProfile className="w-4 h-4 " />
+        </div>
+        <ProfileUpdateField
+          label="Display Name"
+          type="text"
+          value={displayName}
+          setValue={setDisplayName}
+          error={error}
+          message={helperText}
+          disabled={!edit}
+        />
+      </div>
       {!edit ? (
         <button
           type="button"
@@ -91,7 +97,7 @@ export default function ProfileFields() {
           <MdEdit size={20} color={disable ? "grey" : "black"} />
         </button>
       ) : (
-        <div className="flex justify-end items-center gap-3">
+        <div className="flex justify-end items-center gap-3 mt-2">
           <button
             type="button"
             className="w-8"

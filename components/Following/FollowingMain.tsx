@@ -21,7 +21,6 @@ import GridWrapper from "../general/GridWrapper";
 import AnimateTabButton from "../general/AnimatedTabButton";
 import ProfileCard from "../general/ProfileCard";
 
-import GhostityIcon from "../../public/images/Ghostity-svg.svg";
 
 export default function FollowingMain() {
   const [currentTab, setCurrentTab] = useState("Live");
@@ -137,7 +136,7 @@ export default function FollowingMain() {
       {followProfiles.data && currentTab === "All" ? (
         <>
           <GridWrapper
-            colSize="small"
+            colSize="normal"
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
@@ -154,7 +153,7 @@ export default function FollowingMain() {
                     <ProfileCard
                       key={profile._id}
                       profile={profile}
-                      size="normal"
+                      size="large"
                     />
                   </motion.span>
                 ))}

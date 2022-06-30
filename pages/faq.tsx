@@ -1,9 +1,16 @@
-import React from 'react'
+import Head from "next/head";
+import React from "react";
+import FaqMain from "../components/FAQ/FaqMain";
 
 function faq() {
   return (
-    <div>faq</div>
-  )
+    <>
+      <Head>
+        <title>Ghostity | FAQ</title>
+      </Head>
+      <FaqMain />
+    </>
+  );
 }
 
-export default faq
+export default faq;

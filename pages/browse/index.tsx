@@ -8,6 +8,10 @@ export default function browse() {
     <>
       <Head>
         <title>Ghostity | Browse</title>
+        <meta
+          name="keywords"
+          content="V-Tubers, VTubers, virtual youtubers, Vtuber agency, Vtuber organization, Hololive, Nijisanji, VShojo, VSPO, 774inc., NoriPro,"
+        />
       </Head>
       <BrowseStreams />
     </>

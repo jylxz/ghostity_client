@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 
 // Hooks
 import useHandleFilters from "../../hooks/useHandleFilters";
@@ -32,8 +32,6 @@ export default function BrowseStreams() {
     fetchNextPage,
     hasNextPage,
     refetch,
-    isRefetching,
-    isFetchingNextPage,
   } = useInfiniteQuery<Streams, Error>(
     ["allStreams", `${filters.sort || ""}`],
     fetchStreams,

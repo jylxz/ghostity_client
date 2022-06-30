@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,7 +25,6 @@ import StatsTotal from "../Stats/StatsTotal";
 import AnimatedButton from "../general/AnimatedButton";
 import GhostityIcon from "../../public/images/Ghostity-svg.svg";
 import { homeStatsAnimations } from "./animations/homeAnimations";
-import GradientCircularProgress from "../general/GradientCircularProgress";
 
 ChartJS.register(
   CategoryScale,

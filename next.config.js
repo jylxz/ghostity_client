@@ -28,6 +28,9 @@ module.exports = {
       "neo-porte.jp",
       "lh3.googleusercontent.com",
       "res.cloudinary.com",
+      "i2.hdslb.com",
+      "i1.hdslb.com",
+      "i0.hdslb.com"
     ],
   },
   webpack(config) {

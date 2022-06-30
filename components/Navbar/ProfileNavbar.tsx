@@ -24,6 +24,7 @@ export default function ProfileNavbar() {
       {user && user.photoURL ? (
         <button onClick={() => setShow(!show)} type="button">
           <Image
+            alt="ghostity profile image"
             src={user.photoURL}
             height={32}
             width={32}

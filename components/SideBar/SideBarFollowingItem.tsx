@@ -101,6 +101,7 @@ export default function SideBarFollowingItem({
           <div className="min-w-fit mx-1 flex">
             <Image
               src={stream.channel_img}
+              alt={`${stream.channel_name}'s profile image`}
               height={28}
               width={28}
               className="rounded-full text-xs"
@@ -124,7 +125,7 @@ export default function SideBarFollowingItem({
                   <motion.span
                     key="title"
                     variants={opacity}
-                    className=" overflow-hidden inline-block w-[10.5rem] align-text-bottom whitespace-nowrap text-sm font-medium text-gray-700"
+                    className=" overflow-hidden inline-block w-[10.5rem] align-text-bottom whitespace-nowrap text-sm font-medium"
                   >
                     {shouldAnimate ? (
                       <motion.span variants={text} className="inline-block">
@@ -137,20 +138,22 @@ export default function SideBarFollowingItem({
                 ) : (
                   <motion.span
                     variants={opacity}
-                    className="line-clamp-1 font-bold"
+                    className="line-clamp-1 font-semibold text-sm"
                   >
                     {stream.channel_name}
                   </motion.span>
                 )}
               </AnimatePresence>
-              <div className="text-gray-500 grid grid-cols-8 justify-between">
+              <div className="text-gray-500 grid grid-cols-8 justify-between text-sm font-medium">
                 <div className="flex-1 col-span-5">
-                  <span className="line-clamp-1">{stream.stream.game} </span>
+                  <span className="line-clamp-1 text-sm font-medium">
+                    {stream.stream.game}{" "}
+                  </span>
                 </div>
                 <div className="col-span-3 grid grid-cols-2 relative items-center gap-1">
                   <span className="animate-ping h-3 w-3 absolute left-[17px] rounded-full bg-primary border border-white opacity-60" />
                   <span className="justify-self-end rounded-full h-3 w-3 bg-primary border border-white" />
-                  <span className="text-gray-700">{stream.stream.viewers}</span>
+                  <span className="text-gray-500">{stream.stream.viewers}</span>
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 // Libraries
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { Navigation, Mousewheel, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -21,10 +21,38 @@ import useIsWindowSmall from "../../hooks/useIsWindowSmall";
 import "swiper/css";
 import "swiper/css/navigation";
 
+const containerVariant = {
+  initial: {
+    translateY: -100,
+    opacity: 0,
+  },
+  animate: {
+    translateY: 0,
+    opacity: 1,
+    transition: {
+      delayChildren: 2
+    }
+  },
+};
+
+const childVariant = {
+  initial: {
+    translateY: -100,
+    opacity: 0,
+  },
+  animate: (i: number) => ({
+    translateY: 0,
+    opacity: 1,
+    transition: {
+      delay: i * 0.3
+    }
+  }),
+};
+
+
 export default function LiveFollowingBar() {
   const user = useContext(UserContext);
   const follows = useContext(UserFollowContext);
-  const [disableBodyScroll, setDisableBodyScroll] = useState(false);
   const router = useRouter();
   const isWindowSmall = useIsWindowSmall();
 
@@ -35,14 +63,6 @@ export default function LiveFollowingBar() {
       (router.route.includes("/browse") || router.route === "/search"),
     [user, router, isWindowSmall]
   );
-
-  useEffect(() => {
-    if (disableBodyScroll) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [disableBodyScroll]);
 
   const channelIds: string[] | undefined = follows?.channels;
 
@@ -68,12 +88,13 @@ export default function LiveFollowingBar() {
       {showLiveFollowingBar ? (
         <motion.div
           key="live-following-bar"
-          initial={{  translateY: -100, opacity: 0 }}
-          animate={{  translateY: 0, opacity: 1 }}
+          variants={containerVariant}
+          initial="initial"
+          animate="animate"
+          // initial={{  translateY: -100, opacity: 0 }}
+          // animate={{  translateY: 0, opacity: 1 }}
           // exit={{  translateY: -100, opacity: 0 }}
           className={`${!showLiveFollowingBar ? "hidden" : "block" } px-3 h-20 w-full bg-slate-100 flex items-center`}
-          onMouseEnter={() => setDisableBodyScroll(true)}
-          onMouseLeave={() => setDisableBodyScroll(false)}
         >
           <Swiper
             modules={[Navigation, Mousewheel, FreeMode]}
@@ -87,10 +108,13 @@ export default function LiveFollowingBar() {
             mousewheel={{
               sensitivity: 1,
             }}
+            className="overscroll-contain"
           >
-            {streams.data?.pages[0].results.map((stream) => (
+            {streams.data?.pages[0].results.map((stream, i) => (
               <SwiperSlide key={stream._id}>
-                <LiveFollowingBarItem stream={stream} />
+                <motion.div variants={childVariant} custom={i}>
+                  <LiveFollowingBarItem stream={stream} />
+                </motion.div>
               </SwiperSlide>
             ))}
           </Swiper>

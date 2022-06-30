@@ -49,6 +49,10 @@ function OrganizationPage({ organization }: { organization: Organization[] }) {
     <>
       <Head>
         <title>Ghostity | {organization[0].name}</title>
+        <meta
+          name="keywords"
+          content={`V-Tubers, VTubers, virtual youtubers, Vtuber agency, Vtuber organization,${organization[0].name}, ${organization[0].name}'s members`}
+        />
       </Head>
       <OrganizationMain org={organization[0]} />
     </>

@@ -57,7 +57,7 @@ export default function AuthModalMain({
           animate={{ translateY: 0 }}
           exit={{ translateY: "-200%" }}
           transition={{ duration: 0.5 }}
-          className="min-w-[20rem] w-1/5 max-w-[26rem] h-[38rem] bg-slate-50 rounded flex flex-col items-center gap-4 py-8 px-6 overflow-x-hidden overflow-y-auto z-50"
+          className="min-w-[20rem] w-1/5 max-w-[26rem] h-[38rem] bg-slate-50 rounded flex flex-col items-center gap-4 py-8 px-6 overflow-x-hidden overflow-y-auto z-50 font-medium"
           onClick={() => setShowAuth(false)}
         >
           <button

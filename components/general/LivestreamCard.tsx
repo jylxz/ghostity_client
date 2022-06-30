@@ -1,7 +1,7 @@
 // Libraries
 import React, { useContext, useState } from "react";
 import { Card, CardContent, Typography } from "@mui/material";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 // Icons
@@ -208,13 +208,14 @@ function BlacklistButton({ stream }: { stream: Stream }) {
 export default function LivestreamCard({ stream }: { stream: Stream }) {
   return (
     <Card className="flex flex-col max-w-[22rem] shadow">
-      <div className="relative max-h-[198px] object-scale-down">
+      <div className="relative max-w-[22rem] max-h-[198px]">
         <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
           <Image
             src={stream.stream.thumbnail}
             alt={`${stream.channel_name}'s stream thumbnail`}
-            height="198"
-            width="352"
+            height={198}
+            width={352}
+            layout="intrinsic"
             // priority
           />
         </a>
@@ -235,7 +236,7 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
           <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
             <Typography
               title={stream.stream.title}
-              className="text-ellipsis overflow-hidden line-clamp-1 text-sm font-medium text-gray-700"
+              className="text-ellipsis overflow-hidden line-clamp-1 text-sm font-medium"
             >
               {stream.stream.title}
             </Typography>
@@ -245,18 +246,18 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
       <CardContent className="bg-slate-100 py-1">
         <div className="flex gap-2 items-center">
           <ChannelPic stream={stream} />
-          <Typography className="line-clamp-1 font-bold flex-1">
+          <Typography className="line-clamp-1 text-sm font-bold flex-1">
             <ChannelName stream={stream} />
           </Typography>
           <PlatformIcon stream={stream} />
         </div>
         <div className="flex justify-between items-center text-gray-400 mt-0.5">
-          <Typography className="text-sm line-clamp-1 cursor-pointer">
+          <Typography className="text-sm font-medium line-clamp-1 cursor-pointer">
             <LinkTo href={`/browse/games/${encodeURI(stream.stream.game)}`}>
               <span>{stream.stream.game}</span>
             </LinkTo>
           </Typography>
-          <Typography className="text-sm cursor-default min-w-fit ml-1">
+          <Typography className="text-sm font-medium cursor-default min-w-fit ml-1">
             {stream.language}
           </Typography>
         </div>

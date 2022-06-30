@@ -20,7 +20,6 @@ import ProfileDisplayName from "./ProfileDisplayName";
 import ProfileEmail from "./ProfileEmail";
 import ProfilePassword from "./ProfilePassword";
 import ProfileGoogleNotice from "./ProfileGoogleNotice";
-import DarkenBackgroundWrapper from "../general/ModalWrapper";
 import ProfileChangePfp from "./ProfileChangePfp";
 
 export default function ProfileMain() {
@@ -31,7 +30,7 @@ export default function ProfileMain() {
   const [editPfp, setEditPfp] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="relative font-medium">
       <AnimatePresence exitBeforeEnter>
         {editPfp ? <ProfileChangePfp setEditPfp={setEditPfp} /> : null}
       </AnimatePresence>
@@ -41,6 +40,7 @@ export default function ProfileMain() {
             <div className="flex flex-col justify-center items-center h-96">
               <div
                 className="relative"
+                onTouchStart={() => setEditPfp(true)}
                 onMouseEnter={() =>
                   user.emailVerified ||
                   user.providerData[0].providerId === "google.com"
@@ -54,6 +54,7 @@ export default function ProfileMain() {
                     user?.photoURL ||
                     "https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-primary_jg3evf.png"
                   }
+                  alt="ghostity profile image"
                   height={144}
                   width={144}
                   className="rounded-full"
@@ -71,7 +72,9 @@ export default function ProfileMain() {
               <div className="flex flex-col items-center gap-3">
                 <div className="flex flex-col items-center">
                   <span className="text-2xl">{user?.displayName}</span>
-                  <span className="">{`Following: ${follow?.channels?.length || 0}`}</span>
+                  <span className="">{`Following: ${
+                    follow?.channels?.length || 0
+                  }`}</span>
                 </div>
                 <div className="flex flex-col items-center text-gray-600">
                   <span className="text-sm ">
@@ -113,7 +116,8 @@ export default function ProfileMain() {
             ) : null}
             <div className="flex flex-col gap-4">
               <h1 className="text-2xl">Profile</h1>
-              <div className="px-8 flex">
+              <div className="px-8 flex items-center">
+                
                 <ProfileDisplayName />
               </div>
             </div>

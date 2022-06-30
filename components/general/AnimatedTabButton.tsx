@@ -19,8 +19,8 @@ export default function AnimatedTabButton({
       // whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={() => setCurrentTab(tab)}
-      className={`relative z-10 px-2 flex flex-col items-center ${
-        tab === currentTab ? "text-black" : "text-gray-500"
+      className={`relative z-10 px-2 flex flex-col items-center  ${
+        tab === currentTab ? "text-black font-medium" : "text-gray-500 font-normal"
       }`}
     >
       <div className="flex items-center gap-1">

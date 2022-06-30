@@ -147,7 +147,7 @@ export default function OrganizationMembers({
           )}
         </button>
         {branches.map((branch) => (
-          <>
+          <Fragment key={branch.id}>
             <div className="before:content-['|'] before:px-1 text-gray-400" />
             <button
               type="button"
@@ -163,7 +163,7 @@ export default function OrganizationMembers({
                 <span className="text-gray-400 px-1">{branch.name}</span>
               )}
             </button>
-          </>
+          </Fragment>
         ))}
       </div>
       <div className="self-end mt-5 mb-7">

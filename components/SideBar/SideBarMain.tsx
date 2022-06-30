@@ -1,7 +1,7 @@
 // Libraries
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useInfiniteQuery } from "react-query";
 
 // Icons
@@ -77,8 +77,8 @@ export default function SideBarMain() {
       layoutScroll
       initial={{ translateX: -300 }}
       animate={{ translateX: 0 }}
-      className={` z-30  bg-slate-100 ${
-        showBrowseBar ? "min-w-[15.5rem] max-w-[15.5rem] pl-4" : "w-16"
+      className={` z-30  bg-slate-100 scroll-smooth ${
+        showBrowseBar ? "min-w-[16rem] max-w-[16rem] pl-4" : "w-16"
       } h-[calc(100vh_-_3.8rem)] overflow-x-hidden overflow-y-auto hidden sm:block sm-custom-scroll`}
       onMouseLeave={() => (minimized ? browseBarOverride(false) : null)}
     >
@@ -183,7 +183,7 @@ export default function SideBarMain() {
       {user ? (
         <>
           {showBrowseBar ? (
-            <h1 className="text-lg my-3 font-medium">Followed</h1>
+            <h1 className="text-lg my-3 font-medium">Following</h1>
           ) : (
             <div className="mx-auto mt-1 mb-2 w-10 h-0.5 border" />
           )}
@@ -197,7 +197,7 @@ export default function SideBarMain() {
               layout
               initial="initial"
               animate="animate"
-              className={`grid gap-2.5 ${showBrowseBar ? "mr-5" : ""} mb-4`}
+              className={`grid gap-3 ${showBrowseBar ? "mr-5" : ""} mb-4`}
             >
               {streams.data?.pages[0].results
                 .slice(0, showChannels)

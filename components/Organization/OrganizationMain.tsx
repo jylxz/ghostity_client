@@ -30,7 +30,7 @@ function SocialMedia({ social, isWindowSmall }: { social: Organization["social_m
         href={social.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1"
+        className="flex items-center gap-1 font-medium"
         
       >
         <div className="w-5 h-5 flex">
@@ -83,23 +83,23 @@ export default function OrganizationMain({ org }: { org: Organization }) {
             <div>
               <h2 className="flex text-4xl font-semibold">{org.name}</h2>
             </div>
-            <div className="flex gap-2 text-sm">
+            <div className="flex gap-2 text-sm font-semibold text-gray-600">
               {org.languages.map((lang) => (
                 <div key={lang}>{lang}</div>
               ))}
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center font-medium">
               <GoLocation />
               {org.based}
             </div>
-            <div className="text-sm">
+            <div className="font-medium text-sm">
               Total Members:{" "}
               <span className="font-bold">{org.members.length}</span>
             </div>
           </div>
           <div className=" flex flex-col md:self-start md:mt-6">
             <div className="flex flex-wrap gap-2 justify-center md:justify-end">
-              <AnimatedButton className="text-xs bg-slate-100 border border-slate-100 px-2 py-1 rounded">
+              <AnimatedButton className="text-xs font-medium bg-slate-100 border border-slate-100 px-2 py-1 rounded">
                 <a
                   href={org.website}
                   target="_blank"
@@ -111,7 +111,7 @@ export default function OrganizationMain({ org }: { org: Organization }) {
                 </a>
               </AnimatedButton>
               {org.main_channel ? (
-                <AnimatedButton className="text-xs bg-slate-100 border border-slate-100 px-2 rounded">
+                <AnimatedButton className="text-xs font-medium bg-slate-100 border border-slate-100 px-2 rounded">
                   <a
                     href={org.main_channel}
                     target="_blank"

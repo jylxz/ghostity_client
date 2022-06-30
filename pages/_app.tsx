@@ -7,7 +7,6 @@ import { useState, useEffect, useMemo } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { useRouter } from "next/router";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { AnimatePresence } from "framer-motion";
 import {
   createTheme,
   StyledEngineProvider,
@@ -64,6 +63,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         '"Segoe UI Emoji"',
         '"Segoe UI Symbol"',
       ].join(","),
+      fontWeightRegular: 500
     },
     palette: {
       primary: {

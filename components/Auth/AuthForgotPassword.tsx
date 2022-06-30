@@ -75,7 +75,9 @@ export default function AuthForgotPassword({
         No biggie! Just enter your email associated with ghostity!
       </p>
       <div className="flex items-center">
-        <AiOutlineMail className="mt-3 mr-3" />
+        <div className="mr-3 mt-2">
+          <AiOutlineMail className="w-4 h-4" />
+        </div>
         <TextField
           required
           type="email"

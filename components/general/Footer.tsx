@@ -53,15 +53,17 @@ function FooterItem({ children }: { children: React.ReactNode }) {
 
 function Footer() {
   return (
-    <footer className="pt-16 pb-28 bg-gradient-to-r from-primary via-secondary to-secondary2 flex justify-center items-center">
-      <div className="sm:flex gap-10 sm:gap-20 px-6">
-        <div className="mb-10 sm:mb-0">
-          <div className="flex gap-2 items-center text-2xl border-b border-black pb-2 mb-2">
-            <div>
-              <GhostityLogo className="h-12 w-12" />
+    <motion.footer layout className="pt-16 pb-28 bg-gradient-to-r from-primary via-secondary to-secondary2 flex justify-center items-center">
+      <div className="flex-1 lg:flex-none md:flex gap-10 sm:gap-20 px-6 justify-center sm:w-1/2">
+        <div className="mb-10">
+          <LinkTo href="/">
+            <div className="flex gap-2 items-center text-2xl border-b border-black pb-2 mb-2">
+              <div>
+                <GhostityLogo className="h-12 w-12" />
+              </div>
+              <h1 className="text-3xl sm:text-4xl text-black">ghostity</h1>
             </div>
-            <h1 className="text-3xl sm:text-4xl text-black">ghostity</h1>
-          </div>
+          </LinkTo>
           <motion.div
             initial="initial"
             whileInView="animate"
@@ -88,8 +90,8 @@ function Footer() {
             </motion.div>
           </motion.div>
         </div>
-        <div className="grid grid-cols-4 gap-3">
-          <div className="flex flex-col text-sm items-center">
+        <div className="flex-1 grid grid-cols-[repeat(auto-fill,_minmax(6rem,_1fr))] gap-x-1 gap-y-3">
+          <div className="flex flex-col text-sm">
             <motion.div
               initial="initial"
               whileInView="animate"
@@ -119,7 +121,7 @@ function Footer() {
               </div>
             </motion.div>
           </div>
-          <div className="flex justify-center text-sm">
+          <div className="flex text-sm">
             <motion.div
               initial="initial"
               whileInView="animate"
@@ -158,7 +160,33 @@ function Footer() {
               </div>
             </motion.div>
           </div>
-          <div className="flex justify-center text-sm">
+          <div className="flex text-sm">
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              variants={animations.containerVariant}
+              viewport={{ once: true }}
+              className="flex flex-col text-gray-600"
+            >
+              <motion.h2
+                variants={animations.textVariant2}
+                className="text-lg mb-1 text-black font-medium"
+              >
+                Legal
+              </motion.h2>
+              <div className="flex flex-col gap-1">
+                <FooterItem>
+                  <LinkTo href="/legal/terms-of-service">
+                    Terms of Service
+                  </LinkTo>
+                </FooterItem>
+                <FooterItem>
+                  <LinkTo href="/legal/privacy-policy">Privacy Policy</LinkTo>
+                </FooterItem>
+              </div>
+            </motion.div>
+          </div>
+          <div className="flex text-sm">
             <motion.div
               initial="initial"
               whileInView="animate"
@@ -177,7 +205,7 @@ function Footer() {
               </FooterItem>
             </motion.div>
           </div>
-          <div className="flex justify-center text-sm">
+          <div className="flex text-sm">
             <motion.div
               initial="initial"
               whileInView="animate"
@@ -204,7 +232,7 @@ function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }
 

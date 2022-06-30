@@ -10,6 +10,8 @@ import { FirebaseError } from "firebase/app";
 // Icons
 import { MdEdit } from "react-icons/md";
 import { GoCheck } from "react-icons/go";
+import { AiOutlineMail } from "react-icons/ai";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 // Firebase
 import { auth } from "../../firebase/ghostityFirebase";
@@ -26,7 +28,9 @@ export default function ProfileEmail() {
   const [edit, setEdit] = useState(false);
   const [disable, setDisable] = useState(true);
 
-  const [email, setEmail] = useState<string | null | undefined>(user?.email || user?.providerData[0].email || "");
+  const [email, setEmail] = useState<string | null | undefined>(
+    user?.email || user?.providerData[0].email || ""
+  );
   const [emailError, setEmailError] = useState(false);
   const [helperText, setHelperText] = useState("");
 
@@ -41,13 +45,13 @@ export default function ProfileEmail() {
     setPasswordError(false);
 
     if (email?.length === 0) {
-      setEmailError(true)
+      setEmailError(true);
       return setHelperText("Email cannot be empty!");
     }
 
     if (password.length === 0) {
-      setPasswordError(true)
-      return setPasswordHelperText("Please enter your password")
+      setPasswordError(true);
+      return setPasswordHelperText("Please enter your password");
     }
 
     if (user && user.emailVerified) {
@@ -119,15 +123,22 @@ export default function ProfileEmail() {
   }, [edit, user]);
 
   return (
-    <form className={`flex-1 flex ${!edit ? "flex-row" : "flex-col"} gap-2`}>
+    <form
+      className={`flex-1 flex ${
+        !edit ? "flex-row" : "flex-col bg-gray-100 p-4 rounded mt-4 gap-3"
+      }`}
+    >
       {!edit ? (
         <>
-        <input
-          type="hidden"
-          autoComplete="username email"
-          defaultValue={user && user.email ? user?.email : undefined}
-          hidden
-        />
+          <input
+            type="hidden"
+            autoComplete="username email"
+            defaultValue={user && user.email ? user?.email : undefined}
+            hidden
+          />
+          <div className="mr-3 mt-3">
+            <AiOutlineMail className="w-4 h-4" />
+          </div>
           <ProfileUpdateField
             label="Email"
             type="email"
@@ -151,27 +162,38 @@ export default function ProfileEmail() {
         </>
       ) : (
         <>
-          <ProfileUpdateField
-            label="Email"
-            type="email"
-            autoComplete="username email"
-            value={email}
-            setValue={setEmail}
-            message={helperText}
-            error={emailError}
-            disabled={!edit}
-          />
-          <ProfileUpdateField
-            label="Current Password"
-            type="password"
-            autoComplete="current-password"
-            value={password}
-            setValue={setPassword}
-            message={passwordHelperText}
-            error={passwordError}
-            disabled={!edit}
-          />
-          <div className="flex justify-end items-center gap-3">
+        <h2 className="text-lg">Changing Email</h2>
+          <div className="flex">
+            <div className="mr-3 mt-5">
+              <AiOutlineMail className="w-4 h-4" />
+            </div>
+            <ProfileUpdateField
+              label="Email"
+              type="email"
+              autoComplete="username email"
+              value={email}
+              setValue={setEmail}
+              message={helperText}
+              error={emailError}
+              disabled={!edit}
+            />
+          </div>
+          <div className="flex">
+            <div className="mt-5 mr-3">
+              <RiLockPasswordLine className="w-4 h-4" />
+            </div>
+            <ProfileUpdateField
+              label="Current Password"
+              type="password"
+              autoComplete="current-password"
+              value={password}
+              setValue={setPassword}
+              message={passwordHelperText}
+              error={passwordError}
+              disabled={!edit}
+            />
+          </div>
+          <div className="flex justify-end items-center gap-3 mt-2">
             <button
               type="button"
               className="w-8"

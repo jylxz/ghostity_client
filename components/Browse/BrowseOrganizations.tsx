@@ -12,9 +12,9 @@ export default function BrowseOrganizations({
 }) {
   return (
     <BrowseWrapper>
-      <div className="w-full flex flex-wrap text-xl  justify-center gap-2 mb-4">
+      <div className="w-full flex flex-wrap text-xl font-medium justify-center gap-2 mb-4">
         <h2 className="flex">Organizations currently on</h2>
-        <span className=" bg-clip-text text-transparent bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 flex gap-2">
+        <span className=" text-primary flex gap-2">
           ghostity
           <div className="w-8 h-8 -scale-x-100">
             <Ghostity />

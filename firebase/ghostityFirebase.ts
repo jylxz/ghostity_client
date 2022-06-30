@@ -9,6 +9,7 @@ const clientCredentials = {
   storageBucket: process.env.NEXT_PUBLIC_PROD_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_PROD_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_PROD_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_PROD_MEASUREMENT_ID,
 };
 
 const firebaseApp = initializeApp(clientCredentials);

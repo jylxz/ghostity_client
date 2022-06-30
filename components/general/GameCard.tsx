@@ -13,11 +13,11 @@ export default function GameCard({ game }: { game: Game }) {
       </LinkTo>
       <CardContent className="h-16 pt-2 bg-slate-50">
         <LinkTo href={`/browse/games/${encodeURIComponent(game.name)}`}>
-          <Typography className="text-sm font-semibold line-clamp-1 cursor-pointer">
+          <Typography className="text-sm font-bold line-clamp-1 cursor-pointer">
             {game.name}
           </Typography>
         </LinkTo>
-        <Typography className="text-sm text-gray-500">
+        <Typography className="text-sm font-medium text-gray-500">
           {game.viewers} viewers
         </Typography>
       </CardContent>
