@@ -38,7 +38,7 @@ export default function FaqMain() {
   };
 
   return (
-    <div className="font-medium">
+    <div className="font-medium overflow-x-hidden">
       <BackgroundWrapper image="https://res.cloudinary.com/ghostity/image/upload/v1656533585/banner/Banner_1_hstgss.png">
         <div className="h-64 flex flex-col justify-center items-center">
           <div className="bg-primary w-20 h-20 p-4 rounded-full">

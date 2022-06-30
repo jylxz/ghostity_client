@@ -43,7 +43,7 @@ import UserContext from "../context/UserContext";
 import UserFollowContext from "../context/UserFollowContext";
 import AdminContext from "../context/AdminContext";
 import BlacklistContext from "../context/BlacklistContext";
-import LiveFollowingBar from "../components/general/LiveFollowingBar";
+import LiveFollowingBar from "../components/Navbar/LiveFollowingBar";
 import Favicons from "../components/Head/Favicons";
 
 export default function MyApp({ Component, pageProps }: AppProps) {

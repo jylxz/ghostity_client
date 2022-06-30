@@ -8,11 +8,12 @@ interface Admin {
 
 export default function useAdminCheck(UID: string | undefined) {
   const [admin, setAdmin] = useState<boolean>(false);
+  const API = process.env.NEXT_PUBLIC_API as string;
 
   const checkAdmin = async () => {
     if (UID) {
       const adminCheck = await axios
-        .get<Admin>(`https://api.ghostity.com/user?uid=${UID}`)
+        .get<Admin>(`${API}/user?uid=${UID}`)
         .then((res) => res.data);
 
       if (adminCheck.admin) {

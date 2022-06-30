@@ -95,12 +95,13 @@ export default function OrganizationMembers({
   members: Member[];
 }) {
   const [currentBranch, setCurrentBranch] = useState(-1);
+  const API = process.env.NEXT_PUBLIC_API as string;
 
   // Fetch Profiles
   const ids = members.map((member) => member.profile_id);
   const fetchProfiles = () =>
     axios
-      .post<Profile[]>("https://api.ghostity.com/profiles", {
+      .post<Profile[]>(`${API}/profiles`, {
         ids,
       })
       .then((res) => res.data);

@@ -5,8 +5,10 @@ import GameMain from "../../../components/Game/GameMain";
 
 export async function getServerSideProps(context: { query: { game: string } }) {
   const { game } = context.query;
+  const API = process.env.NEXT_PUBLIC_API as string;
+
   const gameData = await axios
-    .get<Game>(`https://api.ghostity.com/games/${encodeURIComponent(game)}`)
+    .get<Game>(`${API}/games/${encodeURIComponent(game)}`)
     .then((res) => res.data);
 
   if (!gameData) return { notFound: true };

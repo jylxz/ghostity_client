@@ -55,9 +55,11 @@ export default function OrganizationMain({ org }: { org: Organization }) {
     }
   }, [window])
 
+  const API = process.env.NEXT_PUBLIC_API as string
+
   const fetchOrganizationStreams = async () =>
     axios
-      .get<Stream[]>(`https://api.ghostity.com/organizations/${org.name}/streams`)
+      .get<Stream[]>(`${API}/organizations/${org.name}/streams`)
       .then((streams) => streams.data);
 
   const { isLoading, error, data } = useQuery<Stream[], Error>(

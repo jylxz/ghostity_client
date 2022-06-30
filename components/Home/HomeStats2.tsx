@@ -47,9 +47,12 @@ export default function HomeStats2() {
   const [currentLive, setCurrentLive] = useState<number>(0)
   const [currentWatching, setCurrentWatching] = useState<number>(0);
   const [currentTotal, setCurrentTotal] = useState<number>(0);
+
+  const API = process.env.NEXT_PUBLIC_API as string
+
   const fetchLiveStats = () =>
     axios
-      .get<LiveStat[]>(`https://api.ghostity.com/stats/live?time=${time}`)
+      .get<LiveStat[]>(`${API}/stats/live?time=${time}`)
       .then((res) => res.data);
   const liveStats = useQuery<LiveStat[], Error>(
     `liveStats, ${time} ${currentTab}`,
@@ -59,7 +62,7 @@ export default function HomeStats2() {
   const fetchWatchingStats = () =>
     axios
       .get<WatchingStat[]>(
-        `https://api.ghostity.com/stats/watching?time=${time}`
+        `${API}/stats/watching?time=${time}`
       )
       .then((res) => res.data);
   const watchingStats = useQuery<WatchingStat[], Error>(
@@ -69,7 +72,7 @@ export default function HomeStats2() {
 
   const fetchTotalStats = () =>
     axios
-      .get<TotalStat[]>(`https://api.ghostity.com/stats/total?time=${time}`)
+      .get<TotalStat[]>(`${API}/stats/total?time=${time}`)
       .then((res) => res.data);
   const totalStats = useQuery<TotalStat[], Error>(
     `totalStats, ${time} ${currentTab}`,

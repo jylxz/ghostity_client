@@ -6,9 +6,11 @@ import { useInfiniteQuery } from "react-query";
 import { Navigation, Mousewheel, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRouter } from "next/router";
+import { BsArrowRightShort } from "react-icons/bs";
 
 // Components
 import LiveFollowingBarItem from "./LiveFollowingBarItem";
+import LinkTo from "../general/LinkTo";
 
 // Contexts
 import UserFollowContext from "../../context/UserFollowContext";
@@ -30,8 +32,8 @@ const containerVariant = {
     translateY: 0,
     opacity: 1,
     transition: {
-      delayChildren: 2
-    }
+      delayChildren: 2,
+    },
   },
 };
 
@@ -44,11 +46,10 @@ const childVariant = {
     translateY: 0,
     opacity: 1,
     transition: {
-      delay: i * 0.3
-    }
+      delay: i * 0.3,
+    },
   }),
 };
-
 
 export default function LiveFollowingBar() {
   const user = useContext(UserContext);
@@ -66,9 +67,11 @@ export default function LiveFollowingBar() {
 
   const channelIds: string[] | undefined = follows?.channels;
 
+  const API = process.env.NEXT_PUBLIC_API as string;
+
   const fetchStreams = ({ pageParam = 1 }) =>
     axios
-      .post<Streams>(`https://api.ghostity.com/streams?page=${pageParam}`, {
+      .post<Streams>(`${API}/streams?page=${pageParam}`, {
         channelIds,
       })
       .then((res) => res.data);
@@ -94,7 +97,9 @@ export default function LiveFollowingBar() {
           // initial={{  translateY: -100, opacity: 0 }}
           // animate={{  translateY: 0, opacity: 1 }}
           // exit={{  translateY: -100, opacity: 0 }}
-          className={`${!showLiveFollowingBar ? "hidden" : "block" } px-3 h-20 w-full bg-slate-100 flex items-center`}
+          className={`${
+            !showLiveFollowingBar ? "hidden" : "block"
+          } px-3 h-20 w-full bg-slate-100 flex items-center`}
         >
           <Swiper
             modules={[Navigation, Mousewheel, FreeMode]}
@@ -110,13 +115,26 @@ export default function LiveFollowingBar() {
             }}
             className="overscroll-contain"
           >
-            {streams.data?.pages[0].results.map((stream, i) => (
+            {streams.data?.pages[0].results.slice(1, 30).map((stream, i) => (
               <SwiperSlide key={stream._id}>
                 <motion.div variants={childVariant} custom={i}>
                   <LiveFollowingBarItem stream={stream} />
                 </motion.div>
               </SwiperSlide>
             ))}
+            {streams.data && streams.data.pages[0].results.length > 30 ? (
+              <SwiperSlide>
+                <LinkTo href="/browse/following">
+                  <motion.button
+                    variants={childVariant}
+                    className="flex flex-col items-center justify-center max-w-[5rem] relative mx-auto mt-1.5"
+                  >
+                    <BsArrowRightShort size={40} />
+                    <span className="text-gray-500 text-xs">View More</span>
+                  </motion.button>
+                </LinkTo>
+              </SwiperSlide>
+            ) : null}
           </Swiper>
         </motion.div>
       ) : null}

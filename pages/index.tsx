@@ -15,7 +15,7 @@ import HomeStats2 from "../components/Home/HomeStats2";
 
 export const getStaticProps: GetStaticProps = async () => {
   const logos = await axios
-    .get<OrganizationLogos>("https://api.ghostity.com/organizations/logos")
+    .get<OrganizationLogos>(`http://localhost:4000/organizations/logos`)
     .then((orgLogos) => orgLogos.data);
 
   return { props: { logos }, revalidate: 6000 };
@@ -42,7 +42,7 @@ export default function Home({ logos }: OrganizationLogos) {
         />
         <meta
           name="twitter:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1655696219/profile-icons/ghostity-pfp-blue_cp5ctv.png"
+          content="https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-primary_jg3evf.png"
         />
       </Head>
       <HomeWelcome />

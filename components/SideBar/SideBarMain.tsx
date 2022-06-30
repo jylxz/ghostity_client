@@ -53,9 +53,11 @@ export default function SideBarMain() {
 
   const channelIds: string[] | undefined = follows?.channels;
 
+  const API = process.env.NEXT_PUBLIC_API as string;
+
   const fetchStreams = ({ pageParam = 1 }) =>
     axios
-      .post<Streams>(`https://api.ghostity.com/streams?page=${pageParam}`, {
+      .post<Streams>(`${API}/streams?page=${pageParam}`, {
         channelIds,
       })
       .then((res) => res.data);

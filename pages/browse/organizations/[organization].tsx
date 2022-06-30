@@ -3,25 +3,25 @@ import axios from "axios";
 
 import OrganizationMain from "../../../components/Organization/OrganizationMain";
 
-const getAllOrganizationNames = async () =>
-  axios
-    .get<Organization[]>("https://api.ghostity.com/organizations")
-    .then((res) => {
-      const organizations = res.data;
+const getAllOrganizationNames = async () => {
+  const API = process.env.NEXT_PUBLIC_API as string;
+  return axios.get<Organization[]>(`${API}/organizations`).then((res) => {
+    const organizations = res.data;
 
-      return organizations.map((org) => ({
-        params: {
-          organization: org.name.toLowerCase(),
-        },
-      }));
-    });
+    return organizations.map((org) => ({
+      params: {
+        organization: org.name.toLowerCase(),
+      },
+    }));
+  });
+};
 
-const getOrganizationData = async (organization: string) =>
-  axios
-    .get<Organization>(
-      `https://api.ghostity.com/organizations?name=${organization}`
-    )
+const getOrganizationData = async (organization: string) => {
+  const API = process.env.NEXT_PUBLIC_API as string;
+  return axios
+    .get<Organization>(`${API}/organizations?name=${organization}`)
     .then((res) => res.data);
+};
 
 export async function getStaticPaths() {
   const paths = await getAllOrganizationNames();
@@ -54,14 +54,17 @@ function OrganizationPage({ organization }: { organization: Organization[] }) {
           content={`V-Tubers, VTubers, virtual youtubers, Vtuber agency, Vtuber organization, ${organization[0].name}, ${organization[0].name} members`}
         />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content={`Ghostity | ${organization[0].name}`} />
+        <meta
+          name="twitter:title"
+          content={`Ghostity | ${organization[0].name}`}
+        />
         <meta
           name="twitter:description"
           content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
         />
         <meta
           name="twitter:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1655696219/profile-icons/ghostity-pfp-blue_cp5ctv.png"
+          content="https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-primary_jg3evf.png"
         />
       </Head>
       <OrganizationMain org={organization[0]} />

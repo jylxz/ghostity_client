@@ -17,9 +17,11 @@ export default function BrowseGames() {
   const { ref, inView } = useInView();
   const isWindowSmall = useIsWindowSmall();
 
+  const API = process.env.NEXT_PUBLIC_API as string
+
   const fetchGames = async ({ pageParam = 1 }) =>
     axios
-      .get<Games>(`https://api.ghostity.com/games?page=${pageParam}`)
+      .get<Games>(`${API}/games?page=${pageParam}`)
       .then((res) => res.data);
 
   const { data, error, fetchNextPage, hasNextPage, isLoading } =

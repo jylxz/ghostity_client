@@ -21,7 +21,7 @@ export default function BrowseOrganizations({
           </div>
         </span>
       </div>
-      <div className="grid grid-cols-[repeat(auto-fit,_minmax(160px,_1fr))] gap-7 justify-items-center">
+      <div className="grid grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] gap-7 justify-items-center">
         {organizations.map((org) => (
           <InfoCard
             key={org._id}

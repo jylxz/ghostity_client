@@ -14,11 +14,12 @@ import GridWrapper from "../general/GridWrapper";
 
 export default function GameStreams({ game }: { game: string }) {
   const { ref, inView } = useInView();
+  const API = process.env.NEXT_PUBLIC_API as string
 
   const fetchGameStreams = async ({ pageParam = 1 }) =>
     axios
       .get<Streams>(
-        `https://api.ghostity.com/games/${encodeURIComponent(
+        `${API}/games/${encodeURIComponent(
           game
         )}/streams?page=${pageParam}`
       )

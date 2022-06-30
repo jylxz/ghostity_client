@@ -4,8 +4,10 @@ import axios from "axios";
 import BrowseOrganizations from "../../../components/Browse/BrowseOrganizations";
 
 export async function getStaticProps() {
+  const API = process.env.NEXT_PUBLIC_API as string;
+
   const orgs = await axios
-    .get<Organization[]>("https://api.ghostity.com/organizations")
+    .get<Organization[]>(`${API}/organizations`)
     .then((allOrgs) => allOrgs.data);
 
   return { props: { orgs } };
@@ -28,7 +30,7 @@ function organizations({ orgs }: { orgs: Organization[] }) {
         />
         <meta
           name="twitter:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1655696219/profile-icons/ghostity-pfp-blue_cp5ctv.png"
+          content="https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-primary_jg3evf.png"
         />
       </Head>
       <BrowseOrganizations organizations={orgs} />

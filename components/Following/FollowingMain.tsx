@@ -30,9 +30,11 @@ export default function FollowingMain() {
 
   const channelIds: string[] | undefined = follows?.channels;
 
+  const API = process.env.NEXT_PUBLIC_API as string
+
   const fetchStreams = ({ pageParam = 1 }) =>
     axios
-      .post<Streams>(`https://api.ghostity.com/streams?page=${pageParam}`, {
+      .post<Streams>(`${API}/streams?page=${pageParam}`, {
         channelIds,
       })
       .then((res) => res.data);
@@ -49,7 +51,7 @@ export default function FollowingMain() {
 
   const fetchProfiles = ({ pageParam = 1 }) =>
     axios
-      .post<Profiles>(`https://api.ghostity.com/profiles?page=${pageParam}`, {
+      .post<Profiles>(`${API}/profiles?page=${pageParam}`, {
         channelIds,
       })
       .then((res) => res.data);

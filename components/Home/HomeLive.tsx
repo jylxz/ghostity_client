@@ -22,9 +22,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 export default function HomeLive() {
+  const API = process.env.NEXT_PUBLIC_API as string
+
   const fetchStreams = async ({ pageParam = 1 }) =>
     axios
-      .get<Streams>(`https://api.ghostity.com/streams?page=${pageParam}`)
+      .get<Streams>(`${API}/streams?page=${pageParam}`)
       .then((res) => res.data);
 
   const { data, error, isLoading } = useInfiniteQuery<Streams, Error>(

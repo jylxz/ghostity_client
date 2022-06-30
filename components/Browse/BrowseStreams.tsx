@@ -20,10 +20,11 @@ export default function BrowseStreams() {
   const { ref, inView } = useInView();
   const [loading, setLoading] = useState(false)
   const [filterString, filters, setFilters, resetFilters] = useHandleFilters();
+  const API = process.env.NEXT_PUBLIC_API as string;
 
   const fetchStreams = async ({ pageParam = 1 }) =>
     axios
-      .get<Streams>(`https://api.ghostity.com/streams?page=${pageParam}&limit=30${filterString}`)
+      .get<Streams>(`${API}/streams?page=${pageParam}&limit=30${filterString}`)
       .then((res) => res.data);
 
   const {

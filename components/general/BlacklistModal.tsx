@@ -16,6 +16,7 @@ export default function BlacklistModal({
   setBlacklistChannel: Dispatch<SetStateAction<Stream | null>>;
 }) {
   const userContext = useContext(UserContext);
+  const API = process.env.NEXT_PUBLIC_API as string
 
   const handleClose = () => {
     setBlacklistChannel(null);
@@ -24,7 +25,7 @@ export default function BlacklistModal({
 
   const handleBlacklist = async () =>
     axios
-      .delete("https://api.ghostity.com/admin/channel", {
+      .delete(`${API}/admin/channel`, {
         headers: {
           authorization: userContext?.uid || "",
         },
