@@ -24,12 +24,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         email,
       },
     }))
-    .catch((error) => ({
+    .catch((error) => {
+      console.log(error)
+      return ({
       redirect: {
         permanent: false,
         destination: "/",
       },
-    }));
+    })})
 
   return props;
 };
