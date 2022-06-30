@@ -37,9 +37,21 @@ export default function ProfileChangePfp({
   setEditPfp: Dispatch<SetStateAction<boolean>>;
 }) {
   const user = useContext(UserContext);
-  const [currentPfp, setCurrentPfp] = useState<string>(user?.photoURL as string);
-  const profileIconLinks =
-    process.env.NEXT_PUBLIC_ALT_PROFILE_ICON_LINKS?.split(",");
+  const [currentPfp, setCurrentPfp] = useState<string>(
+    user?.photoURL as string
+  );
+  const profileIconLinks = [
+    "https://res.cloudinary.com/ghostity/image/upload/v1655922626/alt-profile-icons/ghostity-pfp-red_ojqbtt.png",
+    "https://res.cloudinary.com/ghostity/image/upload/v1655922626/alt-profile-icons/ghostity-pfp-yellow_xfimay.png",
+    "https://res.cloudinary.com/ghostity/image/upload/v1655922626/alt-profile-icons/ghostity-pfp-purple_uhjvu6.png",
+    "https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-periwinkle_tpqwgw.png",
+    "https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-primary_jg3evf.png",
+    "https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-orange_kaueo8.png",
+    "https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-blue_cbnk3u.png",
+    "https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-pink_jrrk3p.png",
+    "https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-mint_j9zuev.png",
+  ];
+
   const [updateProfile] = useUpdateProfile(auth);
 
   const changePfp = () =>

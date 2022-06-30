@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         email,
       },
     }))
-    .catch(() => ({
+    .catch((error) => ({
       redirect: {
         permanent: false,
         destination: "/",
