@@ -14,8 +14,10 @@ import HomeHelp from "../components/Home/HomeHelp";
 import HomeStats2 from "../components/Home/HomeStats2";
 
 export const getStaticProps: GetStaticProps = async () => {
+  const API = process.env.NEXT_PUBLIC_API as string
+  
   const logos = await axios
-    .get<OrganizationLogos>(`http://localhost:4000/organizations/logos`)
+    .get<OrganizationLogos>(`${API}/organizations/logos`)
     .then((orgLogos) => orgLogos.data);
 
   return { props: { logos }, revalidate: 6000 };
