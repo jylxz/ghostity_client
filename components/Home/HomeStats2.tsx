@@ -138,10 +138,12 @@ export default function HomeStats2() {
           Month
         </AnimatedButton>
       </div>
-      <div className="select-none">
-        <StatsLive stats={liveStats.data} currentTab={currentTab} />
-        <StatsWatching stats={watchingStats.data} currentTab={currentTab} />
-        <StatsTotal stats={totalStats.data} currentTab={currentTab} />
+      <div className="">
+        <div className="mx-auto select-none max-w-[70rem]">
+          <StatsLive stats={liveStats.data} currentTab={currentTab} />
+          <StatsWatching stats={watchingStats.data} currentTab={currentTab} />
+          <StatsTotal stats={totalStats.data} currentTab={currentTab} />
+        </div>
       </div>
       <motion.div
         variants={buttonContainer}

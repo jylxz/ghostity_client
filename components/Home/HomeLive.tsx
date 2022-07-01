@@ -64,7 +64,7 @@ export default function HomeLive() {
           </span>
           <Swiper
             modules={[Navigation]}
-            spaceBetween={24}
+            spaceBetween={20}
             slidesPerView={1}
             slidesPerGroup={1}
             navigation={{
@@ -73,21 +73,20 @@ export default function HomeLive() {
             }}
             breakpoints={{
               768: { slidesPerGroup: 2, slidesPerView: 2 },
-              1024: { slidesPerGroup: 3, slidesPerView: 3 },
               1280: {
-                slidesPerGroup: 4,
-                slidesPerView: 4,
+                slidesPerGroup: 3,
+                slidesPerView: 3,
               },
               1920: {
-                slidesPerGroup: 5,
-                slidesPerView: 5,
+                slidesPerGroup: 4,
+                slidesPerView: 4,
               },
             }}
             updateOnWindowResize
             className="py-4"
           >
             {data?.pages[0].results
-              .slice(0, 15)
+              .slice(0, 16)
               .map((stream: Stream, i: number) => (
                 <SwiperSlide
                   key={stream.channel_id}

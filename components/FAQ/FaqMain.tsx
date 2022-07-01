@@ -123,7 +123,7 @@ export default function FaqMain() {
               <motion.div
                 layout
                 variants={itemAnimation}
-                className="flex gap-3"
+                className="flex gap-3 text-sm"
               >
                 <AnimatedButton
                   className={`${
