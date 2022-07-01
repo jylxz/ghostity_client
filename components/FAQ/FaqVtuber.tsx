@@ -245,7 +245,7 @@ export default function FaqVtuber({ currentTab }: { currentTab: string }) {
                 <p>
                   If anything, the most I can ask you to do is share ghostity
                   with your friends, discord homies, Vtuber enjoyers, or other
-                  Vtubers! It would be my dream if ghostity blew up and became
+                  Vtubers! It would be cool if ghostity blew up and became
                   popular!
                 </p>
               </div>

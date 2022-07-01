@@ -20,11 +20,6 @@ module.exports = {
       },
       fontFamily: {
         sans: ['"Quicksand"', ...defaultTheme.fontFamily.sans],
-        secondary: [
-          '"Raleway"',
-          '"Quicksand"',
-          ...defaultTheme.fontFamily.sans,
-        ],
       },
       keyframes: {
         "fade-out": {
