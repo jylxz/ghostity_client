@@ -44,19 +44,19 @@ export default function Home({ logos }: OrganizationLogos) {
         />
         <meta
           name="twitter:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1656661542/Logos/ghostity-720x720_jznyvc.png"
+          content="https://res.cloudinary.com/ghostity/image/upload/v1656659048/OG/GhostityFullLogo_bgnhbs.png"
         />
         <meta property="og:title" content="Ghostity | Home" />
         <meta
           property="og:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1656661542/Logos/ghostity-720x720_jznyvc.png"
+          content="https://res.cloudinary.com/ghostity/image/upload/v1656659048/OG/GhostityFullLogo_bgnhbs.png"
         />
         <meta
-          property="description"
+          property="og:description"
           content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
         />
-        <meta property="og:image:width" content="640" />
-        <meta property="og:image:height" content="360" />
+        <meta property="og:image:width" content="1280" />
+        <meta property="og:image:height" content="720" />
       </Head>
       <HomeWelcome />
       <HomeOrganizations logos={logos} />
