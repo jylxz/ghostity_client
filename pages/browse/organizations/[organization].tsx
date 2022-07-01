@@ -64,7 +64,7 @@ function OrganizationPage({ organization }: { organization: Organization[] }) {
         />
         <meta
           name="twitter:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-primary_jg3evf.png"
+          content="https://res.cloudinary.com/ghostity/image/upload/v1656659048/OG/GhostityFullLogo_bgnhbs.png"
         />
       </Head>
       <OrganizationMain org={organization[0]} />

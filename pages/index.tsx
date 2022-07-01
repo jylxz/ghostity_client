@@ -14,8 +14,8 @@ import HomeHelp from "../components/Home/HomeHelp";
 import HomeStats2 from "../components/Home/HomeStats2";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const API = process.env.NEXT_PUBLIC_API as string
-  
+  const API = process.env.NEXT_PUBLIC_API as string;
+
   const logos = await axios
     .get<OrganizationLogos>(`${API}/organizations/logos`)
     .then((orgLogos) => orgLogos.data);
@@ -44,8 +44,19 @@ export default function Home({ logos }: OrganizationLogos) {
         />
         <meta
           name="twitter:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-primary_jg3evf.png"
+          content="https://res.cloudinary.com/ghostity/image/upload/v1656659048/OG/GhostityFullLogo_bgnhbs.png"
         />
+        <meta property="og:title" content="Ghostity | Home" />
+        <meta
+          property="og:image"
+          content="https://res.cloudinary.com/ghostity/image/upload/v1656659048/OG/GhostityFullLogo_bgnhbs.png"
+        />
+        <meta
+          property="description"
+          content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
+        />
+        <meta property="og:image:width" content="640" />
+        <meta property="og:image:height" content="360" />
       </Head>
       <HomeWelcome />
       <HomeOrganizations logos={logos} />
