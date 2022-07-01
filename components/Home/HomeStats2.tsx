@@ -99,7 +99,7 @@ export default function HomeStats2() {
       <div className="flex gap-2 text-sm justify-center sm:justify-end ">
         <AnimatedButton
           onClick={() => setTime("1day")}
-          className={`px-2 py-0.5 rounded border-2 ${
+          className={`px-2 py-0.5 rounded border-2 shadow-sm ${
             time === "1day"
               ? "text-black border-primary bg-white font-medium"
               : "text-gray-400 bg-gray-100 "
@@ -109,7 +109,7 @@ export default function HomeStats2() {
         </AnimatedButton>
         <AnimatedButton
           onClick={() => setTime("3day")}
-          className={`px-2 py-0.5 rounded border-2 ${
+          className={`px-2 py-0.5 rounded border-2 shadow-sm ${
             time === "3day"
               ? "text-black border-primary bg-white font-medium"
               : "text-gray-400 bg-gray-100"
@@ -119,7 +119,7 @@ export default function HomeStats2() {
         </AnimatedButton>
         <AnimatedButton
           onClick={() => setTime("week")}
-          className={` px-2 py-0.5 rounded border-2 ${
+          className={` px-2 py-0.5 rounded border-2 shadow-sm ${
             time === "week"
               ? "text-black border-primary bg-white font-medium"
               : "text-gray-400 bg-gray-100"
@@ -155,7 +155,7 @@ export default function HomeStats2() {
           whileTap={{ scale: 0.95 }}
           variants={buttons}
           onClick={() => setCurrentTab("watching")}
-          className="flex items-center gap-2 bg-primary px-2 py-1.5 rounded"
+          className="flex items-center gap-2 bg-primary px-2 py-1.5 rounded shadow"
         >
           <LiveTvOutlinedIcon className="w-6 h-6" />
           <span className="flex items-center gap-1 font-medium">
@@ -168,7 +168,7 @@ export default function HomeStats2() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setCurrentTab("live")}
-          className="flex items-center gap-2 bg-secondary px-2 py-1.5 rounded"
+          className="flex items-center gap-2 bg-secondary px-2 py-1.5 rounded shadow"
         >
           <CableOutlinedIcon className="w-6 h-6" />
           <span className="flex items-center gap-1 font-medium">
@@ -181,7 +181,7 @@ export default function HomeStats2() {
           whileTap={{ scale: 0.95 }}
           variants={buttons}
           onClick={() => setCurrentTab("total")}
-          className="flex items-center gap-2 bg-secondary2 px-2 py-1.5 rounded"
+          className="flex items-center gap-2 bg-secondary2 px-2 py-1.5 rounded shadow"
         >
           <div className="w-6 h-6">
             <GhostityIcon />
