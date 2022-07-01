@@ -62,7 +62,6 @@ export default function Favicons() {
       ) : null}
       {!systemColor ? (
         <>
-          <link rel="shortcut icon" href="/favicon.ico" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"

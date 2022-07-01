@@ -30,7 +30,7 @@ function organizations({ orgs }: { orgs: Organization[] }) {
         />
         <meta
           name="twitter:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1656659048/OG/GhostityFullLogo_bgnhbs.png"
+          content="https://res.cloudinary.com/ghostity/image/upload/v1656660902/Logos/ghostity-full-1280x720_unhfvu.png"
         />
       </Head>
       <BrowseOrganizations organizations={orgs} />
