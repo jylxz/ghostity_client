@@ -44,12 +44,12 @@ export default function Home({ logos }: OrganizationLogos) {
         />
         <meta
           name="twitter:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1656659048/OG/GhostityFullLogo_bgnhbs.png"
+          content="https://res.cloudinary.com/ghostity/image/upload/v1656661542/Logos/ghostity-720x720_jznyvc.png"
         />
         <meta property="og:title" content="Ghostity | Home" />
         <meta
           property="og:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1656659048/OG/GhostityFullLogo_bgnhbs.png"
+          content="https://res.cloudinary.com/ghostity/image/upload/v1656661542/Logos/ghostity-720x720_jznyvc.png"
         />
         <meta
           property="description"
