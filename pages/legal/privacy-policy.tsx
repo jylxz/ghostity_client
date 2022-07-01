@@ -15,7 +15,7 @@ export default function PrivatePolicy() {
           <GhostityLogo />
         </div>
         <h1 className="text-2xl font-semibold">Privacy Policy</h1>
-        <div className="text-sm">Last Updated: June 29, 2022</div>
+        <div className="text-sm">Last Updated: July 1, 2022</div>
       </div>
       <main className="flex justify-center py-16">
         <div className="max-w-[75ch] text-sm flex flex-col items-center gap-10 px-4">

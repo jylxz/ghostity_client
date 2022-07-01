@@ -45,7 +45,7 @@ export default function StatsLive({ stats, currentTab }: { stats?: LiveStat[], c
         ticks: {
           callback(val, index) {
             // eslint-disable-next-line react/no-this-in-sfc
-            return index % 6 === 0 ? this.getLabelForValue(val as number) : "";
+            return index % 3 === 0 ? this.getLabelForValue(val as number) : "";
           },
           maxTicksLimit: isWindowSmall ? 8 : undefined
         },

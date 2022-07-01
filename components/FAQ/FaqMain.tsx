@@ -46,7 +46,7 @@ export default function FaqMain() {
           </div>
           <h1 className="text-2xl font-semibold">Frequently Asked Questions</h1>
           <div className="text-sm text-gray-500">
-            Last Updated: June 29, 2022
+            Last Updated: July 1, 2022
           </div>
           <div className="mt-4 flex flex-wrap justify-center items-center gap-4 bg-gray-200/70 px-3 py-1 rounded-lg">
             <div>

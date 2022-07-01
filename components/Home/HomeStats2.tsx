@@ -129,9 +129,9 @@ export default function HomeStats2() {
         </AnimatedButton>
         <AnimatedButton
           onClick={() => setTime("month")}
-          className={`px-2 py-0.5 rounded border-2 ${
+          className={`px-2 py-0.5 rounded border-2 shadow-sm ${
             time === "month"
-              ? "text-black border-primary bg-white font-medium"
+              ? "text-black border-primary bg-white font-medium "
               : "text-gray-400 bg-gray-100 "
           }`}
         >
@@ -139,7 +139,7 @@ export default function HomeStats2() {
         </AnimatedButton>
       </div>
       <div className="">
-        <div className="mx-auto select-none max-w-[70rem]">
+        <div className="mx-auto select-none sm:max-w-[70rem]">
           <StatsLive stats={liveStats.data} currentTab={currentTab} />
           <StatsWatching stats={watchingStats.data} currentTab={currentTab} />
           <StatsTotal stats={totalStats.data} currentTab={currentTab} />

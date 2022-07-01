@@ -64,7 +64,7 @@ export default function HomeLive() {
           </span>
           <Swiper
             modules={[Navigation]}
-            spaceBetween={20}
+            spaceBetween={16}
             slidesPerView={1}
             slidesPerGroup={1}
             navigation={{
