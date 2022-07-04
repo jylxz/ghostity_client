@@ -10,7 +10,7 @@ import LinkTo from "../general/LinkTo";
 import { homeHelpAnimations } from "./animations/homeAnimations";
 
 // Images
-import GhostityLogo from "../../public/images/Ghostity-svg.svg";
+import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
 
 export default function HomeHelp() {
   const {
@@ -33,7 +33,7 @@ export default function HomeHelp() {
             className="relative"
           >
             <motion.div variants={ghostVariant}>
-              <GhostityLogo className="h-24 w-24" />
+              <VGhostityLogo className="h-24 w-24" />
             </motion.div>
             <motion.span
               variants={questionMarkVariant}
@@ -61,7 +61,7 @@ export default function HomeHelp() {
               variants={textVariant}
               className="text-sm lg:text-base text-gray-500"
             >
-              Are you a V-Tuber, but don&apos;t see your channel on ghostity?
+              Are you a V-Tuber, but don&apos;t see your channel on vGhostity?
               Check the FAQ page for help!
             </motion.p>
             <motion.div variants={textVariant} className="mt-3">

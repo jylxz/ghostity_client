@@ -33,12 +33,12 @@ export default function FaqVtuber({ currentTab }: { currentTab: string }) {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <h3>How do I get on ghostity?</h3>
+              <h3>How do I get on vGhostity?</h3>
             </AccordionSummary>
             <AccordionDetails>
               <div className="text-sm text-gray-500">
                 <p>
-                  Getting on ghostity is pretty easy, and in most cases you are
+                  Getting on vGhostity is pretty easy, and in most cases you are
                   probably already on here!
                 </p>
                 <br />
@@ -54,7 +54,7 @@ export default function FaqVtuber({ currentTab }: { currentTab: string }) {
                 </p>
                 <br />
                 <p>
-                  Thats all you need to do and ghostity will handle the rest!
+                  Thats all you need to do and vGhostity will handle the rest!
                 </p>
               </div>
             </AccordionDetails>
@@ -65,12 +65,12 @@ export default function FaqVtuber({ currentTab }: { currentTab: string }) {
               aria-controls="panel2a-content"
               id="panel2a-header"
             >
-              <Typography>How long does it take to get on ghostity?</Typography>
+              <Typography>How long does it take to get on vGhostity?</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <div className="text-sm text-gray-500">
                 <p>
-                  Ghostity is set up to search for new Vtubers roughly every 30
+                  vGhostity is set up to search for new Vtubers roughly every 30
                   mins around the clock. It could possibly take longer if there
                   is a lot of people streaming at that time and using the
                   &quot;Vtuber&quot; tag.
@@ -95,7 +95,7 @@ export default function FaqVtuber({ currentTab }: { currentTab: string }) {
                 </p>
                 <br />
                 <p>
-                  Please check &quot;Why am I blacklisted from ghostity?&quot;
+                  Please check &quot;Why am I blacklisted from vGhostity?&quot;
                   for more information.
                 </p>
               </div>
@@ -130,7 +130,7 @@ export default function FaqVtuber({ currentTab }: { currentTab: string }) {
               aria-controls="panel5a-content"
               id="panel5a-header"
             >
-              <h3>Why am I blacklisted from ghostity?</h3>
+              <h3>Why am I blacklisted from vGhostity?</h3>
             </AccordionSummary>
             <AccordionDetails>
               <div className="text-sm text-gray-500">
@@ -177,7 +177,7 @@ export default function FaqVtuber({ currentTab }: { currentTab: string }) {
             >
               <h3>
                 I followed the instructions, but I still can&apos;t see my
-                stream on ghostity!
+                stream on vGhostity!
               </h3>
             </AccordionSummary>
             <AccordionDetails>
@@ -198,7 +198,7 @@ export default function FaqVtuber({ currentTab }: { currentTab: string }) {
               aria-controls="panel7a-content"
               id="panel7a-header"
             >
-              <h3>Can I remove my channel from ghostity?</h3>
+              <h3>Can I remove my channel from vGhostity?</h3>
             </AccordionSummary>
             <AccordionDetails>
               <div className="text-sm text-gray-500">
@@ -218,7 +218,7 @@ export default function FaqVtuber({ currentTab }: { currentTab: string }) {
               id="panel8a-header"
             >
               <h3>
-                How can I support the continued development of ghostity and you?
+                How can I support the continued development of vGhostity and you?
               </h3>
             </AccordionSummary>
             <AccordionDetails>
@@ -238,14 +238,14 @@ export default function FaqVtuber({ currentTab }: { currentTab: string }) {
                 <p>
                   Anything helps! Especially anything I can proudly tell my
                   parents about. However, don&apos;t feel pressured or obligated
-                  to donate. I created ghostity on my accord and as a portfolio
+                  to donate. I created vGhostity on my accord and as a portfolio
                   project as a self-taught developer.
                 </p>
                 <br />
                 <p>
-                  If anything, the most I can ask you to do is share ghostity
+                  If anything, the most I can ask you to do is share VGhostity
                   with your friends, discord homies, Vtuber enjoyers, or other
-                  Vtubers! It would be cool if ghostity blew up and became
+                  Vtubers! It would be cool if VGhostity blew up and became
                   popular!
                 </p>
               </div>
@@ -263,7 +263,7 @@ export default function FaqVtuber({ currentTab }: { currentTab: string }) {
               <div className="text-sm text-gray-500">
                 <p>
                   Absolutely! I would love to hear your opinion on how I can
-                  make ghostity the best Vtuber app there is!
+                  make VGhostity the best Vtuber app there is!
                 </p>
               </div>
             </AccordionDetails>

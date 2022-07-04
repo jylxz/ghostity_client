@@ -19,7 +19,7 @@ import { auth } from "../../firebase/ghostityFirebase";
 import Modal from "../general/Modal";
 import AuthForgotPassword from "./AuthForgotPassword";
 import AuthSignUp from "./AuthSignUp";
-import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+import VGhostityIcon from "../../public/images/Ghostity-svg.svg";
 import googleG from "../../public/images/googleG.png";
 
 export default function AuthModalMain({
@@ -87,9 +87,9 @@ export default function AuthModalMain({
               >
                 <div className="flex-1 flex flex-col items-center justify-center gap-6">
                   <div className="w-16 h-16 bg-primary rounded-full p-4">
-                    <GhostityIcon />
+                    <VGhostityIcon />
                   </div>
-                  <h1 className="text-xl">Sign in to ghostity</h1>
+                  <h1 className="text-xl">Sign in to vGhostity</h1>
                   <form
                     onSubmit={(e) => handleSignIn(e)}
                     className="flex flex-col gap-2 items-center"

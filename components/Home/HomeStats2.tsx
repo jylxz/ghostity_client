@@ -23,7 +23,7 @@ import HomeSectionHeading from "../general/HomeSectionHeading";
 import StatsWatching from "../Stats/StatsWatching";
 import StatsTotal from "../Stats/StatsTotal";
 import AnimatedButton from "../general/AnimatedButton";
-import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+import VGhostityIcon from "../../public/images/Ghostity-svg.svg";
 import { homeStatsAnimations } from "./animations/homeAnimations";
 
 ChartJS.register(
@@ -95,7 +95,7 @@ export default function HomeStats2() {
 
   return (
     <SectionWrapper color="white" className="">
-      <HomeSectionHeading heading="Ghostity Stats" />
+      <HomeSectionHeading heading="vGhostity Stats" />
       <div className="flex gap-2 text-sm justify-center sm:justify-end ">
         <AnimatedButton
           onClick={() => setTime("1day")}
@@ -186,7 +186,7 @@ export default function HomeStats2() {
           className="flex items-center gap-2 bg-secondary2 px-2 py-1.5 rounded shadow"
         >
           <div className="w-6 h-6">
-            <GhostityIcon />
+            <VGhostityIcon />
           </div>
           <span className="flex items-center gap-1 font-medium">
             Total{" "}

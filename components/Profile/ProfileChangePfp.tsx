@@ -21,7 +21,7 @@ function PfpCards({
       onClick={() => setCurrentPfp(src)}
     >
       <Image
-        alt="A ghostity profile icon option"
+        alt="A vGhostity profile icon option"
         src={src}
         width={36}
         height={36}
@@ -71,7 +71,7 @@ export default function ProfileChangePfp({
         <div className="bg-black/50 rounded w-96 p-8">
           <div className="flex flex-col justify-center items-center">
             <Image
-              alt="ghostity profile icon"
+              alt="vGhostity profile icon"
               src={currentPfp}
               height={144}
               width={144}

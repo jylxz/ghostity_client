@@ -3,7 +3,7 @@ import React from "react";
 import BrowseWrapper from "../general/BrowseWrapper";
 import InfoCard from "../general/InfoCard";
 
-import Ghostity from "../../public/images/Ghostity-svg.svg";
+import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
 
 export default function BrowseOrganizations({
   organizations,
@@ -15,9 +15,9 @@ export default function BrowseOrganizations({
       <div className="w-full flex flex-wrap text-xl font-medium justify-center gap-2 mb-4">
         <h2 className="flex">Organizations currently on</h2>
         <span className=" text-primary flex gap-2">
-          ghostity
+          vGhostity
           <div className="w-8 h-8 -scale-x-100">
-            <Ghostity />
+            <VGhostityLogo />
           </div>
         </span>
       </div>

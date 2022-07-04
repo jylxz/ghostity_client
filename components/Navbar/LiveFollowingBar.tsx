@@ -115,7 +115,7 @@ export default function LiveFollowingBar() {
             }}
             className="overscroll-contain"
           >
-            {streams.data?.pages[0].results.slice(1, 30).map((stream, i) => (
+            {streams.data?.pages[0].results.slice(0, 30).map((stream, i) => (
               <SwiperSlide key={stream._id}>
                 <motion.div variants={childVariant} custom={i}>
                   <LiveFollowingBarItem stream={stream} />

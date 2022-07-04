@@ -12,7 +12,7 @@ import AnimatedButton from "../components/general/AnimatedButton";
 import Footer from "../components/general/Footer";
 import LoadingButton from "../components/general/LoadingButton";
 import useValidatePassword from "../hooks/useValidatePassword";
-import GhostityLogo from "../public/images/Ghostity-svg.svg";
+import VGhostityLogo from "../public/images/Ghostity-svg.svg";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const props = await verifyPasswordResetCode(
@@ -62,12 +62,12 @@ export default function ResetPassword({ email }: { email: string }) {
   return (
     <>
       <Head>
-        <title>Ghostity | Reset Password</title>
+        <title>vGhostity | Reset Password</title>
       </Head>
       <div className="h-screen flex flex-col font-medium">
         <div className="flex-1 w-96 mx-auto flex flex-col justify-center gap-8">
           <div className="w-16 h-16 bg-primary rounded-full p-4 mx-auto">
-            <GhostityLogo />
+            <VGhostityLogo />
           </div>
           <h1 className="text-center">{`Reset password for ${email}`}</h1>
           <form className="flex flex-col gap-4" onSubmit={(e) => handleResetPassword(e)}>

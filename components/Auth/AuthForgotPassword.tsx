@@ -15,7 +15,7 @@ import { auth } from "../../firebase/ghostityFirebase";
 
 // Components
 import LoadingButton from "../general/LoadingButton";
-import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+import VGhostityIcon from "../../public/images/Ghostity-svg.svg";
 
 export default function AuthForgotPassword({
   setCurrentTab,
@@ -68,11 +68,11 @@ export default function AuthForgotPassword({
         <BsArrowLeftShort className="text-lg" /> Go back
       </button>
       <div className="w-16 h-16 bg-primary rounded-full p-4">
-        <GhostityIcon />
+        <VGhostityIcon />
       </div>
       <h1 className="text-xl">Forgot your password?</h1>
       <p className="text-sm text-center text-gray-600">
-        No biggie! Just enter your email associated with ghostity!
+        No biggie! Just enter your email associated with vGhostity!
       </p>
       <div className="flex items-center">
         <div className="mr-3 mt-2">

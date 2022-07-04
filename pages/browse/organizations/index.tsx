@@ -10,20 +10,20 @@ export async function getStaticProps() {
     .get<Organization[]>(`${API}/organizations`)
     .then((allOrgs) => allOrgs.data);
 
-  return { props: { orgs } };
+  return { props: { orgs }, revalidate: 1000 };
 }
 
 function organizations({ orgs }: { orgs: Organization[] }) {
   return (
     <>
       <Head>
-        <title>Ghostity | Organizations</title>
+        <title>vGhostity | Organizations</title>
         <meta
           name="keywords"
           content="V-Tubers, VTubers, virtual youtubers, Vtuber agency, Vtuber organization, Hololive, Nijisanji, VShojo, VSPO, 774inc., NoriPro,"
         />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Ghostity | Organizations" />
+        <meta name="twitter:title" content="vGhostity | Organizations" />
         <meta
           name="twitter:description"
           content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"

@@ -29,13 +29,13 @@ export default function FaqUser({ currentTab }: { currentTab: string }) {
               id="panel1c-header"
             >
               <h3>
-                How long does it take for streams to update/show up on ghostity?
+                How long does it take for streams to update/show up on vGhostity?
               </h3>
             </AccordionSummary>
             <AccordionDetails>
               <div className="text-sm text-gray-500">
                 <p>
-                  Ghostity starts updating streams every 10 mins around the
+                  vGhostity starts updating streams every 10 mins around the
                   clock! However, it could take an few minutes before you can
                   see it!
                 </p>
@@ -67,7 +67,7 @@ export default function FaqUser({ currentTab }: { currentTab: string }) {
               aria-controls="panel3c-content"
               id="panel3c-header"
             >
-              <h3>Did you really build ghostity by yourself?</h3>
+              <h3>Did you really build vGhostity by yourself?</h3>
             </AccordionSummary>
             <AccordionDetails>
               <div className="text-sm text-gray-500">
@@ -90,7 +90,7 @@ export default function FaqUser({ currentTab }: { currentTab: string }) {
               id="panel4c-header"
             >
               <h3>
-                How can I support the continued development of ghostity and you?
+                How can I support the continued development of vGhostity and you?
               </h3>
             </AccordionSummary>
             <AccordionDetails>
@@ -110,14 +110,14 @@ export default function FaqUser({ currentTab }: { currentTab: string }) {
                 <p>
                   Anything helps! Especially anything I can proudly tell my
                   parents about. However, don&apos;t feel pressured or obligated
-                  to donate. I created ghostity on my accord and as a portfolio
+                  to donate. I created vGhostity on my accord and as a portfolio
                   project as a self-taught developer.
                 </p>
                 <br />
                 <p>
-                  If anything, the most I can ask you to do is share ghostity
+                  If anything, the most I can ask you to do is share vGhostity
                   with your friends, discord homies, Vtuber enjoyers, or other
-                  Vtubers! It would cool if ghostity blew up and became
+                  Vtubers! It would cool if vGhostity blew up and became
                   popular!
                 </p>
               </div>
@@ -135,7 +135,7 @@ export default function FaqUser({ currentTab }: { currentTab: string }) {
               <div className="text-sm text-gray-500">
                 <p>
                   Absolutely! I would love to hear your opinion on how I can
-                  make ghostity the best Vtuber app there is!
+                  make vGhostity the best Vtuber app there is!
                 </p>
               </div>
             </AccordionDetails>
@@ -146,7 +146,7 @@ export default function FaqUser({ currentTab }: { currentTab: string }) {
               aria-controls="panel6c-content"
               id="panel6c-header"
             >
-              <h3>Why is ghostity called &quot;ghostity&quot;?</h3>
+              <h3>Why is vGhostity called &quot;vGhostity&quot;?</h3>
             </AccordionSummary>
             <AccordionDetails>
               <div className="text-sm text-gray-500">
@@ -154,7 +154,7 @@ export default function FaqUser({ currentTab }: { currentTab: string }) {
                   It&apos;s nothing too special or deep. When I was coming up
                   names for the app, I was listening to Hoshimachi Suisei&apos;s
                   song &quot;GHOST&quot; and decide why not use something with
-                  ghost in it. &quot;Ghostity&quot; was a available domain and
+                  ghost in it. &quot;vGhostity&quot; was a available domain and
                   rest is history!
                 </p>
               </div>

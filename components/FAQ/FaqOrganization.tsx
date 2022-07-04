@@ -33,7 +33,7 @@ export default function FaqOrganization({
               aria-controls="panel1b-content"
               id="panel1b-header"
             >
-              <h3>Can my organization be added into ghostity?</h3>
+              <h3>Can my organization be added into vGhostity?</h3>
             </AccordionSummary>
             <AccordionDetails>
               <div className="text-sm text-gray-500">
@@ -51,7 +51,7 @@ export default function FaqOrganization({
                 <p>
                   If you meet that requirement, send me a message through one of
                   the three contacts above and let&apos;s get your organization
-                  on ghostity!
+                  on vGhostity!
                 </p>
               </div>
             </AccordionDetails>

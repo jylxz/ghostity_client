@@ -25,7 +25,7 @@ export default function UserProfileCard({
             width={56}
             height={56}
             className="rounded-full "
-            alt="Ghostity profile image"
+            alt="vGhostity profile image"
           />
         </div>
         <span className="line-clamp-1 text-center font-medium">

@@ -21,7 +21,7 @@ import useValidatePassword from "../../hooks/useValidatePassword";
 
 // Components
 import LoadingButton from "../general/LoadingButton";
-import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+import VGhostityIcon from "../../public/images/Ghostity-svg.svg";
 
 export default function AuthSignUp({
   setShowAuth,
@@ -110,7 +110,7 @@ export default function AuthSignUp({
         Go Back
       </button>
       <div className="w-16 h-16 bg-primary rounded-full p-4">
-        <GhostityIcon />
+        <VGhostityIcon />
       </div>
       <h1 className="text-xl">Create an account</h1>
       <div className="flex flex-col gap-2 mx-8">

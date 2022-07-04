@@ -6,7 +6,7 @@ function following() {
   return (
     <>
       <Head>
-        <title>Ghostity | Following</title>
+        <title>vGhostity | Following</title>
       </Head>
       <FollowingMain />
     </>

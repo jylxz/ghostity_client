@@ -16,7 +16,7 @@ import SectionWrapper from "../general/SectionWrapper";
 import LinkTo from "../general/LinkTo";
 
 // Images
-import GhostityLogo from "../../public/images/Ghostity-svg.svg";
+import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
 
 // Animations
 import { homeBrowseAnimations } from "./animations/homeAnimations";
@@ -105,10 +105,10 @@ export default function BrowseBar() {
               <BrowseCardAnimation staggerOrder={1} title="Streams">
                 <div className="flex gap-2">
                   <motion.div variants={ghostVariant} className="h-10 w-10">
-                    <GhostityLogo className="h-10 w-10" />
+                    <VGhostityLogo className="h-10 w-10" />
                   </motion.div>
                   <motion.div variants={ghostVariant2} className="h-10 w-10">
-                    <GhostityLogo className="h-10 w-10 -scale-x-100" />
+                    <VGhostityLogo className="h-10 w-10 -scale-x-100" />
                   </motion.div>
                 </div>
               </BrowseCardAnimation>

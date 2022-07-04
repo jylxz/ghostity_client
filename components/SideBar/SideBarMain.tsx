@@ -9,7 +9,7 @@ import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined
 import { BsHeart } from "react-icons/bs";
 import { CgGames } from "react-icons/cg";
 import { BiSearchAlt, BiArrowToLeft, BiArrowFromLeft } from "react-icons/bi";
-import GhostityIcon from "../../public/images/Ghostity-svg.svg";
+import VGhostityIcon from "../../public/images/Ghostity-svg.svg";
 
 // Contexts
 import UserContext from "../../context/UserContext";
@@ -139,7 +139,7 @@ export default function SideBarMain() {
           item="Streams"
           minimized={!showBrowseBar}
           icon={
-            <GhostityIcon
+            <VGhostityIcon
               className={`h-6 w-6 py-0.5 ${showBrowseBar ? "mx-2" : "mx-auto"}`}
             />
           }

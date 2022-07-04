@@ -12,13 +12,12 @@ import HomeOrganizations from "../components/Home/HomeOrganizations";
 import HomeBrowse from "../components/Home/HomeBrowse";
 import HomeHelp from "../components/Home/HomeHelp";
 import HomeStats2 from "../components/Home/HomeStats2";
+import API from "../API";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const API = process.env.NEXT_PUBLIC_API as string;
-
-  const logos = await axios
-    .get<OrganizationLogos>(`${API}/organizations/logos`)
-    .then((orgLogos) => orgLogos.data);
+  const logos = await API.get<OrganizationLogos>("/organizations/logos").then(
+    (orgLogos) => orgLogos.data
+  );
 
   return { props: { logos }, revalidate: 6000 };
 };
@@ -27,7 +26,7 @@ export default function Home({ logos }: OrganizationLogos) {
   return (
     <motion.div className="overflow-hidden">
       <Head>
-        <title>Ghostity | Home</title>
+        <title>vGhostity | Home</title>
         <meta
           name="description"
           content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
@@ -37,7 +36,7 @@ export default function Home({ logos }: OrganizationLogos) {
           content="V-Tubers, VTubers, virtual youtubers, Hololive, Nijisanji, VShojo, VSPO, Twitch, Youtube, V-Tuber directory, VTuber app, livestreams, games"
         />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Ghostity | Home" />
+        <meta name="twitter:title" content="vGhostity | Home" />
         <meta
           name="twitter:description"
           content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
@@ -46,7 +45,7 @@ export default function Home({ logos }: OrganizationLogos) {
           name="twitter:image"
           content="https://res.cloudinary.com/ghostity/image/upload/v1656660902/Logos/ghostity-full-1280x720_unhfvu.png"
         />
-        <meta property="og:title" content="Ghostity | Home" />
+        <meta property="og:title" content="vGhostity | Home" />
         <meta
           property="og:image"
           content="https://res.cloudinary.com/ghostity/image/upload/v1656660902/Logos/ghostity-full-1280x720_unhfvu.png"

@@ -7,7 +7,7 @@ import Image from "next/image";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
 import { AnimatePresence } from "framer-motion";
-import GhostityLogo from "../../public/images/Ghostity-svg.svg";
+import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
 
 // Contexts
 import UserContext from "../../context/UserContext";
@@ -54,7 +54,7 @@ export default function ProfileMain() {
                     user?.photoURL ||
                     "https://res.cloudinary.com/ghostity/image/upload/v1655922625/alt-profile-icons/ghostity-pfp-primary_jg3evf.png"
                   }
-                  alt="ghostity profile image"
+                  alt="vGhostity profile image"
                   height={144}
                   width={144}
                   className="rounded-full"
@@ -141,7 +141,7 @@ export default function ProfileMain() {
       {!user ? (
         <div className="w-full top-1/3 absolute flex flex-col justify-center items-center text-center gap-4">
           <div className="h-20 w-20">
-            <GhostityLogo />
+            <VGhostityLogo />
           </div>
           Please Login or Create an Account to view your profile
         </div>

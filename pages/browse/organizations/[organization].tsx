@@ -48,7 +48,7 @@ function OrganizationPage({ organization }: { organization: Organization[] }) {
   return (
     <>
       <Head>
-        <title>Ghostity | {organization[0].name}</title>
+        <title>vGhostity | {organization[0].name}</title>
         <meta
           name="keywords"
           content={`V-Tubers, VTubers, virtual youtubers, Vtuber agency, Vtuber organization, ${organization[0].name}, ${organization[0].name} members`}
@@ -56,7 +56,7 @@ function OrganizationPage({ organization }: { organization: Organization[] }) {
         <meta name="twitter:card" content="summary" />
         <meta
           name="twitter:title"
-          content={`Ghostity | ${organization[0].name}`}
+          content={`vGhostity | ${organization[0].name}`}
         />
         <meta
           name="twitter:description"

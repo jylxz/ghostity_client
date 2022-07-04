@@ -6,7 +6,7 @@ export default function games() {
   return (
     <>
       <Head>
-        <title>Ghostity | Games</title>
+        <title>vGhostity | Games</title>
         <meta
           name="keywords"
           content="V-Tubers, VTubers, virtual youtubers, Hololive, Nijisanji, VShojo, VSPO, Twitch, Youtube, V-Tuber directory, livestreams, games"

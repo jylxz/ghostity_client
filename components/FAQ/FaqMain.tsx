@@ -12,7 +12,7 @@ import AnimatedButton from "../general/AnimatedButton";
 import FaqUser from "./FaqUser";
 
 // Images
-import GhostityLogo from "../../public/images/Ghostity-svg.svg";
+import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
 import TwitterIcon from "../../public/images/TwitterBlue.svg";
 import DiscordIcon from "../../public/images/Discord-Logo-Color.svg";
 
@@ -42,7 +42,7 @@ export default function FaqMain() {
       <BackgroundWrapper image="https://res.cloudinary.com/ghostity/image/upload/v1656533585/banner/Banner_1_hstgss.png">
         <div className="h-64 flex flex-col justify-center items-center">
           <div className="bg-primary w-20 h-20 p-4 rounded-full">
-            <GhostityLogo />
+            <VGhostityLogo />
           </div>
           <h1 className="text-2xl font-semibold">Frequently Asked Questions</h1>
           <div className="text-sm text-gray-500">
@@ -111,7 +111,7 @@ export default function FaqMain() {
                 variants={itemAnimation}
                 className="text-2xl text-center"
               >
-                Welcome to the ghostity FAQ page!
+                Welcome to the vGhostity FAQ page!
               </motion.h2>
               <motion.h3
                 layout

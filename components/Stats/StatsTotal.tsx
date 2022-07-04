@@ -82,7 +82,7 @@ export default function StatsTotal({
       title: {
         color: "black",
         display: true,
-        text: "Total V-Tubers (On Ghostity)",
+        text: "Total V-Tubers (On vGhostity)",
         font: {
           size: 20,
         },

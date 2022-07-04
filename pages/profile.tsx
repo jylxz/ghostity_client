@@ -8,7 +8,7 @@ export default function Profile() {
   return (
     <>
       <Head>
-        <title>Ghostity | Profile</title>
+        <title>vGhostity | Profile</title>
       </Head>
       <ProfileMain />
       <Footer />

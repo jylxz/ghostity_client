@@ -72,7 +72,7 @@ function HomeStatCard({
 export default function HomeStats({ stats }: Stats) {
   return (
     <SectionWrapper color="bg-slate-100">
-      <HomeSectionHeading heading="Ghostity Stats" />
+      <HomeSectionHeading heading="vGhostity Stats" />
       <motion.div
         variants={container}
         initial="hidden"
@@ -82,7 +82,7 @@ export default function HomeStats({ stats }: Stats) {
       >
         <HomeStatCard
           backgroundColor="bg-primary"
-          image={<GhostityIcon className="w-2/3" />}
+          image={<VGhostityIcon className="w-2/3" />}
           title="TOTAL"
           stat={`${stats.number_of_channels_in_db} V-Tubers`}
         />

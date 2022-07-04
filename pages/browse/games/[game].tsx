@@ -20,7 +20,7 @@ export default function BrowseGameStreams({ gameData }: { gameData: Game }) {
   return (
     <>
       <Head>
-        <title>Ghostity | {gameData.name}</title>
+        <title>vGhostity | {gameData.name}</title>
         <meta
           name="keywords"
           content={`V-Tubers, VTubers, virtual youtubers, Hololive, Nijisanji, VShojo, VSPO, Twitch, Youtube, V-Tuber directory, livestreams, games, ${gameData.name}`}

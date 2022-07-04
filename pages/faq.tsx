@@ -7,7 +7,7 @@ export default function Faq() {
   return (
     <>
       <Head>
-        <title>Ghostity | FAQ</title>
+        <title>vGhostity | FAQ</title>
       </Head>
       <FaqMain />
     </>

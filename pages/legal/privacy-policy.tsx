@@ -1,18 +1,18 @@
 import Head from "next/head";
 import React from "react";
 import Footer from "../../components/general/Footer";
-import GhostityLogo from "../../public/images/Ghostity-svg.svg";
+import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
 
 export default function PrivatePolicy() {
   return (
     <>
     <Head>
-      <title>Ghostity | Privacy Policy</title>
+      <title>vGhostity | Privacy Policy</title>
     </Head>
     <div className="font-medium">
       <div className="bg-gray-100 h-64 flex flex-col justify-center items-center">
         <div className="bg-primary w-20 h-20 p-4 rounded-full">
-          <GhostityLogo />
+          <VGhostityLogo />
         </div>
         <h1 className="text-2xl font-semibold">Privacy Policy</h1>
         <div className="text-sm">Last Updated: July 1, 2022</div>
@@ -22,18 +22,18 @@ export default function PrivatePolicy() {
           <section className="flex flex-col gap-4">
             <h2 className="text-base font-bold">Privacy Policy</h2>
             <p>
-              Ghostity website is owned by Ghostity, which is a data controller
+              vGhostity website is owned by vGhostity, which is a data controller
               of your personal data.
             </p>
             <p>
               We have adopted this Privacy Policy, which determines how we are
-              processing the information collected by Ghostity, which also
+              processing the information collected by vGhostity, which also
               provides the reasons why we must collect certain personal data
               about you. Therefore, you must read this Privacy Policy before
               using the website.
             </p>
             <p>
-              Ghostity also uses <strong>YouTube API Services</strong>,{" "}
+              vGhostity also uses <strong>YouTube API Services</strong>,{" "}
               <strong>Twitch API</strong>, and <strong>IGDB API</strong>, which
               all adopt a different Privacy Policy. Therefore, you must read
               their respective Privacy Policy as well, before using the website.
@@ -73,7 +73,7 @@ export default function PrivatePolicy() {
               Personal information we collect:
             </h2>
             <p>
-              When you visit the Ghostity, we automatically collect certain
+              When you visit the vGhostity, we automatically collect certain
               information about your device, including information about your
               web browser, IP address, time zone, and some of the installed
               cookies on your device. Additionally, as you browse the Site, we

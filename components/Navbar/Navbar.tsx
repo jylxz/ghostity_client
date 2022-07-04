@@ -17,7 +17,7 @@ import UserContext from "../../context/UserContext";
 import useIsWindowSmall from "../../hooks/useIsWindowSmall";
 
 // Images
-import GhostityLogo from "../../public/images/Ghostity-svg.svg";
+import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
 
 function NavbarButton({ text, href }: { text: string; href: string }) {
   const router = useRouter();
@@ -104,10 +104,10 @@ export default function Navbar({
               className="flex gap-2 items-center text-2xl "
             >
               <motion.div variants={wiggle}>
-                <GhostityLogo className="h-10 w-10 " />
+                <VGhostityLogo className="h-10 w-10 " />
               </motion.div>
               <motion.h1 variants={fadeOut} className=" text-black font-medium">
-                ghostity
+                vGhostity
               </motion.h1>
             </motion.div>
           </motion.button>

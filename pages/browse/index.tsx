@@ -7,13 +7,13 @@ export default function browse() {
   return (
     <>
       <Head>
-        <title>Ghostity | Browse</title>
+        <title>vGhostity | Browse</title>
         <meta
           name="keywords"
           content="V-Tubers, VTubers, virtual youtubers, Vtuber agency, Vtuber organization, V-Tuber directory, VTuber app, Hololive, Nijisanji, VShojo, VSPO, 774inc., NoriPro,"
         />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Ghostity | Browse" />
+        <meta name="twitter:title" content="vGhostity | Browse" />
         <meta
           name="twitter:description"
           content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"

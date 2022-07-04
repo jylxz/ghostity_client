@@ -6,7 +6,7 @@ export default function search() {
   return (
     <>
     <Head>
-      <title>Ghostity | Search</title>
+      <title>vGhostity | Search</title>
     </Head>
     <div className='text-xl h-full'><WIP/></div>
     </>

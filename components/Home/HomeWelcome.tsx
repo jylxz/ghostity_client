@@ -9,7 +9,7 @@ import LinkTo from "../general/LinkTo";
 import homeAnimations from "./animations/homeAnimations"
 
 // Images
-import GhostityDiscovering from "../../public/images/Ghost-discovering-ghostity.svg?component";
+import VGhostityDiscovering from "../../public/images/Ghost-discovering-ghostity.svg?component";
 
 export default function HomeWelcome() {
   const animations = homeAnimations.welcome
@@ -33,7 +33,7 @@ export default function HomeWelcome() {
               variants={animations.ghostityVariant as AnimationProps["variants"]}
               className="text-white"
             >
-              ghostity
+              vGhostity
             </motion.span>{" "}
             !
           </motion.h1>
@@ -66,7 +66,7 @@ export default function HomeWelcome() {
           animate="animate"
           className="hidden lg:flex w-1/4 min-w-[400px] justify-center"
         >
-          <GhostityDiscovering className="w-full" />
+          <VGhostityDiscovering className="w-full" />
         </motion.div>
       </div>
     </section>
