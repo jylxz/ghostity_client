@@ -10,6 +10,7 @@ import OptionUnstyled, {
 } from "@mui/base/OptionUnstyled";
 import PopperUnstyled from "@mui/base/PopperUnstyled";
 import { styled } from "@mui/system";
+import useThemeColor from "../../hooks/useThemeColor";
 
 const blue = {
   100: "#DAECFF",
@@ -44,7 +45,7 @@ const StyledButton = styled("button")(
   box-sizing: border-box;
   min-width: fit-content;
   width: 100%
-  border: 1px solid ${theme.palette.mode === "dark" ? grey[800] : grey[300]};
+  border: 1px solid ${grey[300]};
   margin-top: 0.5em;
   padding: 4px 8px;
   text-align: left;
@@ -52,12 +53,12 @@ const StyledButton = styled("button")(
   color: white;
 
   &:hover {
-    background: ${theme.palette.mode === "dark" ? "" : grey[100]};
-    border-color: ${theme.palette.mode === "dark" ? grey[700] : grey[400]};
+    background: ${grey[100]};
+    border-color: ${grey[400]};
   }
 
   &.${selectUnstyledClasses.focusVisible} {
-    outline: 3px solid ${theme.palette.mode === "dark" ? blue[600] : blue[100]};
+    outline: 3px solid ${blue[100]};
   }
 
   &.${selectUnstyledClasses.expanded} {
@@ -83,11 +84,11 @@ const StyledListbox = styled("ul")(
   margin: 10px 0;
   min-width: 100%;
   background: ${
-    theme.palette.mode === "dark" ? grey[900] : "rgb(241 245 249 )"
+    theme.palette.mode === "dark" ? "#2b2b2b" : "rgb(241 245 249 )"
   };
-  border: 1px solid ${theme.palette.mode === "dark" ? grey[800] : grey[300]};
+  border: 1px solid ${grey[300]};
   border-radius: 0.75em;
-  color: ${theme.palette.mode === "dark" ? grey[300] : "rgb(107 114 128)"};
+  color: ${"rgb(107 114 128)"};
   overflow: auto;
   outline: 0px;
   `
@@ -106,15 +107,16 @@ const StyledOption = styled(OptionUnstyled)(
   }
 
   &.${optionUnstyledClasses.highlighted} {
-    background-color: ${theme.palette.mode === "dark" ? grey[800] : "white"};
-    color: ${theme.palette.mode === "dark" ? grey[300] : "black"};
+    background-color: ${theme.palette.mode === "dark" ? "#454545" : "white"};
+    color: ${theme.palette.mode === "dark" ? "#deecfc" : "black"};
   }
 
   &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
-    background-color: white;
-    color: black
+    background-color: ${theme.palette.mode === "dark" ? "#454545" : "white"};
+    color: background-color: ${
+      theme.palette.mode === "dark" ? "#DEECFC" : "black"
+    };
   }
-
 
   &:hover:not(.${optionUnstyledClasses.disabled}) {
     cursor: pointer;

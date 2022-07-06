@@ -1,12 +1,13 @@
 // Libraries
 import React, { useContext, useState } from "react";
 import { Card, CardContent, Typography } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 // Icons
 import { AiOutlineHeart, AiFillHeart, AiOutlineStop } from "react-icons/ai";
-import YoutubeIcon from "../../public/images/yt_icon_rgb.svg";
+import { ClassNames } from "@emotion/react";
+import YoutubeIcon from "../../public/images/yt_icon_rgb.png";
 import TwitchIcon from "../../public/images/TwitchGlitchPurple.svg";
 
 // Contexts
@@ -32,8 +33,8 @@ function ChannelPic({ stream }: { stream: Stream }) {
           <Image
             src={stream.channel_img}
             // priority
-            height="24"
-            width="24"
+            height="22"
+            width="22"
             alt={`${stream.channel_name}'s profile img`}
             className="rounded-full min-w-[24px] min-h-[24px]"
           />
@@ -85,6 +86,45 @@ function ChannelName({ stream }: { stream: Stream }) {
   );
 }
 
+function OrganizationIcon({ mainAffiliation }: { mainAffiliation: Stream["channel_info"]["main_affiliation"] }) {
+  const [hoverState, setHoverState] = useState(false);
+
+  if (mainAffiliation) {
+    return (
+      <div
+        className="relative flex items-center"
+        onMouseEnter={() => setHoverState(true)}
+        onMouseLeave={() => setHoverState(false)}
+      >
+        <button
+          type="button"
+          // className="absolute top-1 right-1 dark:bg-secondary-dark/80 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
+        >
+          <LinkTo
+            href={`/browse/organizations/${mainAffiliation.organization_name.toLowerCase()}`}
+            className="border"
+          >
+            <Image
+              src={mainAffiliation.organization_logo}
+              height={22}
+              width={22}
+              // layout="fill"
+              className="rounded-full border"
+            />
+          </LinkTo>
+        </button>
+        {hoverState ? (
+          <span className="absolute whitespace-nowrap dark:bg-secondary-dark-2 bg-white text-xs px-2 py-1 top-[24px] right-0">
+            {`${mainAffiliation.organization_name} | ${mainAffiliation.full_name}`}
+          </span>
+        ) : null}
+      </div>
+    );
+  }
+
+  return null;
+}
+
 function PlatformIcon({ stream }: { stream: Stream }) {
   if (stream.platform === "twitch")
     return (
@@ -106,9 +146,9 @@ function PlatformIcon({ stream }: { stream: Stream }) {
         target="_blank"
         href={stream.stream.url}
         rel="noopener noreferrer"
-        className="block"
+        className="block bg-white bg-clip-text"
       >
-        <YoutubeIcon />
+        <Image src={YoutubeIcon} height={16} width={20} />
       </a>
     </div>
   );
@@ -133,7 +173,7 @@ function FollowButton({
         // initial={{ opacity: 0, scale: 0 }}
         // animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, delay: 1 } }}
         // exit={{opacity: 0}}
-        className="absolute top-1 left-1 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
+        className="absolute top-1 left-1 dark:bg-secondary-dark/80 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
         onHoverStart={() => setShowFollowText(true)}
         onHoverEnd={() => setShowFollowText(false)}
         onClick={() => follow()}
@@ -181,6 +221,71 @@ function FollowButton({
   return null;
 }
 
+function SimpleFollowButton({ channelId }: { channelId: string }) {
+  const user = useContext(UserContext);
+  const [follow, followed] = useHandleFollows(channelId);
+  const [hoverState, setHoverState] = useState(false);
+
+  if (user)
+    return (
+      <motion.button
+        whileTap={{ scale: 0.7 }}
+        className="absolute top-1 left-1 dark:bg-secondary-dark/80 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
+        onClick={() => follow()}
+        onMouseEnter={() => setHoverState(true)}
+        onMouseLeave={() => setHoverState(false)}
+      >
+        <AnimatePresence exitBeforeEnter>
+          {(() => {
+            if (followed)
+              return hoverState ? (
+                <motion.div
+                  initial={{ scale: 0.5 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0.5 }}
+                  key="initialState"
+                >
+                  <AiOutlineHeart className="text-2xl h-6 min-w-[20px]" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ scale: 0.5 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0.5 }}
+                  key="unfollowbutton"
+                >
+                  <AiFillHeart className="text-2xl h-6 min-w-[20px]" />
+                </motion.div>
+              );
+
+            if (!followed)
+              return hoverState ? (
+                <motion.div
+                  initial={{ scale: 0.5 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0.5 }}
+                  key="initialState"
+                >
+                  <AiFillHeart className="text-2xl h-6 min-w-[20px]" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ scale: 0.5 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0.5 }}
+                  key="unfollowbutton"
+                >
+                  <AiOutlineHeart className="text-2xl h-6 min-w-[20px]" />
+                </motion.div>
+              );
+          })()}
+        </AnimatePresence>
+      </motion.button>
+    );
+
+  return null;
+}
+
 function BlacklistButton({ stream }: { stream: Stream }) {
   const admin = useContext(AdminContext);
   const { setShowBlacklistModal, setBlacklistChannel } =
@@ -196,7 +301,7 @@ function BlacklistButton({ stream }: { stream: Stream }) {
       <button
         type="button"
         onClick={() => handleBlacklist()}
-        className="absolute top-1 right-1 bg-gray-400/80 flex items-start gap-1 text-red-400 px-1 py-0.5 text-sm rounded"
+        className="absolute bottom-1 left-1 bg-gray-400/80 flex items-start gap-1 text-red-400 px-1 py-0.5 text-sm rounded"
       >
         <AiOutlineStop className="w-5 h-5" />
       </button>
@@ -207,7 +312,7 @@ function BlacklistButton({ stream }: { stream: Stream }) {
 
 export default function LivestreamCard({ stream }: { stream: Stream }) {
   return (
-    <Card className="flex flex-col max-w-[22rem] shadow">
+    <Card className="flex flex-col max-w-[22rem] shadow dark:bg-secondary-dark">
       <div className="relative max-w-[22rem] max-h-[198px]">
         <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
           <Image
@@ -215,23 +320,18 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
             alt={`${stream.channel_name}'s stream thumbnail`}
             height={198}
             width={352}
-            layout="intrinsic"
             // priority
           />
         </a>
-        <FollowButton
+        {/* <FollowButton
           channel={stream.channel_name}
           channelId={stream.channel_id}
-        />
+        /> */}
+        <SimpleFollowButton channelId={stream.channel_id} />
         <BlacklistButton stream={stream} />
-        <motion.span
-          // initial={{ opacity: 0, scale: 0 }}
-          // animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, delay: 0.8 } }}
-          // exit={{opacity: 0}}
-          className="absolute bottom-2.5 right-1 text-primary bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default"
-        >{`${stream.stream.viewers} viewers`}</motion.span>
+        <span className="absolute bottom-2.5 right-1 text-primary dark:bg-secondary-dark/80 bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default">{`${stream.stream.viewers} viewers`}</span>
       </div>
-      <CardContent className="grow py-2.5">
+      <CardContent className="dark:bg-secondary-dark-2 dark:text-text-primary-dark grow py-2.5">
         <div>
           <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
             <Typography
@@ -243,18 +343,28 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
           </a>
         </div>
       </CardContent>
-      <CardContent className="bg-slate-100 py-1">
-        <div className="flex gap-2 items-center">
+      <CardContent
+        className="bg-slate-100 dark:bg-secondary-dark"
+        sx={{
+          ":last-child": {
+            paddingTop: "0.25rem",
+            paddingBottom: "0.25rem",
+          },
+        }}
+      >
+        <div className="flex gap-2 items-center dark:text-primary">
           <ChannelPic stream={stream} />
           <Typography className="line-clamp-1 text-sm font-bold flex-1">
             <ChannelName stream={stream} />
           </Typography>
+          <OrganizationIcon mainAffiliation={stream.channel_info.main_affiliation} />
+
           <PlatformIcon stream={stream} />
         </div>
-        <div className="flex justify-between items-center text-gray-400 mt-0.5">
+        <div className="flex justify-between items-center dark:text-text-secondary-dark text-gray-400 mt-0.5">
           <Typography className="text-sm font-medium line-clamp-1 cursor-pointer">
             <LinkTo href={`/browse/games/${encodeURI(stream.stream.game)}`}>
-              <span>{stream.stream.game}</span>
+              <span className="line-clamp-1">{stream.stream.game}</span>
             </LinkTo>
           </Typography>
           <Typography className="text-sm font-medium cursor-default min-w-fit ml-1">

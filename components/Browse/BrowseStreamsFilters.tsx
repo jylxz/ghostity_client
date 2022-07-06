@@ -46,34 +46,42 @@ export default function BrowseStreamsFilters({
     >
       <div className="flex sm:items-center justify-between">
         <motion.div layout className="flex items-center gap-2 ">
-          <span className="hidden md:block font-medium">Filter</span>
+          <span className="hidden md:block font-medium dark:text-text-primary-dark">
+            Filter
+          </span>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.1, type: "string" }}
             type="button"
             onClick={() => setShowFilter(!showFilter)}
-            className="bg-slate-100 px-2 py-0.5 rounded h-full"
+            className="dark:bg-secondary-dark bg-slate-100 px-2 py-0.5 rounded h-full"
           >
-            <AiOutlineFilter className="h-8 w-5 text-gray-600 font-thin" />
+            <AiOutlineFilter className="h-8 w-5 dark:text-primary text-gray-600 font-thin" />
           </motion.button>
         </motion.div>
         <LayoutGroup>
           {filters.sort ? (
             <motion.div layout className="flex items-center gap-2 z-20">
-              <motion.span className="hidden md:block font-medium" layout>
+              <motion.span
+                className="hidden md:block font-medium dark:text-text-primary-dark"
+                layout
+              >
                 Sort by
               </motion.span>
               <motion.span
                 layout="position"
                 layoutId="sort-by-button"
-                // whileHover={{ scale: 1.05 }}
-                // whileTap={{ scale: 0.95 }}
               >
                 <CustomSelect
                   value={filters.sort}
                   onChange={(e) => setFilters("sort", e)}
-                  className="bg-slate-100 text-gray-600 px-3 m-0"
+                  className="dark:bg-secondary-dark dark:text-primary  bg-slate-100 text-gray-600 px-3 m-0"
+                  componentsProps={{
+                    listbox: {
+                      className: "dark:border-0"
+                    }
+                  }}
                 >
                   <StyledOption value="desc">
                     Viewers (High to Low)
@@ -94,7 +102,7 @@ export default function BrowseStreamsFilters({
             animate={{ translateY: 0 }}
             exit={{ translateY: -600 }}
             transition={{ duration: 0.3, delay: 0.1 }}
-            className="bg-slate-100 p-4 rounded-lg flex flex-col mt-4 z-30"
+            className="dark:bg-secondary-dark bg-slate-100 p-4 rounded-lg flex flex-col mt-4 z-30"
           >
             <motion.button
               // whileHover={{ scale: 1.05 }}
@@ -102,17 +110,22 @@ export default function BrowseStreamsFilters({
               onClick={() => setShowFilter(!showFilter)}
               className="self-end"
             >
-              <CloseIcon className="text-gray-500  cursor-pointer" />
+              <CloseIcon className="dark:text-white text-gray-500  cursor-pointer" />
             </motion.button>
             <div className="mb-4 grid sm:grid-cols-2 gap-4 sm:gap-8">
               <FormControl size="small">
-                <div className="font-medium">Language</div>
+                <div className="font-medium dark:text-text-primary-dark">
+                  Language
+                </div>
                 <CustomSelect
                   value={filters.language}
                   onChange={(e) => setFilters("language", e)}
-                  className="bg-white text-black border"
+                  className="dark:bg-secondary-dark-2 dark:text-primary bg-white text-black border"
                   componentsProps={{
-                    listbox: { className: "sm:flex flex-row flex-wrap gap-2" },
+                    listbox: {
+                      className:
+                        "dark:text-text-secondary-dark sm:flex flex-row flex-wrap gap-2",
+                    },
                   }}
                 >
                   <StyledOption value="all">All</StyledOption>
@@ -129,13 +142,18 @@ export default function BrowseStreamsFilters({
                 </CustomSelect>
               </FormControl>
               <FormControl size="small">
-                <div className="font-medium">Platform</div>
+                <div className="font-medium dark:text-text-primary-dark">
+                  Platform
+                </div>
                 <CustomSelect
                   value={filters.platform}
-                  className="bg-white text-black border"
+                  className="dark:bg-secondary-dark-2 dark:text-primary bg-white text-black border"
                   onChange={(e) => setFilters("platform", e)}
                   componentsProps={{
-                    listbox: { className: "sm:flex flex-wrap flex-row gap-2" },
+                    listbox: {
+                      className:
+                        "dark:text-text-secondary-dark sm:flex flex-wrap flex-row gap-2",
+                    },
                   }}
                 >
                   <StyledOption value="all">All</StyledOption>
@@ -145,7 +163,9 @@ export default function BrowseStreamsFilters({
               </FormControl>
             </div>
             <div className="mb-4">
-              <div className="mb-2 font-medium">Exclude</div>
+              <div className="mb-2 font-medium dark:text-text-primary-dark">
+                Exclude
+              </div>
               <div className="flex flex-wrap gap-4">
                 <Chip
                   label="English"
@@ -153,8 +173,8 @@ export default function BrowseStreamsFilters({
                   onClick={() => setFilters("exclude", "en")}
                   className={
                     filters?.exclude?.includes("en")
-                      ? "bg-white text-black px-1.5"
-                      : "bg-gray-200 text-gray-500 px-1.5"
+                      ? "dark:bg-secondary-dark-2 dark:text-primary bg-white text-black px-1.5"
+                      : "dark:bg-secondary-dark dark:text-text-secondary-dark bg-gray-200 text-gray-500 px-1.5"
                   }
                 />
                 <Chip
@@ -163,8 +183,8 @@ export default function BrowseStreamsFilters({
                   onClick={() => setFilters("exclude", "ja")}
                   className={
                     filters?.exclude?.includes("ja")
-                      ? "bg-white text-black px-1.5"
-                      : "bg-gray-200 text-gray-500 px-1.5"
+                      ? "dark:bg-secondary-dark-2 dark:text-primary bg-white text-black px-1.5"
+                      : "dark:bg-secondary-dark dark:text-text-secondary-dark bg-gray-200 text-gray-500 px-1.5"
                   }
                 />
                 <Chip
@@ -173,8 +193,8 @@ export default function BrowseStreamsFilters({
                   onClick={() => setFilters("exclude", "ko")}
                   className={
                     filters?.exclude?.includes("ko")
-                      ? "bg-white text-black px-1.5"
-                      : "bg-gray-200 text-gray-500 px-1.5"
+                      ? "dark:bg-secondary-dark-2 dark:text-primary bg-white text-black px-1.5"
+                      : "dark:bg-secondary-dark dark:text-text-secondary-dark bg-gray-200 text-gray-500 px-1.5"
                   }
                 />
                 <Chip
@@ -183,8 +203,8 @@ export default function BrowseStreamsFilters({
                   onClick={() => setFilters("exclude", "id")}
                   className={
                     filters?.exclude?.includes("id")
-                      ? "bg-white text-black px-1.5"
-                      : "bg-gray-200 text-gray-500 px-1.5"
+                      ? "dark:bg-secondary-dark-2 dark:text-primary bg-white text-black px-1.5"
+                      : "dark:bg-secondary-dark dark:text-text-secondary-dark bg-gray-200 text-gray-500 px-1.5"
                   }
                 />
                 <Chip
@@ -193,8 +213,8 @@ export default function BrowseStreamsFilters({
                   onClick={() => setFilters("exclude", "zh")}
                   className={
                     filters?.exclude?.includes("zh")
-                      ? "bg-white text-black px-1.5"
-                      : "bg-gray-200 text-gray-500 px-1.5"
+                      ? "dark:bg-secondary-dark-2 dark:text-primary bg-white text-black px-1.5"
+                      : "dark:bg-secondary-dark dark:text-text-secondary-dark bg-gray-200 text-gray-500 px-1.5"
                   }
                 />
                 <Chip
@@ -203,8 +223,8 @@ export default function BrowseStreamsFilters({
                   onClick={() => setFilters("exclude", "es")}
                   className={
                     filters?.exclude?.includes("es")
-                      ? "bg-white text-black px-1.5"
-                      : "bg-gray-200 text-gray-500 px-1.5"
+                      ? "dark:bg-secondary-dark-2 dark:text-primary bg-white text-black px-1.5"
+                      : "dark:bg-secondary-dark dark:text-text-secondary-dark bg-gray-200 text-gray-500 px-1.5"
                   }
                 />
                 <Chip
@@ -213,8 +233,8 @@ export default function BrowseStreamsFilters({
                   onClick={() => setFilters("exclude", "fr")}
                   className={
                     filters?.exclude?.includes("fr")
-                      ? "bg-white text-black px-1.5"
-                      : "bg-gray-200 text-gray-500 px-1.5"
+                      ? "dark:bg-secondary-dark-2 dark:text-primary bg-white text-black px-1.5"
+                      : "dark:bg-secondary-dark dark:text-text-secondary-dark bg-gray-200 text-gray-500 px-1.5"
                   }
                 />
                 <Chip
@@ -223,8 +243,8 @@ export default function BrowseStreamsFilters({
                   onClick={() => setFilters("exclude", "de")}
                   className={
                     filters?.exclude?.includes("de")
-                      ? "bg-white text-black px-1.5"
-                      : "bg-gray-200 text-gray-500 px-1.5"
+                      ? "dark:bg-secondary-dark-2 dark:text-primary bg-white text-black px-1.5"
+                      : "dark:bg-secondary-dark dark:text-text-secondary-dark bg-gray-200 text-gray-500 px-1.5"
                   }
                 />
                 <Chip
@@ -233,8 +253,8 @@ export default function BrowseStreamsFilters({
                   onClick={() => setFilters("exclude", "pt")}
                   className={
                     filters?.exclude?.includes("pt")
-                      ? "bg-white text-black px-1.5"
-                      : "bg-gray-200 text-gray-500 px-1.5"
+                      ? "dark:bg-secondary-dark-2 dark:text-primary bg-white text-black px-1.5"
+                      : "dark:bg-secondary-dark dark:text-text-secondary-dark bg-gray-200 text-gray-500 px-1.5"
                   }
                 />
                 <Chip
@@ -243,8 +263,8 @@ export default function BrowseStreamsFilters({
                   onClick={() => setFilters("exclude", "other")}
                   className={
                     filters?.exclude?.includes("other")
-                      ? "bg-white text-black px-1.5"
-                      : "bg-gray-200 text-gray-500 px-1.5"
+                      ? "dark:bg-secondary-dark-2 dark:text-primary bg-white text-black px-1.5"
+                      : "dark:bg-secondary-dark dark:text-text-secondary-dark bg-gray-200 text-gray-500 px-1.5"
                   }
                 />
               </div>
@@ -254,7 +274,7 @@ export default function BrowseStreamsFilters({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.9 }}
                 type="button"
-                className="bg-gray-200 text-gray-500 px-3 py-1 rounded text-sm"
+                className="dark:bg-bg-gray-200 dark:border dark:border-text-secondary-dark dark:text-text-secondary-dark text-gray-500 px-3 py-1 rounded text-sm"
                 onClick={() => resetFilters()}
               >
                 Reset Filters
@@ -263,7 +283,7 @@ export default function BrowseStreamsFilters({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.9 }}
                 type="button"
-                className="bg-white px-3 py-1 text-black rounded border font-medium"
+                className="dark:bg-secondary-dark-2 dark:text-primary  bg-white px-3 py-1 text-black rounded border font-medium"
                 onClick={async () => refetch().then(() => setShowFilter(false))}
               >
                 Apply

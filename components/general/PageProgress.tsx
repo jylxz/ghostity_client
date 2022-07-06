@@ -22,7 +22,7 @@ export default function PageProgress() {
     <div className="w-full">
       <LinearProgress
         variant="determinate"
-        className="bg-gradient-to-r from-primary via-secondary to-secondary2 child:bg-gray-400 h-1"
+        className="dark:bg-primary-dark dark:bg-none bg-gradient-to-r from-primary via-secondary to-secondary2 dark:child:bg-primary child:bg-gray-400 h-1"
         value={progress}
       />
     </div>

@@ -14,6 +14,13 @@ declare global {
     channel_id: string;
     channel_img: string;
     channel_name: string;
+    channel_info: {
+      main_affiliation?: {
+        full_name: string,
+        organization_name: string
+        organization_logo: string,
+      }
+    }
     platform: string;
     language: string;
   }

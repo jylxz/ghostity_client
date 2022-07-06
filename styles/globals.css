@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-.underline-navbar {
-  position: absolute;
-  top: 1;
-  left: 0;
-  width: 100%;
-  height: 0.1rem;
-  background: black;
-  opacity: 0.85;
+@layer components {
+  .underline-navbar {
+    @apply absolute top-6 left-0 bg-black h-[0.1rem] w-full
+  }
+
+  .underline-dark-navbar {
+    @apply absolute top-6 left-0 bg-text-primary-dark h-[0.1rem] w-full
+  }
 }
 
 body {
@@ -36,4 +36,8 @@ body {
 
 .sm-custom-scroll::-webkit-scrollbar {
   width: 0.4rem;
+}
+
+html {
+  font-weight: 500;
 }

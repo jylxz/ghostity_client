@@ -15,42 +15,35 @@ import GradientCircularProgress from "../general/GradientCircularProgress";
 import ProblemLoading from "../general/ProblemLoading";
 import BrowseWrapper from "../general/BrowseWrapper";
 import GridWrapper from "../general/GridWrapper";
+import API from "../../API";
 
 export default function BrowseStreams() {
   const { ref, inView } = useInView();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [filterString, filters, setFilters, resetFilters] = useHandleFilters();
-  const API = process.env.NEXT_PUBLIC_API as string;
 
   const fetchStreams = async ({ pageParam = 1 }) =>
-    axios
-      .get<Streams>(`${API}/streams?page=${pageParam}&limit=30${filterString}`)
-      .then((res) => res.data);
+    API.get<Streams>(`/streams?page=${pageParam}&limit=30${filterString}`).then(
+      (res) => res.data
+    );
 
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    refetch,
-  } = useInfiniteQuery<Streams, Error>(
-    ["allStreams", `${filters.sort || ""}`],
-    fetchStreams,
-    {
-      getNextPageParam: (lastPage) =>
-        lastPage.next ? lastPage.next.page : false,
-      cacheTime: 0
-    }
-  );
+  const { data, error, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery<
+    Streams,
+    Error
+  >(["allStreams", `${filters.sort || ""}`], fetchStreams, {
+    getNextPageParam: (lastPage) =>
+      lastPage.next ? lastPage.next.page : false,
+    cacheTime: 0,
+  });
 
-  const refetchWithFilters =  async () => {
-    setLoading(true)
-    return refetch().then(() => setLoading(false))
-  }
+  const refetchWithFilters = async () => {
+    setLoading(true);
+    return refetch().then(() => setLoading(false));
+  };
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage().catch(() => {})
+      fetchNextPage().catch(() => {});
     }
   }, [fetchNextPage, inView]);
 

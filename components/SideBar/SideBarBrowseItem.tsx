@@ -39,7 +39,7 @@ export default function SideBarBrowseItem({
         <motion.div
           layoutId="browseItem"
           initial={false}
-          className="absolute z-20 -left-5 col-start-1 w-[calc(100%_+_1.25rem)] h-full bg-white"
+          className="absolute z-20 -left-5 col-start-1 w-[calc(100%_+_1.25rem)] h-full dark:bg-secondary-dark-2 bg-white"
         />
       ) : null}
       <div
@@ -53,8 +53,8 @@ export default function SideBarBrowseItem({
             type="button"
             className={`z-30 flex items-center w-full h-full ${
               !selected
-                ? "text-sm text-gray-500 fill-gray-500 "
-                : "font-medium"
+                ? "text-sm dark:text-text-secondary-dark dark:fill-text-secondary-dark text-gray-500 fill-gray-500 "
+                : "font-medium dark:text-primary dark:fill-primary"
             }`}
           >
             {icon}

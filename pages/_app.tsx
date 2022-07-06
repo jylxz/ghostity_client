@@ -50,32 +50,59 @@ import AdminContext from "../context/AdminContext";
 import BlacklistContext from "../context/BlacklistContext";
 import LiveFollowingBar from "../components/Navbar/LiveFollowingBar";
 import Favicons from "../components/Head/Favicons";
+import useThemeColor from "../hooks/useThemeColor";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   // MUI Theme
-  const theme = createTheme({
-    typography: {
-      fontFamily: [
-        '"Quicksand"',
-        "-apple-system",
-        "BlinkMacSystemFont",
-        '"Segoe UI"',
-        "Roboto",
-        '"Helvetica Neue"',
-        "Arial",
-        "sans-serif",
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-      ].join(","),
-      fontWeightRegular: 500
-    },
-    palette: {
-      primary: {
-        main: "#c3d1e0",
+  const [theme, overrideSystem] = useThemeColor();
+
+  // const theme = createTheme({
+  //   typography: {
+  //     fontFamily: [
+  //       '"Quicksand"',
+  //       "-apple-system",
+  //       "BlinkMacSystemFont",
+  //       '"Segoe UI"',
+  //       "Roboto",
+  //       '"Helvetica Neue"',
+  //       "Arial",
+  //       "sans-serif",
+  //       '"Apple Color Emoji"',
+  //       '"Segoe UI Emoji"',
+  //       '"Segoe UI Symbol"',
+  //     ].join(","),
+  //     fontWeightRegular: 500
+  //   },
+  //   palette: {
+  //     primary: {
+  //       main: "#c3d1e0",
+  //     },
+  //   },
+  // });
+
+  const MUITheme = useMemo(() =>
+    createTheme({
+      typography: {
+        fontFamily: [
+          '"Quicksand"',
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "Roboto",
+          '"Helvetica Neue"',
+          "Arial",
+          "sans-serif",
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+        ].join(","),
+        fontWeightRegular: 500,
       },
-    },
-  });
+      palette: {
+        mode: theme === "dark" ? "dark" : "light"
+      }
+    }), [theme]
+  );
 
   // React-Query
   const [queryClient] = useState(
@@ -140,7 +167,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={MUITheme}>
               <UserContext.Provider value={user || null}>
                 <UserFollowContext.Provider value={followsData || null}>
                   <AdminContext.Provider value={admin}>
@@ -153,6 +180,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                         showAuth={showAuth}
                         setShowAuth={setShowAuth}
                         setShowHamburgerMenu={setShowHamburgerMenu}
+                        theme={theme}
+                        overrideSystem={overrideSystem}
                       />
                       <LiveFollowingBar />
                     </div>

@@ -79,7 +79,7 @@ export default function SideBarMain() {
       layoutScroll
       initial={{ translateX: -300 }}
       animate={{ translateX: 0 }}
-      className={` z-30  bg-slate-100 scroll-smooth ${
+      className={` z-30 dark:bg-secondary-dark bg-slate-100 scroll-smooth ${
         showBrowseBar ? "min-w-[16rem] max-w-[16rem] pl-4" : "w-16"
       } h-[calc(100vh_-_3.8rem)] overflow-x-hidden overflow-y-auto hidden sm:block sm-custom-scroll`}
       onMouseLeave={() => (minimized ? browseBarOverride(false) : null)}
@@ -90,7 +90,7 @@ export default function SideBarMain() {
         }`}
       >
         {showBrowseBar ? (
-          <h1 className="text-lg my-3 flex items-center font-medium">
+          <h1 className="dark:text-text-primary-dark text-lg my-3 flex items-center">
             Browse
           </h1>
         ) : null}
@@ -99,7 +99,7 @@ export default function SideBarMain() {
             type="button"
             whileHover={{ scale: 1.05 }}
             onClick={() => setShowBrowseBar(!showBrowseBar)}
-            className={`p-1 my-3 flex items-center justify-center ${
+            className={`p-1 my-3 flex items-center justify-center dark:text-text-primary-dark ${
               !showBrowseBar ? "mx-auto" : ""
             } ${isWindowSmall ? "hidden" : ""}`}
           >
@@ -178,14 +178,14 @@ export default function SideBarMain() {
         {showBrowseBar ? (
           <motion.div
             variants={animations.gradientBar}
-            className="z-0 -mt-[1rem] absolute bg-gradient-to-r from-primary via-secondary to-secondary2 w-[11.5rem] h-[1rem] origin-bottom-left rotate-90 rounded border-2 border-white"
+            className="z-0 -mt-[1rem] absolute bg-gradient-to-r from-primary via-secondary to-secondary2 w-[11.5rem] h-[1rem] origin-bottom-left rotate-90 rounded border-2 dark:border-secondary-dark-2 border-white"
           />
         ) : null}
       </motion.div>
       {user ? (
         <>
           {showBrowseBar ? (
-            <h1 className="text-lg my-3 font-medium">Following</h1>
+            <h1 className="dark:text-text-primary-dark text-lg my-3">Following</h1>
           ) : (
             <div className="mx-auto mt-1 mb-2 w-10 h-0.5 border" />
           )}

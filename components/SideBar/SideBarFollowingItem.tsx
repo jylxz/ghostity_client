@@ -125,7 +125,7 @@ export default function SideBarFollowingItem({
                   <motion.span
                     key="title"
                     variants={opacity}
-                    className=" overflow-hidden inline-block w-[10.5rem] align-text-bottom whitespace-nowrap text-sm font-medium"
+                    className=" overflow-hidden inline-block w-[10.5rem] align-text-bottom whitespace-nowrap text-sm dark:text-primary font-medium"
                   >
                     {shouldAnimate ? (
                       <motion.span variants={text} className="inline-block">
@@ -138,7 +138,7 @@ export default function SideBarFollowingItem({
                 ) : (
                   <motion.span
                     variants={opacity}
-                    className="line-clamp-1 font-semibold text-sm"
+                    className="line-clamp-1 font-semibold text-sm dark:text-primary"
                   >
                     {stream.channel_name}
                   </motion.span>
@@ -146,14 +146,14 @@ export default function SideBarFollowingItem({
               </AnimatePresence>
               <div className="text-gray-500 grid grid-cols-8 justify-between text-sm font-medium">
                 <div className="flex-1 col-span-5">
-                  <span className="line-clamp-1 text-sm font-medium">
+                  <span className="line-clamp-1 text-sm font-medium dark:text-text-secondary-dark">
                     {stream.stream.game}{" "}
                   </span>
                 </div>
                 <div className="col-span-3 grid grid-cols-2 relative items-center gap-1">
-                  <span className="animate-ping h-3 w-3 absolute left-[17px] rounded-full bg-primary border border-white opacity-60" />
+                  <span className="animate-ping h-2.5 w-2.5 absolute left-[19px] rounded-full bg-primary border border-white opacity-60" />
                   <span className="justify-self-end rounded-full h-3 w-3 bg-primary border border-white" />
-                  <span className="text-gray-500">{stream.stream.viewers}</span>
+                  <span className="text-gray-500 dark:text-text-secondary-dark">{stream.stream.viewers}</span>
                 </div>
               </div>
             </div>

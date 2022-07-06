@@ -6,7 +6,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
-  important: "#__next",
+  // important: "#__next",
   theme: {
     extend: {
       colors: {
@@ -17,83 +17,14 @@ module.exports = {
         twitchPurple: "#6441a5",
         blurGray: "#ffffff60",
         blurSlate: "#e2e8f080",
+        "primary-dark": "#222222",
+        "secondary-dark": "#2b2b2b",
+        "secondary-dark-2": "#454545",
+        "text-primary-dark": "#efefef",
+        "text-secondary-dark": "#a1a1a1"
       },
       fontFamily: {
         sans: ['"Quicksand"', ...defaultTheme.fontFamily.sans],
-      },
-      keyframes: {
-        "fade-out": {
-          "0%": {
-            opacity: "100",
-          },
-          "50%": {
-            opacity: "0",
-          },
-          "100%": {
-            opacity: "100",
-          },
-        },
-        "move-center": {
-          "0%": {
-            transform: "translateX(0%)",
-          },
-          "50%": {
-            transform: "translateX(50%)",
-          },
-          "100%": {
-            transform: "translateX(0%)",
-          },
-        },
-        wiggle: {
-          "0%": {
-            transform: "rotate(0deg)",
-          },
-          "20%, 60%": {
-            transform: "rotate(10deg)",
-          },
-          "40%, 80%": {
-            transform: "rotate(-10deg)",
-          },
-        },
-        "background-position-left": {
-          "0%": {
-            "background-position": "left",
-          },
-          "100%": {
-            "background-position": "right",
-          },
-        },
-        "background-position-center": {
-          "0%, 50%": {
-            "background-position": "center",
-          },
-          "25%": {
-            "background-position": "right",
-          },
-          "100%": {
-            "background-position": "left",
-          },
-        },
-        "background-position-right": {
-          "0%": {
-            "background-position": "right",
-          },
-          "100%": {
-            "background-position": "left",
-          },
-        },
-      },
-      animation: {
-        wiggle: "wiggle 2s linear infinite",
-        "fade-out": "fade-out 2s ease-out infinite",
-        "move-center": "move-center 2s ease-out infinite",
-        "fade-out-2": "fade-out 8s ease-in infinite",
-        "background-position-right":
-          "background-position-right 10s ease-in infinite alternate",
-        "background-position-center":
-          "background-position-center 20s ease-in infinite alternate",
-        "background-position-left":
-          "background-position-left 10s ease-in infinite alternate",
       },
     },
   },

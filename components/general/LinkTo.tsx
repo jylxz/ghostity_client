@@ -12,7 +12,7 @@ export default function LinkTo({
 }) {
   return (
     <Link href={href} passHref className={className}>
-      <a href="dummy">{children}</a>
+      <a href="dummy" className="flex items-center">{children}</a>
     </Link>
   );
 }
