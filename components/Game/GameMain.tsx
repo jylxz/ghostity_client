@@ -49,26 +49,26 @@ export default function GameMain({ gameData }: { gameData: Game }) {
           <div className="flex flex-col gap-3">
             <motion.h2
               layout
-              className="text-center sm:text-start text-4xl font-semibold"
+              className="dark:text-text-primary-dark text-center sm:text-start text-4xl font-semibold"
             >
               {gameData.name}
             </motion.h2>
             <motion.span
               layout="position"
-              className="text-center sm:text-start text-sm font-medium text-gray-600"
+              className="text-center sm:text-start text-sm font-medium dark:text-text-secondary-dark text-gray-600"
             >
-              <span className="font-semibold text-black">
+              <span className="font-semibold dark:text-text-primary-dark text-black">
                 {gameData.viewers}
               </span>{" "}
               Viewers |{" "}
-              <span className="font-semibold text-black">
+              <span className="font-semibold dark:text-text-primary-dark text-black">
                 {gameData.streams}
               </span>{" "}
               Streams
             </motion.span>
             <p
               ref={lineClamp}
-              className={`my-1 max-w-[75ch] font-medium ${
+              className={`dark:text-text-primary-dark my-1 max-w-[75ch] font-medium ${
                 !showFullSummary ? "line-clamp-4" : ""
               } text-sm`}
             >
@@ -77,7 +77,7 @@ export default function GameMain({ gameData }: { gameData: Game }) {
             {showButton ? (
               <motion.button
                 layout="position"
-                className="text-sm font-semibold underline self-center sm:self-start"
+                className="dark:text-text-primary-dark text-sm font-semibold underline self-center sm:self-start"
                 type="button"
                 onClick={() => setShowFullSummary(!showFullSummary)}
               >

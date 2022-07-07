@@ -1,13 +1,13 @@
 // Libraries
 import React, { useEffect, useState } from "react";
-import Image from "next/image"
+import Image from "next/image";
 import axios from "axios";
 import { useQuery } from "react-query";
 
 // Icons
 import { GoLocation } from "react-icons/go";
 import { BiGlobe } from "react-icons/bi";
-import YTIcon from "../../public/images/yt_icon_rgb.svg";
+import YTIcon from "../../public/images/yt_icon_rgb.png";
 import TwitterIcon from "../../public/images/TwitterBlue.svg";
 
 // Hooks
@@ -23,7 +23,13 @@ import BackgroundWrapper from "../general/BackgroundWrapper";
 import AnimatedTabButton from "../general/AnimatedTabButton";
 import AnimatedButton from "../general/AnimatedButton";
 
-function SocialMedia({ social, isWindowSmall }: { social: Organization["social_media"][0], isWindowSmall?: boolean }) {
+function SocialMedia({
+  social,
+  isWindowSmall,
+}: {
+  social: Organization["social_media"][0];
+  isWindowSmall?: boolean;
+}) {
   if (social.platform === "twitter") {
     return (
       <a
@@ -31,12 +37,11 @@ function SocialMedia({ social, isWindowSmall }: { social: Organization["social_m
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center gap-1 font-medium"
-        
       >
         <div className="w-5 h-5 flex">
           <TwitterIcon />
         </div>
-        {!isWindowSmall ? (social.tag || "Twitter") : null}
+        {!isWindowSmall ? social.tag || "Twitter" : null}
       </a>
     );
   }
@@ -46,16 +51,16 @@ function SocialMedia({ social, isWindowSmall }: { social: Organization["social_m
 
 export default function OrganizationMain({ org }: { org: Organization }) {
   const [currentTab, setCurrentTab] = useState("Live Members");
-  const [isWindowSmall, setIsWindowSmall] = useState<boolean>()
+  const [isWindowSmall, setIsWindowSmall] = useState<boolean>();
   const window = useWindowDimensions();
 
   useEffect(() => {
     if (window && window.width) {
       setIsWindowSmall(window.width < 640);
     }
-  }, [window])
+  }, [window]);
 
-  const API = process.env.NEXT_PUBLIC_API as string
+  const API = process.env.NEXT_PUBLIC_API as string;
 
   const fetchOrganizationStreams = async () =>
     axios
@@ -83,25 +88,29 @@ export default function OrganizationMain({ org }: { org: Organization }) {
           </div>
           <div className="flex flex-col flex-1 justify-center items-center md:items-start gap-1 mr-5">
             <div>
-              <h2 className="flex text-4xl font-semibold">{org.name}</h2>
+              <h2 className="flex text-4xl font-semibold dark:text-primary">
+                {org.name}
+              </h2>
             </div>
-            <div className="flex gap-2 text-sm font-semibold text-gray-600">
+            <div className="flex gap-2 text-sm font-semibold dark:text-text-secondary-dark text-gray-600">
               {org.languages.map((lang) => (
                 <div key={lang}>{lang}</div>
               ))}
             </div>
-            <div className="flex items-center font-medium">
+            <div className="flex items-center font-medium dark:text-text-primary-dark">
               <GoLocation />
               {org.based}
             </div>
-            <div className="font-medium text-sm">
+            <div className="font-medium text-sm dark:text-text-primary-dark">
               Total Members:{" "}
-              <span className="font-bold">{org.members.length}</span>
+              <span className="font-bold dark:text-primary">
+                {org.members.length}
+              </span>
             </div>
           </div>
           <div className=" flex flex-col md:self-start md:mt-6">
             <div className="flex flex-wrap gap-2 justify-center md:justify-end">
-              <AnimatedButton className="text-xs font-medium bg-slate-100 border border-slate-100 px-2 py-1 rounded">
+              <AnimatedButton className="text-xs font-medium dark:bg-secondary-dark dark:text-text-primary-dark dark:border-0 bg-slate-100 border border-slate-100 px-2 py-1 rounded">
                 <a
                   href={org.website}
                   target="_blank"
@@ -113,15 +122,15 @@ export default function OrganizationMain({ org }: { org: Organization }) {
                 </a>
               </AnimatedButton>
               {org.main_channel ? (
-                <AnimatedButton className="text-xs font-medium bg-slate-100 border border-slate-100 px-2 rounded">
+                <AnimatedButton className="text-xs font-medium dark:bg-secondary-dark dark:text-text-primary-dark dark:border-0 bg-slate-100 border border-slate-100 px-2 rounded">
                   <a
                     href={org.main_channel}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1 py-1.5"
                   >
-                    <div className="w-5">
-                      <YTIcon />
+                    <div className="w-5 flex items-center">
+                      <Image src={YTIcon} height={15} width={20} />
                     </div>
                     {!isWindowSmall ? "Youtube" : null}
                   </a>
@@ -130,7 +139,7 @@ export default function OrganizationMain({ org }: { org: Organization }) {
               {org.social_media.map((social) => (
                 <AnimatedButton
                   key={social.url}
-                  className="text-xs bg-slate-100 border border-slate-100 px-2 py-1 rounded"
+                  className="text-xs dark:bg-secondary-dark dark:text-text-primary-dark dark:border-0 bg-slate-100 border border-slate-100 px-2 py-1 rounded"
                 >
                   <SocialMedia social={social} isWindowSmall={isWindowSmall} />
                 </AnimatedButton>
@@ -152,7 +161,7 @@ export default function OrganizationMain({ org }: { org: Organization }) {
           setCurrentTab={setCurrentTab}
           layoutId="organization"
         />
-        <div className="border absolute bottom-0 w-full z-0" />
+        <div className="dark:border-text-secondary-dark border absolute bottom-0 w-full z-0" />
       </div>
       {error ? (
         <div className="flex flex-col h-48 text-sm">

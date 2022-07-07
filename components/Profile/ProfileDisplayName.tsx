@@ -72,7 +72,7 @@ export default function ProfileFields() {
     <form className={`flex-1 flex ${!edit ? "flex-row" : "flex-col"} gap-2`}>
       <div className="flex-1 flex">
         <div className="mr-3 mt-5">
-          <CgProfile className="w-4 h-4 " />
+          <CgProfile className="w-4 h-4 dark:text-primary" />
         </div>
         <ProfileUpdateField
           label="Display Name"
@@ -94,10 +94,10 @@ export default function ProfileFields() {
             setHelperText("");
           }}
         >
-          <MdEdit size={20} color={disable ? "grey" : "black"} />
+          <MdEdit size={20} className={`${disable ? "text-text-secondary-dark" : "text-black dark:text-primary"}`}/>
         </button>
       ) : (
-        <div className="flex justify-end items-center gap-3 mt-2">
+        <div className="dark:text-primary flex justify-end items-center gap-3 mt-2">
           <button
             type="button"
             className="w-8"

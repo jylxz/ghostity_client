@@ -68,7 +68,7 @@ function FollowBranchButton({
       onClick={() => follow()}
       onMouseEnter={() => setFollowState(true)}
       onMouseLeave={() => setFollowState(false)}
-      className="flex items-center gap-2 bg-slate-100 px-2 py-0.5 text-sm  text-gray-800 rounded"
+      className="flex items-center gap-2 dark:bg-secondary-dark dark:text-primary bg-slate-100 px-2 py-0.5 text-sm  text-gray-800 rounded"
     >
       {followed ? (
         <>
@@ -142,14 +142,14 @@ export default function OrganizationMembers({
       <div className="flex flex-wrap justify-center text-sm py-2">
         <button type="button" onClick={() => setCurrentBranch(-1)}>
           {currentBranch === -1 ? (
-            <span className="font-semibold px-3">All</span>
+            <span className="dark:text-text-primary-dark font-semibold px-3">All</span>
           ) : (
-            <span className="text-gray-400 px-3">All</span>
+            <span className="dark:text-text-secondary-dark text-gray-400 px-3">All</span>
           )}
         </button>
         {branches.map((branch) => (
           <Fragment key={branch.id}>
-            <div className="before:content-['|'] before:px-1 text-gray-400" />
+            <div className="before:content-['|'] before:px-1 dark:text-text-secondary-dark text-gray-400" />
             <button
               type="button"
               key={branch.id}
@@ -157,11 +157,11 @@ export default function OrganizationMembers({
               className="flex"
             >
               {currentBranch === branch.id ? (
-                <span className="text-black font-semibold px-1">
+                <span className="dark:text-text-primary-dark text-black font-semibold px-1">
                   {branch.name}
                 </span>
               ) : (
-                <span className="text-gray-400 px-1">{branch.name}</span>
+                <span className="dark:text-text-secondary-dark text-gray-400 px-1">{branch.name}</span>
               )}
             </button>
           </Fragment>

@@ -10,14 +10,14 @@ export default function TermsOfService() {
       <title>vGhostity | Terms of Service</title>
     </Head>
     <div className="font-medium">
-      <div className="bg-gray-100 h-64 flex flex-col justify-center items-center">
+      <div className="dark:bg-secondary-dark dark:text-text-primary-dark bg-gray-100 h-64 flex flex-col justify-center items-center">
         <div className="bg-primary w-20 h-20 p-4 rounded-full">
           <VGhostityLogo />
         </div>
         <h1 className="text-2xl font-semibold">Terms of Service</h1>
         <div className="text-sm">Last Updated: July 1, 2022</div>
       </div>
-      <main className="flex justify-center py-16">
+      <main className="dark:text-text-primary-dark flex justify-center py-16">
         <div className="max-w-[75ch] text-sm flex flex-col items-center gap-10 px-4">
           <section className="flex flex-col gap-4">
             <h2 className="text-base font-bold">Terms of Service</h2>

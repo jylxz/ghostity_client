@@ -96,25 +96,24 @@ function OrganizationIcon({ mainAffiliation }: { mainAffiliation: Stream["channe
         onMouseEnter={() => setHoverState(true)}
         onMouseLeave={() => setHoverState(false)}
       >
+        <LinkTo
+          href={`/browse/organizations/${mainAffiliation.organization_name.toLowerCase()}`}
+        >
         <button
           type="button"
-          // className="absolute top-1 right-1 dark:bg-secondary-dark/80 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
+          className="flex items-center"
         >
-          <LinkTo
-            href={`/browse/organizations/${mainAffiliation.organization_name.toLowerCase()}`}
-            className="border"
-          >
             <Image
               src={mainAffiliation.organization_logo}
+              alt={`${mainAffiliation.organization_name}'s alt logo`}
               height={22}
               width={22}
-              // layout="fill"
-              className="rounded-full border"
+              className="rounded-full text-xs"
             />
-          </LinkTo>
         </button>
+          </LinkTo>
         {hoverState ? (
-          <span className="absolute whitespace-nowrap dark:bg-secondary-dark-2 bg-white text-xs px-2 py-1 top-[24px] right-0">
+          <span className="absolute whitespace-nowrap dark:bg-secondary-dark-2 bg-white text-xs px-2 py-1 top-[24px] right-0 rounded">
             {`${mainAffiliation.organization_name} | ${mainAffiliation.full_name}`}
           </span>
         ) : null}
@@ -230,7 +229,7 @@ function SimpleFollowButton({ channelId }: { channelId: string }) {
     return (
       <motion.button
         whileTap={{ scale: 0.7 }}
-        className="absolute top-1 left-1 dark:bg-secondary-dark/80 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
+        className="absolute top-1.5 left-1.5 dark:bg-secondary-dark/80 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
         onClick={() => follow()}
         onMouseEnter={() => setHoverState(true)}
         onMouseLeave={() => setHoverState(false)}
@@ -312,14 +311,15 @@ function BlacklistButton({ stream }: { stream: Stream }) {
 
 export default function LivestreamCard({ stream }: { stream: Stream }) {
   return (
-    <Card className="flex flex-col max-w-[22rem] shadow dark:bg-secondary-dark">
-      <div className="relative max-w-[22rem] max-h-[198px]">
+    <Card className="flex flex-col max-w-[22rem] shadow ">
+      <div className="relative max-w-[22rem] max-h-[198px] dark:bg-secondary-dark-2">
         <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
           <Image
             src={stream.stream.thumbnail}
             alt={`${stream.channel_name}'s stream thumbnail`}
             height={198}
             width={352}
+            className="dark:bg-secondary-dark-2"
             // priority
           />
         </a>
@@ -329,7 +329,7 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
         /> */}
         <SimpleFollowButton channelId={stream.channel_id} />
         <BlacklistButton stream={stream} />
-        <span className="absolute bottom-2.5 right-1 text-primary dark:bg-secondary-dark/80 bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default">{`${stream.stream.viewers} viewers`}</span>
+        <span className="absolute bottom-2 right-1.5 text-primary dark:bg-secondary-dark/80 bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default">{`${stream.stream.viewers} viewers`}</span>
       </div>
       <CardContent className="dark:bg-secondary-dark-2 dark:text-text-primary-dark grow py-2.5">
         <div>
@@ -357,7 +357,9 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
           <Typography className="line-clamp-1 text-sm font-bold flex-1">
             <ChannelName stream={stream} />
           </Typography>
-          <OrganizationIcon mainAffiliation={stream.channel_info.main_affiliation} />
+          <OrganizationIcon
+            mainAffiliation={stream.channel_info.main_affiliation}
+          />
 
           <PlatformIcon stream={stream} />
         </div>

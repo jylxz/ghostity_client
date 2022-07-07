@@ -2,11 +2,7 @@
   "compilerOptions": {
     "types": ["@honkhonk/vite-plugin-svgr/client"],
     "target": "es2021",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -21,12 +17,6 @@
     "jsx": "preserve",
     "strictFunctionTypes": false
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-, "components/SideBar/SideBarMain.tsx", "next.config.js"  ],
-  "exclude": [
-    "node_modules", "functions"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js"],
+  "exclude": ["node_modules", "functions"]
 }

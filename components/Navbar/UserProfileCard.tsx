@@ -13,7 +13,7 @@ export default function UserProfileCard({
   const follows = useContext(UserFollowContext);
 
   return (
-    <div className="bg-white h-40 rounded flex flex-col">
+    <div className="dark:bg-secondary-dark-2 bg-white h-40 rounded flex flex-col">
       <div className="flex-1 w-full flex-col justify-center items-center text-sm px-2 py-2">
         {/* <div className="w-14 h-14 rounded-full border mx-auto mb-2" /> */}
         <div className="flex justify-center mb-2">
@@ -28,17 +28,17 @@ export default function UserProfileCard({
             alt="vGhostity profile image"
           />
         </div>
-        <span className="line-clamp-1 text-center font-medium">
+        <span className="dark:text-primary line-clamp-1 text-center font-medium">
           {user?.displayName || "A Wandering Ghost"}
         </span>
         {user ? (
-          <div className="text-sm text-gray-500 text-center">{`Following: ${follows?.channels?.length || 0}`}</div>
+          <div className="text-sm dark:text-text-secondary-dark text-gray-500 text-center">{`Following: ${follows?.channels?.length || 0}`}</div>
         ) : null}
       </div>
         <LinkTo href="/profile" className="w-full">
           <button
             type="button"
-            className=" text-sm text-center py-1.5 border-t w-full font-medium"
+            className="dark:text-text-primary-dark text-sm text-center py-1.5 border-t w-full font-medium"
             onClick={() => closeParent(false)}
           >
             View Profile

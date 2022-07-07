@@ -1,8 +1,10 @@
-import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import { Accordion } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { AnimatePresence, motion } from "framer-motion";
 
 import React from "react";
+import FaqAccordionDetails from "./FaqAccordionDetails";
+import FaqAccordionSummary from "./FaqAccordionSummary";
 
 export default function FaqOrganization({
   currentTab,
@@ -28,15 +30,14 @@ export default function FaqOrganization({
           // transition={{ duration: 0.4 }}
         >
           <Accordion>
-            <AccordionSummary
+            <FaqAccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1b-content"
               id="panel1b-header"
             >
               <h3>Can my organization be added into vGhostity?</h3>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div className="text-sm text-gray-500">
+            </FaqAccordionSummary>
+            <FaqAccordionDetails>
                 <p>Absolutely!</p>
                 <br />
                 <p>
@@ -53,8 +54,7 @@ export default function FaqOrganization({
                   the three contacts above and let&apos;s get your organization
                   on vGhostity!
                 </p>
-              </div>
-            </AccordionDetails>
+            </FaqAccordionDetails>
           </Accordion>
         </motion.div>
       ) : null}

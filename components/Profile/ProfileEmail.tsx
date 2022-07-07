@@ -137,7 +137,7 @@ export default function ProfileEmail() {
             hidden
           />
           <div className="mr-3 mt-3">
-            <AiOutlineMail className="w-4 h-4" />
+            <AiOutlineMail className="dark:text-primary w-4 h-4" />
           </div>
           <ProfileUpdateField
             label="Email"
@@ -157,15 +157,22 @@ export default function ProfileEmail() {
               setHelperText("");
             }}
           >
-            <MdEdit size={20} color={disable ? "grey" : "black"} />
+            <MdEdit
+              size={20}
+              className={`${
+                disable
+                  ? "text-text-secondary-dark"
+                  : "text-black dark:text-primary"
+              }`}
+            />
           </button>
         </>
       ) : (
         <>
-        <h2 className="text-lg">Changing Email</h2>
+          <h2 className="text-lg dark:text-text-primary-dark">Changing Email</h2>
           <div className="flex">
             <div className="mr-3 mt-5">
-              <AiOutlineMail className="w-4 h-4" />
+              <AiOutlineMail className="w-4 h-4 dark:text-primary" />
             </div>
             <ProfileUpdateField
               label="Email"
@@ -180,7 +187,7 @@ export default function ProfileEmail() {
           </div>
           <div className="flex">
             <div className="mt-5 mr-3">
-              <RiLockPasswordLine className="w-4 h-4" />
+              <RiLockPasswordLine className="w-4 h-4 dark:text-primary" />
             </div>
             <ProfileUpdateField
               label="Current Password"
@@ -193,7 +200,7 @@ export default function ProfileEmail() {
               disabled={!edit}
             />
           </div>
-          <div className="flex justify-end items-center gap-3 mt-2">
+          <div className="dark:text-primary flex justify-end items-center gap-3 mt-2">
             <button
               type="button"
               className="w-8"

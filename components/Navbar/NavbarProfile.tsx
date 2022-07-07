@@ -28,7 +28,7 @@ function NavbarProfileMenu({
             translateX: 0,
           }}
           exit={{ translateX: 300 }}
-          className="absolute top-[44px] -right-8 z-40 w-64 bg-slate-100 text-black px-2 py-3 rounded-bl "
+          className="absolute top-[44px] -right-8 z-40 w-64 dark:bg-secondary-dark bg-slate-100 text-black px-2 py-3 rounded-bl "
         >
           <UserProfileCard closeParent={setShow} />
           <div className="flex flex-col items-end px-4 py-2 text font-medium">

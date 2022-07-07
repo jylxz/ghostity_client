@@ -157,7 +157,11 @@ export default function ProfilePassword() {
   }, [edit, user]);
 
   return (
-    <form className={`flex-1 flex ${!edit ? "flex-row" : "flex-col bg-gray-100 p-4 rounded mt-4 gap-3"}`}>
+    <form
+      className={`flex-1 flex ${
+        !edit ? "flex-row" : "flex-col bg-gray-100 p-4 rounded mt-4 gap-3"
+      }`}
+    >
       {!edit ? (
         <>
           <input
@@ -167,7 +171,7 @@ export default function ProfilePassword() {
             hidden
           />
           <div className="mt-5 mr-3">
-            <RiLockPasswordLine className="w-4 h-4" />
+            <RiLockPasswordLine className="dark:text-primary w-4 h-4" />
           </div>
           <TextField
             type="password"
@@ -189,7 +193,14 @@ export default function ProfilePassword() {
             }
             onClick={() => setEdit(true)}
           >
-            <MdEdit size={20} color={disable ? "grey" : "black"} />
+            <MdEdit
+              size={20}
+              className={`${
+                disable
+                  ? "text-text-secondary-dark"
+                  : "text-black dark:text-primary"
+              }`}
+            />
           </button>
         </>
       ) : (
@@ -200,10 +211,12 @@ export default function ProfilePassword() {
             defaultValue={user && user.email ? user?.email : undefined}
             hidden
           />
-          <h2 className="text-lg">Changing Password</h2>
+          <h2 className="text-lg dark:text-text-primary-dark">
+            Changing Password
+          </h2>
           <div className="flex items-center">
             <div className="mr-3 mt-1">
-              <RiLockPasswordLine className="w-4 h-4" />
+              <RiLockPasswordLine className="w-4 h-4 dark:text-primary" />
             </div>
             <ProfileUpdateField
               label="Current Password"
@@ -218,7 +231,7 @@ export default function ProfilePassword() {
           </div>
           <div className="flex items-center">
             <div className="mr-3 self-start mt-[1.1rem]">
-              <RiLockPasswordLine className="w-4 h-4" />
+              <RiLockPasswordLine className="w-4 h-4 dark:text-primary" />
             </div>
             <ProfileUpdateField
               label="New Password"
@@ -233,7 +246,7 @@ export default function ProfilePassword() {
           </div>
           <div className="flex items-center">
             <div className="mr-3 mt-2">
-              <RiLockPasswordFill className="w-4 h-4" />
+              <RiLockPasswordFill className="w-4 h-4 dark:text-primary" />
             </div>
             <ProfileUpdateField
               label="Confirm New Password"
@@ -246,13 +259,13 @@ export default function ProfilePassword() {
               autoComplete="new-password"
             />
           </div>
-          <div className="flex justify-end items-center gap-3 mt-2">
+          <div className="dark:text-primary flex justify-end items-center gap-3 mt-2">
             <button
               type="button"
               className="w-8"
               onClick={() => handleChange()}
             >
-              <GoCheck size={20} className="mx-auto" />
+              <GoCheck size={20} className="mx-auto " />
             </button>
             <button
               type="button"

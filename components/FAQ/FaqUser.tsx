@@ -1,7 +1,9 @@
-import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import React from "react";
+import { Accordion } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
+import FaqAccordionSummary from "./FaqAccordionSummary"
+import FaqAccordionDetails from "./FaqAccordionDetails"
 
 export default function FaqUser({ currentTab }: { currentTab: string }) {
   return (
@@ -23,142 +25,132 @@ export default function FaqUser({ currentTab }: { currentTab: string }) {
           // transition={{ duration: 0.4 }}
         >
           <Accordion>
-            <AccordionSummary
+            <FaqAccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1c-content"
               id="panel1c-header"
             >
               <h3>
-                How long does it take for streams to update/show up on vGhostity?
+                How long does it take for streams to update/show up on
+                vGhostity?
               </h3>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div className="text-sm text-gray-500">
-                <p>
-                  vGhostity starts updating streams every 10 mins around the
-                  clock! However, it could take an few minutes before you can
-                  see it!
-                </p>
-              </div>
-            </AccordionDetails>
+            </FaqAccordionSummary>
+            <FaqAccordionDetails>
+              <p>
+                vGhostity starts updating streams every 10 mins around the
+                clock! However, it could take an few minutes before you can see
+                it!
+              </p>
+            </FaqAccordionDetails>
           </Accordion>
           <Accordion>
-            <AccordionSummary
+            <FaqAccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel2c-content"
               id="panel2c-header"
             >
               <h3>A feature/something is broken!</h3>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div className="text-sm text-gray-500">
-                <p>
-                  I still consider myself a Junior Developer so there is bound
-                  to be some bugs here and there. So, please forgive me and let
-                  know through twitter or discord! I&apos;ll try to fix it to
-                  the best of my ability!
-                </p>
-              </div>
-            </AccordionDetails>
+            </FaqAccordionSummary>
+            <FaqAccordionDetails>
+              <p>
+                I still consider myself a Junior Developer so there is bound to
+                be some bugs here and there. So, please forgive me and let know
+                through twitter or discord! I&apos;ll try to fix it to the best
+                of my ability!
+              </p>
+            </FaqAccordionDetails>
           </Accordion>
           <Accordion>
-            <AccordionSummary
+            <FaqAccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel3c-content"
               id="panel3c-header"
             >
               <h3>Did you really build vGhostity by yourself?</h3>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div className="text-sm text-gray-500">
-                <p>
-                  <strong>YES!</strong>
-                </p>
-                <br />
-                <p>
-                  Unless you count YouTube tutorials, StackOverflow threads, and
-                  using React libraries. Everything was coded and designed by
-                  myself!
-                </p>
-              </div>
-            </AccordionDetails>
+            </FaqAccordionSummary>
+            <FaqAccordionDetails>
+              <p>
+                <strong>YES!</strong>
+              </p>
+              <br />
+              <p>
+                Unless you count YouTube tutorials, StackOverflow threads, and
+                using React libraries. Everything was coded and designed by
+                myself!
+              </p>
+            </FaqAccordionDetails>
           </Accordion>
           <Accordion>
-            <AccordionSummary
+            <FaqAccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel4c-content"
               id="panel4c-header"
             >
               <h3>
-                How can I support the continued development of vGhostity and you?
+                How can I support the continued development of vGhostity and
+                you?
               </h3>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div className="text-sm text-gray-500">
-                <p>
-                  I currently have a BuyMeACoffee account where you can donate{" "}
-                  <a
-                    href="https://www.buymeacoffee.com/jylx"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-bold underline"
-                  >
-                    here.
-                  </a>
-                </p>
-                <br />
-                <p>
-                  Anything helps! Especially anything I can proudly tell my
-                  parents about. However, don&apos;t feel pressured or obligated
-                  to donate. I created vGhostity on my accord and as a portfolio
-                  project as a self-taught developer.
-                </p>
-                <br />
-                <p>
-                  If anything, the most I can ask you to do is share vGhostity
-                  with your friends, discord homies, Vtuber enjoyers, or other
-                  Vtubers! It would cool if vGhostity blew up and became
-                  popular!
-                </p>
-              </div>
-            </AccordionDetails>
+            </FaqAccordionSummary>
+            <FaqAccordionDetails>
+              <p>
+                I currently have a BuyMeACoffee account where you can donate{" "}
+                <a
+                  href="https://www.buymeacoffee.com/jylx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold underline"
+                >
+                  here.
+                </a>
+              </p>
+              <br />
+              <p>
+                Anything helps! Especially anything I can proudly tell my
+                parents about. However, don&apos;t feel pressured or obligated
+                to donate. I created vGhostity on my accord and as a portfolio
+                project as a self-taught developer.
+              </p>
+              <br />
+              <p>
+                If anything, the most I can ask you to do is share vGhostity
+                with your friends, discord homies, Vtuber enjoyers, or other
+                Vtubers! It would cool if vGhostity blew up and became popular!
+              </p>
+            </FaqAccordionDetails>
           </Accordion>
           <Accordion>
-            <AccordionSummary
+            <FaqAccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel5c-content"
               id="panel5c-header"
             >
               <h3>Can I suggest a new feature/change?</h3>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div className="text-sm text-gray-500">
-                <p>
-                  Absolutely! I would love to hear your opinion on how I can
-                  make vGhostity the best Vtuber app there is!
-                </p>
-              </div>
-            </AccordionDetails>
+            </FaqAccordionSummary>
+            <FaqAccordionDetails>
+              <p>
+                Absolutely! I would love to hear your opinion on how I can make
+                vGhostity the best Vtuber app there is!
+              </p>
+            </FaqAccordionDetails>
           </Accordion>
           <Accordion>
-            <AccordionSummary
+            <FaqAccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel6c-content"
               id="panel6c-header"
             >
               <h3>Why is vGhostity called &quot;vGhostity&quot;?</h3>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div className="text-sm text-gray-500">
-                <p>
-                  It&apos;s nothing too special or deep. When I was coming up
-                  names for the app, I was listening to Hoshimachi Suisei&apos;s
-                  song &quot;GHOST&quot; and decide why not use something with
-                  ghost in it. &quot;vGhostity&quot; was a available domain and
-                  rest is history!
-                </p>
-              </div>
-            </AccordionDetails>
+            </FaqAccordionSummary>
+            <FaqAccordionDetails>
+              <p>
+                It&apos;s nothing too special or deep. When I was coming up
+                names for the app, I was listening to Hoshimachi Suisei&apos;s
+                song &quot;GHOST&quot; and decide why not use something with
+                ghost in it. &quot;ghostity&quot; was a available domain and I
+                added a &quot;v&quot; after some suggestions from some very cool
+                people! Shoutout to the weebs in MoonCord!
+              </p>
+            </FaqAccordionDetails>
           </Accordion>
         </motion.div>
       ) : null}

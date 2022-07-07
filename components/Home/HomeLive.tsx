@@ -42,7 +42,7 @@ export default function HomeLive() {
   const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
 
   return (
-    <SectionWrapper color="bg-slate-100">
+    <SectionWrapper className="dark:bg-secondary-dark-2" color="bg-slate-100">
       <HomeSectionHeading heading="Popular Live Channels" />
       {isLoading || error ? (
         <div className="flex justify-center items-center h-[17rem]">
@@ -59,7 +59,7 @@ export default function HomeLive() {
               className="disabled:opacity-40"
               ref={(node) => setPrevEl(node)}
             >
-              <ChevronLeftIcon className="text-4xl lg:text-5xl text-gray-600" />
+              <ChevronLeftIcon className="text-4xl lg:text-5xl dark:text-white text-gray-600" />
             </motion.button>
           </span>
           <Swiper
@@ -114,7 +114,7 @@ export default function HomeLive() {
               className="disabled:opacity-40"
               ref={(node) => setNextEl(node)}
             >
-              <ChevronRightIcon className="text-4xl lg:text-5xl text-gray-600" />
+              <ChevronRightIcon className="text-4xl lg:text-5xl dark:text-white text-gray-600" />
             </motion.button>
           </span>
         </div>

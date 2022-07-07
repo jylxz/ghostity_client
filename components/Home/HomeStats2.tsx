@@ -99,40 +99,40 @@ export default function HomeStats2() {
       <div className="flex gap-2 text-sm justify-center sm:justify-end ">
         <AnimatedButton
           onClick={() => setTime("1day")}
-          className={`px-2 py-0.5 rounded border-2 shadow-sm ${
+          className={`px-2 py-0.5 rounded dark:border-0 border-2 shadow-sm ${
             time === "1day"
-              ? "text-black border-primary bg-white font-medium"
-              : "text-gray-400 bg-gray-100 "
+              ? "dark:bg-secondary-dark dark:text-primary text-black border-primary bg-white font-medium"
+              : "dark:bg-text-secondary-dark dark:text-gray-300 text-gray-400 bg-gray-100 "
           }`}
         >
           1 Day
         </AnimatedButton>
         <AnimatedButton
           onClick={() => setTime("3day")}
-          className={`px-2 py-0.5 rounded border-2 shadow-sm ${
+          className={`px-2 py-0.5 rounded dark:border-0 border-2 shadow-sm ${
             time === "3day"
-              ? "text-black border-primary bg-white font-medium"
-              : "text-gray-400 bg-gray-100"
+              ? "dark:bg-secondary-dark dark:text-primary text-black border-primary bg-white font-medium"
+              : "dark:bg-text-secondary-dark dark:text-gray-300 bg-gray-100"
           }`}
         >
           3 Day
         </AnimatedButton>
         <AnimatedButton
           onClick={() => setTime("week")}
-          className={` px-2 py-0.5 rounded border-2 shadow-sm ${
+          className={` px-2 py-0.5 rounded dark:border-0 border-2 shadow-sm ${
             time === "week"
-              ? "text-black border-primary bg-white font-medium"
-              : "text-gray-400 bg-gray-100"
+              ? "dark:bg-secondary-dark dark:text-primary text-black border-primary bg-white font-medium"
+              : "dark:bg-text-secondary-dark dark:text-gray-300 bg-gray-100"
           }`}
         >
           Week
         </AnimatedButton>
         <AnimatedButton
           onClick={() => setTime("month")}
-          className={`px-2 py-0.5 rounded border-2 shadow-sm ${
+          className={`px-2 py-0.5 rounded dark:border-0 border-2 shadow-sm ${
             time === "month"
-              ? "text-black border-primary bg-white font-medium "
-              : "text-gray-400 bg-gray-100 "
+              ? "dark:bg-secondary-dark dark:text-primary text-black border-primary bg-white font-medium "
+              : "dark:bg-text-secondary-dark dark:text-gray-300 bg-gray-100 "
           }`}
         >
           Month
@@ -157,12 +157,16 @@ export default function HomeStats2() {
           whileTap={{ scale: 0.95 }}
           variants={buttons}
           onClick={() => setCurrentTab("watching")}
-          className="flex items-center gap-2 bg-primary px-2 py-1.5 rounded shadow"
+          className={`flex items-center gap-2 ${
+            currentTab === "watching"
+              ? "dark:bg-secondary-dark"
+              : "dark:bg-text-secondary-dark"
+          } bg-primary px-2 py-1.5 rounded shadow`}
         >
-          <LiveTvOutlinedIcon className="w-6 h-6" />
-          <span className="flex items-center gap-1 font-medium">
+          <LiveTvOutlinedIcon className="w-6 h-6 dark:text-primary" />
+          <span className="dark:text-primary flex items-center gap-1 font-medium">
             Watching{" "}
-            <span className="text-sm text-gray-400 font-normal">{`(${currentWatching} Weebs)`}</span>
+            <span className="text-sm dark:text-text-primary-dark text-gray-400 font-normal">{`(${currentWatching} Weebs)`}</span>
           </span>
         </motion.button>
         <motion.button
@@ -170,12 +174,16 @@ export default function HomeStats2() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setCurrentTab("live")}
-          className="flex items-center gap-2 bg-secondary px-2 py-1.5 rounded shadow"
+          className={`flex items-center gap-2 bg-secondary px-2 py-1.5 rounded shadow ${
+            currentTab === "live"
+              ? "dark:bg-secondary-dark"
+              : "dark:bg-text-secondary-dark"
+          }`}
         >
-          <CableOutlinedIcon className="w-6 h-6" />
-          <span className="flex items-center gap-1 font-medium">
+          <CableOutlinedIcon className="w-6 h-6 dark:text-primary" />
+          <span className="dark:text-primary flex items-center gap-1 font-medium">
             Live{" "}
-            <span className="text-sm text-gray-400 font-normal">{`(${currentLive} Channels)`}</span>
+            <span className="text-sm dark:text-text-primary-dark text-gray-400 font-normal">{`(${currentLive} Channels)`}</span>
           </span>
         </motion.button>
         <motion.button
@@ -183,14 +191,18 @@ export default function HomeStats2() {
           whileTap={{ scale: 0.95 }}
           variants={buttons}
           onClick={() => setCurrentTab("total")}
-          className="flex items-center gap-2 bg-secondary2 px-2 py-1.5 rounded shadow"
+          className={`flex items-center gap-2 bg-secondary2 px-2 py-1.5 rounded shadow ${
+            currentTab === "total"
+              ? "dark:bg-secondary-dark"
+              : "dark:bg-text-secondary-dark"
+          }`}
         >
           <div className="w-6 h-6">
-            <VGhostityIcon />
+            <VGhostityIcon className="dark:fill-primary"/>
           </div>
-          <span className="flex items-center gap-1 font-medium">
+          <span className="dark:text-primary flex items-center gap-1 font-medium">
             Total{" "}
-            <span className="text-sm text-gray-400 font-normal">{`(${currentTotal} V-Tubers)`}</span>
+            <span className="text-sm dark:text-text-primary-dark text-gray-400 font-normal">{`(${currentTotal} V-Tubers)`}</span>
           </span>
         </motion.button>
       </motion.div>

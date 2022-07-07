@@ -38,17 +38,19 @@ export default function FaqMain() {
   };
 
   return (
-    <div className="font-medium overflow-x-hidden">
+    <div className="font-medium overflow-hidden">
       <BackgroundWrapper image="https://res.cloudinary.com/ghostity/image/upload/v1656533585/banner/Banner_1_hstgss.png">
         <div className="h-64 flex flex-col justify-center items-center">
           <div className="bg-primary w-20 h-20 p-4 rounded-full">
             <VGhostityLogo />
           </div>
-          <h1 className="text-2xl font-semibold">Frequently Asked Questions</h1>
-          <div className="text-sm text-gray-500">
-            Last Updated: July 1, 2022
+          <h1 className="text-2xl dark:text-text-primary-dark font-semibold">
+            Frequently Asked Questions
+          </h1>
+          <div className="text-sm dark:text-text-primary-dark text-gray-500">
+            Last Updated: July 6, 2022
           </div>
-          <div className="mt-4 flex flex-wrap justify-center items-center gap-4 bg-gray-200/70 px-3 py-1 rounded-lg">
+          <div className="mt-4 flex flex-wrap justify-center items-center gap-4 bg-gray-200/70 dark:bg-secondary-dark dark:text-text-primary-dark px-3 py-1 rounded-lg">
             <div>
               <a
                 href="https://twitter.com/_jylx"
@@ -101,7 +103,7 @@ export default function FaqMain() {
           >
             <motion.div
               layout="position"
-              className="flex flex-col w-full justify-center items-center gap-4 mb-4"
+              className="dark:text-text-primary-dark flex flex-col w-full justify-center items-center gap-4 mb-4"
               variants={containerAnimation}
               initial="initial"
               animate="animate"
@@ -128,8 +130,8 @@ export default function FaqMain() {
                 <AnimatedButton
                   className={`${
                     currentTab === "vtuber"
-                      ? "bg-slate-100 text-black"
-                      : "bg-gray-100 : text-gray-300"
+                      ? "dark:bg-secondary-dark dark:text-primary bg-slate-100 text-black"
+                      : "dark:bg-text-secondary-dark bg-gray-100 text-gray-300"
                   } py-1 px-2 rounded shadow`}
                   onClick={() => setCurrentTab("vtuber")}
                 >
@@ -138,8 +140,8 @@ export default function FaqMain() {
                 <AnimatedButton
                   className={`${
                     currentTab === "user"
-                      ? "bg-slate-100 text-black"
-                      : "bg-gray-100 : text-gray-300"
+                      ? "dark:bg-secondary-dark dark:text-primary bg-slate-100 text-black"
+                      : "dark:bg-text-secondary-dark bg-gray-100 text-gray-300"
                   } py-1 px-2 rounded shadow`}
                   onClick={() => setCurrentTab("user")}
                 >
@@ -148,8 +150,8 @@ export default function FaqMain() {
                 <AnimatedButton
                   className={`${
                     currentTab === "org"
-                      ? "bg-slate-100 text-black"
-                      : "bg-gray-100 : text-gray-300"
+                      ? "dark:bg-secondary-dark dark:text-primary bg-slate-100 text-black"
+                      : "dark:bg-text-secondary-dark bg-gray-100  text-gray-300"
                   } py-1 px-2 rounded shadow`}
                   onClick={() => setCurrentTab("org")}
                 >

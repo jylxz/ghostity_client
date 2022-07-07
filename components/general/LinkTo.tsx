@@ -11,8 +11,10 @@ export default function LinkTo({
   className?: string
 }) {
   return (
-    <Link href={href} passHref className={className}>
-      <a href="dummy" className="flex items-center">{children}</a>
+    <Link href={href} passHref>
+      <a href="dummy" className={className}>
+        {children}
+      </a>
     </Link>
   );
 }

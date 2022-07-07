@@ -27,6 +27,7 @@ export default function ProfileUpdateField({
       sx={{
         "& .MuiInputLabel-root": { fontSize: "14px" },
         "& .MuiInputLabel-shrink": { fontSize: "18px" },
+        "& .MuiInputLabel-shrink:active": { fontSize: "1200px" },
       }}
       autoComplete={autoComplete}
       type={type}

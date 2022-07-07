@@ -18,7 +18,7 @@ export default function ProfileResendVerification() {
       );
 
   return (
-    <div className="text-sm flex flex-col justify-center items-center gap-3">
+    <div className="dark:text-text-secondary-dark text-sm flex flex-col justify-center items-center gap-3">
       <div className="flex gap-3 items-center">
         <div>
           <RiErrorWarningFill size={24} />

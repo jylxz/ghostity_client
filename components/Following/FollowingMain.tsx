@@ -101,7 +101,7 @@ export default function FollowingMain() {
             followProfiles.data?.pages[0].results.length
           }
         />
-        <div className="border absolute bottom-0 w-full z-0" />
+        <div className="dark:border-text-secondary-dark border absolute bottom-0 w-full z-0" />
       </div>
       {followStreams.isLoading ? (
         <div className="flex-grow flex items-center justify-center">

@@ -33,7 +33,7 @@ export default function BackgroundWrapper({
 
   return (
     <motion.div layout className="relative">
-      <div className="absolute h-full w-full z-0 bg-gray-100">
+      <div className="absolute h-full w-full z-0 bg-gray-100 dark:bg-secondary-dark overflow-hidden">
         {image ? (
           <Image
             src={image}

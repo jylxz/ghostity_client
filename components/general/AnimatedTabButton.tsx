@@ -20,7 +20,7 @@ export default function AnimatedTabButton({
       whileTap={{ scale: 0.95 }}
       onClick={() => setCurrentTab(tab)}
       className={`relative z-10 px-2 flex flex-col items-center  ${
-        tab === currentTab ? "text-black font-medium" : "text-gray-500 font-normal"
+        tab === currentTab ? "dark:text-text-primary-dark text-black font-medium" : "dark:text-text-secondary-dark text-gray-500 font-normal"
       }`}
     >
       <div className="flex items-center gap-1">
@@ -32,7 +32,7 @@ export default function AnimatedTabButton({
       {tab === currentTab ? (
         <motion.div
           layoutId={layoutId ? `${layoutId}AnimatedTabButtons` : "AnimatedTabButton"}
-          className="absolute bottom-0 w-full h-0.5 bg-black z-10"
+          className="absolute bottom-0 w-full h-0.5 dark:bg-text-primary-dark bg-black z-10"
         />
       ) : null}
     </motion.button>

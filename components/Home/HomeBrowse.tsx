@@ -44,14 +44,14 @@ function BrowseCardAnimation({
       whileInView="animate"
       whileHover="hover"
       viewport={{ once: true }}
-      className="mb-3 py-4 bg-[length:300%_300%] bg-left bg-gradient-to-r from-primary via-secondary to-secondary2 flex flex-col justify-center items-center h-36 shadow cursor-pointer rounded animate-background-position-left text-gray-500 "
+      className="mb-3 py-4 bg-[length:300%_300%] dark:bg-none dark:bg-secondary-dark-2 bg-left bg-gradient-to-r from-primary via-secondary to-secondary2 flex flex-col justify-center items-center h-36 shadow cursor-pointer rounded animate-background-position-left text-gray-500 "
     >
       <motion.div
         variants={hoverVariant}
-        className="flex flex-col items-center"
+        className="dark:fill-text-primary-dark flex flex-col items-center"
       >
         {children}
-        <motion.span variants={titleVariant} className="text-xl">
+        <motion.span variants={titleVariant} className="dark:text-primary text-xl">
           {title}
         </motion.span>
       </motion.div>
@@ -66,7 +66,7 @@ export default function BrowseBar() {
     homeBrowseAnimations;
 
   return (
-    <SectionWrapper color="bg-slate-50">
+    <SectionWrapper color="bg-slate-50" className="dark:bg-secondary-dark">
       <HomeSectionHeading heading="Browse" />
       <div className="flex">
         <span className="my-auto">
@@ -76,7 +76,7 @@ export default function BrowseBar() {
             className="disabled:opacity-40"
             ref={(node) => setPrevEl(node)}
           >
-            <ChevronLeftIcon className="text-4xl lg:text-5xl text-gray-600" />
+            <ChevronLeftIcon className="text-4xl lg:text-5xl dark:text-white text-gray-600" />
           </motion.button>
         </span>
         <Swiper
@@ -118,7 +118,7 @@ export default function BrowseBar() {
             <LinkTo href="/browse/games">
               <BrowseCardAnimation staggerOrder={2} title="Games">
                 <motion.div variants={gamesVariant} className="flex flex-col">
-                  <GamesOutlinedIcon className="mx-auto h-10 w-10 text-black" />
+                  <GamesOutlinedIcon className="mx-auto h-10 w-10 dark:text-text-primary-dark text-black" />
                 </motion.div>
               </BrowseCardAnimation>
             </LinkTo>
@@ -130,7 +130,7 @@ export default function BrowseBar() {
                   variants={organizationVariant}
                   className="flex flex-col items-center"
                 >
-                  <CorporateFareOutlinedIcon className="text-black h-10 w-10" />
+                  <CorporateFareOutlinedIcon className="dark:text-text-primary-dark text-black h-10 w-10" />
                 </motion.div>
               </BrowseCardAnimation>
             </LinkTo>
@@ -143,7 +143,7 @@ export default function BrowseBar() {
             className="disabled:opacity-40"
             ref={(node) => setNextEl(node)}
           >
-            <ChevronRightIcon className="text-4xl lg:text-5xl text-gray-600" />
+            <ChevronRightIcon className="text-4xl lg:text-5xl dark:text-white text-gray-600" />
           </motion.button>
         </span>
       </div>

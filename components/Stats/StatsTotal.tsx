@@ -1,8 +1,10 @@
 import { Chart as ChartJS, ChartData, ChartOptions } from "chart.js";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { format } from "date-fns";
 import useIsWindowSmall from "../../hooks/useIsWindowSmall";
+import defaultChartOptions from "./defaultChartOptions";
+import ThemeContext from "../../context/ThemeContext";
 
 const createGradient = (ctx: CanvasRenderingContext2D) => {
   const gradient = ctx.createLinearGradient(0, 25, 0, 600);
@@ -43,87 +45,31 @@ export default function StatsTotal({
     datasets: [],
   });
   const isWindowSmall = useIsWindowSmall();
-
-  const options: ChartOptions<"line"> = {
-    responsive: true,
-    scales: {
-      x: {
-        ticks: {
-          callback(val, index) {
-            // eslint-disable-next-line react/no-this-in-sfc
-            return index % 3 === 0 ? this.getLabelForValue(val as number) : "";
-          },
-          maxTicksLimit: isWindowSmall ? 8 : undefined,
-        },
-        grid: {
-          display: false,
-        },
-      },
-      y: {
-        grid: {
-          display: false,
-        },
-      },
-    },
-    layout: {
-      padding: 20,
-    },
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "top" as const,
-        labels: {
-          color: "black",
-          font: {
-            size: 13,
-          },
-        },
-      },
-      title: {
-        color: "black",
-        display: true,
-        text: "Total V-Tubers (On vGhostity)",
-        font: {
-          size: 20,
-        },
-        padding: {
-          bottom: 0,
-        },
-      },
-      subtitle: {
-        display: true,
-        text: "Updates Every 30 Minutes",
-        padding: {
-          top: 2,
-          bottom: 10,
-        },
-        font: {
-          size: 14,
-        },
-      },
-      tooltip: {
-        mode: "index",
-        intersect: false,
-        position: "nearest",
-        callbacks: {
-          label(context) {
-            let label = context.dataset.label || "";
-
-            if (/\d/.test(label)) {
-              label = label.replace(/[0-9]/g, "").replace(/\(|\)/g, "");
-            }
-
-            return `${label}: ${context.parsed.y} V-Tubers`;
-          },
-        },
-      },
-    },
-  };
+  const theme = useContext(ThemeContext);
+  const [chartOptions, setChartOptions] = useState<ChartOptions<"line">>(
+    defaultChartOptions(
+      "Total (On vGhostity)",
+      "Updates Every 30 Mins",
+      "channels",
+      isWindowSmall,
+      theme
+    )
+  );
 
   useEffect(() => {
     if (!stats) {
-      return
+      return;
     }
+
+    setChartOptions(
+      defaultChartOptions(
+        "Total (On vGhostity)",
+        "Updates Every 30 Mins",
+        "channels",
+        isWindowSmall,
+        theme
+      )
+    );
 
     const totalStats = stats.slice().reverse();
     const chart = chartRef.current;
@@ -160,7 +106,7 @@ export default function StatsTotal({
         {
           label: `Twitch (${totalStats.slice(-1)[0].current_twitch})`,
           data: totalStats.map((stat) => stat.current_twitch) || [0],
-          borderColor: "#6441a5",
+          borderColor: "#3a167a",
           backgroundColor: createTwitchGradient(chart.ctx),
           pointBackgroundColor: "#6441a5",
           fill: true,
@@ -170,7 +116,9 @@ export default function StatsTotal({
       ],
     };
     setChartData(data);
-  }, [stats]);
+  }, [stats, theme]);
 
-  return currentTab === "total" ? <Line ref={chartRef} options={options} data={chartData} height={400} /> : null;
+  return currentTab === "total" ? (
+    <Line ref={chartRef} options={chartOptions} data={chartData} height={420} />
+  ) : null;
 }

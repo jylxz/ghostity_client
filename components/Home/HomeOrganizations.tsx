@@ -38,7 +38,7 @@ export default function HomeOrganizations({ logos }: OrganizationLogos) {
       spaceBetween={30}
       loop
       freeMode
-      className="child:ease-linear bg-white"
+      className="child:ease-linear bg-white dark:bg-text-primary-dark"
     >
       {logos.map((logo) => (
         <SwiperSlide key={logo._id}>

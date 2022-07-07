@@ -23,7 +23,7 @@ export default function HomeHelp() {
   } = homeHelpAnimations;
 
   return (
-    <SectionWrapper color="bg-slate-50" className="py-14">
+    <SectionWrapper color="bg-slate-50" className="dark:bg-secondary-dark py-14">
       <div className="grid grid-cols-2 gap-8 sm:w-1/2 mx-auto">
         <div className="text-6xl flex justify-center items-center">
           <motion.div
@@ -33,11 +33,11 @@ export default function HomeHelp() {
             className="relative"
           >
             <motion.div variants={ghostVariant}>
-              <VGhostityLogo className="h-24 w-24" />
+              <VGhostityLogo className="h-24 w-24 dark:fill-text-primary-dark" />
             </motion.div>
             <motion.span
               variants={questionMarkVariant}
-              className="absolute -top-[1rem] -right-[2rem] select-none cursor-default"
+              className="absolute -top-[1rem] -right-[2rem] select-none cursor-default dark:text-text-primary-dark"
             >
               ?
             </motion.span>
@@ -52,14 +52,14 @@ export default function HomeHelp() {
         >
           <motion.h2
             variants={questionHeadingVariant}
-            className="text-xl font-medium lg:text-2xl"
+            className="text-xl font-medium lg:text-2xl dark:text-text-primary-dark"
           >
             Questions?
           </motion.h2>
           <motion.div variants={containerVariant}>
             <motion.p
               variants={textVariant}
-              className="text-sm lg:text-base text-gray-500"
+              className="text-sm lg:text-base text-gray-500 dark:text-text-secondary-dark"
             >
               Are you a V-Tuber, but don&apos;t see your channel on vGhostity?
               Check the FAQ page for help!
@@ -70,7 +70,7 @@ export default function HomeHelp() {
                   type="button"
                   variants={buttonVariant}
                   whileHover="hover"
-                  className="bg-gradient-to-r from-primary via-secondary to-secondary2 shadow-sm px-4 py-1 rounded font-medium"
+                  className="dark:bg-none dark:bg-secondary-dark-2 dark:text-primary bg-gradient-to-r from-primary via-secondary to-secondary2 shadow-sm px-4 py-1 rounded font-medium"
                 >
                   FAQ Page
                 </motion.button>

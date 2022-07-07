@@ -31,6 +31,7 @@ import { auth, db } from "../firebase/ghostityFirebase";
 // Hooks
 import useAdminCheck from "../hooks/useAdminCheck";
 import useScrollRestoration from "../hooks/useScrollRestoration";
+import useThemeColor from "../hooks/useThemeColor";
 
 // Components
 import Navbar from "../components/Navbar/Navbar";
@@ -50,35 +51,11 @@ import AdminContext from "../context/AdminContext";
 import BlacklistContext from "../context/BlacklistContext";
 import LiveFollowingBar from "../components/Navbar/LiveFollowingBar";
 import Favicons from "../components/Head/Favicons";
-import useThemeColor from "../hooks/useThemeColor";
+import ThemeContext from "../context/ThemeContext";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   // MUI Theme
   const [theme, overrideSystem] = useThemeColor();
-
-  // const theme = createTheme({
-  //   typography: {
-  //     fontFamily: [
-  //       '"Quicksand"',
-  //       "-apple-system",
-  //       "BlinkMacSystemFont",
-  //       '"Segoe UI"',
-  //       "Roboto",
-  //       '"Helvetica Neue"',
-  //       "Arial",
-  //       "sans-serif",
-  //       '"Apple Color Emoji"',
-  //       '"Segoe UI Emoji"',
-  //       '"Segoe UI Symbol"',
-  //     ].join(","),
-  //     fontWeightRegular: 500
-  //   },
-  //   palette: {
-  //     primary: {
-  //       main: "#c3d1e0",
-  //     },
-  //   },
-  // });
 
   const MUITheme = useMemo(() =>
     createTheme({
@@ -99,7 +76,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         fontWeightRegular: 500,
       },
       palette: {
-        mode: theme === "dark" ? "dark" : "light"
+        mode: theme === "dark" ? "dark" : "light",
+        primary: {
+          main: "#c3d1e0",
+        }
       }
     }), [theme]
   );
@@ -169,54 +149,56 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <StyledEngineProvider injectFirst>
             <ThemeProvider theme={MUITheme}>
               <UserContext.Provider value={user || null}>
-                <UserFollowContext.Provider value={followsData || null}>
-                  <AdminContext.Provider value={admin}>
-                    <AuthVerifyEmail />
-                    <AuthUpdateEmail />
-                    <AuthPasswordResetMessage />
-                    <div className="sticky sm:relative top-0 z-50 w-full">
-                      <PageProgress />
-                      <Navbar
+                <ThemeContext.Provider value={theme}>
+                  <UserFollowContext.Provider value={followsData || null}>
+                    <AdminContext.Provider value={admin}>
+                      <AuthVerifyEmail />
+                      <AuthUpdateEmail />
+                      <AuthPasswordResetMessage />
+                      <div className="sticky sm:relative top-0 z-50 w-full">
+                        <PageProgress />
+                        <Navbar
+                          showAuth={showAuth}
+                          setShowAuth={setShowAuth}
+                          setShowHamburgerMenu={setShowHamburgerMenu}
+                          theme={theme}
+                          overrideSystem={overrideSystem}
+                        />
+                        <LiveFollowingBar />
+                      </div>
+                      <AuthModalMain
                         showAuth={showAuth}
                         setShowAuth={setShowAuth}
-                        setShowHamburgerMenu={setShowHamburgerMenu}
-                        theme={theme}
-                        overrideSystem={overrideSystem}
                       />
-                      <LiveFollowingBar />
-                    </div>
-                    <AuthModalMain
-                      showAuth={showAuth}
-                      setShowAuth={setShowAuth}
-                    />
-                    <HamburgerNavMenu
-                      showHamburgerMenu={showHamburgerMenu}
-                      setShowHamburgerMenu={setShowHamburgerMenu}
-                      setShowAuth={setShowAuth}
-                    />
-                    <BlacklistModal
-                      channel={blacklistChannel}
-                      setBlacklistChannel={setBlacklistChannel}
-                      showBlacklistModal={showBlacklistModal}
-                      setShowBlacklistModal={setShowBlacklistModal}
-                    />
-                    <BlacklistContext.Provider value={blacklistContextValue}>
-                      <main className={showAuth ? "overflow-hidden" : ""}>
-                        {router.route.includes("browse") ||
-                        router.route.includes("search") ? (
-                          <div className="flex">
-                            <SideBarMain />
-                            <div className="flex-1">
-                              <Component {...pageProps} />
+                      <HamburgerNavMenu
+                        showHamburgerMenu={showHamburgerMenu}
+                        setShowHamburgerMenu={setShowHamburgerMenu}
+                        setShowAuth={setShowAuth}
+                      />
+                      <BlacklistModal
+                        channel={blacklistChannel}
+                        setBlacklistChannel={setBlacklistChannel}
+                        showBlacklistModal={showBlacklistModal}
+                        setShowBlacklistModal={setShowBlacklistModal}
+                      />
+                      <BlacklistContext.Provider value={blacklistContextValue}>
+                        <main className={showAuth ? "overflow-hidden" : ""}>
+                          {router.route.includes("browse") ||
+                          router.route.includes("search") ? (
+                            <div className="flex">
+                              <SideBarMain />
+                              <div className="flex-1">
+                                <Component {...pageProps} />
+                              </div>
                             </div>
-                          </div>
-                        ) : (
-                          <Component {...pageProps} />
-                        )}
-                      </main>
-                    </BlacklistContext.Provider>
-                  </AdminContext.Provider>
-                </UserFollowContext.Provider>
+                          ) : (
+                            <Component {...pageProps} />
+                          )}
+                        </main>
+                      </BlacklistContext.Provider>
+                    </AdminContext.Provider>
+                  </UserFollowContext.Provider>
+                </ThemeContext.Provider>
               </UserContext.Provider>
             </ThemeProvider>
           </StyledEngineProvider>

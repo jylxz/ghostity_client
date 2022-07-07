@@ -12,7 +12,7 @@ export default function HamburgerNavMenuButtons({title, onClick, icon, href}: {
   return (
     <LinkTo href={href || ""}>
       <AnimatedButton
-        className="flex items-center gap-2"
+        className="dark:text-text-primary-dark flex items-center gap-2"
         onClick={onClick}
       >
         {title}

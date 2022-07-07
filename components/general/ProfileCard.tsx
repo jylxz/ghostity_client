@@ -7,7 +7,7 @@ import numbro from "numbro";
 // Icons
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import TwitchIcon from "../../public/images/TwitchGlitchPurple.svg";
-import YoutubeIcon from "../../public/images/yt_icon_rgb.svg";
+import YoutubeIcon from "../../public/images/yt_icon_rgb.png";
 import TwitterIcon from "../../public/images/TwitterBlue.svg";
 import BilibiliIcon from "../../public/images/Bilibili_logo.svg";
 // Hooks
@@ -39,7 +39,7 @@ function ChannelIcon({ channel }: { channel: Channel }) {
       className="h-5 w-5"
     >
       <a href={channel.link} target="_blank" rel="noopener noreferrer">
-        {channel.platform === "youtube" ? <YoutubeIcon /> : null}
+        {channel.platform === "youtube" ? <Image src={YoutubeIcon} height={15} width={20}/> : null}
         {channel.platform === "twitch" ? <TwitchIcon /> : null}
         {channel.platform === "bilibili" ? <BilibiliIcon /> : null}
       </a>
@@ -80,7 +80,7 @@ function FollowIcon({
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       type="button"
-      className="rounded"
+      className="rounded dark:text-primary"
       onClick={() => follow()}
     >
       {followed ? (
@@ -94,7 +94,7 @@ function FollowIcon({
 
 function SubscriberCount({ subcount }: { subcount: number }) {
   return (
-    <span className="text-sm font-medium mt-2">
+    <span className="dark:text-primary text-sm font-medium mt-2">
       Subscribers:{" "}
       {numbro(subcount).format({
         thousandSeparated: true,
@@ -128,15 +128,15 @@ export default function ProfileCard({
   return (
     <motion.div
       layout
-      className={` relative w-80 sm:w-[19rem] ${cardSize.cardHeight} rounded-lg border`}
+      className={`relative w-80 sm:w-[19rem] ${cardSize.cardHeight} rounded-lg dark:border-0 border`}
     >
-      <div className={`absolute w-full ${cardSize.imageHeight} z-0 rounded-lg`}>
+      <div className={`absolute w-full ${cardSize.imageHeight} z-0 rounded-lg overflow-hidden`}>
         {profile.profile.img ? (
           <Image
             src={profile.profile?.img}
             layout="fill"
             draggable={false}
-            className="blur-sm opacity-40 w-full object-cover object-center h-full rounded-lg text-sm"
+            className="blur-sm scale-1.1 opacity-40 w-full object-cover object-center h-full rounded-t-lg text-sm"
             priority
           />
         ) : null}
@@ -168,20 +168,20 @@ export default function ProfileCard({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="line-clamp-1 px-2 text-center font-medium">
+            <span className="dark:text-primary line-clamp-1 px-2 text-center font-medium">
               {profile.name}
             </span>
           </a>
-          <span className="text-gray-600 text-xs">
+          <span className="dark:text-text-primary-dark text-gray-600 text-xs">
             {altName ? `(${altName})` : null}
           </span>
-          <span className="text-gray-600 text-xs font-medium">
+          <span className="dark:text-text-primary-dark text-gray-600 text-xs font-medium">
             {language || null}
           </span>
           {subCount && profile.channels[0].platform === "youtube" ? (
             <SubscriberCount subcount={profile.channels[0].sub_count} />
           ) : null}
-          <div className="text-xs text-gray-600 font-medium px-3 w-full mt-5 break-words whitespace-pre-line">
+          <div className="text-xs dark:text-text-primary-dark text-gray-600 font-medium px-3 w-full mt-5 break-words whitespace-pre-line">
             {profile.channels[0].description}
           </div>
         </div>
@@ -189,7 +189,7 @@ export default function ProfileCard({
           // initial="initial"
           // animate="animate"
           // transition={{ staggerChildren: 0.2, delayChildren: 0.4 }}
-          className="flex items-center gap-2 bg-white justify-center py-2 rounded-b-lg border-t"
+          className="flex items-center gap-2 dark:bg-secondary-dark dark:border-0 bg-white justify-center py-2 rounded-b-lg border-t"
         >
           {profile.channels.map((channel) => (
             <ChannelIcon key={channel.id} channel={channel} />

@@ -1,10 +1,10 @@
 import { Chart as ChartJS, ChartData, ChartOptions } from "chart.js";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Line } from "react-chartjs-2";
 import { format } from "date-fns";
 import useIsWindowSmall from "../../hooks/useIsWindowSmall";
-
-
+import ThemeContext from "../../context/ThemeContext";
+import defaultChartOptions from "./defaultChartOptions";
 
 const createGradient = (ctx: CanvasRenderingContext2D) => {
   const gradient = ctx.createLinearGradient(0, 25, 0, 600);
@@ -15,94 +15,43 @@ const createGradient = (ctx: CanvasRenderingContext2D) => {
   return gradient;
 };
 
-export default function StatsWatching({ stats, currentTab }: { stats?: WatchingStat[], currentTab: string }) {
+export default function StatsWatching({
+  stats,
+  currentTab,
+}: {
+  stats?: WatchingStat[];
+  currentTab: string;
+}) {
   const chartRef = useRef<ChartJS<"line">>(null);
   const [chartData, setChartData] = useState<ChartData<"line">>({
     datasets: [],
   });
-
-  const isWindowSmall = useIsWindowSmall()
-
-  const options: ChartOptions<"line"> = {
-    responsive: true,
-    scales: {
-      x: {
-        ticks: {
-          callback(val, index) {
-            // eslint-disable-next-line react/no-this-in-sfc
-            return index % 3 === 0 ? this.getLabelForValue(val as number) : "";
-          },
-          maxTicksLimit: isWindowSmall ? 8 : undefined,
-        },
-        grid: {
-          display: false,
-        },
-      },
-      y: {
-        grid: {
-          display: false,
-        },
-      },
-    },
-    layout: {
-      padding: 20,
-    },
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "top" as const,
-        labels: {
-          color: "black",
-          font: {
-            size: 13,
-          },
-        },
-      },
-      title: {
-        color: "black",
-        display: true,
-        text: "Watching",
-        font: {
-          size: 20,
-        },
-        padding: {
-          bottom: 0,
-        },
-      },
-      subtitle: {
-        display: true,
-        text: "Updates Every 10 Minutes",
-        padding: {
-          top: 2,
-          bottom: 10,
-        },
-        font: {
-          size: 14,
-        },
-      },
-      tooltip: {
-        mode: "index",
-        intersect: false,
-        position: "average",
-        callbacks: {
-          label(context) {
-            let label = context.dataset.label || "";
-
-            if (/\d/.test(label)) {
-              label = label.replace(/[0-9]/g, "").replace(/\(|\)/g, "");
-            }
-
-            return `${label}: ${context.parsed.y} Weebs`;
-          },
-        },
-      },
-    },
-  };
+  const theme = useContext(ThemeContext);
+  const isWindowSmall = useIsWindowSmall();
+  const [chartOptions, setChartOptions] = useState<ChartOptions<"line">>(
+    defaultChartOptions(
+      "Watching",
+      "Updates Every 10 Mins",
+      "Weebs",
+      isWindowSmall,
+      theme
+    )
+  );
 
   useEffect(() => {
     if (!stats) {
-      return
+      return;
     }
+
+    setChartOptions(
+      defaultChartOptions(
+        "Watching",
+        "Updates Every 10 Mins",
+        "Weebs",
+        isWindowSmall,
+        theme
+      )
+    );
 
     const watchingStats = stats.slice().reverse();
     const chart = chartRef.current;
@@ -131,7 +80,9 @@ export default function StatsWatching({ stats, currentTab }: { stats?: WatchingS
     };
 
     setChartData(data);
-  }, [stats]);
+  }, [stats, theme]);
 
-  return currentTab === "watching" ? <Line ref={chartRef} options={options} data={chartData} height={400} /> : null
+  return currentTab === "watching" ? (
+    <Line ref={chartRef} options={chartOptions} data={chartData} height={400} />
+  ) : null;
 }

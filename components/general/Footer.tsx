@@ -48,27 +48,32 @@ const animations = {
 };
 
 function FooterItem({ children }: { children: React.ReactNode }) {
-  return <motion.div variants={animations.textVariant2}>{children}</motion.div>;
+  return <motion.div variants={animations.textVariant2} className="dark:text-text-secondary-dark">{children}</motion.div>;
 }
 
 function Footer() {
   return (
-    <motion.footer layout className="pt-16 pb-28 bg-gradient-to-r from-primary via-secondary to-secondary2 flex justify-center items-center">
+    <motion.footer
+      layout
+      className="pt-16 pb-28 dark:bg-none dark:bg-primary-dark bg-gradient-to-r from-primary via-secondary to-secondary2 flex justify-center items-center"
+    >
       <div className="flex-1 lg:flex-none md:flex gap-10 sm:gap-20 px-6 justify-center sm:w-1/2">
         <div className="mb-10">
           <LinkTo href="/">
-            <div className="flex gap-2 items-center text-2xl border-b border-black pb-2 mb-2">
+            <div className=" flex gap-2 items-center text-2xl border-b dark:border-text-primary-dark border-black pb-2 mb-2">
               <div>
-                <VGhostityLogo className="h-12 w-12" />
+                <VGhostityLogo className="h-12 w-12 dark:fill-text-primary-dark" />
               </div>
-              <h1 className="text-3xl sm:text-4xl text-black">vGhostity</h1>
+              <h1 className="text-3xl sm:text-4xl text-black dark:text-text-primary-dark">
+                vGhostity
+              </h1>
             </div>
           </LinkTo>
           <motion.div
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="flex text-sm"
+            className="flex text-sm dark:text-primary"
           >
             <motion.div variants={animations.textVariant}>
               Made by
@@ -86,7 +91,7 @@ function Footer() {
               <FavoriteBorderIcon className="text-sm ml-2" />
             </motion.div>
             <motion.div variants={animations.ghostVariant}>
-              <VGhostityLogo className="h-5 w-5 -scale-x-100" />
+              <VGhostityLogo className="h-5 w-5 -scale-x-100 dark:fill-primary" />
             </motion.div>
           </motion.div>
         </div>
@@ -101,7 +106,7 @@ function Footer() {
             >
               <motion.h2
                 variants={animations.textVariant2}
-                className="text-lg mb-1 font-medium"
+                className="text-lg mb-1 font-medium dark:text-primary"
               >
                 Browse
               </motion.h2>
@@ -131,7 +136,7 @@ function Footer() {
             >
               <motion.h2
                 variants={animations.textVariant2}
-                className="text-lg mb-1 text-black font-medium"
+                className="text-lg mb-1 text-black dark:text-primary font-medium"
               >
                 Contacts
               </motion.h2>
@@ -170,7 +175,7 @@ function Footer() {
             >
               <motion.h2
                 variants={animations.textVariant2}
-                className="text-lg mb-1 text-black font-medium"
+                className="text-lg mb-1 text-black dark:text-primary font-medium"
               >
                 Legal
               </motion.h2>
@@ -196,7 +201,7 @@ function Footer() {
             >
               <motion.h2
                 variants={animations.textVariant2}
-                className="text-lg mb-1 text-black font-medium"
+                className="text-lg mb-1 text-black dark:text-primary font-medium"
               >
                 Help
               </motion.h2>
@@ -215,7 +220,7 @@ function Footer() {
             >
               <motion.h2
                 variants={animations.textVariant2}
-                className="text-lg mb-1 text-black font-medium"
+                className="text-lg mb-1 text-black dark:text-primary font-medium"
               >
                 Status
               </motion.h2>

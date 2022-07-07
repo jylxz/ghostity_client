@@ -2,7 +2,7 @@ import React from "react";
 
 import LinkTo from "./LinkTo";
 
-export default function InfoCard({
+export default function OrganizationCard({
   image,
   title,
   languages,
@@ -33,9 +33,9 @@ export default function InfoCard({
             title.toLowerCase()
           )}`}
         >
-          <div className="font-medium cursor-pointer">{title}</div>
+          <div className="dark:text-primary font-medium cursor-pointer">{title}</div>
         </LinkTo>
-        <div className="text-gray-500">
+        <div className="dark:text-text-secondary-dark text-gray-500">
           {languages?.map((language) => (
             <span key={language} className="mx-0.5 text-xs">
               {language}

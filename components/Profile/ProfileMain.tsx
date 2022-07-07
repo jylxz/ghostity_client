@@ -71,12 +71,12 @@ export default function ProfileMain() {
               </div>
               <div className="flex flex-col items-center gap-3">
                 <div className="flex flex-col items-center">
-                  <span className="text-2xl">{user?.displayName}</span>
-                  <span className="">{`Following: ${
+                  <span className="text-2xl dark:text-primary">{user?.displayName}</span>
+                  <span className="dark:text-text-primary-dark">{`Following: ${
                     follow?.channels?.length || 0
                   }`}</span>
                 </div>
-                <div className="flex flex-col items-center text-gray-600">
+                <div className="flex flex-col items-center dark:text-text-secondary-dark text-gray-600">
                   <span className="text-sm ">
                     Member Since:{" "}
                     {user?.metadata?.creationTime
@@ -115,14 +115,14 @@ export default function ProfileMain() {
               <ProfileResendVerification />
             ) : null}
             <div className="flex flex-col gap-4">
-              <h1 className="text-2xl">Profile</h1>
+              <h1 className="dark:text-text-primary-dark text-2xl">Profile</h1>
               <div className="px-8 flex items-center">
                 
                 <ProfileDisplayName />
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              <h1 className="text-2xl">Account Information</h1>
+              <h1 className="dark:text-text-primary-dark text-2xl">Account Information</h1>
               {user?.providerData[0].providerId === "google.com" ? (
                 <ProfileGoogleNotice />
               ) : null}
