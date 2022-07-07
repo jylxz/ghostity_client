@@ -6,7 +6,6 @@ import Image from "next/image";
 
 // Icons
 import { AiOutlineHeart, AiFillHeart, AiOutlineStop } from "react-icons/ai";
-import { ClassNames } from "@emotion/react";
 import YoutubeIcon from "../../public/images/yt_icon_rgb.png";
 import TwitchIcon from "../../public/images/TwitchGlitchPurple.svg";
 
@@ -239,18 +238,18 @@ function SimpleFollowButton({ channelId }: { channelId: string }) {
             if (followed)
               return hoverState ? (
                 <motion.div
-                  initial={{ scale: 0.5 }}
+                  initial={{ scale: 0.1 }}
                   animate={{ scale: 1 }}
-                  exit={{ scale: 0.5 }}
+                  exit={{ scale: 0.1 }}
                   key="initialState"
                 >
                   <AiOutlineHeart className="text-2xl h-6 min-w-[20px]" />
                 </motion.div>
               ) : (
                 <motion.div
-                  initial={{ scale: 0.5 }}
+                  initial={{ scale: 0.1 }}
                   animate={{ scale: 1 }}
-                  exit={{ scale: 0.5 }}
+                  exit={{ scale: 0.1 }}
                   key="unfollowbutton"
                 >
                   <AiFillHeart className="text-2xl h-6 min-w-[20px]" />
@@ -260,18 +259,18 @@ function SimpleFollowButton({ channelId }: { channelId: string }) {
             if (!followed)
               return hoverState ? (
                 <motion.div
-                  initial={{ scale: 0.5 }}
+                  initial={{ scale: 0.1 }}
                   animate={{ scale: 1 }}
-                  exit={{ scale: 0.5 }}
+                  exit={{ scale: 0.1 }}
                   key="initialState"
                 >
                   <AiFillHeart className="text-2xl h-6 min-w-[20px]" />
                 </motion.div>
               ) : (
                 <motion.div
-                  initial={{ scale: 0.5 }}
+                  initial={{ scale: 0.1 }}
                   animate={{ scale: 1 }}
-                  exit={{ scale: 0.5 }}
+                  exit={{ scale: 0.1 }}
                   key="unfollowbutton"
                 >
                   <AiOutlineHeart className="text-2xl h-6 min-w-[20px]" />

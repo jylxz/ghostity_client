@@ -52,6 +52,7 @@ import BlacklistContext from "../context/BlacklistContext";
 import LiveFollowingBar from "../components/Navbar/LiveFollowingBar";
 import Favicons from "../components/Head/Favicons";
 import ThemeContext from "../context/ThemeContext";
+import NoticeBar from "../components/general/NoticeBar";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   // MUI Theme
@@ -156,6 +157,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                       <AuthUpdateEmail />
                       <AuthPasswordResetMessage />
                       <div className="sticky sm:relative top-0 z-50 w-full">
+                        <NoticeBar />
                         <PageProgress />
                         <Navbar
                           showAuth={showAuth}

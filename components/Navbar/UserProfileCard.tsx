@@ -32,7 +32,7 @@ export default function UserProfileCard({
           {user?.displayName || "A Wandering Ghost"}
         </span>
         {user ? (
-          <div className="text-sm dark:text-text-secondary-dark text-gray-500 text-center">{`Following: ${follows?.channels?.length || 0}`}</div>
+          <div className="text-sm dark:text-text-primary-dark text-gray-500 text-center">{`Following: ${follows?.channels?.length || 0}`}</div>
         ) : null}
       </div>
         <LinkTo href="/profile" className="w-full">
