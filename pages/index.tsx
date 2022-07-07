@@ -2,7 +2,6 @@
 import Head from "next/head";
 import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
-import axios from "axios";
 
 // Components
 import HomeWelcome from "../components/Home/HomeWelcome";
@@ -11,7 +10,7 @@ import HomeLive from "../components/Home/HomeLive";
 import HomeOrganizations from "../components/Home/HomeOrganizations";
 import HomeBrowse from "../components/Home/HomeBrowse";
 import HomeHelp from "../components/Home/HomeHelp";
-import HomeStats2 from "../components/Home/HomeStats2";
+import HomeStats from "../components/Home/HomeStats";
 import API from "../API";
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -61,7 +60,7 @@ export default function Home({ logos }: OrganizationLogos) {
       <HomeOrganizations logos={logos} />
       <HomeLive />
       <HomeBrowse />
-      <HomeStats2 />
+      <HomeStats />
       <HomeHelp />
       <Footer />
     </motion.div>
