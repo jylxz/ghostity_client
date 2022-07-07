@@ -19,7 +19,7 @@ export default function LiveFollowingBarItem({ stream }: { stream: Stream }) {
           <span className="absolute top-8 right-0 animate-ping h-3 w-3 rounded-full bg-primary border border-white opacity-60" />
           <span className="absolute top-8 right-0 rounded-full h-3 w-3 bg-primary border border-white" />
         </div>
-        <span className="max-w-[4.2rem] truncate text-xs text-gray-500">
+        <span className="max-w-[4.2rem] truncate text-xs dark:text-primary text-gray-500">
           {stream.channel_name}
         </span>
       </button>

@@ -73,7 +73,7 @@ export default function OrganizationMain({ org }: { org: Organization }) {
   );
 
   return (
-    <BrowseWrapper>
+    <BrowseWrapper className="overflow-y-scroll">
       <BackgroundWrapper nextImage={false} image={org.logo}>
         <div className="flex flex-col md:flex-row flex-wrap items-center gap-5 py-8">
           <div className="bg-white flex justify-center h-48 min-w-[12rem] w-48 items-center p-8 rounded-full shadow-md border-2">

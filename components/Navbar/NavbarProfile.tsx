@@ -44,13 +44,15 @@ function NavbarProfileMenu({
   );
 }
 
-export default function NavbarProfileButton({ user }: { user: User | null }) {
+export default function NavbarProfileButton({ user, isWindowSmall }: { user: User | null, isWindowSmall: boolean }) {
   const router = useRouter();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     setShow(false);
   }, [router.route]);
+
+  if (isWindowSmall) return null
 
   return (
     <div className="relative">

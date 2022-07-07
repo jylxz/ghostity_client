@@ -99,7 +99,7 @@ export default function LiveFollowingBar() {
           // exit={{  translateY: -100, opacity: 0 }}
           className={`${
             !showLiveFollowingBar ? "hidden" : "block"
-          } px-3 h-20 w-full bg-slate-100 flex items-center`}
+          } px-3 h-20 w-full dark:bg-secondary-dark bg-slate-100 flex items-center`}
         >
           <Swiper
             modules={[Navigation, Mousewheel, FreeMode]}

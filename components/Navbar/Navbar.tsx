@@ -88,7 +88,7 @@ function LoginButton({
 }) {
   const user = useContext(UserContext);
 
-  return !isWindowSmall && !user ? (
+  return !user ? (
     <button
       type="button"
       className="hidden sm:block text-md dark:text-text-primary-dark border dark:border-text-primary-dark border-gray-500 rounded py-1 px-3 hover:bg-blurGray"
@@ -97,7 +97,7 @@ function LoginButton({
       Login
     </button>
   ) : (
-    <NavbarProfileButton user={user} />
+    <NavbarProfileButton user={user} isWindowSmall={isWindowSmall}/>
   );
 }
 

@@ -57,12 +57,12 @@ export default function AuthModalMain({
           animate={{ translateY: 0 }}
           exit={{ translateY: "-200%" }}
           transition={{ duration: 0.5 }}
-          className="min-w-[20rem] w-1/5 max-w-[26rem] h-[38rem] bg-slate-50 rounded flex flex-col items-center gap-4 py-8 px-6 overflow-x-hidden overflow-y-auto z-50 font-medium"
+          className="min-w-[20rem] w-1/5 max-w-[26rem] h-[38rem] dark:bg-secondary-dark bg-slate-50 rounded flex flex-col items-center gap-4 py-8 px-6 overflow-x-hidden overflow-y-auto z-50 font-medium"
           onClick={() => setShowAuth(false)}
         >
           <button
             type="button"
-            className="self-end px-1.5"
+            className="self-end px-1.5 dark:text-text-primary-dark"
             onClick={() => setShowAuth(false)}
           >
             X
@@ -89,13 +89,13 @@ export default function AuthModalMain({
                   <div className="w-16 h-16 bg-primary rounded-full p-4">
                     <VGhostityIcon />
                   </div>
-                  <h1 className="text-xl">Sign in to vGhostity</h1>
+                  <h1 className="text-xl dark:text-text-primary-dark">Sign in to vGhostity</h1>
                   <form
                     onSubmit={(e) => handleSignIn(e)}
                     className="flex flex-col gap-2 items-center"
                   >
                     <div className="flex items-center">
-                      <AiOutlineMail className="w-4 h-4 mr-3 mt-3" />
+                      <AiOutlineMail className="w-4 h-4 mr-3 mt-3 dark:text-primary" />
                       <TextField
                         type="email"
                         label="Email"
@@ -108,7 +108,7 @@ export default function AuthModalMain({
                       />
                     </div>
                     <div className="flex items-center">
-                      <RiLockPasswordLine className="w-4 h-4 mr-3 mt-3" />
+                      <RiLockPasswordLine className="w-4 h-4 mr-3 mt-3 dark:text-primary" />
                       <TextField
                         type="password"
                         label="Password"
@@ -148,7 +148,7 @@ export default function AuthModalMain({
                       ) : (
                         <button
                           type="submit"
-                          className="bg-primary w-20 py-1 rounded"
+                          className="dark:bg-secondary-dark-2 dark:text-primary bg-primary w-20 py-1 rounded"
                         >
                           Login
                         </button>
@@ -158,14 +158,14 @@ export default function AuthModalMain({
                   <button
                     type="button"
                     onClick={() => setCurrentTab("forgot")}
-                    className="text-sm text-gray-600"
+                    className="text-sm text-gray-600 dark:text-text-secondary-dark"
                   >
                     Forgot your password?
                   </button>
                 </div>
                 <div className="relative w-full border mt-5 mb-4">
                   <div className="absolute -top-2.5 w-full px-2 text-sm mx-auto text-center">
-                    <span className="bg-slate-50 px-2">or</span>
+                    <span className="bg-slate-50 dark:bg-secondary-dark dark:text-text-primary-dark px-2">or</span>
                   </div>
                 </div>
                 <div className="h-24 flex flex-col justify-center items-center gap-5">
@@ -177,13 +177,13 @@ export default function AuthModalMain({
                     <div className="max-w-[1.5rem] flex items-center justify-center">
                       <Image src={googleG} alt="Google G icon" />
                     </div>
-                    <span className="text-gray-600">Sign in with Google</span>
+                    <span className="text-gray-600 dark:text-text-primary-dark">Sign in with Google</span>
                   </button>
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm dark:text-text-secondary-dark text-gray-600">
                     New user?{" "}
                     <button
                       type="button"
-                      className="font-semibold text-black"
+                      className="font-semibold dark:text-text-primary-dark text-black"
                       onClick={() => setCurrentTab("signup")}
                     >
                       Create an account

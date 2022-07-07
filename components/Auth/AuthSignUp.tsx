@@ -104,7 +104,7 @@ export default function AuthSignUp({
       <button
         type="button"
         onClick={() => setCurrentTab("login")}
-        className="self-start text-sm flex items-center underline decoration-1 underline-offset-2"
+        className="dark:text-text-primary-dark self-start text-sm flex items-center underline decoration-1 underline-offset-2"
       >
         <BsArrowLeftShort className="text-lg" />
         Go Back
@@ -112,11 +112,11 @@ export default function AuthSignUp({
       <div className="w-16 h-16 bg-primary rounded-full p-4">
         <VGhostityIcon />
       </div>
-      <h1 className="text-xl">Create an account</h1>
+      <h1 className="text-xl dark:text-text-primary-dark">Create an account</h1>
       <div className="flex flex-col gap-2 mx-8">
         <div className="flex items-center">
           <div className="mr-3 mt-2">
-            <CgProfile className="w-4 h-4 " />
+            <CgProfile className="w-4 h-4 dark:text-primary" />
           </div>
           <TextField
             type="text"
@@ -130,7 +130,7 @@ export default function AuthSignUp({
         </div>
         <div className="flex items-center">
           <div className="mr-3 mt-3">
-            <AiOutlineMail className="w-4 h-4" />
+            <AiOutlineMail className="w-4 h-4 dark:text-primary" />
           </div>
           <TextField
             required
@@ -148,7 +148,7 @@ export default function AuthSignUp({
         </div>
         <div className="flex">
           <div className="mt-5 mr-3">
-            <RiLockPasswordLine className="w-4 h-4" />
+            <RiLockPasswordLine className="w-4 h-4 dark:text-primary" />
           </div>
           <TextField
             required
@@ -166,7 +166,7 @@ export default function AuthSignUp({
         </div>
         <div className="flex items-center">
           <div className="mr-3 mt-2">
-            <RiLockPasswordFill className="w-4 h-4" />
+            <RiLockPasswordFill className="w-4 h-4 dark:text-primary" />
           </div>
           <TextField
             required
@@ -185,10 +185,7 @@ export default function AuthSignUp({
       {loading ? (
         <LoadingButton />
       ) : (
-        <button
-          type="submit"
-          className="bg-primary w-20 py-1 rounded"
-        >
+        <button type="submit" className="dark:bg-secondary-dark-2 dark:text-primary bg-primary w-20 py-1 rounded">
           Register
         </button>
       )}

@@ -63,20 +63,22 @@ export default function AuthForgotPassword({
       <button
         type="button"
         onClick={() => setCurrentTab("login")}
-        className="self-start text-sm flex items-center underline decoration-1 underline-offset-2"
+        className="dark:text-text-primary-dark self-start text-sm flex items-center underline decoration-1 underline-offset-2"
       >
         <BsArrowLeftShort className="text-lg" /> Go back
       </button>
       <div className="w-16 h-16 bg-primary rounded-full p-4">
         <VGhostityIcon />
       </div>
-      <h1 className="text-xl">Forgot your password?</h1>
-      <p className="text-sm text-center text-gray-600">
+      <h1 className="text-xl dark:text-text-primary-dark">
+        Forgot your password?
+      </h1>
+      <p className="text-sm text-center dark:text-text-secondary-dark text-gray-600">
         No biggie! Just enter your email associated with vGhostity!
       </p>
       <div className="flex items-center">
         <div className="mr-3 mt-2">
-          <AiOutlineMail className="w-4 h-4" />
+          <AiOutlineMail className="w-4 h-4 dark:text-primary" />
         </div>
         <TextField
           required
@@ -93,7 +95,7 @@ export default function AuthForgotPassword({
       {loading ? (
         <LoadingButton />
       ) : (
-        <button type="submit" className="bg-primary px-4 py-1 rounded">
+        <button type="submit" className="dark:bg-secondary-dark-2 dark:text-primary bg-primary px-4 py-1 rounded">
           Reset password
         </button>
       )}

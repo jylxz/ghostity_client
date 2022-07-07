@@ -43,14 +43,14 @@ export default function HamburgerNavMenu({
           onClick={() => setShowHamburgerMenu(false)}
         >
           <motion.div
-            className="fixed top-0 right-0 text-black bg-slate-100 z-50 h-full w-64 border-l-4 border-white flex flex-col px-2 py-8"
+            className="fixed top-0 right-0 dark:bg-secondary-dark dark:border-primary-dark text-black bg-slate-100 z-50 h-full w-64 border-l-4 border-white flex flex-col px-2 py-8"
             initial={{ translateX: 300 }}
             animate={{ translateX: 0 }}
             exit={{ translateX: 300 }}
             onClick={(e) => e.stopPropagation()}
           >
             <UserProfileCard closeParent={setShowHamburgerMenu} />
-            <div className="flex flex-col items-end grid-rows-3 p-4 text-lg gap-4 justify-items-end">
+            <div className="dark:text-text-primary-dark  flex flex-col items-end grid-rows-3 p-4 text-lg gap-4 justify-items-end">
               <div className="">
                 <LinkTo href="/">
                   <AnimatedButton
@@ -73,12 +73,12 @@ export default function HamburgerNavMenu({
                     Browse
                     <div className="border-l-2 border-gray-300 pl-3">
                       <div className="w-5 h-5 -scale-x-100">
-                        <VGhostityLogo />
+                        <VGhostityLogo className="dark:fill-text-primary-dark"/>
                       </div>
                     </div>
                   </AnimatedButton>
                 </LinkTo>
-                <div className="mt-2 text-base text-gray-600 flex flex-col items-end gap-1.5">
+                <div className="mt-2 text-base dark:text-text-secondary-dark text-gray-600 flex flex-col items-end gap-1.5">
                   <AnimatedButton onClick={() => setShowHamburgerMenu(false)}>
                     <LinkTo href="/browse/following">Following</LinkTo>
                   </AnimatedButton>
