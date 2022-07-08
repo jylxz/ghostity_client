@@ -58,7 +58,6 @@ export default function BrowseStreams() {
         />
         {data && !loading ? (
           <>
-            {/* <AnimatePresence exitBeforeEnter> */}
             <GridWrapper
               colSize="normal"
               key="streams-wrapper"
@@ -71,39 +70,26 @@ export default function BrowseStreams() {
               {data.pages.map((group, i) => (
                 <Fragment key={i}>
                   {group.results.map((stream: Stream) => (
-                    <motion.div
-                      key={stream.channel_id}
-                      layout="position"
-                      // transition={{
-                      //   layout: {
-                      //     duration: 0.3,
-                      //   },
-                      // }}
-                    >
+                    <motion.div key={stream.channel_id} layout="position">
                       <LivestreamCard stream={stream} />
                     </motion.div>
                   ))}
                 </Fragment>
               ))}
             </GridWrapper>
-            {/* </AnimatePresence> */}
             {hasNextPage ? (
-              <motion.div
-                layout="position"
+              <div
                 ref={ref}
                 className="flex justify-center items-center pt-10 pb-3 h-24"
               >
                 <GradientCircularProgress />
-              </motion.div>
+              </div>
             ) : null}
           </>
         ) : (
-          <motion.div
-            layout
-            className="flex-1 flex justify-center items-center"
-          >
+          <div className="flex-1 flex justify-center items-center">
             <GradientCircularProgress />
-          </motion.div>
+          </div>
         )}
         {error ? <ProblemLoading /> : null}
       </LayoutGroup>

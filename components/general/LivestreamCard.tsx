@@ -238,18 +238,18 @@ function SimpleFollowButton({ channelId }: { channelId: string }) {
             if (followed)
               return hoverState ? (
                 <motion.div
-                  initial={{ scale: 0.1 }}
+                  initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  exit={{ scale: 0.1 }}
+                  exit={{ scale: 0 }}
                   key="initialState"
                 >
                   <AiOutlineHeart className="text-2xl h-6 min-w-[20px]" />
                 </motion.div>
               ) : (
                 <motion.div
-                  initial={{ scale: 0.1 }}
+                  initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  exit={{ scale: 0.1 }}
+                  exit={{ scale: 0 }}
                   key="unfollowbutton"
                 >
                   <AiFillHeart className="text-2xl h-6 min-w-[20px]" />
