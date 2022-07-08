@@ -2,6 +2,8 @@ import Head from "next/head";
 import React from "react";
 import axios from "axios";
 import GameMain from "../../../components/Game/GameMain";
+import DefaultKeywords from "../../../components/Head/Keywords";
+import DefaultOpenGraph from "../../../components/Head/OpenGraph";
 
 export async function getServerSideProps(context: { query: { game: string } }) {
   const { game } = context.query;
@@ -21,11 +23,15 @@ export default function BrowseGameStreams({ gameData }: { gameData: Game }) {
     <>
       <Head>
         <title>vGhostity | {gameData.name}</title>
-        <meta
-          name="keywords"
-          content={`V-Tubers, VTubers, virtual youtubers, Hololive, Nijisanji, VShojo, VSPO, Twitch, Youtube, V-Tuber directory, livestreams, games, ${gameData.name}`}
-        />
+        <meta name="description" content={gameData.summary} />
       </Head>
+      <>
+        <DefaultOpenGraph
+          title={`vGhostity | ${gameData.name}`}
+          description={gameData.summary}
+        />
+        <DefaultKeywords keywords={gameData.name} />
+      </>
       <GameMain gameData={gameData} />
     </>
   );

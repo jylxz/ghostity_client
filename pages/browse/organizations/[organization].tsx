@@ -2,6 +2,8 @@ import Head from "next/head";
 import axios from "axios";
 
 import OrganizationMain from "../../../components/Organization/OrganizationMain";
+import DefaultKeywords from "../../../components/Head/Keywords";
+import DefaultOpenGraph from "../../../components/Head/OpenGraph";
 
 const getAllOrganizationNames = async () => {
   const API = process.env.NEXT_PUBLIC_API as string;
@@ -50,23 +52,19 @@ function OrganizationPage({ organization }: { organization: Organization[] }) {
       <Head>
         <title>vGhostity | {organization[0].name}</title>
         <meta
-          name="keywords"
-          content={`V-Tubers, VTubers, virtual youtubers, Vtuber agency, Vtuber organization, ${organization[0].name}, ${organization[0].name} members`}
-        />
-        <meta name="twitter:card" content="summary" />
-        <meta
-          name="twitter:title"
-          content={`vGhostity | ${organization[0].name}`}
-        />
-        <meta
-          name="twitter:description"
-          content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
-        />
-        <meta
-          name="twitter:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1656660902/Logos/ghostity-full-1280x720_unhfvu.png"
+          name="description"
+          content={`Discover and follow ${organization[0].name} and their VTubers on vGhostity! See who is live and start watching them instantly!`}
         />
       </Head>
+      <>
+        <DefaultOpenGraph
+          title={`vGhostity | ${organization[0].name}`}
+          description={`Discover and follow ${organization[0].name} and their VTubers on vGhostity! See who is live and start watching them instantly!`}
+        />
+        <DefaultKeywords
+          keywords={`Vtuber agency, Vtuber organization, ${organization[0].name}, ${organization[0].name} members`}
+        />
+      </>
       <OrganizationMain org={organization[0]} />
     </>
   );

@@ -137,7 +137,6 @@ export default function ProfileCard({
             layout="fill"
             draggable={false}
             className="blur-sm scale-1.1 opacity-40 w-full object-cover object-center h-full rounded-t-lg text-sm"
-            priority
           />
         ) : null}
       </div>
@@ -159,7 +158,6 @@ export default function ProfileCard({
                 height={48}
                 alt="profileImage"
                 className="rounded-full text-xs"
-                priority
               />
             ) : null}
           </a>

@@ -1,14 +1,20 @@
-import Head from 'next/head'
-import React from 'react'
-import WIP from '../components/general/WIP'
+import Head from "next/head";
+import React from "react";
+import WIP from "../components/general/WIP";
+import DefaultDescription from "../components/Head/Description";
+import DefaultKeywords from "../components/Head/Keywords";
 
 export default function search() {
   return (
     <>
-    <Head>
-      <title>vGhostity | Search</title>
-    </Head>
-    <div className='text-xl h-full'><WIP/></div>
+      <Head>
+        <title>vGhostity | Search</title>
+      </Head>
+      <DefaultKeywords />
+      <DefaultDescription />
+      <div className="text-xl h-full">
+        <WIP />
+      </div>
     </>
-  )
+  );
 }

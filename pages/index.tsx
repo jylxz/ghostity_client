@@ -12,6 +12,11 @@ import HomeBrowse from "../components/Home/HomeBrowse";
 import HomeHelp from "../components/Home/HomeHelp";
 import HomeStats from "../components/Home/HomeStats";
 import API from "../API";
+import DefaultDescription, {
+  description,
+} from "../components/Head/Description";
+import DefaultKeywords from "../components/Head/Keywords";
+import DefaultOpenGraph from "../components/Head/OpenGraph";
 
 export const getStaticProps: GetStaticProps = async () => {
   const logos = await API.get<OrganizationLogos>("/organizations/logos").then(
@@ -26,36 +31,12 @@ export default function Home({ logos }: OrganizationLogos) {
     <motion.div className="overflow-hidden">
       <Head>
         <title>vGhostity | Home</title>
-        <meta
-          name="description"
-          content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
-        />
-        <meta
-          name="keywords"
-          content="V-Tubers, VTubers, virtual youtubers, Hololive, Nijisanji, VShojo, VSPO, Twitch, Youtube, V-Tuber directory, VTuber app, livestreams, games"
-        />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="vGhostity | Home" />
-        <meta
-          name="twitter:description"
-          content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
-        />
-        <meta
-          name="twitter:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1656660902/Logos/ghostity-full-1280x720_unhfvu.png"
-        />
-        <meta property="og:title" content="vGhostity | Home" />
-        <meta
-          property="og:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1656660902/Logos/ghostity-full-1280x720_unhfvu.png"
-        />
-        <meta
-          property="og:description"
-          content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
-        />
-        <meta property="og:image:width" content="1280" />
-        <meta property="og:image:height" content="720" />
       </Head>
+      <>
+        <DefaultOpenGraph title="vGhostity | Home" description={description} />
+        <DefaultKeywords />
+        <DefaultDescription />
+      </>
       <HomeWelcome />
       <HomeOrganizations logos={logos} />
       <HomeLive />

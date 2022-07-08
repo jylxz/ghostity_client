@@ -2,6 +2,11 @@ import React from "react";
 import Head from "next/head";
 import axios from "axios";
 import BrowseOrganizations from "../../../components/Browse/BrowseOrganizations";
+import DefaultKeywords from "../../../components/Head/Keywords";
+import DefaultDescription, {
+  description,
+} from "../../../components/Head/Description";
+import DefaultOpenGraph from "../../../components/Head/OpenGraph";
 
 export async function getStaticProps() {
   const API = process.env.NEXT_PUBLIC_API as string;
@@ -18,21 +23,15 @@ function organizations({ orgs }: { orgs: Organization[] }) {
     <>
       <Head>
         <title>vGhostity | Organizations</title>
-        <meta
-          name="keywords"
-          content="V-Tubers, VTubers, virtual youtubers, Vtuber agency, Vtuber organization, Hololive, Nijisanji, VShojo, VSPO, 774inc., NoriPro,"
-        />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="vGhostity | Organizations" />
-        <meta
-          name="twitter:description"
-          content="A comprehensive (not exhaustive!) app for V-Tubers! Keep up with your favorite V-Tubers from Hololive or Nijisanji, or even explore and discover a new V-Tuber that you haven't even heard about!"
-        />
-        <meta
-          name="twitter:image"
-          content="https://res.cloudinary.com/ghostity/image/upload/v1656660902/Logos/ghostity-full-1280x720_unhfvu.png"
-        />
       </Head>
+      <>
+        <DefaultOpenGraph
+          title="vGhostity | Organization"
+          description={description}
+        />
+        <DefaultDescription />
+        <DefaultKeywords keywords={orgs.map((org) => org.name)} />
+      </>
       <BrowseOrganizations organizations={orgs} />
     </>
   );

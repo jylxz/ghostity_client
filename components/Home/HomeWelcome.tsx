@@ -15,7 +15,7 @@ import ThemeContext from "../../context/ThemeContext";
 
 export default function HomeWelcome() {
   const animations = homeAnimations.welcome;
-  const theme = useContext(ThemeContext)
+  const theme = useContext(ThemeContext);
 
   return (
     <section className="px-4 sm:px-36 h-[30rem] flex items-center justify-center dark:bg-none dark:bg-primary-dark bg-gradient-to-r from-primary via-secondary to-secondary2">
@@ -46,9 +46,10 @@ export default function HomeWelcome() {
             variants={animations.textVariant}
             className="text-sm lg:text-base 2xl:text-lg mb-6 dark:text-text-secondary-dark text-gray-700"
           >
-            A comprehensive (not exhaustive!) app for V-Tubers! Keep up with
-            your favorite V-Tubers from Hololive or Nijisanji, or even explore
-            and discover a new V-Tuber that you haven&apos;t even heard about!
+            A comprehensive (not exhaustive!) app for VTubers! Keep up with your
+            favorite VTubers from Hololive or Nijisanji, or even explore and
+            discover a new VTuber that you haven&apos;t even heard about,
+            regardless if they stream on Twitch or Youtube!
           </motion.p>
           <motion.div variants={animations.textVariant}>
             <LinkTo href="/browse">
