@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import "@fontsource/quicksand/300.css"
+import "@fontsource/quicksand/300.css";
 import "@fontsource/quicksand/400.css";
 import "@fontsource/quicksand/500.css";
 import "@fontsource/quicksand/600.css";
-import "@fontsource/quicksand/700.css"
+import "@fontsource/quicksand/700.css";
 
 // Libraries
 import { AppProps } from "next/app";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, ReactElement, ReactNode } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { useRouter } from "next/router";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -17,6 +17,7 @@ import {
   StyledEngineProvider,
   ThemeProvider,
 } from "@mui/material";
+import type { NextPage } from "next";
 
 // Tailwind & CSS
 import "../styles/globals.css";
@@ -35,7 +36,6 @@ import useThemeColor from "../hooks/useThemeColor";
 
 // Components
 import Navbar from "../components/Navbar/Navbar";
-import SideBarMain from "../components/SideBar/SideBarMain";
 import PageProgress from "../components/general/PageProgress";
 import BlacklistModal from "../components/general/BlacklistModal";
 import HamburgerNavMenu from "../components/Navbar/HamburgerNavMenu";
@@ -53,36 +53,51 @@ import LiveFollowingBar from "../components/Navbar/LiveFollowingBar";
 import Favicons from "../components/Head/Favicons";
 import ThemeContext from "../context/ThemeContext";
 import NoticeBar from "../components/general/NoticeBar";
+import SidebarContext from "../context/SidebarContext";
+import useResponsiveBrowseBar from "../hooks/useResponsiveBrowseBar";
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  // Layout
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   // MUI Theme
   const [theme, overrideSystem] = useThemeColor();
 
-  const MUITheme = useMemo(() =>
-    createTheme({
-      typography: {
-        fontFamily: [
-          '"Quicksand"',
-          "-apple-system",
-          "BlinkMacSystemFont",
-          '"Segoe UI"',
-          "Roboto",
-          '"Helvetica Neue"',
-          "Arial",
-          "sans-serif",
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-        ].join(","),
-        fontWeightRegular: 500,
-      },
-      palette: {
-        mode: theme === "dark" ? "dark" : "light",
-        primary: {
-          main: "#c3d1e0",
-        }
-      }
-    }), [theme]
+  const MUITheme = useMemo(
+    () =>
+      createTheme({
+        typography: {
+          fontFamily: [
+            '"Quicksand"',
+            "-apple-system",
+            "BlinkMacSystemFont",
+            '"Segoe UI"',
+            "Roboto",
+            '"Helvetica Neue"',
+            "Arial",
+            "sans-serif",
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"',
+          ].join(","),
+          fontWeightRegular: 500,
+        },
+        palette: {
+          mode: theme === "dark" ? "dark" : "light",
+          primary: {
+            main: "#c3d1e0",
+          },
+        },
+      }),
+    [theme]
   );
 
   // React-Query
@@ -125,6 +140,32 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   useScrollRestoration(router, ["#browse-games-wrapper", "window"]);
 
+  // For Sidebar
+  const [
+    showBrowseBar,
+    setShowBrowseBar,
+    userPreference,
+    browseBarOverride,
+    minimized,
+  ] = useResponsiveBrowseBar();
+
+  const sideBarContextValue = useMemo(
+    () => ({
+      showBrowseBar,
+      setShowBrowseBar,
+      userPreference,
+      browseBarOverride,
+      minimized,
+    }),
+    [
+      browseBarOverride,
+      minimized,
+      setShowBrowseBar,
+      showBrowseBar,
+      userPreference,
+    ]
+  );
+
   // For Navbar and Login
   const [showAuth, setShowAuth] = useState(false);
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
@@ -144,7 +185,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Favicons />
-
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <StyledEngineProvider injectFirst>
@@ -157,7 +197,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                       <AuthUpdateEmail />
                       <AuthPasswordResetMessage />
                       <div className="sticky sm:relative top-0 z-50 w-full">
-                        <NoticeBar />
+                        <NoticeBar/>
                         <PageProgress />
                         <Navbar
                           showAuth={showAuth}
@@ -184,19 +224,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                         setShowBlacklistModal={setShowBlacklistModal}
                       />
                       <BlacklistContext.Provider value={blacklistContextValue}>
-                        <main className={showAuth ? "overflow-hidden" : ""}>
-                          {router.route.includes("browse") ||
-                          router.route.includes("search") ? (
-                            <div className="flex">
-                              <SideBarMain />
-                              <div className="flex-1">
-                                <Component {...pageProps} />
-                              </div>
-                            </div>
-                          ) : (
-                            <Component {...pageProps} />
-                          )}
-                        </main>
+                        <SidebarContext.Provider value={sideBarContextValue}>
+                          <main className={showAuth ? "overflow-hidden" : ""}>
+                            {getLayout(<Component {...pageProps} />)}
+                          </main>
+                        </SidebarContext.Provider>
                       </BlacklistContext.Provider>
                     </AdminContext.Provider>
                   </UserFollowContext.Provider>

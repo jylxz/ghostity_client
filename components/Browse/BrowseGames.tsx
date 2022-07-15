@@ -1,6 +1,5 @@
 // Libraries
-import axios from "axios";
-import React, { Fragment, useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
@@ -12,17 +11,14 @@ import GradientCircularProgress from "../general/GradientCircularProgress";
 import BrowseWrapper from "../general/BrowseWrapper";
 import GridWrapper from "../general/GridWrapper";
 import useIsWindowSmall from "../../hooks/useIsWindowSmall";
+import API from "../../API";
 
 export default function BrowseGames() {
   const { ref, inView } = useInView();
   const isWindowSmall = useIsWindowSmall();
 
-  const API = process.env.NEXT_PUBLIC_API as string
-
   const fetchGames = async ({ pageParam = 1 }) =>
-    axios
-      .get<Games>(`${API}/games?page=${pageParam}`)
-      .then((res) => res.data);
+    API.get<Games>(`/games?page=${pageParam}`).then((res) => res.data);
 
   const { data, error, fetchNextPage, hasNextPage, isLoading } =
     useInfiniteQuery<Games, Error>("games", fetchGames, {

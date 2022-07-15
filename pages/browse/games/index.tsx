@@ -1,10 +1,11 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Head from "next/head";
 import BrowseGames from "../../../components/Browse/BrowseGames";
 import DefaultKeywords from "../../../components/Head/Keywords";
 import DefaultOpenGraph from "../../../components/Head/OpenGraph";
+import BrowseLayout from "../../../layouts/BrowseLayout";
 
-export default function games() {
+export default function Games() {
   return (
     <>
       <Head>
@@ -25,3 +26,7 @@ export default function games() {
     </>
   );
 }
+
+Games.getLayout = function getLayout(page: ReactElement) {
+  return <BrowseLayout>{page}</BrowseLayout>;
+};

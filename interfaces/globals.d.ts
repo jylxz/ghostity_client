@@ -1,31 +1,7 @@
 export {};
 
 declare global {
-  interface Stream {
-    stream: {
-      title: string;
-      thumbnail: string;
-      url: string;
-      game: string;
-      viewers: number;
-      time_started: string;
-    };
-    _id: string;
-    channel_id: string;
-    channel_img: string;
-    channel_name: string;
-    channel_info: {
-      main_affiliation?: {
-        full_name: string,
-        organization_name: string
-        organization_logo: string,
-      }
-    }
-    platform: string;
-    language: string;
-  }
-
-  interface Streams {
+  interface APINextPrev {
     next?: {
       total: number;
       page: number;
@@ -36,6 +12,33 @@ declare global {
       page: number;
       limit: number;
     };
+  }
+
+  interface Stream {
+    stream: {
+      title: string;
+      thumbnail: string;
+      url: string;
+      game: string;
+      viewers: number;
+      time_started: string;
+      language: string;
+    };
+    _id: string;
+    channel_id: string;
+    channel_img: string;
+    channel_name: string;
+    channel_info: {
+      main_affiliation?: {
+        full_name: string;
+        organization_name: string;
+        organization_logo: string;
+      };
+    };
+    platform: string;
+  }
+
+  interface Streams extends APINextPrev {
     results: Stream[];
   }
 
@@ -67,7 +70,7 @@ declare global {
     profile_img: string;
     branch_id: number;
     branch_name: string;
-    language: string;
+    primary_language: string;
   }
 
   interface Organization {
@@ -90,35 +93,33 @@ declare global {
     members: Member[];
   }
 
+  interface Organizations extends APINextPrev {
+    results: Organization[]
+  }
+
   interface Profile {
     _id: string;
     name: string;
     profile: {
       img: string;
-      social_media: {
-        platform: string;
-        url: string;
-      }[];
       country: string;
-      affiliations: {
-        organization_name: string;
-        organization_id: string;
-      }[];
+      affiliations: [
+        {
+          organization_name: string;
+          organization_id: string;
+        }
+      ];
+      social_media: [
+        {
+          platform: string;
+          url: string;
+        }
+      ];
     };
     channels: Channel[];
   }
 
-  interface Profiles {
-    next?: {
-      total: number;
-      page: number;
-      limit: number;
-    };
-    prev?: {
-      total: number;
-      page: number;
-      limit: number;
-    };
+  interface Profiles extends APINextPrev{
     results: Profile[];
   }
 
@@ -131,16 +132,7 @@ declare global {
     view_count: number;
     sub_count: number;
   }
-
-  interface Games {
-    next?: {
-      page: number;
-      limit: number;
-    };
-    prev?: {
-      page: number;
-      limit: number;
-    };
+  interface Games extends APINextPrev {
     results: Game[];
   }
 
@@ -189,5 +181,21 @@ declare global {
     difference_youtube: number;
     updatedAt: Date;
     createdAt: Date;
+  }
+
+  interface Search {
+    query: string,
+    results: {
+      streams: SearchItem<Stream>;
+      organizations: SearchItem<Organization>;
+      games: SearchItem<Game>;
+      profiles: SearchItem<Profile>;
+    };
+  }
+
+  interface SearchItem<T> {
+    more: boolean;
+    total: number;
+    results: T[];
   }
 }

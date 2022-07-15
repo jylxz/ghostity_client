@@ -7,14 +7,16 @@ export default function BrowseWrapper({
   id,
 }: {
   children: React.ReactNode;
-  className?: string,
+  className?: string;
   id?: HTMLAttributes<HTMLDivElement>["id"];
 }) {
   return (
     <motion.div
       id={id}
       layoutScroll
-      className={`${className || ""} overflow-x-hidden sm:h-[calc(100vh_-_3.8rem)] px-6 sm:px-16 py-7 flex flex-col dark:bg-secondary-dark-2`}
+      className={`${
+        className || ""
+      } overflow-x-hidden sm:h-[calc(100vh_-_3.8rem)] px-4 sm:px-16 py-7 flex flex-col flex-1 dark:bg-secondary-dark-2`}
     >
       {children}
     </motion.div>

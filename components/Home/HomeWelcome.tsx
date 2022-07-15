@@ -9,7 +9,7 @@ import LinkTo from "../general/LinkTo";
 import homeAnimations from "./animations/homeAnimations";
 
 // Images
-import VGhostityDiscoveringAlt from "../../public/images/Ghost-discovering-ghostity-white.svg";
+import VGhostityDiscoveringAlt from "../../public/images/Ghost-discovering-ghostity-white.svg?component";
 import VGhostityDiscovering from "../../public/images/Ghost-discovering-ghostity.svg?component";
 import ThemeContext from "../../context/ThemeContext";
 
@@ -44,7 +44,7 @@ export default function HomeWelcome() {
           </motion.h1>
           <motion.p
             variants={animations.textVariant}
-            className="text-sm lg:text-base 2xl:text-lg mb-6 dark:text-text-secondary-dark text-gray-700"
+            className="text-sm lg:text-base 2xl:text-lg mb-6 dark:text-text-secondary-dark text-text-secondary"
           >
             A comprehensive (not exhaustive!) app for VTubers! Keep up with your
             favorite VTubers from Hololive or Nijisanji, or even explore and

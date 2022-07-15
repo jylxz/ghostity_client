@@ -90,7 +90,7 @@ export default function HomeLive() {
               .map((stream: Stream, i: number) => (
                 <SwiperSlide
                   key={stream.channel_id}
-                  className="flex justify-center"
+                  className="flex justify-center my-1"
                 >
                   <motion.div
                     initial={{ opacity: 0 }}

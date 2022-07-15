@@ -43,7 +43,7 @@ export default function HamburgerNavMenu({
           onClick={() => setShowHamburgerMenu(false)}
         >
           <motion.div
-            className="fixed top-0 right-0 dark:bg-secondary-dark dark:border-primary-dark text-black bg-slate-100 z-50 h-full w-64 border-l-4 border-white flex flex-col px-2 py-8"
+            className="fixed top-0 right-0 dark:bg-secondary-dark text-black bg-slate-100 z-50 h-full w-64 flex flex-col px-2 py-8"
             initial={{ translateX: 300 }}
             animate={{ translateX: 0 }}
             exit={{ translateX: 300 }}

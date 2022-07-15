@@ -1,10 +1,12 @@
 import Head from "next/head";
-import React from "react";
+import React, { ReactElement } from "react";
 import WIP from "../components/general/WIP";
 import DefaultDescription from "../components/Head/Description";
 import DefaultKeywords from "../components/Head/Keywords";
+import SearchMain from "../components/Search/SearchMain";
+import BrowseLayout from "../layouts/BrowseLayout";
 
-export default function search() {
+function Search() {
   return (
     <>
       <Head>
@@ -12,9 +14,13 @@ export default function search() {
       </Head>
       <DefaultKeywords />
       <DefaultDescription />
-      <div className="text-xl h-full">
-        <WIP />
-      </div>
+      <SearchMain />
     </>
   );
 }
+
+Search.getLayout = function getLayout(page: ReactElement) {
+  return <BrowseLayout>{page}</BrowseLayout>;
+};
+
+export default Search;

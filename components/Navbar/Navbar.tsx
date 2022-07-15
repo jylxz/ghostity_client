@@ -20,8 +20,8 @@ import useIsWindowSmall from "../../hooks/useIsWindowSmall";
 import useThemeColor from "../../hooks/useThemeColor";
 
 // Images
-import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
-import VGhostityWhiteLogo from "../../public/images/Ghostity-svg-white.svg";
+import VGhostityLogo from "../../public/images/Ghostity-svg.svg?component";
+import VGhostityWhiteLogo from "../../public/images/Ghostity-svg-white.svg?component";
 
 function NavbarButton({ text, href }: { text: string; href: string }) {
   const router = useRouter();
@@ -70,6 +70,7 @@ function ThemeButton({
       type="button"
       onClick={() => overrideSystem()}
       className="px-2"
+      aria-label="theme"
     >
       {theme === "light" ? <MdOutlineDarkMode color="black" size={20} /> : null}
       {theme === "dark" ? <BsFillSunFill color="#efefef" size={20} /> : null}

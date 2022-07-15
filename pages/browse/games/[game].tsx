@@ -1,9 +1,10 @@
 import Head from "next/head";
-import React from "react";
+import React, { ReactElement } from "react";
 import axios from "axios";
 import GameMain from "../../../components/Game/GameMain";
 import DefaultKeywords from "../../../components/Head/Keywords";
 import DefaultOpenGraph from "../../../components/Head/OpenGraph";
+import BrowseLayout from "../../../layouts/BrowseLayout";
 
 export async function getServerSideProps(context: { query: { game: string } }) {
   const { game } = context.query;
@@ -36,3 +37,7 @@ export default function BrowseGameStreams({ gameData }: { gameData: Game }) {
     </>
   );
 }
+
+BrowseGameStreams.getLayout = function getLayout(page: ReactElement) {
+  return <BrowseLayout>{page}</BrowseLayout>;
+};

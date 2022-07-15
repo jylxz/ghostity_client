@@ -155,7 +155,6 @@ export default function FollowingMain() {
                     <ProfileCard
                       key={profile._id}
                       profile={profile}
-                      size="large"
                     />
                   </motion.span>
                 ))}

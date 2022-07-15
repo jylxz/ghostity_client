@@ -1,10 +1,11 @@
 import Head from "next/head";
-import React from "react";
+import React, { ReactElement } from "react";
 import FollowingMain from "../../components/Following/FollowingMain";
 import DefaultDescription from "../../components/Head/Description";
 import DefaultKeywords from "../../components/Head/Keywords";
+import BrowseLayout from "../../layouts/BrowseLayout";
 
-function following() {
+export default function Following() {
   return (
     <>
       <Head>
@@ -19,4 +20,7 @@ function following() {
   );
 }
 
-export default following;
+Following.getLayout = function getLayout(page: ReactElement) {
+  return <BrowseLayout>{page}</BrowseLayout>;
+};
+

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
 
 // Components
+import { ReactElement } from "react";
 import HomeWelcome from "../components/Home/HomeWelcome";
 import Footer from "../components/general/Footer";
 import HomeLive from "../components/Home/HomeLive";
@@ -26,7 +27,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: { logos }, revalidate: 6000 };
 };
 
-export default function Home({ logos }: OrganizationLogos) {
+function Home({ logos }: OrganizationLogos) {
   return (
     <motion.div className="overflow-hidden">
       <Head>
@@ -47,3 +48,5 @@ export default function Home({ logos }: OrganizationLogos) {
     </motion.div>
   );
 }
+
+export default Home

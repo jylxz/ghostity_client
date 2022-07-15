@@ -39,7 +39,9 @@ function ChannelIcon({ channel }: { channel: Channel }) {
       className="h-5 w-5"
     >
       <a href={channel.link} target="_blank" rel="noopener noreferrer">
-        {channel.platform === "youtube" ? <Image src={YoutubeIcon} height={15} width={20}/> : null}
+        {channel.platform === "youtube" ? (
+          <Image src={YoutubeIcon} height={15} width={20} />
+        ) : null}
         {channel.platform === "twitch" ? <TwitchIcon /> : null}
         {channel.platform === "bilibili" ? <BilibiliIcon /> : null}
       </a>
@@ -108,29 +110,22 @@ export default function ProfileCard({
   profile,
   altName,
   language,
-  size,
   subCount,
 }: {
   profile: Profile;
   altName?: string;
   language?: string;
-  size: "normal" | "large";
   subCount?: boolean;
 }) {
   const [follow, followed] = useHandleFollows(profile.channels);
   const [showMore, setShowMore] = useState(false);
 
-  const cardSize =
-    size === "large"
-      ? { cardHeight: "h-48", imageHeight: "h-40" }
-      : { cardHeight: "h-64", imageHeight: "h-52" };
-
   return (
     <motion.div
       layout
-      className={`relative w-80 sm:w-[19rem] ${cardSize.cardHeight} rounded-lg dark:border-0 border`}
+      className="relative w-72 sm:w-[19rem] h-48 rounded-lg dark:border-0 border"
     >
-      <div className={`absolute w-full ${cardSize.imageHeight} z-0 rounded-lg overflow-hidden`}>
+      <div className="absolute w-full h-40 z-0 rounded-lg overflow-hidden">
         {profile.profile.img ? (
           <Image
             src={profile.profile?.img}
@@ -187,7 +182,7 @@ export default function ProfileCard({
           // initial="initial"
           // animate="animate"
           // transition={{ staggerChildren: 0.2, delayChildren: 0.4 }}
-          className="flex items-center gap-2 dark:bg-secondary-dark dark:border-0 bg-white justify-center py-2 rounded-b-lg border-t"
+          className="flex items-center gap-2 dark:bg-secondary-dark dark:border-0 bg-secondary-alt justify-center py-2 rounded-b-lg border-t"
         >
           {profile.channels.map((channel) => (
             <ChannelIcon key={channel.id} channel={channel} />

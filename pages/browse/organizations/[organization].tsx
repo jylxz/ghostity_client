@@ -4,6 +4,8 @@ import axios from "axios";
 import OrganizationMain from "../../../components/Organization/OrganizationMain";
 import DefaultKeywords from "../../../components/Head/Keywords";
 import DefaultOpenGraph from "../../../components/Head/OpenGraph";
+import { ReactElement } from "react";
+import BrowseLayout from "../../../layouts/BrowseLayout";
 
 const getAllOrganizationNames = async () => {
   const API = process.env.NEXT_PUBLIC_API as string;
@@ -46,7 +48,11 @@ export async function getStaticProps({
   };
 }
 
-function OrganizationPage({ organization }: { organization: Organization[] }) {
+export default function OrganizationPage({
+  organization,
+}: {
+  organization: Organization[];
+}) {
   return (
     <>
       <Head>
@@ -70,4 +76,7 @@ function OrganizationPage({ organization }: { organization: Organization[] }) {
   );
 }
 
-export default OrganizationPage;
+OrganizationPage.getLayout = function getLayout(page: ReactElement) {
+  return <BrowseLayout>{page}</BrowseLayout>;
+};
+

@@ -1,4 +1,4 @@
-import Head from "next/head";
+ import Head from "next/head";
 import React from "react";
 import Footer from "../components/general/Footer";
 import ProfileMain from "../components/Profile/ProfileMain";

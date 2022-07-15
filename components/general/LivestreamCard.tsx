@@ -112,7 +112,7 @@ function OrganizationIcon({ mainAffiliation }: { mainAffiliation: Stream["channe
         </button>
           </LinkTo>
         {hoverState ? (
-          <span className="absolute whitespace-nowrap dark:bg-secondary-dark-2 bg-white text-xs px-2 py-1 top-[24px] right-0 rounded">
+          <span className="absolute whitespace-nowrap dark:bg-secondary-dark-2 bg-secondary-alt-2 text-xs px-2 py-1 top-[24px] right-0 rounded">
             {`${mainAffiliation.organization_name} | ${mainAffiliation.full_name}`}
           </span>
         ) : null}
@@ -328,14 +328,14 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
         /> */}
         <SimpleFollowButton channelId={stream.channel_id} />
         <BlacklistButton stream={stream} />
-        <span className="absolute bottom-2 right-1.5 text-primary dark:bg-secondary-dark/80 bg-gray-400/80 rounded p-1 text-sm font-medium cursor-default">{`${stream.stream.viewers} viewers`}</span>
+        <span className="absolute bottom-2 right-1.5 text-primary dark:bg-secondary-dark/80 bg-gray-400/80 rounded p-1 text-sm cursor-default">{`${stream.stream.viewers} viewers`}</span>
       </div>
       <CardContent className="dark:bg-secondary-dark-2 dark:text-text-primary-dark grow py-2.5">
         <div>
           <a target="_blank" href={stream.stream.url} rel="noopener noreferrer">
             <Typography
               title={stream.stream.title}
-              className="text-ellipsis overflow-hidden line-clamp-1 text-sm font-medium"
+              className="text-ellipsis overflow-hidden line-clamp-1 text-sm"
             >
               {stream.stream.title}
             </Typography>
@@ -343,7 +343,7 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
         </div>
       </CardContent>
       <CardContent
-        className="bg-slate-100 dark:bg-secondary-dark"
+        className="bg-secondary-alt dark:bg-secondary-dark"
         sx={{
           ":last-child": {
             paddingTop: "0.25rem",
@@ -362,14 +362,14 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
 
           <PlatformIcon stream={stream} />
         </div>
-        <div className="flex justify-between items-center dark:text-text-secondary-dark text-gray-400 mt-0.5">
-          <Typography className="text-sm font-medium line-clamp-1 cursor-pointer">
+        <div className="flex justify-between items-center dark:text-text-secondary-dark text-text-secondary mt-0.5">
+          <Typography className="text-sm line-clamp-1 cursor-pointer">
             <LinkTo href={`/browse/games/${encodeURI(stream.stream.game)}`}>
               <span className="line-clamp-1">{stream.stream.game}</span>
             </LinkTo>
           </Typography>
-          <Typography className="text-sm font-medium cursor-default min-w-fit ml-1">
-            {stream.language}
+          <Typography className="text-sm cursor-default min-w-fit ml-1">
+            {stream.stream.language}
           </Typography>
         </div>
       </CardContent>

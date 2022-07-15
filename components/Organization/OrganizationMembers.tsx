@@ -182,8 +182,7 @@ export default function OrganizationMembers({
             <ProfileCard
               profile={getProfile(member.profile_id, profiles.data)}
               altName={member.alt_name}
-              language={member.language}
-              size="large"
+              language={member.primary_language}
               subCount
             />
           </Fragment>

@@ -16,7 +16,6 @@ import UserContext from "../../context/UserContext";
 import UserFollowContext from "../../context/UserFollowContext";
 
 // Hooks
-import useResponsiveBrowseBar from "../../hooks/useResponsiveBrowseBar";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 // Components
@@ -27,6 +26,7 @@ import SideBarFollowingItem from "./SideBarFollowingItem";
 // Animations
 import browseAnimations from "../Browse/animations/browseAnimations";
 import useIsWindowSmall from "../../hooks/useIsWindowSmall";
+import SidebarContext from "../../context/SidebarContext";
 
 export default function SideBarMain() {
   const animations = browseAnimations.sidebar;
@@ -35,13 +35,14 @@ export default function SideBarMain() {
   const [showChannels, setShowChannels] = useState(5);
   const window = useWindowDimensions();
   const isWindowSmall = useIsWindowSmall();
-  const [
+  const responsiveBrowseBar = useContext(SidebarContext)
+  const {
     showBrowseBar,
     setShowBrowseBar,
     userPreference,
     browseBarOverride,
     minimized,
-  ] = useResponsiveBrowseBar();
+  } = {...responsiveBrowseBar}
 
   const [width, setWidth] = useState<number>();
 
@@ -81,7 +82,7 @@ export default function SideBarMain() {
       animate={{ translateX: 0 }}
       className={` z-30 dark:bg-secondary-dark bg-slate-100 scroll-smooth ${
         showBrowseBar ? "min-w-[16rem] max-w-[16rem] pl-4" : "w-16"
-      } h-[calc(100vh_-_3.8rem)] overflow-x-hidden overflow-y-auto hidden sm:block sm-custom-scroll`}
+      } pb-8 h-[calc(100vh_-_3.8rem)] overflow-x-hidden overflow-y-auto hidden sm:block sm-custom-scroll`}
       onMouseLeave={() => (minimized ? browseBarOverride(false) : null)}
     >
       <div
@@ -185,7 +186,9 @@ export default function SideBarMain() {
       {user ? (
         <>
           {showBrowseBar ? (
-            <h1 className="dark:text-text-primary-dark text-lg my-3">Following</h1>
+            <h1 className="dark:text-text-primary-dark text-lg my-3">
+              Following
+            </h1>
           ) : (
             <div className="mx-auto mt-1 mb-2 w-10 h-0.5 border" />
           )}

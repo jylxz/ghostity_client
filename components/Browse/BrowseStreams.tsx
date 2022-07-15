@@ -1,6 +1,5 @@
 // Libraries
 import React, { Fragment, useEffect, useState } from "react";
-import axios from "axios";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import { LayoutGroup, motion } from "framer-motion";
@@ -68,6 +67,7 @@ export default function BrowseStreams() {
               }}
             >
               {data.pages.map((group, i) => (
+                // eslint-disable-next-line react/no-array-index-key
                 <Fragment key={i}>
                   {group.results.map((stream: Stream) => (
                     <motion.div key={stream.channel_id} layout="position">
