@@ -8,7 +8,7 @@ export default function DefaultKeywords({ keywords }: { keywords?: string | stri
     <Head>
       <meta
         name="keywords"
-        content={`VTubers, watch VTubers, virtual youtubers, Hololive, Nijisanji, VShojo, VSPO, Twitch, Vtuber twitch, Youtube, Vtuber youtube, Vtuber directory, Vtuber app, livestreams, games, ${keywordsString || ""}`}
+        content={`VTubers, watch VTubers, virtual youtubers, Hololive, Nijisanji, VShojo, VSPO, Twitch, Vtuber twitch, Youtube, Vtuber youtube, Vtuber directory, Vtuber app, VTuber livestreams, games, ${keywordsString || ""}`}
       />
     </Head>
   );

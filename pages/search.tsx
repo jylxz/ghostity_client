@@ -1,6 +1,5 @@
 import Head from "next/head";
 import React, { ReactElement } from "react";
-import DefaultDescription from "../components/Head/Description";
 import DefaultKeywords from "../components/Head/Keywords";
 import SearchMain from "../components/Search/SearchMain";
 import BrowseLayout from "../layouts/BrowseLayout";
@@ -10,9 +9,9 @@ function Search() {
     <>
       <Head>
         <title>vGhostity | Search</title>
+        <meta name="description" content="Search through vGhostity's comprehensive database of VTubers!"/>
       </Head>
       <DefaultKeywords />
-      <DefaultDescription />
       <SearchMain />
     </>
   );
