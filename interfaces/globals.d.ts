@@ -184,7 +184,10 @@ declare global {
   }
 
   interface Search {
-    query: string,
+    query: {
+      string: string,
+      total: number
+    }
     results: {
       streams: SearchItem<Stream>;
       organizations: SearchItem<Organization>;

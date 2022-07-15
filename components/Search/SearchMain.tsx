@@ -19,27 +19,34 @@ import useElementDimensions from "../../hooks/useElementDimensions";
 // CSS
 import "swiper/css";
 import "swiper/css/navigation";
+import SearchNoResults from "./SearchNoResults";
 
 export default function SearchMain() {
   const [input, setInput] = useState("");
   const [compact, setCompact] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const { width } = useElementDimensions(ref.current);
-  
-  const { showStreams, showGames, showProfiles, showOrganizations, showing, setShow } =
-  useHandleShowResults();
-  
+
+  const {
+    showStreams,
+    showGames,
+    showProfiles,
+    showOrganizations,
+    showing,
+    setShow,
+  } = useHandleShowResults();
+
   const fetchSearch = async () =>
-  API.get<Search>(`/search?query=${input}`).then((res) => res.data);
-  
+    API.get<Search>(`/search?query=${input}`).then((res) => res.data);
+
   const search = useQuery<Search, Error>("search", fetchSearch, {
     enabled: false,
   });
-  
+
   useEffect(() => {
     if (!input) return;
 
-    if (search && search.data?.query === input) return
+    if (search && search.data?.query.string === input) return;
 
     const searchDebounce = setTimeout(async () => {
       if (input.length >= 3) {
@@ -58,16 +65,16 @@ export default function SearchMain() {
   useEffect(() => {
     if (search.data && !search.isStale) {
       setCompact(true);
-      setInput(search.data.query)
+      setInput(search.data.query.string);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (search.data && search.isStale) {
-      setInput("")
-      setShow("none")
-      setCompact(false)
-      search.remove()
+      setInput("");
+      setShow("none");
+      setCompact(false);
+      search.remove();
     }
   }, [search]);
 
@@ -82,22 +89,21 @@ export default function SearchMain() {
       />
       <motion.div ref={ref} className="flex flex-col gap-8 pb-8">
         <AnimatePresence exitBeforeEnter>
-          {search.data && !search.isRefetching && typeof width === "number" ? (
+          {search.data && !search.isRefetching && typeof width === "number" && (
             <LayoutGroup id="search-results">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                layout: {
-                  duration: 1
-                }
-              }}
-              // key="search-container"
-              className="flex flex-col gap-6"
-            >
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  layout: {
+                    duration: 1,
+                  },
+                }}
+                className="flex flex-col gap-6"
+              >
                 <SearchStream
-                  streams={search.data?.results.streams}
+                  streams={search.data.results.streams}
                   query={input}
                   show={showStreams}
                   currentlyShowing={showing}
@@ -128,9 +134,12 @@ export default function SearchMain() {
                   setShow={setShow}
                   width={width}
                 />
-            </motion.div>
-              </LayoutGroup>
-          ) : null}
+              </motion.div>
+              {search.data?.query.total === 0 && !search.isRefetching && (
+                <SearchNoResults />
+              )}
+            </LayoutGroup>
+          )}
         </AnimatePresence>
       </motion.div>
     </BrowseWrapper>
