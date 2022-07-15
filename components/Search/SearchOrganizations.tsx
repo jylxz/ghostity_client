@@ -19,18 +19,21 @@ import GradientCircularProgress from "../general/GradientCircularProgress";
 import useHandleCollapseAndExpand from "./hooks/useHandleCollapseAndExpand";
 import useInfiniteSearch from "./hooks/useInfiniteSearch";
 import useResponseSlides from "./hooks/useResponseSlides";
+import { ShowResultsOptions } from "./hooks/useHandleShowResults";
 
 export default function SearchOrganizations({
   organizations,
   query,
   show,
+  currentlyShowing,
   setShow,
   width,
 }: {
   organizations: SearchItem<Organization>;
   query: string;
   show: boolean;
-  setShow: React.Dispatch<React.SetStateAction<string>>;
+  currentlyShowing: ShowResultsOptions
+  setShow: React.Dispatch<React.SetStateAction<ShowResultsOptions>>;
   width: number | undefined;
 }) {
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
@@ -40,7 +43,7 @@ export default function SearchOrganizations({
 
   const { expand, handleExpand, handleCollapse } = useHandleCollapseAndExpand(
     "organizations",
-    show,
+    currentlyShowing,
     setShow
   );
   const moreOrganizations = useInfiniteSearch<Organizations>(
@@ -73,21 +76,13 @@ export default function SearchOrganizations({
                   opacity: 0,
                   translateY: 100,
                   transition: {
-                    duration: 0.3,
+                    duration: 0.2,
                   },
                 }
               : {
                   opacity: 0,
-                  transition: {
-                    duration: 0.3,
-                  },
                 }
           }
-          transition={{
-            layout: {
-              duration: 0.3,
-            },
-          }}
         >
           <SearchHeading
             heading="Organizations"
@@ -98,85 +93,87 @@ export default function SearchOrganizations({
             handleCollapse={handleCollapse}
             refetch={() => moreOrganizations.refetch()}
           />
-          {!expand ? (
-            <div className="flex">
-              <span className="my-auto">
-                <motion.button
-                  whileTap={{ scale: 0.8 }}
-                  type="button"
-                  className="disabled:opacity-40"
-                  ref={(node) => setPrevEl(node)}
-                >
-                  <ChevronLeftIcon className="text-4xl lg:text-5xl dark:text-white text-gray-600" />
-                </motion.button>
-              </span>
-              <Swiper
-                modules={[Navigation]}
-                spaceBetween={12}
-                slidesPerView={slides}
-                slidesPerGroup={slides}
-                navigation={{
-                  prevEl,
-                  nextEl,
-                }}
-                className="flex-1"
-                updateOnWindowResize
-              >
-                {organizations.results.map((organization) => (
-                  <SwiperSlide
-                    className="flex justify-center"
-                    key={organization._id}
+          <AnimatePresence exitBeforeEnter>
+            {!expand ? (
+              <motion.div className="flex" exit={{ opacity: 0 }} key="results-organizations">
+                <span className="my-auto">
+                  <motion.button
+                    whileTap={{ scale: 0.8 }}
+                    type="button"
+                    className="disabled:opacity-40"
+                    ref={(node) => setPrevEl(node)}
                   >
-                    <OrganizationCard
-                      image={organization.logo}
-                      title={organization.name}
-                      languages={organization.languages}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-              <span className="my-auto">
-                <motion.button
-                  whileTap={{ scale: 0.8 }}
-                  type="button"
-                  className="disabled:opacity-40"
-                  ref={(node) => setNextEl(node)}
+                    <ChevronLeftIcon className="text-4xl lg:text-5xl dark:text-white text-gray-600" />
+                  </motion.button>
+                </span>
+                <Swiper
+                  modules={[Navigation]}
+                  spaceBetween={12}
+                  slidesPerView={slides}
+                  slidesPerGroup={slides}
+                  navigation={{
+                    prevEl,
+                    nextEl,
+                  }}
+                  className="flex-1"
+                  updateOnWindowResize
                 >
-                  <ChevronRightIcon className="text-4xl lg:text-5xl dark:text-white text-gray-600" />
-                </motion.button>
-              </span>
-            </div>
-          ) : null}
-          {moreOrganizations.data && expand ? (
-            <>
-              <GridWrapper colSize="normal">
-                {moreOrganizations.data?.pages.map((group, i) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <Fragment key={i}>
-                    {group.results.map((organization, index) => (
-                      <motion.div
-                        key={organization._id}
-                        ref={
-                          index === group.results.length - 1 ? ref : undefined
-                        }
-                      >
-                        <OrganizationCard
-                          image={organization.logo}
-                          title={organization.name}
-                          languages={organization.languages}
-                        />
-                      </motion.div>
-                    ))}
-                  </Fragment>
-                ))}
-              </GridWrapper>
-              {moreOrganizations.hasNextPage ? (
-                <div className="flex justify-center items-center pt-10 pb-3 h-24">
-                  <GradientCircularProgress />
-                </div>
-              ) : null}
-            </>
-          ) : null}
+                  {organizations.results.map((organization) => (
+                    <SwiperSlide
+                      className="flex justify-center"
+                      key={organization._id}
+                    >
+                      <OrganizationCard
+                        image={organization.logo}
+                        title={organization.name}
+                        languages={organization.languages}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+                <span className="my-auto">
+                  <motion.button
+                    whileTap={{ scale: 0.8 }}
+                    type="button"
+                    className="disabled:opacity-40"
+                    ref={(node) => setNextEl(node)}
+                  >
+                    <ChevronRightIcon className="text-4xl lg:text-5xl dark:text-white text-gray-600" />
+                  </motion.button>
+                </span>
+              </motion.div>
+            ) : null}
+            {moreOrganizations.data && expand ? (
+              <>
+                <GridWrapper colSize="normal">
+                  {moreOrganizations.data?.pages.map((group, i) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <Fragment key={i}>
+                      {group.results.map((organization, index) => (
+                        <motion.div
+                          key={organization._id}
+                          ref={
+                            index === group.results.length - 1 ? ref : undefined
+                          }
+                        >
+                          <OrganizationCard
+                            image={organization.logo}
+                            title={organization.name}
+                            languages={organization.languages}
+                          />
+                        </motion.div>
+                      ))}
+                    </Fragment>
+                  ))}
+                </GridWrapper>
+                {moreOrganizations.hasNextPage ? (
+                  <div className="flex justify-center items-center pt-10 pb-3 h-24">
+                    <GradientCircularProgress />
+                  </div>
+                ) : null}
+              </>
+            ) : null}
+          </AnimatePresence>
         </motion.div>
       )}
     </AnimatePresence>

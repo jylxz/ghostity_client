@@ -19,18 +19,21 @@ import GradientCircularProgress from "../general/GradientCircularProgress";
 import useInfiniteSearch from "./hooks/useInfiniteSearch";
 import useHandleCollapseAndExpand from "./hooks/useHandleCollapseAndExpand";
 import useResponseSlides from "./hooks/useResponseSlides";
+import { ShowResultsOptions } from "./hooks/useHandleShowResults";
 
 export default function SearchProfiles({
   profiles,
   query,
   show,
+  currentlyShowing,
   setShow,
   width,
 }: {
   profiles: SearchItem<Profile>;
   query: string;
   show: boolean;
-  setShow: React.Dispatch<React.SetStateAction<string>>;
+  currentlyShowing: ShowResultsOptions
+  setShow: React.Dispatch<React.SetStateAction<ShowResultsOptions>>;
   width: number | undefined;
 }) {
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
@@ -40,7 +43,7 @@ export default function SearchProfiles({
 
   const { expand, handleExpand, handleCollapse } = useHandleCollapseAndExpand(
     "profiles",
-    show,
+    currentlyShowing,
     setShow
   );
   const moreProfiles = useInfiniteSearch<Profiles>(query, "profiles");
@@ -62,7 +65,7 @@ export default function SearchProfiles({
             translateY: 0,
             transition: {
               duration: 0.3,
-            }
+            },
           }}
           exit={
             !expand
@@ -70,18 +73,13 @@ export default function SearchProfiles({
                   opacity: 0,
                   translateY: 100,
                   transition: {
-                    duration: 0.3,
+                    duration: 0.2,
                   },
                 }
               : {
                   opacity: 0,
                 }
           }
-          transition={{
-            layout: {
-              duration: 0.5,
-            },
-          }}
         >
           <SearchHeading
             heading="Profiles"
@@ -92,8 +90,13 @@ export default function SearchProfiles({
             handleCollapse={handleCollapse}
             refetch={() => moreProfiles.refetch()}
           />
-            {!expand ? (
-              <div className="flex"> 
+          <AnimatePresence exitBeforeEnter>
+            {!expand && (
+              <motion.div
+                className="flex"
+                exit={{ opacity: 0 }}
+                key="results-profiles"
+              >
                 <span className="my-auto">
                   <motion.button
                     whileTap={{ scale: 0.8 }}
@@ -137,8 +140,8 @@ export default function SearchProfiles({
                     <ChevronRightIcon className="text-4xl lg:text-5xl dark:text-white text-gray-600" />
                   </motion.button>
                 </span>
-              </div>
-            ) : null}
+              </motion.div>
+            )}
             {moreProfiles.data && expand ? (
               <>
                 <GridWrapper colSize="normal">
@@ -165,6 +168,7 @@ export default function SearchProfiles({
                 ) : null}
               </>
             ) : null}
+          </AnimatePresence>
         </motion.div>
       )}
     </AnimatePresence>

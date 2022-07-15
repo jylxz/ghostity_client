@@ -26,7 +26,7 @@ export default function SearchMain() {
   const ref = useRef<HTMLDivElement>(null);
   const { width } = useElementDimensions(ref.current);
   
-  const { showStreams, showGames, showProfiles, showOrganizations, setShow } =
+  const { showStreams, showGames, showProfiles, showOrganizations, showing, setShow } =
   useHandleShowResults();
   
   const fetchSearch = async () =>
@@ -43,7 +43,7 @@ export default function SearchMain() {
 
     const searchDebounce = setTimeout(async () => {
       if (input.length >= 3) {
-        setShow("reset");
+        setShow("none");
         setCompact(true);
         await search.refetch();
         setShow("all");
@@ -65,7 +65,7 @@ export default function SearchMain() {
   useEffect(() => {
     if (search.data && search.isStale) {
       setInput("")
-      setShow("reset")
+      setShow("none")
       setCompact(false)
       search.remove()
     }
@@ -100,6 +100,7 @@ export default function SearchMain() {
                   streams={search.data?.results.streams}
                   query={input}
                   show={showStreams}
+                  currentlyShowing={showing}
                   setShow={setShow}
                   width={width}
                 />
@@ -107,6 +108,7 @@ export default function SearchMain() {
                   profiles={search.data.results.profiles}
                   query={input}
                   show={showProfiles}
+                  currentlyShowing={showing}
                   setShow={setShow}
                   width={width}
                 />
@@ -114,6 +116,7 @@ export default function SearchMain() {
                   organizations={search.data.results.organizations}
                   query={input}
                   show={showOrganizations}
+                  currentlyShowing={showing}
                   setShow={setShow}
                   width={width}
                 />
@@ -121,6 +124,7 @@ export default function SearchMain() {
                   games={search.data.results.games}
                   query={input}
                   show={showGames}
+                  currentlyShowing={showing}
                   setShow={setShow}
                   width={width}
                 />

@@ -19,18 +19,21 @@ import GradientCircularProgress from "../general/GradientCircularProgress";
 import useHandleCollapseAndExpand from "./hooks/useHandleCollapseAndExpand";
 import useResponseSlides from "./hooks/useResponseSlides";
 import useInfiniteSearch from "./hooks/useInfiniteSearch";
+import { ShowResultsOptions } from "./hooks/useHandleShowResults";
 
 export default function SearchStream({
   streams,
   query,
   show,
+  currentlyShowing,
   setShow,
   width,
 }: {
   streams: SearchItem<Stream>;
   query: string;
   show: boolean;
-  setShow: React.Dispatch<React.SetStateAction<string>>;
+  currentlyShowing: ShowResultsOptions;
+  setShow: React.Dispatch<React.SetStateAction<ShowResultsOptions>>;
   width: number | undefined;
 }) {
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
@@ -40,7 +43,7 @@ export default function SearchStream({
 
   const { expand, handleExpand, handleCollapse } = useHandleCollapseAndExpand(
     "streams",
-    show,
+    currentlyShowing,
     setShow
   );
   const moreStreams = useInfiniteSearch<Streams>(query, "streams");
@@ -68,20 +71,15 @@ export default function SearchStream({
             !expand
               ? {
                   opacity: 0,
-                  translateY: -100,
+                  translateY: -200,
                   transition: {
-                    duration: 0.3,
+                    duration: 0.2,
                   },
                 }
               : {
                   opacity: 0,
                 }
           }
-          transition={{
-            layout: {
-              duration: 0.5,
-            },
-          }}
         >
           <SearchHeading
             heading="Streams"
@@ -92,8 +90,13 @@ export default function SearchStream({
             handleCollapse={handleCollapse}
             refetch={() => moreStreams.refetch()}
           />
+          <AnimatePresence exitBeforeEnter>
             {!expand ? (
-              <div className="flex">
+              <motion.div
+                className="flex"
+                exit={{ opacity: 0 }}
+                key="results-streams"
+              >
                 <span className="my-auto">
                   <motion.button
                     whileTap={{ scale: 0.8 }}
@@ -137,7 +140,7 @@ export default function SearchStream({
                     <ChevronRightIcon className="text-4xl lg:text-5xl dark:text-white text-gray-600" />
                   </motion.button>
                 </span>
-              </div>
+              </motion.div>
             ) : null}
             {moreStreams.data && expand ? (
               <>
@@ -165,6 +168,7 @@ export default function SearchStream({
                 ) : null}
               </>
             ) : null}
+          </AnimatePresence>
         </motion.div>
       )}
     </AnimatePresence>

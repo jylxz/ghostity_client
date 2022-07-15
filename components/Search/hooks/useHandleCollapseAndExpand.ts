@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { ShowResultsOptions } from './useHandleShowResults';
 
 export default function useHandleCollapseAndExpand(
   expandSection: "profiles" | "organizations" | "games" | "streams",
-  show: boolean,
+  currentlyShowing: ShowResultsOptions,
   setShow: (
-    value: React.SetStateAction<
-      "all" | "reset" | "streams" | "profiles" | "games" | "organizations"
-    >
+    value: React.SetStateAction<ShowResultsOptions>
   ) => void
 ) {
   const [expand, setExpand] = useState(false);
@@ -22,10 +21,10 @@ export default function useHandleCollapseAndExpand(
   };
 
   useEffect(() => {
-    if (show) {
+    if (currentlyShowing === "all") {
       setExpand(false);
     }
-  }, [show]);
+  }, [currentlyShowing]);
 
   return { expand, handleExpand, handleCollapse };
 }
