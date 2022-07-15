@@ -1,10 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { signOut, User } from "firebase/auth";
 import { AiOutlineLogout } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
-import UserContext from "../../context/UserContext";
 import { auth } from "../../firebase/ghostityFirebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
 import UserProfileCard from "./UserProfileCard";

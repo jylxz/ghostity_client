@@ -1,5 +1,5 @@
 // Libraries
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import numbro from "numbro";
@@ -40,7 +40,7 @@ function ChannelIcon({ channel }: { channel: Channel }) {
     >
       <a href={channel.link} target="_blank" rel="noopener noreferrer">
         {channel.platform === "youtube" ? (
-          <Image src={YoutubeIcon} height={15} width={20} />
+          <Image src={YoutubeIcon} height={15} width={20} alt="YouTube icon" />
         ) : null}
         {channel.platform === "twitch" ? <TwitchIcon /> : null}
         {channel.platform === "bilibili" ? <BilibiliIcon /> : null}
@@ -118,7 +118,6 @@ export default function ProfileCard({
   subCount?: boolean;
 }) {
   const [follow, followed] = useHandleFollows(profile.channels);
-  const [showMore, setShowMore] = useState(false);
 
   return (
     <motion.div
@@ -131,16 +130,13 @@ export default function ProfileCard({
             src={profile.profile?.img}
             layout="fill"
             draggable={false}
+            alt={`${profile.name}'s profile image`}
             className="blur-sm scale-1.1 opacity-40 w-full object-cover object-center h-full rounded-t-lg text-sm"
           />
         ) : null}
       </div>
       <div className="relative z-10 h-full flex flex-col gap-0.5 ">
-        <div
-          className="flex-1 py-3 z-30 flex flex-col items-center sm-custom-scroll overflow-y-auto overscroll-contain"
-          onMouseEnter={() => setShowMore(true)}
-          onMouseLeave={() => setShowMore(false)}
-        >
+        <div className="flex-1 py-3 z-30 flex flex-col items-center sm-custom-scroll overflow-y-auto overscroll-contain">
           <a
             href={profile.channels[0].link}
             target="_blank"

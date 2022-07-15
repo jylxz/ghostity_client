@@ -17,7 +17,6 @@ import UserContext from "../../context/UserContext";
 
 // Hooks
 import useIsWindowSmall from "../../hooks/useIsWindowSmall";
-import useThemeColor from "../../hooks/useThemeColor";
 
 // Images
 import VGhostityLogo from "../../public/images/Ghostity-svg.svg?component";

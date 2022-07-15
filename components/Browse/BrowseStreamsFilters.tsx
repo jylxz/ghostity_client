@@ -24,6 +24,7 @@ export default function BrowseStreamsFilters({
   refetch: () => Promise<void>;
 }) {
   const [showFilter, setShowFilter] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sort, setSort] = useState(filters.sort);
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 // Libraries
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useMemo } from "react";
 import { useInfiniteQuery } from "react-query";
 import { Navigation, Mousewheel, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";

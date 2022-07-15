@@ -1,6 +1,5 @@
 import Head from "next/head";
 import React, { ReactElement } from "react";
-import WIP from "../components/general/WIP";
 import DefaultDescription from "../components/Head/Description";
 import DefaultKeywords from "../components/Head/Keywords";
 import SearchMain from "../components/Search/SearchMain";

@@ -130,7 +130,7 @@ export default function OrganizationMain({ org }: { org: Organization }) {
                     className="flex items-center gap-1 py-1.5"
                   >
                     <div className="w-5 flex items-center">
-                      <Image src={YTIcon} height={15} width={20} />
+                      <Image src={YTIcon} height={15} width={20} alt="YouTube Icon"/>
                     </div>
                     {!isWindowSmall ? "Youtube" : null}
                   </a>

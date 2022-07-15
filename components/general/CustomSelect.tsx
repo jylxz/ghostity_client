@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/destructuring-assignment */
 import * as React from "react";
@@ -10,7 +11,6 @@ import OptionUnstyled, {
 } from "@mui/base/OptionUnstyled";
 import PopperUnstyled from "@mui/base/PopperUnstyled";
 import { styled } from "@mui/system";
-import useThemeColor from "../../hooks/useThemeColor";
 
 const blue = {
   100: "#DAECFF",
@@ -34,7 +34,7 @@ const grey = {
 };
 
 const StyledButton = styled("button")(
-  ({ theme }) => `
+  () => `
   display: flex;
   align-items: center;
   justify-content: space-between;

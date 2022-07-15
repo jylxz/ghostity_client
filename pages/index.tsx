@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
 
 // Components
-import { ReactElement } from "react";
 import HomeWelcome from "../components/Home/HomeWelcome";
 import Footer from "../components/general/Footer";
 import HomeLive from "../components/Home/HomeLive";

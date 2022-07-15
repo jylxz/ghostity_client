@@ -6,7 +6,7 @@ import LinkTo from '../general/LinkTo';
 export default function HamburgerNavMenuButtons({title, onClick, icon, href}: {
   title: string,
   onClick?: () => void,
-  icon?: IconType | any,
+  icon?: IconType | JSX.Element,
   href?: string
 }) {
   return (

@@ -146,77 +146,10 @@ function PlatformIcon({ stream }: { stream: Stream }) {
         rel="noopener noreferrer"
         className="block bg-white bg-clip-text"
       >
-        <Image src={YoutubeIcon} height={16} width={20} />
+        <Image src={YoutubeIcon} height={16} width={20} alt="YouTube icon"/>
       </a>
     </div>
   );
-}
-
-function FollowButton({
-  channel,
-  channelId,
-}: {
-  channel: string;
-  channelId: string;
-}) {
-  const user = useContext(UserContext);
-  const [follow, followed] = useHandleFollows(channelId);
-  const [showFollowText, setShowFollowText] = useState(false);
-
-  if (user)
-    return (
-      <motion.button
-        layout
-        layoutId={channelId}
-        // initial={{ opacity: 0, scale: 0 }}
-        // animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, delay: 1 } }}
-        // exit={{opacity: 0}}
-        className="absolute top-1 left-1 dark:bg-secondary-dark/80 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
-        onHoverStart={() => setShowFollowText(true)}
-        onHoverEnd={() => setShowFollowText(false)}
-        onClick={() => follow()}
-      >
-        {followed ? (
-          <div>
-            {showFollowText ? (
-              <div className="flex">
-                <motion.div layout>
-                  <AiOutlineHeart className="text-2xl h-6 min-w-[20px]" />
-                </motion.div>
-                <motion.span
-                  layout
-                  className="self-center"
-                >{`Unfollow ${channel}`}</motion.span>
-              </div>
-            ) : (
-              <motion.div layout>
-                <AiFillHeart className="text-2xl h-6 min-w-[20px]" />
-              </motion.div>
-            )}
-          </div>
-        ) : (
-          <div>
-            {showFollowText ? (
-              <div className="flex">
-                <motion.div layout>
-                  <AiFillHeart className="text-2xl h-6 min-w-[20px]" />
-                </motion.div>
-                <motion.span
-                  layout
-                  className="self-center"
-                >{`Follow ${channel}`}</motion.span>
-              </div>
-            ) : (
-              <motion.div layout>
-                <AiOutlineHeart className="text-2xl h-6 min-w-[20px]" />
-              </motion.div>
-            )}
-          </div>
-        )}
-      </motion.button>
-    );
-
-  return null;
 }
 
 function SimpleFollowButton({ channelId }: { channelId: string }) {

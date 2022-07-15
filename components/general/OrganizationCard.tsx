@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image"
 
 import LinkTo from "./LinkTo";
 
@@ -19,9 +20,11 @@ export default function OrganizationCard({
         )}`}
       >
         <div className="bg-white flex justify-center h-32 w-32 items-center p-5 rounded-full border-2 shadow-md cursor-pointer">
-          <img
+          <Image
             src={image}
             alt={`${title}'s logo`}
+            width={128}
+            height={128}
             className="object-scale-down select-none"
             draggable={false}
           />

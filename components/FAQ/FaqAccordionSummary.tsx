@@ -1,4 +1,3 @@
-import * as React from "react";
 import { AccordionSummary, AccordionSummaryProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
 

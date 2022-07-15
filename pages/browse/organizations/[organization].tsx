@@ -1,10 +1,10 @@
+import { ReactElement } from "react";
 import Head from "next/head";
 import axios from "axios";
 
 import OrganizationMain from "../../../components/Organization/OrganizationMain";
 import DefaultKeywords from "../../../components/Head/Keywords";
 import DefaultOpenGraph from "../../../components/Head/OpenGraph";
-import { ReactElement } from "react";
 import BrowseLayout from "../../../layouts/BrowseLayout";
 
 const getAllOrganizationNames = async () => {
