@@ -14,7 +14,7 @@ export default function useInfiniteSearch<T extends APINextPrev>(
     getNextPageParam: (lastPage) =>
       lastPage.next ? lastPage.next.page : undefined,
     enabled: false,
-    cacheTime: 0
+    // cacheTime: 0
   });
 
   return moreData;

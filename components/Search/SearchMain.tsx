@@ -90,7 +90,7 @@ export default function SearchMain() {
       <motion.div ref={ref} className="flex flex-col gap-8 pb-8">
         <AnimatePresence exitBeforeEnter>
           {search.data && !search.isRefetching && typeof width === "number" && (
-            <LayoutGroup id="search-results">
+            <LayoutGroup>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

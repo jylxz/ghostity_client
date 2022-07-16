@@ -141,25 +141,27 @@ export default function SearchStream({
                   </motion.button>
                 </span>
               </motion.div>
-            ) : null}
-            {moreStreams.data && expand ? (
+            ) : (
               <>
                 <GridWrapper colSize="normal">
-                  {moreStreams.data?.pages.map((group, i) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <Fragment key={i}>
-                      {group.results.map((stream, index) => (
-                        <motion.div
-                          key={stream._id}
-                          ref={
-                            index === group.results.length - 1 ? ref : undefined
-                          }
-                        >
-                          <LivestreamCard stream={stream} />
-                        </motion.div>
-                      ))}
-                    </Fragment>
-                  ))}
+                  {moreStreams.data &&
+                    moreStreams.data?.pages.map((group, i) => (
+                      // eslint-disable-next-line react/no-array-index-key
+                      <Fragment key={i}>
+                        {group.results.map((stream, index) => (
+                          <motion.div
+                            key={stream._id}
+                            ref={
+                              index === group.results.length - 1
+                                ? ref
+                                : undefined
+                            }
+                          >
+                            <LivestreamCard stream={stream} />
+                          </motion.div>
+                        ))}
+                      </Fragment>
+                    ))}
                 </GridWrapper>
                 {moreStreams.hasNextPage ? (
                   <div className="flex justify-center items-center pt-10 pb-3 h-24">
@@ -167,7 +169,7 @@ export default function SearchStream({
                   </div>
                 ) : null}
               </>
-            ) : null}
+            )}
           </AnimatePresence>
         </motion.div>
       )}

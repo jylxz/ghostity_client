@@ -88,7 +88,7 @@ export default function SearchGames({
               <motion.div
                 className="flex"
                 exit={{ opacity: 0 }}
-                key="results-games"
+                // key="results-games"
               >
                 <span className="my-auto">
                   <motion.button

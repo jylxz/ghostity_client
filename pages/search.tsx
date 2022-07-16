@@ -9,7 +9,7 @@ function Search() {
     <>
       <Head>
         <title>vGhostity | Search</title>
-        <meta name="description" content="Search through vGhostity's comprehensive database of VTubers!"/>
+        <meta name="description" content="Search through vGhostity's comprehensive database of 100,000+ VTubers!"/>
       </Head>
       <DefaultKeywords />
       <SearchMain />
