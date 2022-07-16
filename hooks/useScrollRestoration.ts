@@ -1,5 +1,5 @@
 /* eslint-disable no-promise-executor-return */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Router, { NextRouter } from "next/router";
 
 interface ScrollPositions {
@@ -14,6 +14,7 @@ export default function useScrollRestoration(
   elementSelectors: string[],
   restoreOnNew = false
 ) {
+  const [shouldRestoreScroll, setRestoreScroll] = useState(false)
   // Save each scroll position to sessionStorage
   function saveScrollPos(url: string) {
     const scrollPositions: ScrollPositions = {};
@@ -73,7 +74,8 @@ export default function useScrollRestoration(
   // Run when route changes
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
-      let shouldRestoreScroll = false;
+      // let shouldRestoreScroll = false;
+      setRestoreScroll(false)
       window.history.scrollRestoration = "manual";
 
       if (restoreOnNew) {
@@ -91,19 +93,21 @@ export default function useScrollRestoration(
 
       const onRouteChangeComplete = (url: string) => {
         if (shouldRestoreScroll) {
-          shouldRestoreScroll = false;
+          // shouldRestoreScroll = false;
+          setRestoreScroll(false)
           restoreScrollPos(url).catch(() => {});
         }
       };
 
       // Apply to router
+      Router.beforePopState(() => {
+        // shouldRestoreScroll = true;
+        setRestoreScroll(true)
+        return true;
+      });
       window.addEventListener("beforeunload", onBeforeUnload);
       Router.events.on("routeChangeStart", onRouteChangeStart);
       Router.events.on("routeChangeComplete", onRouteChangeComplete);
-      Router.beforePopState(() => {
-        shouldRestoreScroll = true;
-        return true;
-      });
 
       // Clean up
       return () => {
