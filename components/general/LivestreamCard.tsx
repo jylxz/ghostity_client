@@ -66,7 +66,7 @@ function ChannelName({ stream }: { stream: Stream }) {
     return (
       <a
         target="_blank"
-        href={`${stream.stream.url}/about`}
+        href={`${stream.stream.url}/videos`}
         rel="noopener noreferrer"
       >
         <span title={stream.channel_name}>{stream.channel_name}</span>

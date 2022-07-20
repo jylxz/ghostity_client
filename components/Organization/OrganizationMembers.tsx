@@ -1,5 +1,4 @@
 // Libraries
-import axios from "axios";
 import React, { Fragment, useMemo, useState } from "react";
 import { useQuery } from "react-query";
 
@@ -13,6 +12,7 @@ import useHandleFollows from "../../hooks/useHandleFollows";
 import GradientCircularProgress from "../general/GradientCircularProgress";
 import GridWrapper from "../general/GridWrapper";
 import ProfileCard from "../general/ProfileCard";
+import API from "../../API";
 
 function FollowBranchButton({
   organization,
@@ -38,8 +38,13 @@ function FollowBranchButton({
         channels(member.profile_id, profilesList).map((channel) => channel)
       );
     }
+
     return members.flatMap((member) =>
-      member.branch_id === currentBranch
+      member.branch_id === currentBranch ||
+      (member.branches &&
+        member.branches.some(
+          (branch) => branch.branch_id === currentBranch
+        ))
         ? channels(member.profile_id, profilesList).map((channel) => channel)
         : []
     );
@@ -95,16 +100,13 @@ export default function OrganizationMembers({
   members: Member[];
 }) {
   const [currentBranch, setCurrentBranch] = useState(-1);
-  const API = process.env.NEXT_PUBLIC_API as string;
 
   // Fetch Profiles
   const ids = members.map((member) => member.profile_id);
   const fetchProfiles = () =>
-    axios
-      .post<Profile[]>(`${API}/profiles`, {
-        ids,
-      })
-      .then((res) => res.data);
+    API.post<Profile[]>(`/profiles`, {
+      ids,
+    }).then((res) => res.data);
 
   const profiles = useQuery<Profile[], Error>(
     `${organization} member profiles`,
@@ -126,7 +128,13 @@ export default function OrganizationMembers({
       }
 
       return members
-        .filter((member) => member.branch_id === currentBranch)
+        .filter(
+          (member) =>
+            member.branch_id === currentBranch ||
+            (member.branches && member.branches.some(
+              (branch) => branch.branch_id === currentBranch
+            ))
+        )
         .sort(
           (a, b) =>
             getProfile(b.profile_id, profiles.data).channels[0].sub_count -
@@ -142,9 +150,13 @@ export default function OrganizationMembers({
       <div className="flex flex-wrap justify-center text-sm py-2">
         <button type="button" onClick={() => setCurrentBranch(-1)}>
           {currentBranch === -1 ? (
-            <span className="dark:text-text-primary-dark font-semibold px-3">All</span>
+            <span className="dark:text-text-primary-dark font-semibold px-3">
+              All
+            </span>
           ) : (
-            <span className="dark:text-text-secondary-dark text-gray-400 px-3">All</span>
+            <span className="dark:text-text-secondary-dark text-gray-400 px-3">
+              All
+            </span>
           )}
         </button>
         {branches.map((branch) => (
@@ -161,7 +173,9 @@ export default function OrganizationMembers({
                   {branch.name}
                 </span>
               ) : (
-                <span className="dark:text-text-secondary-dark text-gray-400 px-1">{branch.name}</span>
+                <span className="dark:text-text-secondary-dark text-gray-400 px-1">
+                  {branch.name}
+                </span>
               )}
             </button>
           </Fragment>

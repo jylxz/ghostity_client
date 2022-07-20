@@ -1,15 +1,14 @@
 import { ReactElement } from "react";
 import Head from "next/head";
-import axios from "axios";
 
 import OrganizationMain from "../../../components/Organization/OrganizationMain";
 import DefaultKeywords from "../../../components/Head/Keywords";
 import DefaultOpenGraph from "../../../components/Head/OpenGraph";
 import BrowseLayout from "../../../layouts/BrowseLayout";
+import API from "../../../API";
 
-const getAllOrganizationNames = async () => {
-  const API = process.env.NEXT_PUBLIC_API as string;
-  return axios.get<Organization[]>(`${API}/organizations`).then((res) => {
+const getAllOrganizationNames = async () =>
+  API.get<Organization[]>(`/organizations`).then((res) => {
     const organizations = res.data;
 
     return organizations.map((org) => ({
@@ -18,14 +17,11 @@ const getAllOrganizationNames = async () => {
       },
     }));
   });
-};
 
-const getOrganizationData = async (organization: string) => {
-  const API = process.env.NEXT_PUBLIC_API as string;
-  return axios
-    .get<Organization>(`${API}/organizations?name=${organization}`)
-    .then((res) => res.data);
-};
+const getOrganizationData = async (organization: string) =>
+  API.get<Organization>(`/organizations?name=${organization}`).then(
+    (res) => res.data
+  );
 
 export async function getStaticPaths() {
   const paths = await getAllOrganizationNames();
@@ -79,4 +75,3 @@ export default function OrganizationPage({
 OrganizationPage.getLayout = function getLayout(page: ReactElement) {
   return <BrowseLayout>{page}</BrowseLayout>;
 };
-

@@ -1,7 +1,6 @@
 // Libraries
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import axios from "axios";
 import { useQuery } from "react-query";
 
 // Icons
@@ -14,6 +13,7 @@ import TwitterIcon from "../../public/images/TwitterBlue.svg";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 // Components
+import API from "../../API";
 import OrganizationLive from "./OrganizationLive";
 import OrganizationMembers from "./OrganizationMembers";
 import GradientCircularProgress from "../general/GradientCircularProgress";
@@ -60,12 +60,10 @@ export default function OrganizationMain({ org }: { org: Organization }) {
     }
   }, [window]);
 
-  const API = process.env.NEXT_PUBLIC_API as string;
-
   const fetchOrganizationStreams = async () =>
-    axios
-      .get<Stream[]>(`${API}/organizations/${org.name}/streams`)
-      .then((streams) => streams.data);
+    API.get<Stream[]>(`/organizations/${org.name}/streams`).then(
+      (streams) => streams.data
+    );
 
   const { isLoading, error, data } = useQuery<Stream[], Error>(
     `${org.name}`,
@@ -130,7 +128,12 @@ export default function OrganizationMain({ org }: { org: Organization }) {
                     className="flex items-center gap-1 py-1.5"
                   >
                     <div className="w-5 flex items-center">
-                      <Image src={YTIcon} height={15} width={20} alt="YouTube Icon"/>
+                      <Image
+                        src={YTIcon}
+                        height={15}
+                        width={20}
+                        alt="YouTube Icon"
+                      />
                     </div>
                     {!isWindowSmall ? "Youtube" : null}
                   </a>

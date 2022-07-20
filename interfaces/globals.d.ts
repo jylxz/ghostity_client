@@ -71,6 +71,7 @@ declare global {
     branch_id: number;
     branch_name: string;
     primary_language: string;
+    branches?: { branch_name: string; branch_id: number }[];
   }
 
   interface Organization {
@@ -94,7 +95,7 @@ declare global {
   }
 
   interface Organizations extends APINextPrev {
-    results: Organization[]
+    results: Organization[];
   }
 
   interface Profile {
@@ -119,7 +120,7 @@ declare global {
     channels: Channel[];
   }
 
-  interface Profiles extends APINextPrev{
+  interface Profiles extends APINextPrev {
     results: Profile[];
   }
 
@@ -185,9 +186,9 @@ declare global {
 
   interface Search {
     query: {
-      string: string,
-      total: number
-    }
+      string: string;
+      total: number;
+    };
     results: {
       streams: SearchItem<Stream>;
       organizations: SearchItem<Organization>;
