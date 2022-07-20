@@ -42,6 +42,7 @@ export default function GameMain({ gameData }: { gameData: Game }) {
                 src={gameData.cover_img}
                 width={140}
                 height={200}
+                quality={100}
                 className="rounded"
               />
             ) : null}

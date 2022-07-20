@@ -9,7 +9,7 @@ export default function GameCard({ game }: { game: Game }) {
   return (
     <Card className="sm:w-52 select-none dark:bg-secondary-dark">
       <LinkTo href={`/browse/games/${encodeURIComponent(game.name)}`} className="dark:bg-secondary-dark">
-        <Image src={game.cover_img} width="208" height="280" alt={`${game.name} cover art`} className="dark:bg-secondary-dark" />
+        <Image src={game.cover_img} width="208" height="280" alt={`${game.name} cover art`} quality={100} className="dark:bg-secondary-dark" />
       </LinkTo>
       <CardContent className="h-16 pt-2 dark:bg-secondary-dark bg-slate-50">
         <LinkTo href={`/browse/games/${encodeURIComponent(game.name)}`}>

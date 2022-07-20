@@ -53,6 +53,7 @@ export default function SideBarFollowingItem({
 
   const handleBrowseClose = () => {
     clearTimeout(browseTimeout);
+    clearTimeout(scrollTimeout)
   };
 
   const handleBrowseOnClick = () => {
