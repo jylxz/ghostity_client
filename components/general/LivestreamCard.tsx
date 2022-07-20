@@ -162,9 +162,9 @@ function SimpleFollowButton({ channelId }: { channelId: string }) {
       <motion.button
         whileTap={{ scale: 0.7 }}
         className="absolute top-1.5 left-1.5 dark:bg-secondary-dark/80 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
-        onClick={() => follow()}
-        onMouseEnter={() => setHoverState(true)}
-        onMouseLeave={() => setHoverState(false)}
+        onPointerDown={() => follow()}
+        onPointerEnter={() => setHoverState(true)}
+        onPointerLeave={() => setHoverState(false)}
       >
         <AnimatePresence exitBeforeEnter>
           {(() => {
@@ -255,10 +255,6 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
             // priority
           />
         </a>
-        {/* <FollowButton
-          channel={stream.channel_name}
-          channelId={stream.channel_id}
-        /> */}
         <SimpleFollowButton channelId={stream.channel_id} />
         <BlacklistButton stream={stream} />
         <span className="absolute bottom-2 right-1.5 text-primary dark:bg-secondary-dark/80 bg-gray-400/80 rounded p-1 text-sm cursor-default">{`${stream.stream.viewers} viewers`}</span>
