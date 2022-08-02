@@ -25,13 +25,16 @@ export default function Organizations({ orgs }: { orgs: Organization[] }) {
     <>
       <Head>
         <title>vGhostity | Organizations</title>
+        <meta
+          name="description"
+          content="vGhostity supports the biggest Vtuber organizations and agencies, such as Hololive, NIJISANJI, and VShojo. Learn more about them and explore all the other Vtuber organizations and agencies that are currently on vGhostity!"
+        />
       </Head>
       <>
         <DefaultOpenGraph
           title="vGhostity | Organization"
-          description={description}
+          description="vGhostity supports the biggest Vtuber organizations and agencies, such as Hololive, NIJISANJI, and VShojo. Learn more about them and explore all the other Vtuber organizations and agencies that are currently on vGhostity!"
         />
-        <DefaultDescription />
         <DefaultKeywords keywords={orgs.map((org) => org.name)} />
       </>
       <BrowseOrganizations organizations={orgs} />

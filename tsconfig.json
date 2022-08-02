@@ -17,6 +17,6 @@
     "jsx": "preserve",
     "strictFunctionTypes": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js", "next-sitemap.config.mjs"],
   "exclude": ["node_modules", "functions", "**/*.test.tsx"]
 }

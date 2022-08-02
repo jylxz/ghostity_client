@@ -1,3 +1,9 @@
+# *
 User-agent: *
-Disallow: /reset-password
-Disallow: /profile
+Allow: /
+
+# Host
+Host: https://vghostity.com
+
+# Sitemaps
+Sitemap: https://vghostity.com/sitemap.xml
