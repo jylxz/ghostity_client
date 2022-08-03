@@ -6,13 +6,13 @@ import { useQuery } from "react-query";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 // Hooks
-import useHandleFollows from "../../hooks/useHandleFollows";
+import useHandleFollows from "../../hooks/useHandleFollows/useHandleFollows";
 
 // Components
-import GradientCircularProgress from "../general/GradientCircularProgress";
-import GridWrapper from "../general/GridWrapper";
-import ProfileCard from "../general/ProfileCard";
-import API from "../../API";
+import GradientCircularProgress from "../General/GradientCircularProgress";
+import GridWrapper from "../General/GridWrapper";
+import ProfileCard from "../General/ProfileCard";
+import API from "../../services/API/API";
 
 function FollowBranchButton({
   organization,

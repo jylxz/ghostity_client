@@ -12,18 +12,18 @@ import {
 
 // Firebase
 import { signOut } from "firebase/auth";
-import { auth } from "../../firebase/ghostityFirebase";
+import { auth } from "../../services/Firebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
 
 // Components
 import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
-import AnimatedButton from "../general/AnimatedButton";
-import ModalWrapper from "../general/ModalWrapper";
-import LinkTo from "../general/LinkTo";
+import AnimatedButton from "../General/AnimatedButton";
+import ModalWrapper from "../General/ModalWrapper";
+import LinkTo from "../General/LinkTo";
 import UserProfileCard from "./UserProfileCard";
 
 // Context
-import UserContext from "../../context/UserContext";
+import UserContext from "../../contexts/UserContext";
 
 export default function HamburgerNavMenu({
   showHamburgerMenu,

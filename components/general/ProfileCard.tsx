@@ -11,7 +11,7 @@ import YoutubeIcon from "../../public/images/yt_icon_rgb.png";
 import TwitterIcon from "../../public/images/TwitterBlue.svg";
 import BilibiliIcon from "../../public/images/Bilibili_logo.svg";
 // Hooks
-import useHandleFollows from "../../hooks/useHandleFollows";
+import useHandleFollows from "../../hooks/useHandleFollows/useHandleFollows";
 
 const animations = {
   icons: {

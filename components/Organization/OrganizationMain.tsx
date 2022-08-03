@@ -10,18 +10,18 @@ import YTIcon from "../../public/images/yt_icon_rgb.png";
 import TwitterIcon from "../../public/images/TwitterBlue.svg";
 
 // Hooks
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import useWindowDimensions from "../../hooks/useWindowDimensions/useWindowDimensions";
 
 // Components
-import API from "../../API";
+import API from "../../services/API/API";
 import OrganizationLive from "./OrganizationLive";
 import OrganizationMembers from "./OrganizationMembers";
-import GradientCircularProgress from "../general/GradientCircularProgress";
-import ProblemLoading from "../general/ProblemLoading";
-import BrowseWrapper from "../general/BrowseWrapper";
-import BackgroundWrapper from "../general/BackgroundWrapper";
-import AnimatedTabButton from "../general/AnimatedTabButton";
-import AnimatedButton from "../general/AnimatedButton";
+import GradientCircularProgress from "../General/GradientCircularProgress";
+import ProblemLoading from "../General/ProblemLoading";
+import BrowseWrapper from "../General/BrowseWrapper";
+import BackgroundWrapper from "../General/BackgroundWrapper";
+import AnimatedTabButton from "../General/AnimatedTabButton";
+import AnimatedButton from "../General/AnimatedButton";
 
 function SocialMedia({
   social,

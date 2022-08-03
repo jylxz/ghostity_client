@@ -8,13 +8,13 @@ import { GoCheck } from "react-icons/go";
 import { CgProfile } from "react-icons/cg";
 
 // Contexts
-import UserContext from "../../context/UserContext";
+import UserContext from "../../contexts/UserContext";
 
 // Components
 import ProfileUpdateField from "./ProfileUpdateField";
 
 // Firebase
-import { auth } from "../../firebase/ghostityFirebase";
+import { auth } from "../../services/Firebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
 
 export default function ProfileFields() {

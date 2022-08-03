@@ -11,9 +11,9 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 // Components
 import SearchHeading from "./SearchHeading";
-import ProfileCard from "../general/ProfileCard";
-import GridWrapper from "../general/GridWrapper";
-import GradientCircularProgress from "../general/GradientCircularProgress";
+import ProfileCard from "../General/ProfileCard";
+import GridWrapper from "../General/GridWrapper";
+import GradientCircularProgress from "../General/GradientCircularProgress";
 
 // Hooks
 import useInfiniteSearch from "./hooks/useInfiniteSearch";

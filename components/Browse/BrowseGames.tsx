@@ -5,13 +5,13 @@ import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
 // Components
-import GameCard from "../general/GameCard";
-import ProblemLoading from "../general/ProblemLoading";
-import GradientCircularProgress from "../general/GradientCircularProgress";
-import BrowseWrapper from "../general/BrowseWrapper";
-import GridWrapper from "../general/GridWrapper";
-import useIsWindowSmall from "../../hooks/useIsWindowSmall";
-import API from "../../API";
+import API from "services/API";
+import GameCard from "../General/GameCard";
+import ProblemLoading from "../General/ProblemLoading";
+import GradientCircularProgress from "../General/GradientCircularProgress";
+import BrowseWrapper from "../General/BrowseWrapper";
+import GridWrapper from "../General/GridWrapper";
+import useIsWindowSmall from "../../hooks/useIsWindowSmall/useIsWindowSmall";
 
 export default function BrowseGames() {
   const { ref, inView } = useInView();

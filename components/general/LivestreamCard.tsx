@@ -10,12 +10,12 @@ import YoutubeIcon from "../../public/images/yt_icon_rgb.png";
 import TwitchIcon from "../../public/images/TwitchGlitchPurple.svg";
 
 // Contexts
-import UserContext from "../../context/UserContext";
-import AdminContext from "../../context/AdminContext";
-import BlacklistContext from "../../context/BlacklistContext";
+import UserContext from "../../contexts/UserContext";
+import AdminContext from "../../contexts/AdminContext";
+import BlacklistContext from "../../contexts/BlacklistContext";
 
 // Hooks
-import useHandleFollows from "../../hooks/useHandleFollows";
+import useHandleFollows from "../../hooks/useHandleFollows/useHandleFollows";
 
 // Components
 import LinkTo from "./LinkTo";

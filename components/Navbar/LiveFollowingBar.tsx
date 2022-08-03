@@ -10,14 +10,14 @@ import { BsArrowRightShort } from "react-icons/bs";
 
 // Components
 import LiveFollowingBarItem from "./LiveFollowingBarItem";
-import LinkTo from "../general/LinkTo";
+import LinkTo from "../General/LinkTo";
 
 // Contexts
-import UserFollowContext from "../../context/UserFollowContext";
-import UserContext from "../../context/UserContext";
+import UserFollowContext from "../../contexts/UserFollowContext";
+import UserContext from "../../contexts/UserContext";
 
 // Hooks
-import useIsWindowSmall from "../../hooks/useIsWindowSmall";
+import useIsWindowSmall from "../../hooks/useIsWindowSmall/useIsWindowSmall";
 
 // Swiper css
 import "swiper/css";

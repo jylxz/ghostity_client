@@ -26,35 +26,38 @@ import "../styles/globals.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { doc } from "firebase/firestore";
-import { auth, db } from "../firebase/ghostityFirebase";
-// import { auth, db } from "../firebase/ghostityDevFirebase";
+import { auth, db } from "services/Firebase";
 
 // Hooks
-import useAdminCheck from "../hooks/useAdminCheck";
-import useScrollRestoration from "../hooks/useScrollRestoration";
-import useThemeColor from "../hooks/useThemeColor";
+import {
+  useAdminCheck,
+  useScrollRestoration,
+  useThemeColor,
+  useResponsiveBrowseBar,
+} from "hooks";
 
 // Components
 import Navbar from "../components/Navbar/Navbar";
-import PageProgress from "../components/general/PageProgress";
-import BlacklistModal from "../components/general/BlacklistModal";
+import PageProgress from "../components/General/PageProgress";
+import BlacklistModal from "../components/General/BlacklistModal";
 import HamburgerNavMenu from "../components/Navbar/HamburgerNavMenu";
 import AuthModalMain from "../components/Auth/AuthModalMain";
 import AuthVerifyEmail from "../components/Auth/AuthVerifyEmail";
 import AuthUpdateEmail from "../components/Auth/AuthUpdateEmail";
 import AuthPasswordResetMessage from "../components/Auth/AuthPasswordResetMessage";
-
-// Contexts
-import UserContext from "../context/UserContext";
-import UserFollowContext from "../context/UserFollowContext";
-import AdminContext from "../context/AdminContext";
-import BlacklistContext from "../context/BlacklistContext";
 import LiveFollowingBar from "../components/Navbar/LiveFollowingBar";
 import Favicons from "../components/Head/Favicons";
-import ThemeContext from "../context/ThemeContext";
-import NoticeBar from "../components/general/NoticeBar";
-import SidebarContext from "../context/SidebarContext";
-import useResponsiveBrowseBar from "../hooks/useResponsiveBrowseBar";
+import NoticeBar from "../components/General/NoticeBar";
+
+// Contexts
+import {
+  UserContext,
+  UserFollowContext,
+  AdminContext,
+  BlacklistContext,
+  ThemeContext,
+  SidebarContext,
+} from "contexts";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -197,7 +200,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                       <AuthUpdateEmail />
                       <AuthPasswordResetMessage />
                       <div className="sticky sm:relative top-0 z-50 w-full">
-                        <NoticeBar/>
+                        <NoticeBar />
                         <PageProgress />
                         <Navbar
                           showAuth={showAuth}

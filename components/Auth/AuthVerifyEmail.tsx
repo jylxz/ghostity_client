@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { ImCancelCircle } from "react-icons/im";
 import { applyActionCode } from "firebase/auth";
-import { auth } from "../../firebase/ghostityFirebase";
+import { auth } from "../../services/Firebase";
 
 export default function AuthVerifyEmail() {
   const router = useRouter();

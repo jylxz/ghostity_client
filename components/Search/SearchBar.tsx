@@ -6,8 +6,8 @@ import { MdClear } from "react-icons/md";
 import { motion } from "framer-motion";
 import GhostityLogo from "../../public/images/Ghostity-svg.svg";
 import GhostityLogoAlt from "../../public/images/Ghostity-svg-white.svg";
-import ThemeContext from "../../context/ThemeContext";
-import GradientCircularProgress from "../general/GradientCircularProgress";
+import ThemeContext from "../../contexts/ThemeContext";
+import GradientCircularProgress from "../General/GradientCircularProgress";
 
 export default function SearchBar({
   input,

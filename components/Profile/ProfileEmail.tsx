@@ -14,11 +14,11 @@ import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 
 // Firebase
-import { auth } from "../../firebase/ghostityFirebase";
+import { auth } from "../../services/Firebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
 
 // Context
-import UserContext from "../../context/UserContext";
+import UserContext from "../../contexts/UserContext";
 
 // Components
 import ProfileUpdateField from "./ProfileUpdateField";

@@ -13,10 +13,10 @@ import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-import { auth } from "../../firebase/ghostityFirebase";
+import { auth } from "../../services/Firebase";
 
 // Components
-import Modal from "../general/Modal";
+import Modal from "../General/Modal";
 import AuthForgotPassword from "./AuthForgotPassword";
 import AuthSignUp from "./AuthSignUp";
 import VGhostityIcon from "../../public/images/Ghostity-svg.svg";

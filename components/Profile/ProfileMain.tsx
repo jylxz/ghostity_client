@@ -10,11 +10,11 @@ import { AnimatePresence } from "framer-motion";
 import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
 
 // Contexts
-import UserContext from "../../context/UserContext";
-import UserFollowContext from "../../context/UserFollowContext";
+import UserContext from "../../contexts/UserContext";
+import UserFollowContext from "../../contexts/UserFollowContext";
 
 // Components
-import BackgroundWrapper from "../general/BackgroundWrapper";
+import BackgroundWrapper from "../General/BackgroundWrapper";
 import ProfileResendVerification from "./ProfileResendVerification";
 import ProfileDisplayName from "./ProfileDisplayName";
 import ProfileEmail from "./ProfileEmail";

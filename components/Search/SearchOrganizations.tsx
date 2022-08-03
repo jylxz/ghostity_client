@@ -11,9 +11,9 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 // Components
 import SearchHeading from "./SearchHeading";
-import OrganizationCard from "../general/OrganizationCard";
-import GridWrapper from "../general/GridWrapper";
-import GradientCircularProgress from "../general/GradientCircularProgress";
+import OrganizationCard from "../General/OrganizationCard";
+import GridWrapper from "../General/GridWrapper";
+import GradientCircularProgress from "../General/GradientCircularProgress";
 
 // Hooks
 import useHandleCollapseAndExpand from "./hooks/useHandleCollapseAndExpand";

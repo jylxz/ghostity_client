@@ -2,7 +2,7 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import UserContext from "../../context/UserContext";
+import UserContext from "../../contexts/UserContext";
 
 export default function BlacklistModal({
   channel,

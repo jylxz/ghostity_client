@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { IconType } from "react-icons";
 
-import LinkTo from "../general/LinkTo";
+import LinkTo from "../General/LinkTo";
 
 import browseAnimations from "../Browse/animations/browseAnimations";
 

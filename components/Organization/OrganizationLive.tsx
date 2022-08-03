@@ -1,7 +1,7 @@
 import React from "react";
-import GridWrapper from "../general/GridWrapper";
-import LivestreamCard from "../general/LivestreamCard";
-import NoStreams from "../general/NoStreams";
+import GridWrapper from "../General/GridWrapper";
+import LivestreamCard from "../General/LivestreamCard";
+import NoStreams from "../General/NoStreams";
 
 export default function OrganizationLive({
   channels,

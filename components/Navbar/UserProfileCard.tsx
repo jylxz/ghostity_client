@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React, { Dispatch, SetStateAction, useContext } from "react";
-import UserContext from "../../context/UserContext";
-import UserFollowContext from "../../context/UserFollowContext";
-import LinkTo from "../general/LinkTo";
+import UserContext from "../../contexts/UserContext";
+import UserFollowContext from "../../contexts/UserFollowContext";
+import LinkTo from "../General/LinkTo";
 
 export default function UserProfileCard({
   closeParent,

@@ -4,7 +4,7 @@ import { signOut, User } from "firebase/auth";
 import { AiOutlineLogout } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
-import { auth } from "../../firebase/ghostityFirebase";
+import { auth } from "../../services/Firebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
 import UserProfileCard from "./UserProfileCard";
 import HamburgerNavMenuButton from "./HamburgerNavMenuButton";

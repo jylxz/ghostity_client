@@ -5,13 +5,13 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { TextField } from "@mui/material";
 import { confirmPasswordReset, verifyPasswordResetCode } from "firebase/auth";
-import { auth } from "../firebase/ghostityFirebase";
+import { auth } from "../services/Firebase";
 
 // Components
-import AnimatedButton from "../components/general/AnimatedButton";
-import Footer from "../components/general/Footer";
-import LoadingButton from "../components/general/LoadingButton";
-import useValidatePassword from "../hooks/useValidatePassword";
+import AnimatedButton from "../components/General/AnimatedButton";
+import Footer from "../components/General/Footer";
+import LoadingButton from "../components/General/LoadingButton";
+import useValidatePassword from "../hooks/useValidatePassword/useValidatePassword";
 import VGhostityLogo from "../public/images/Ghostity-svg.svg";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -70,7 +70,10 @@ export default function ResetPassword({ email }: { email: string }) {
             <VGhostityLogo />
           </div>
           <h1 className="text-center">{`Reset password for ${email}`}</h1>
-          <form className="flex flex-col gap-4" onSubmit={(e) => handleResetPassword(e)}>
+          <form
+            className="flex flex-col gap-4"
+            onSubmit={(e) => handleResetPassword(e)}
+          >
             <input autoComplete="username email" defaultValue={email} hidden />
             <TextField
               label="New Password"
@@ -93,18 +96,18 @@ export default function ResetPassword({ email }: { email: string }) {
               error={!valid}
               className="w-full"
             />
-          <div className="mx-auto">
-            {!loading ? (
-              <AnimatedButton
-                type="submit"
-                className="bg-primary px-2 py-1 rounded"
-              >
-                Reset Password
-              </AnimatedButton>
-            ) : (
-              <LoadingButton />
-            )}
-          </div>
+            <div className="mx-auto">
+              {!loading ? (
+                <AnimatedButton
+                  type="submit"
+                  className="bg-primary px-2 py-1 rounded"
+                >
+                  Reset Password
+                </AnimatedButton>
+              ) : (
+                <LoadingButton />
+              )}
+            </div>
           </form>
         </div>
         <Footer />

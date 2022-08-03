@@ -4,11 +4,11 @@ import { AiOutlineMail } from "react-icons/ai";
 import { LayoutGroup, motion } from "framer-motion";
 
 // Components
-import BackgroundWrapper from "../general/BackgroundWrapper";
-import Footer from "../general/Footer";
+import BackgroundWrapper from "../General/BackgroundWrapper";
+import Footer from "../General/Footer";
 import FaqOrganization from "./FaqOrganization";
 import FaqVtuber from "./FaqVtuber";
-import AnimatedButton from "../general/AnimatedButton";
+import AnimatedButton from "../General/AnimatedButton";
 import FaqUser from "./FaqUser";
 
 // Images

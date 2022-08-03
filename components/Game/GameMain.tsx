@@ -4,12 +4,12 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 // Hooks
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import useWindowDimensions from "../../hooks/useWindowDimensions/useWindowDimensions";
 
 // Components
-import BrowseWrapper from "../general/BrowseWrapper";
+import BrowseWrapper from "../General/BrowseWrapper";
 import GameStreams from "./GameStreams";
-import BackgroundWrapper from "../general/BackgroundWrapper";
+import BackgroundWrapper from "../General/BackgroundWrapper";
 
 export default function GameMain({ gameData }: { gameData: Game }) {
   const [showFullSummary, setShowFullSummary] = useState(false);

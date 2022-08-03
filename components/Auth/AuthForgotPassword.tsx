@@ -10,11 +10,11 @@ import { BsArrowLeftShort } from "react-icons/bs";
 // Firebase
 import { sendPasswordResetEmail } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
-import { auth } from "../../firebase/ghostityFirebase";
+import { auth } from "../../services/Firebase";
 // import { auth } from "../../firebase/ghostityDevFirebase";
 
 // Components
-import LoadingButton from "../general/LoadingButton";
+import LoadingButton from "../General/LoadingButton";
 import VGhostityIcon from "../../public/images/Ghostity-svg.svg";
 
 export default function AuthForgotPassword({

@@ -1,7 +1,7 @@
 import React from "react";
 
-import BrowseWrapper from "../general/BrowseWrapper";
-import OrganizationCard from "../general/OrganizationCard";
+import BrowseWrapper from "../General/BrowseWrapper";
+import OrganizationCard from "../General/OrganizationCard";
 
 import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
 

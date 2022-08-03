@@ -3,12 +3,8 @@ import Head from "next/head";
 import axios from "axios";
 import BrowseOrganizations from "../../../components/Browse/BrowseOrganizations";
 import DefaultKeywords from "../../../components/Head/Keywords";
-import DefaultDescription, {
-  description,
-} from "../../../components/Head/Description";
 import DefaultOpenGraph from "../../../components/Head/OpenGraph";
 import BrowseLayout from "../../../layouts/BrowseLayout";
-import Organization from "./[organization]";
 
 export async function getStaticProps() {
   const API = process.env.NEXT_PUBLIC_API as string;

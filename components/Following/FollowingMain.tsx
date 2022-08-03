@@ -8,18 +8,18 @@ import axios from "axios";
 import { motion } from "framer-motion";
 
 // Contexts
-import UserContext from "../../context/UserContext";
-import UserFollowContext from "../../context/UserFollowContext";
+import UserContext from "../../contexts/UserContext";
+import UserFollowContext from "../../contexts/UserFollowContext";
 
 // Components
-import LivestreamCard from "../general/LivestreamCard";
-import BrowseWrapper from "../general/BrowseWrapper";
-import GradientCircularProgress from "../general/GradientCircularProgress";
-import ProblemLoading from "../general/ProblemLoading";
+import LivestreamCard from "../General/LivestreamCard";
+import BrowseWrapper from "../General/BrowseWrapper";
+import GradientCircularProgress from "../General/GradientCircularProgress";
+import ProblemLoading from "../General/ProblemLoading";
 import FollowingEmpty from "./FollowingEmpty";
-import GridWrapper from "../general/GridWrapper";
-import AnimateTabButton from "../general/AnimatedTabButton";
-import ProfileCard from "../general/ProfileCard";
+import GridWrapper from "../General/GridWrapper";
+import AnimateTabButton from "../General/AnimatedTabButton";
+import ProfileCard from "../General/ProfileCard";
 
 
 export default function FollowingMain() {

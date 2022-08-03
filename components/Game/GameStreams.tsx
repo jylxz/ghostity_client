@@ -7,10 +7,10 @@ import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
 // Components
-import LivestreamCard from "../general/LivestreamCard";
-import GradientCircularProgress from "../general/GradientCircularProgress";
-import ProblemLoading from "../general/ProblemLoading";
-import GridWrapper from "../general/GridWrapper";
+import LivestreamCard from "../General/LivestreamCard";
+import GradientCircularProgress from "../General/GradientCircularProgress";
+import ProblemLoading from "../General/ProblemLoading";
+import GridWrapper from "../General/GridWrapper";
 
 export default function GameStreams({ game }: { game: string }) {
   const { ref, inView } = useInView();

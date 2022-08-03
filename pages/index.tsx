@@ -1,22 +1,26 @@
 // Libraries
 import Head from "next/head";
-import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
 
+// Services
+import API from "services/API";
+
 // Components
-import HomeWelcome from "../components/Home/HomeWelcome";
-import Footer from "../components/general/Footer";
-import HomeLive from "../components/Home/HomeLive";
-import HomeOrganizations from "../components/Home/HomeOrganizations";
-import HomeBrowse from "../components/Home/HomeBrowse";
-import HomeHelp from "../components/Home/HomeHelp";
-import HomeStats from "../components/Home/HomeStats";
-import API from "../API";
-import DefaultDescription, {
-  description,
-} from "../components/Head/Description";
-import DefaultKeywords from "../components/Head/Keywords";
-import DefaultOpenGraph from "../components/Head/OpenGraph";
+import Footer from "@general/Footer";
+import {
+  HomeLive,
+  HomeWelcome,
+  HomeOrganizations,
+  HomeBrowse,
+  HomeHelp,
+  HomeStats,
+} from "components/Home";
+import {
+  DefaultDescription,
+  DefaultKeywords,
+  DefaultOpenGraph,
+} from "components/Head";
+import { description } from "components/Head/Description";
 
 export const getStaticProps: GetStaticProps = async () => {
   const logos = await API.get<OrganizationLogos>("/organizations/logos").then(
@@ -28,7 +32,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 function Home({ logos }: OrganizationLogos) {
   return (
-    <motion.div className="overflow-hidden">
+    <>
       <Head>
         <title>vGhostity | Home</title>
       </Head>
@@ -44,8 +48,8 @@ function Home({ logos }: OrganizationLogos) {
       <HomeStats />
       <HomeHelp />
       <Footer />
-    </motion.div>
+    </>
   );
 }
 
-export default Home
+export default Home;

@@ -5,7 +5,7 @@ import OrganizationMain from "../../../components/Organization/OrganizationMain"
 import DefaultKeywords from "../../../components/Head/Keywords";
 import DefaultOpenGraph from "../../../components/Head/OpenGraph";
 import BrowseLayout from "../../../layouts/BrowseLayout";
-import API from "../../../API";
+import API from "../../../services/API";
 
 const getAllOrganizationNames = async () =>
   API.get<Organization[]>(`/organizations`).then((res) => {

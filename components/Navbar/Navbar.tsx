@@ -9,14 +9,14 @@ import { BiMenu } from "react-icons/bi";
 // Components
 import { MdOutlineDarkMode } from "react-icons/md";
 import { BsFillSunFill } from "react-icons/bs";
-import LinkTo from "../general/LinkTo";
+import LinkTo from "../General/LinkTo";
 import NavbarProfileButton from "./NavbarProfile";
 
 // Contexts
-import UserContext from "../../context/UserContext";
+import UserContext from "../../contexts/UserContext";
 
 // Hooks
-import useIsWindowSmall from "../../hooks/useIsWindowSmall";
+import useIsWindowSmall from "../../hooks/useIsWindowSmall/useIsWindowSmall";
 
 // Images
 import VGhostityLogo from "../../public/images/Ghostity-svg.svg?component";

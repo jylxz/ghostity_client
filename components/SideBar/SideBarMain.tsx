@@ -12,11 +12,11 @@ import { BiSearchAlt, BiArrowToLeft, BiArrowFromLeft } from "react-icons/bi";
 import VGhostityIcon from "../../public/images/Ghostity-svg.svg";
 
 // Contexts
-import UserContext from "../../context/UserContext";
-import UserFollowContext from "../../context/UserFollowContext";
+import UserContext from "../../contexts/UserContext";
+import UserFollowContext from "../../contexts/UserFollowContext";
 
 // Hooks
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import useWindowDimensions from "../../hooks/useWindowDimensions/useWindowDimensions";
 
 // Components
 import SideBarBrowseItem from "./SideBarBrowseItem";
@@ -25,8 +25,8 @@ import SideBarFollowingItem from "./SideBarFollowingItem";
 
 // Animations
 import browseAnimations from "../Browse/animations/browseAnimations";
-import useIsWindowSmall from "../../hooks/useIsWindowSmall";
-import SidebarContext from "../../context/SidebarContext";
+import useIsWindowSmall from "../../hooks/useIsWindowSmall/useIsWindowSmall";
+import SidebarContext from "../../contexts/SidebarContext";
 
 export default function SideBarMain() {
   const animations = browseAnimations.sidebar;

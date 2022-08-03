@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import Footer from "../../components/general/Footer";
+import Footer from "../../components/General/Footer";
 import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
 
 export default function PrivatePolicy() {

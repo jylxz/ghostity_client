@@ -9,8 +9,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { AiOutlineFilter } from "react-icons/ai";
 
 // Components
-import { CustomSelect, StyledOption } from "../general/CustomSelect";
-import { Filter, Filters } from "../../hooks/useHandleFilters";
+import { CustomSelect, StyledOption } from "../General/CustomSelect";
+import { Filter, Filters } from "../../hooks/useHandleFilters/useHandleFilters";
 
 export default function BrowseStreamsFilters({
   filters,

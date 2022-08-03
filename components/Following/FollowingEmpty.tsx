@@ -1,5 +1,5 @@
 import React from "react";
-import BrowseWrapper from "../general/BrowseWrapper";
+import BrowseWrapper from "../General/BrowseWrapper";
 import VGhostityIcon from "../../public/images/Ghostity-svg.svg"
 
 export default function FollowingEmpty() {

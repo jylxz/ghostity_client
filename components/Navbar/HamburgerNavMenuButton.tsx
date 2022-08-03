@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconType } from 'react-icons'
-import AnimatedButton from '../general/AnimatedButton'
-import LinkTo from '../general/LinkTo';
+import AnimatedButton from '../General/AnimatedButton'
+import LinkTo from '../General/LinkTo';
 
 export default function HamburgerNavMenuButtons({title, onClick, icon, href}: {
   title: string,
