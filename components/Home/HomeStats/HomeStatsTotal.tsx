@@ -118,7 +118,7 @@ export default function HomeStatsTotal({
     setChartData(data);
   }, [stats, theme]);
 
-  return currentTab === "total" && (
+  return currentTab === "total" ? (
     <Line ref={chartRef} options={chartOptions} data={chartData} height={420} />
-  );
+  ) : null;
 }

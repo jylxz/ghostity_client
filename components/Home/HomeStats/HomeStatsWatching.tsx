@@ -82,7 +82,7 @@ export default function HomeStatsWatching({
     setChartData(data);
   }, [stats, theme]);
 
-  return currentTab === "watching" && (
+  return currentTab === "watching" ? (
     <Line ref={chartRef} options={chartOptions} data={chartData} height={400} />
-  );
+  ) : null;
 }

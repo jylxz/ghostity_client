@@ -122,7 +122,7 @@ export default function HomeStatsLive({
     setChartData(data);
   }, [stats, theme]);
 
-  return currentTab === "live" && (
+  return currentTab === "live" ? (
     <Line ref={chartRef} options={chartOptions} data={chartData} height={400} />
-  );
+  ) : null;
 }

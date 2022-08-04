@@ -20,7 +20,7 @@ import {
 import type { NextPage } from "next";
 
 // Tailwind & CSS
-import "../styles/globals.css";
+import "styles/globals.css";
 
 // Firebase
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -37,17 +37,17 @@ import {
 } from "hooks";
 
 // Components
-import Navbar from "../components/Navbar/Navbar";
-import PageProgress from "../components/General/PageProgress";
-import BlacklistModal from "../components/General/BlacklistModal";
-import HamburgerNavMenu from "../components/Navbar/HamburgerNavMenu";
-import AuthModalMain from "../components/Auth/AuthModalMain";
-import AuthVerifyEmail from "../components/Auth/AuthVerifyEmail";
-import AuthUpdateEmail from "../components/Auth/AuthUpdateEmail";
-import AuthPasswordResetMessage from "../components/Auth/AuthPasswordResetMessage";
-import LiveFollowingBar from "../components/Navbar/LiveFollowingBar";
-import Favicons from "../components/Head/Favicons";
-import NoticeBar from "../components/General/NoticeBar";
+import Navbar from "components/Navbar/Navbar";
+import PageProgress from "@general/PageProgress";
+import BlacklistModal from "@general/BlacklistModal";
+import HamburgerNavMenu from "components/Navbar/HamburgerNavMenu";
+import AuthModalMain from "components/Auth/AuthModalMain";
+import AuthVerifyEmail from "components/Auth/AuthVerifyEmail";
+import AuthUpdateEmail from "components/Auth/AuthUpdateEmail";
+import AuthPasswordResetMessage from "components/Auth/AuthPasswordResetMessage";
+import LiveFollowingBar from "components/Navbar/LiveFollowingBar";
+import Favicons from "components/Head/Favicons";
+import NoticeBar from "@general/NoticeBar";
 
 // Contexts
 import {
