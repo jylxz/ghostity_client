@@ -2,7 +2,7 @@ import BackgroundWrapper from "@general/BackgroundWrapper";
 import React from "react";
 import Image from "next/image";
 import { GoLocation } from "react-icons/go";
-import OrganizationLinks from "./OrganizationLinks";
+import OrganizationBannerLinks from "./Links";
 
 export default function OrganizationBanner({
   organization,
@@ -44,7 +44,7 @@ export default function OrganizationBanner({
             </span>
           </div>
         </div>
-        <OrganizationLinks organization={organization} />
+        <OrganizationBannerLinks organization={organization} />
       </div>
     </BackgroundWrapper>
   );

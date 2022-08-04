@@ -10,13 +10,15 @@ import API from "services/API";
 
 // Components
 import { DefaultKeywords, DefaultOpenGraph } from "components/Head";
-import OrganizationLive from "components/Organization/OrganizationLive";
-import OrganizationMembers from "components/Organization/OrganizationMembers";
+import {
+  OrganizationBanner,
+  OrganizationLive,
+  OrganizationMembers,
+  OrganizationTabsBar,
+} from "components/Organization";
 import GradientCircularProgress from "@general/GradientCircularProgress";
 import ProblemLoading from "@general/ProblemLoading";
 import BrowseWrapper from "@general/BrowseWrapper";
-import OrganizationBanner from "components/Organization/OrganizationBanner";
-import OrganizationTabsBar from "components/Organization/OrganizationTabsBar";
 
 const getAllOrganizationNames = async () =>
   API.get<Organization[]>(`/organizations`).then((res) => {

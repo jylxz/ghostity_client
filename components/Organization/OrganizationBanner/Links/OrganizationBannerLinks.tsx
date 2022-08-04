@@ -4,7 +4,7 @@ import OrganizationSocialMedia from "./OrganizationSocialMedia";
 import OrganizationWebsite from "./OrganizationWebsite";
 import OrganizationYouTube from "./OrganizationYouTube";
 
-export default function OrganizationLinks({
+export default function OrganizationBannerLinks({
   organization,
 }: {
   organization: Organization;
