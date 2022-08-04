@@ -1,11 +1,22 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import Head from "next/head";
+import { useQuery } from "react-query";
 
-import OrganizationMain from "../../../components/Organization/OrganizationMain";
-import DefaultKeywords from "../../../components/Head/Keywords";
-import DefaultOpenGraph from "../../../components/Head/OpenGraph";
-import BrowseLayout from "../../../layouts/BrowseLayout";
-import API from "../../../services/API";
+// Layout
+import BrowseLayout from "layouts/BrowseLayout";
+
+// Services
+import API from "services/API";
+
+// Components
+import { DefaultKeywords, DefaultOpenGraph } from "components/Head";
+import OrganizationLive from "components/Organization/OrganizationLive";
+import OrganizationMembers from "components/Organization/OrganizationMembers";
+import GradientCircularProgress from "@general/GradientCircularProgress";
+import ProblemLoading from "@general/ProblemLoading";
+import BrowseWrapper from "@general/BrowseWrapper";
+import OrganizationBanner from "components/Organization/OrganizationBanner";
+import OrganizationTabsBar from "components/Organization/OrganizationTabsBar";
 
 const getAllOrganizationNames = async () =>
   API.get<Organization[]>(`/organizations`).then((res) => {
@@ -19,7 +30,7 @@ const getAllOrganizationNames = async () =>
   });
 
 const getOrganizationData = async (organization: string) =>
-  API.get<Organization>(`/organizations?name=${organization}`).then(
+  API.get<Organization[]>(`/organizations?name=${organization}`).then(
     (res) => res.data
   );
 
@@ -38,7 +49,7 @@ export async function getStaticProps({
 
   return {
     props: {
-      organization,
+      organization: organization[0],
     },
     revalidate: 1000,
   };
@@ -47,27 +58,65 @@ export async function getStaticProps({
 export default function OrganizationPage({
   organization,
 }: {
-  organization: Organization[];
+  organization: Organization;
 }) {
+  const [currentTab, setCurrentTab] = useState("Live Members");
+
+  const fetchOrganizationStreams = async () =>
+    API.get<Stream[]>(`/organizations/${organization.name}/streams`).then(
+      (streams) => streams.data
+    );
+
+  const { isLoading, error, data } = useQuery<Stream[], Error>(
+    `${organization.name}`,
+    fetchOrganizationStreams
+  );
+
   return (
     <>
       <Head>
-        <title>vGhostity | {organization[0].name}</title>
+        <title>vGhostity | {organization.name}</title>
         <meta
           name="description"
-          content={`Discover and follow ${organization[0].name} and their VTubers on vGhostity! See who is live and start watching them instantly!`}
+          content={`Discover and follow ${organization.name} and their VTubers on vGhostity! See who is live and start watching them instantly!`}
         />
       </Head>
       <>
         <DefaultOpenGraph
-          title={`vGhostity | ${organization[0].name}`}
-          description={`Discover and follow ${organization[0].name} and their VTubers on vGhostity! See who is live and start watching them instantly!`}
+          title={`vGhostity | ${organization.name}`}
+          description={`Discover and follow ${organization.name} and their VTubers on vGhostity! See who is live and start watching them instantly!`}
         />
         <DefaultKeywords
-          keywords={`Vtuber agency, Vtuber organization, ${organization[0].name}, ${organization[0].name} members`}
+          keywords={`Vtuber agency, Vtuber organization, ${organization.name}, ${organization.name} members`}
         />
       </>
-      <OrganizationMain org={organization[0]} />
+      <BrowseWrapper className="overflow-y-scroll">
+        <OrganizationBanner organization={organization} />
+        <OrganizationTabsBar
+          currentTab={currentTab}
+          setCurrentTab={setCurrentTab}
+        />
+        {error && (
+          <div className="flex flex-col h-48 text-sm">
+            <ProblemLoading />
+          </div>
+        )}
+        {isLoading && (
+          <div className="flex-1 flex justify-center items-center">
+            <GradientCircularProgress />
+          </div>
+        )}
+        {currentTab === "Live Members" && data && (
+          <OrganizationLive channels={data} />
+        )}
+        {currentTab === "All Members" && (
+          <OrganizationMembers
+            organization={organization.name}
+            branches={organization.branches}
+            members={organization.members}
+          />
+        )}
+      </BrowseWrapper>
     </>
   );
 }

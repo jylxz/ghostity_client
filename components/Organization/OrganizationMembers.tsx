@@ -12,7 +12,7 @@ import useHandleFollows from "../../hooks/useHandleFollows/useHandleFollows";
 import GradientCircularProgress from "../General/GradientCircularProgress";
 import GridWrapper from "../General/GridWrapper";
 import ProfileCard from "../General/ProfileCard";
-import API from "../../services/API/API";
+import API from "services/API";
 
 function FollowBranchButton({
   organization,
