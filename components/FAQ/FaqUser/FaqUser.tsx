@@ -2,8 +2,8 @@ import React from "react";
 import { Accordion } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { AnimatePresence, motion } from "framer-motion";
-import FaqAccordionSummary from "./FaqAccordionSummary"
-import FaqAccordionDetails from "./FaqAccordionDetails"
+import FaqAccordionSummary from "../FaqAccordionSummary"
+import FaqAccordionDetails from "../FaqAccordionDetails"
 
 export default function FaqUser({ currentTab }: { currentTab: string }) {
   return (

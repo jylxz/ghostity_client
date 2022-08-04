@@ -3,8 +3,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { AnimatePresence, motion } from "framer-motion";
 
 import React from "react";
-import FaqAccordionDetails from "./FaqAccordionDetails";
-import FaqAccordionSummary from "./FaqAccordionSummary";
+import FaqAccordionDetails from "../FaqAccordionDetails";
+import FaqAccordionSummary from "../FaqAccordionSummary";
 
 export default function FaqOrganization({
   currentTab,

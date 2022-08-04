@@ -2,8 +2,8 @@ import { Accordion, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import FaqAccordionDetails from "./FaqAccordionDetails";
-import FaqAccordionSummary from "./FaqAccordionSummary"
+import FaqAccordionDetails from "../FaqAccordionDetails";
+import FaqAccordionSummary from "../FaqAccordionSummary"
 
 export default function FaqVtuber({ currentTab }: { currentTab: string }) {
   return (
