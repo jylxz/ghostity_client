@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "@general/*": ["components/General/*"],
+      "@general/*": ["./components/General/*"],
       "@images/*": ["./public/images/*"]
     },
     "types": ["@honkhonk/vite-plugin-svgr/client"],
