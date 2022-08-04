@@ -1,17 +1,24 @@
 import React, { ReactElement } from "react";
 import Head from "next/head";
-import axios from "axios";
-import BrowseOrganizations from "../../../components/Browse/BrowseOrganizations";
-import DefaultKeywords from "../../../components/Head/Keywords";
-import DefaultOpenGraph from "../../../components/Head/OpenGraph";
-import BrowseLayout from "../../../layouts/BrowseLayout";
+
+// Services
+import API from "services/API";
+
+// Layout
+import BrowseLayout from "layouts/BrowseLayout";
+
+// Images
+import VGhostityLogo from "@images/Ghostity-svg.svg";
+
+// Components
+import { DefaultKeywords, DefaultOpenGraph } from "components/Head";
+import BrowseWrapper from "@general/BrowseWrapper";
+import OrganizationCard from "@general/OrganizationCard";
 
 export async function getStaticProps() {
-  const API = process.env.NEXT_PUBLIC_API as string;
-
-  const orgs = await axios
-    .get<Organization[]>(`${API}/organizations`)
-    .then((allOrgs) => allOrgs.data);
+  const orgs = await API.get<Organization[]>(`/organizations`).then(
+    (allOrgs) => allOrgs.data
+  );
 
   return { props: { orgs }, revalidate: 1000 };
 }
@@ -33,7 +40,29 @@ export default function Organizations({ orgs }: { orgs: Organization[] }) {
         />
         <DefaultKeywords keywords={orgs.map((org) => org.name)} />
       </>
-      <BrowseOrganizations organizations={orgs} />
+      <BrowseWrapper>
+        <div className="w-full flex flex-wrap text-xl font-medium justify-center gap-2 mb-4">
+          <h2 className="flex dark:text-text-primary-dark">
+            Organizations currently on
+          </h2>
+          <span className=" text-primary flex gap-2">
+            vGhostity
+            <div className="w-8 h-8 -scale-x-100 dark:fill-white">
+              <VGhostityLogo />
+            </div>
+          </span>
+        </div>
+        <div className="grid grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] gap-7 justify-items-center">
+          {orgs.map((org) => (
+            <OrganizationCard
+              key={org._id}
+              title={org.name}
+              image={org.logo}
+              languages={org.languages}
+            />
+          ))}
+        </div>
+      </BrowseWrapper>
     </>
   );
 }

@@ -1,29 +1,26 @@
 /* eslint-disable react/no-array-index-key */
 // Libraries
 import React, { Fragment, useEffect } from "react";
-import axios from "axios";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
+// Services
+import API from "services/API";
+
 // Components
-import LivestreamCard from "../General/LivestreamCard";
-import GradientCircularProgress from "../General/GradientCircularProgress";
-import ProblemLoading from "../General/ProblemLoading";
-import GridWrapper from "../General/GridWrapper";
+import LivestreamCard from "@general/LivestreamCard";
+import GradientCircularProgress from "@general/GradientCircularProgress";
+import ProblemLoading from "@general/ProblemLoading";
+import GridWrapper from "@general/GridWrapper";
 
 export default function GameStreams({ game }: { game: string }) {
   const { ref, inView } = useInView();
-  const API = process.env.NEXT_PUBLIC_API as string
 
   const fetchGameStreams = async ({ pageParam = 1 }) =>
-    axios
-      .get<Streams>(
-        `${API}/games/${encodeURIComponent(
-          game
-        )}/streams?page=${pageParam}`
-      )
-      .then((res) => res.data);
+    API.get<Streams>(
+      `/games/${encodeURIComponent(game)}/streams?page=${pageParam}`
+    ).then((res) => res.data);
 
   const { data, error, fetchNextPage, hasNextPage, isLoading } =
     useInfiniteQuery<Streams, Error>(`${game}/streams`, fetchGameStreams, {
@@ -53,10 +50,7 @@ export default function GameStreams({ game }: { game: string }) {
 
   return (
     <>
-      <GridWrapper
-        colSize="normal"
-        
-      >
+      <GridWrapper colSize="normal">
         {data?.pages.map((group, i) => (
           <Fragment key={i}>
             {group.results.map((stream) => (
@@ -67,14 +61,14 @@ export default function GameStreams({ game }: { game: string }) {
           </Fragment>
         ))}
       </GridWrapper>
-      {hasNextPage ? (
+      {hasNextPage && (
         <div
           ref={ref}
           className="flex justify-center items-center pt-10 pb-3 h-24"
         >
           <GradientCircularProgress />
         </div>
-      ) : null}
+      )}
     </>
   );
 }
