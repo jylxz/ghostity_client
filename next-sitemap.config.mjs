@@ -3,7 +3,7 @@ const config = {
   siteUrl: "https://vghostity.com",
   generateRobotsTxt: true, // (optional)
   // ...other options
-  exclude: ["/resetPassword", "/profile"],
+  exclude: ["/resetPassword", "/account"],
 };
 
 export default config;
