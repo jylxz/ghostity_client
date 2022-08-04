@@ -2,10 +2,10 @@ import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
-import UserContext from "../../contexts/UserContext";
-import ModelWrapper from "../General/ModalWrapper";
-import AnimatedButton from "../General/AnimatedButton";
-import { auth } from "../../services/Firebase";
+import UserContext from "contexts/UserContext";
+import ModelWrapper from "@general/ModalWrapper";
+import AnimatedButton from "@general/AnimatedButton";
+import { auth } from "services/Firebase";
 
 function PfpCards({
   src,
@@ -31,7 +31,7 @@ function PfpCards({
   );
 }
 
-export default function ProfileChangePfp({
+export default function AccountChangePfp({
   setEditPfp,
 }: {
   setEditPfp: Dispatch<SetStateAction<boolean>>;

@@ -2,22 +2,22 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
 
+// Services
+import { auth } from "services/Firebase";
+
 // Icons
 import { MdEdit } from "react-icons/md";
 import { GoCheck } from "react-icons/go";
 import { CgProfile } from "react-icons/cg";
 
 // Contexts
-import UserContext from "../../contexts/UserContext";
+import UserContext from "contexts/UserContext";
 
 // Components
-import ProfileUpdateField from "./ProfileUpdateField";
+import AccountMainUpdateField from "../UpdateField/AccountMainUpdateField";
 
-// Firebase
-import { auth } from "../../services/Firebase";
-// import { auth } from "../../firebase/ghostityDevFirebase";
 
-export default function ProfileFields() {
+export default function AccountMainDisplayName() {
   const user = useContext(UserContext);
   const [edit, setEdit] = useState(false);
   const [disable, setDisable] = useState(true);
@@ -74,7 +74,7 @@ export default function ProfileFields() {
         <div className="mr-3 mt-5">
           <CgProfile className="w-4 h-4 dark:text-primary" />
         </div>
-        <ProfileUpdateField
+        <AccountMainUpdateField
           label="Display Name"
           type="text"
           value={displayName}
@@ -94,7 +94,14 @@ export default function ProfileFields() {
             setHelperText("");
           }}
         >
-          <MdEdit size={20} className={`${disable ? "text-text-secondary-dark" : "text-black dark:text-primary"}`}/>
+          <MdEdit
+            size={20}
+            className={`${
+              disable
+                ? "text-text-secondary-dark"
+                : "text-black dark:text-primary"
+            }`}
+          />
         </button>
       ) : (
         <div className="dark:text-primary flex justify-end items-center gap-3 mt-2">

@@ -5,14 +5,14 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { TextField } from "@mui/material";
 import { confirmPasswordReset, verifyPasswordResetCode } from "firebase/auth";
-import { auth } from "../services/Firebase";
+import { auth } from "services/Firebase";
 
 // Components
-import AnimatedButton from "../components/General/AnimatedButton";
-import Footer from "../components/General/Footer";
-import LoadingButton from "../components/General/LoadingButton";
-import useValidatePassword from "../hooks/useValidatePassword/useValidatePassword";
-import VGhostityLogo from "../public/images/Ghostity-svg.svg";
+import AnimatedButton from "@general/AnimatedButton";
+import Footer from "@general/Footer";
+import LoadingButton from "@general/LoadingButton";
+import useValidatePassword from "hooks/useValidatePassword/useValidatePassword";
+import VGhostityLogo from "@images/Ghostity-svg.svg";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const props = await verifyPasswordResetCode(

@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import React, { Dispatch, SetStateAction } from "react";
 
-export default function ProfileUpdateField({
+export default function AccountUpdateField({
   label,
   type,
   value,

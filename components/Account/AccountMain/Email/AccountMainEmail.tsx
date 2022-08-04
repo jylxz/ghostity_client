@@ -13,17 +13,16 @@ import { GoCheck } from "react-icons/go";
 import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 
-// Firebase
-import { auth } from "../../services/Firebase";
-// import { auth } from "../../firebase/ghostityDevFirebase";
+// Services
+import { auth } from "services/Firebase";
 
 // Context
-import UserContext from "../../contexts/UserContext";
+import UserContext from "contexts/UserContext";
 
 // Components
-import ProfileUpdateField from "./ProfileUpdateField";
+import AccountMainUpdateField from "../UpdateField/AccountMainUpdateField";
 
-export default function ProfileEmail() {
+export default function AccountMainEmail() {
   const user = useContext(UserContext);
   const [edit, setEdit] = useState(false);
   const [disable, setDisable] = useState(true);
@@ -139,7 +138,7 @@ export default function ProfileEmail() {
           <div className="mr-3 mt-3">
             <AiOutlineMail className="dark:text-primary w-4 h-4" />
           </div>
-          <ProfileUpdateField
+          <AccountMainUpdateField
             label="Email"
             type="email"
             autoComplete="username email"
@@ -174,7 +173,7 @@ export default function ProfileEmail() {
             <div className="mr-3 mt-5">
               <AiOutlineMail className="w-4 h-4 dark:text-primary" />
             </div>
-            <ProfileUpdateField
+            <AccountMainUpdateField
               label="Email"
               type="email"
               autoComplete="username email"
@@ -189,7 +188,7 @@ export default function ProfileEmail() {
             <div className="mt-5 mr-3">
               <RiLockPasswordLine className="w-4 h-4 dark:text-primary" />
             </div>
-            <ProfileUpdateField
+            <AccountMainUpdateField
               label="Current Password"
               type="password"
               autoComplete="current-password"

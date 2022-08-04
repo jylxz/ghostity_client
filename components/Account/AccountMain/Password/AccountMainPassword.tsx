@@ -11,16 +11,15 @@ import {RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 
 // Firebase
 import { FirebaseError } from "firebase/app";
-import { auth } from "../../services/Firebase";
-// import { auth } from "../../firebase/ghostityDevFirebase";
+import { auth } from "services/Firebase";
 
 // Context
-import UserContext from "../../contexts/UserContext";
+import UserContext from "contexts/UserContext";
 
 // Components
-import ProfileUpdateField from "./ProfileUpdateField";
+import AccountMainUpdateField from "../UpdateField/AccountMainUpdateField";
 
-export default function ProfilePassword() {
+export default function AccountMainPassword() {
   const user = useContext(UserContext);
   const [edit, setEdit] = useState(false);
   const [disable, setDisable] = useState(true);
@@ -218,7 +217,7 @@ export default function ProfilePassword() {
             <div className="mr-3 mt-1">
               <RiLockPasswordLine className="w-4 h-4 dark:text-primary" />
             </div>
-            <ProfileUpdateField
+            <AccountMainUpdateField
               label="Current Password"
               type="password"
               value={currentPassword}
@@ -233,7 +232,7 @@ export default function ProfilePassword() {
             <div className="mr-3 self-start mt-[1.1rem]">
               <RiLockPasswordLine className="w-4 h-4 dark:text-primary" />
             </div>
-            <ProfileUpdateField
+            <AccountMainUpdateField
               label="New Password"
               type="password"
               value={newPassword}
@@ -248,7 +247,7 @@ export default function ProfilePassword() {
             <div className="mr-3 mt-2">
               <RiLockPasswordFill className="w-4 h-4 dark:text-primary" />
             </div>
-            <ProfileUpdateField
+            <AccountMainUpdateField
               label="Confirm New Password"
               type="password"
               value={confirmNewPassword}
