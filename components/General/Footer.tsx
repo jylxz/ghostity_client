@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
+import Ghostity from "@logo/Ghostity.svg";
 import LinkTo from "./LinkTo";
 
 const animations = {
@@ -62,7 +62,7 @@ function Footer() {
           <LinkTo href="/">
             <div className=" flex gap-2 items-center text-2xl border-b dark:border-text-primary-dark border-black pb-2 mb-2">
               <div>
-                <VGhostityLogo className="h-12 w-12 dark:fill-text-primary-dark" />
+                <Ghostity className="h-12 w-12 dark:fill-text-primary-dark" />
               </div>
               <h1 className="text-3xl sm:text-4xl text-black dark:text-text-primary-dark">
                 vGhostity
@@ -91,7 +91,7 @@ function Footer() {
               <FavoriteBorderIcon className="text-sm ml-2" />
             </motion.div>
             <motion.div variants={animations.ghostVariant}>
-              <VGhostityLogo className="h-5 w-5 -scale-x-100 dark:fill-primary" />
+              <Ghostity className="h-5 w-5 -scale-x-100 dark:fill-primary" />
             </motion.div>
           </motion.div>
         </div>

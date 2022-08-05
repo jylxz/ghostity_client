@@ -1,10 +1,10 @@
 import React from 'react'
 
 // Images and Icons
-import VGhostityLogo from "@images/Ghostity-svg.svg";
+import Ghostity from "@logo/Ghostity.svg";
 import { AiOutlineMail } from 'react-icons/ai';
-import TwitterIcon from "@images/TwitterBlue.svg";
-import DiscordIcon from "@images/Discord-Logo-Color.svg";
+import TwitterIcon from "@icons/TwitterBlue.svg";
+import DiscordIcon from "@icons/Discord.svg";
 
 // Components
 import BackgroundWrapper from '@general/BackgroundWrapper';
@@ -14,7 +14,7 @@ export default function FaqBanner() {
     <BackgroundWrapper image="https://res.cloudinary.com/ghostity/image/upload/v1656533585/banner/Banner_1_hstgss.png">
       <div className="h-64 flex flex-col justify-center items-center">
         <div className="bg-primary w-20 h-20 p-4 rounded-full">
-          <VGhostityLogo />
+          <Ghostity />
         </div>
         <h1 className="text-2xl dark:text-text-primary-dark font-semibold">
           Frequently Asked Questions

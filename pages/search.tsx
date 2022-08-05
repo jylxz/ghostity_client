@@ -13,7 +13,7 @@ import BrowseLayout from "layouts/BrowseLayout"
 // Components
 import DefaultKeywords from "components/Head/Keywords";
 import BrowseWrapper from "@general/BrowseWrapper";
-import SearchBar from "components/Search/SearchBar";
+import SearchBar from "components/Search/SearchBar/SearchBar";
 import SearchStream from "components/Search/SearchStream";
 import SearchProfiles from "components/Search/SearchProfiles";
 import SearchOrganizations from "components/Search/SearchOrganizations";

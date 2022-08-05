@@ -3,3 +3,4 @@ vitest.config.js
 tailwind.config.js
 next-sitemap.config.mjs
 *.test.tsx
+vitest.setup.ts

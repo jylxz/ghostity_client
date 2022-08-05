@@ -5,6 +5,8 @@ import { AnimationProps, motion } from "framer-motion";
 
 // Icons
 import { BiMenu } from "react-icons/bi";
+import Ghostity from "@logo/Ghostity.svg?component";
+import GhostityWhite from "@logo/GhostityWhite.svg?component";
 
 // Components
 import { MdOutlineDarkMode } from "react-icons/md";
@@ -19,8 +21,6 @@ import UserContext from "../../contexts/UserContext";
 import useIsWindowSmall from "../../hooks/useIsWindowSmall/useIsWindowSmall";
 
 // Images
-import VGhostityLogo from "../../public/images/Ghostity-svg.svg?component";
-import VGhostityWhiteLogo from "../../public/images/Ghostity-svg-white.svg?component";
 
 function NavbarButton({ text, href }: { text: string; href: string }) {
   const router = useRouter();
@@ -178,9 +178,9 @@ export default function Navbar({
             >
               <motion.div variants={wiggle}>
                 {theme === "light" ? (
-                  <VGhostityLogo className="h-8 w-8" />
+                <Ghostity className="h-8 w-8" />
                 ) : (
-                  <VGhostityWhiteLogo className="h-8 w-8" />
+                  <GhostityWhite className="h-8 w-8" />
                 )}
               </motion.div>
               <motion.h1

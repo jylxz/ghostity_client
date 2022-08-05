@@ -7,6 +7,7 @@ import {loadEnvConfig} from "@next/env"
 export default defineConfig({
   plugins: [react(), svgr()],
   test: {
+    globals: true,
     environment: "jsdom",
     setupFiles: "./vitest.setup.ts"
   },

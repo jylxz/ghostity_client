@@ -1,5 +1,5 @@
 import AnimatedButton from "@general/AnimatedButton";
-import TwitterIcon from "@images/TwitterBlue.svg";
+import TwitterIcon from "@icons/TwitterBlue.svg";
 
 export default function OrganizationSocialMedia({
   social,

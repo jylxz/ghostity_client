@@ -3,9 +3,11 @@
     "baseUrl": "./",
     "paths": {
       "@general/*": ["./components/General/*"],
-      "@images/*": ["./public/images/*"]
+      "@images/*": ["./public/assets/images/*"],
+      "@icons/*": ["./public/assets/icons/*"],
+      "@logo/*": ["./public/assets/logo/*"]
     },
-    "types": ["@honkhonk/vite-plugin-svgr/client"],
+    "types": ["@honkhonk/vite-plugin-svgr/client", "vitest/globals"],
     "target": "es2021",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

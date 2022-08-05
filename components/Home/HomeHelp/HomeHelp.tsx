@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 // Images
-import VGhostityLogo from "@images/Ghostity-svg.svg";
+import Ghostity from "@logo/Ghostity.svg";
 
 // Components
 import LinkTo from "@general/LinkTo";
@@ -35,7 +35,7 @@ export default function HomeHelp() {
             className="relative"
           >
             <motion.div variants={ghostVariant}>
-              <VGhostityLogo className="h-24 w-24 dark:fill-text-primary-dark" />
+              <Ghostity className="h-24 w-24 dark:fill-text-primary-dark" />
             </motion.div>
             <motion.span
               variants={questionMarkVariant}

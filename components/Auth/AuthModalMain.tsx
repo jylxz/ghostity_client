@@ -13,14 +13,14 @@ import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-import { auth } from "../../services/Firebase";
+import { auth } from "services/Firebase";
 
 // Components
+import googleG from "@icons/Google.png";
+import Ghostity from "@logo/Ghostity.svg";
 import Modal from "../General/Modal";
 import AuthForgotPassword from "./AuthForgotPassword";
 import AuthSignUp from "./AuthSignUp";
-import VGhostityIcon from "../../public/images/Ghostity-svg.svg";
-import googleG from "../../public/images/googleG.png";
 
 export default function AuthModalMain({
   showAuth,
@@ -87,7 +87,7 @@ export default function AuthModalMain({
               >
                 <div className="flex-1 flex flex-col items-center justify-center gap-6">
                   <div className="w-16 h-16 bg-primary rounded-full p-4">
-                    <VGhostityIcon />
+                    <Ghostity />
                   </div>
                   <h1 className="text-xl dark:text-text-primary-dark">Sign in to vGhostity</h1>
                   <form

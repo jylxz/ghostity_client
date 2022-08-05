@@ -12,11 +12,10 @@ import {
 
 // Firebase
 import { signOut } from "firebase/auth";
-import { auth } from "../../services/Firebase";
-// import { auth } from "../../firebase/ghostityDevFirebase";
+import { auth } from "services/Firebase";
 
 // Components
-import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
+import Ghostity from "@logo/Ghostity.svg";
 import AnimatedButton from "../General/AnimatedButton";
 import ModalWrapper from "../General/ModalWrapper";
 import LinkTo from "../General/LinkTo";
@@ -73,7 +72,7 @@ export default function HamburgerNavMenu({
                     Browse
                     <div className="border-l-2 border-gray-300 pl-3">
                       <div className="w-5 h-5 -scale-x-100">
-                        <VGhostityLogo className="dark:fill-text-primary-dark"/>
+                        <Ghostity className="dark:fill-text-primary-dark"/>
                       </div>
                     </div>
                   </AnimatedButton>

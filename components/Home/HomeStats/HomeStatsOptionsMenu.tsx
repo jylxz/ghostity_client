@@ -3,7 +3,7 @@ import React from "react";
 
 import CableOutlinedIcon from "@mui/icons-material/CableOutlined";
 import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
-import VGhostityIcon from "@images/Ghostity-svg.svg";
+import Ghostity from "@logo/Ghostity.svg";
 
 import {
   buttonContainerVariant,
@@ -77,7 +77,7 @@ export default function HomeStatsOptionsMenu({
         }`}
       >
         <div className="w-6 h-6">
-          <VGhostityIcon className="dark:fill-primary" />
+          <Ghostity className="dark:fill-primary" />
         </div>
         <span className="dark:text-primary flex items-center gap-1 font-medium">
           Total{" "}

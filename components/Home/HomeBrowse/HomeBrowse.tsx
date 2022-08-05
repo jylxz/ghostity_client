@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "framer-motion";
 
 // Images and Icons
-import VGhostityLogo from "@images/Ghostity-svg.svg";
+import Ghostity from "@logo/Ghostity.svg";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined";
@@ -110,10 +110,10 @@ export default function HomeBrowse() {
               <BrowseCardAnimation staggerOrder={1} title="Streams">
                 <div className="flex gap-2">
                   <motion.div variants={ghostVariant} className="h-10 w-10">
-                    <VGhostityLogo className="h-10 w-10" />
+                    <Ghostity className="h-10 w-10" />
                   </motion.div>
                   <motion.div variants={ghostVariant2} className="h-10 w-10">
-                    <VGhostityLogo className="h-10 w-10 -scale-x-100" />
+                    <Ghostity className="h-10 w-10 -scale-x-100" />
                   </motion.div>
                 </div>
               </BrowseCardAnimation>

@@ -6,8 +6,8 @@ import Image from "next/image";
 
 // Icons
 import { AiOutlineHeart, AiFillHeart, AiOutlineStop } from "react-icons/ai";
-import YoutubeIcon from "../../public/images/yt_icon_rgb.png";
-import TwitchIcon from "../../public/images/TwitchGlitchPurple.svg";
+import TwitchIcon from "@icons/TwitchGlitchPurple.svg";
+import YoutubeIcon from "@icons/Youtube.png";
 
 // Contexts
 import UserContext from "../../contexts/UserContext";

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
-import ThemeContext from "../../contexts/ThemeContext";
-import GhostityLogo from "../../public/images/Ghostity-svg.svg";
-import GhostityLogoAlt from "../../public/images/Ghostity-svg-white.svg";
+import ThemeContext from "contexts/ThemeContext";
+import Ghostity from "@logo/Ghostity.svg";
+import GhostityWhite from "@logo/GhostityWhite.svg";
 
 export default function SearchNoResults() {
   const theme = useContext(ThemeContext);
@@ -14,9 +14,9 @@ export default function SearchNoResults() {
       exit={{ opacity: 0 }}
     >
       {theme === "light" ? (
-        <GhostityLogo className="h-48 w-48" />
+        <Ghostity className="h-48 w-48" />
       ) : (
-        <GhostityLogoAlt className="h-48 w-48" />
+        <GhostityWhite className="h-48 w-48" />
       )}
       No Results Found
     </motion.div>

@@ -4,10 +4,10 @@ import { InputAdornment } from "@mui/material";
 import { BiSearchAlt } from "react-icons/bi";
 import { MdClear } from "react-icons/md";
 import { motion } from "framer-motion";
-import GhostityLogo from "../../public/images/Ghostity-svg.svg";
-import GhostityLogoAlt from "../../public/images/Ghostity-svg-white.svg";
-import ThemeContext from "../../contexts/ThemeContext";
-import GradientCircularProgress from "../General/GradientCircularProgress";
+import Ghostity from "@logo/Ghostity.svg";
+import GhostityWhite from "@logo/GhostityWhite.svg";
+import ThemeContext from "../../../contexts/ThemeContext";
+import GradientCircularProgress from "../../General/GradientCircularProgress";
 
 export default function SearchBar({
   input,
@@ -90,7 +90,7 @@ export default function SearchBar({
             !compact ? "w-28 h-28 p-6" : "w-12 h-12 p-3"
           }  rounded-full bg-primary dark:bg-secondary-dark`}
         >
-          {theme === "light" ? <GhostityLogo /> : <GhostityLogoAlt />}
+          {theme === "light" ? <Ghostity /> : <GhostityWhite />}
         </motion.div>
         {!compact ? (
           <h2 className="dark:text-text-primary-dark text-xl">

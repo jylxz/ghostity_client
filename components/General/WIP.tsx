@@ -1,5 +1,5 @@
 import React from "react";
-import Wip from "../../public/images/WIP.svg";
+import Wip from "@images/WIP.svg";
 
 export default function WIP() {
   return (

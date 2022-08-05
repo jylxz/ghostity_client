@@ -8,6 +8,7 @@ import { RiLockPasswordLine, RiLockPasswordFill } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsArrowLeftShort } from "react-icons/bs";
+import Ghostity from "@logo/Ghostity.svg";
 
 // Firebase
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
@@ -21,7 +22,6 @@ import useValidatePassword from "../../hooks/useValidatePassword/useValidatePass
 
 // Components
 import LoadingButton from "../General/LoadingButton";
-import VGhostityIcon from "../../public/images/Ghostity-svg.svg";
 
 export default function AuthSignUp({
   setShowAuth,
@@ -110,7 +110,7 @@ export default function AuthSignUp({
         Go Back
       </button>
       <div className="w-16 h-16 bg-primary rounded-full p-4">
-        <VGhostityIcon />
+        <Ghostity />
       </div>
       <h1 className="text-xl dark:text-text-primary-dark">Create an account</h1>
       <div className="flex flex-col gap-2 mx-8">

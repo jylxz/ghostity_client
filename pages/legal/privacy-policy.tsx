@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import Footer from "../../components/General/Footer";
-import VGhostityLogo from "../../public/images/Ghostity-svg.svg";
+import Ghostity from "@logo/Ghostity.svg";
 
 export default function PrivatePolicy() {
   return (
@@ -12,7 +12,7 @@ export default function PrivatePolicy() {
       <div className="">
         <div className="dark:bg-secondary-dark dark:text-text-primary-dark bg-gray-100 h-64 flex flex-col justify-center items-center">
           <div className="bg-primary w-20 h-20 p-4 rounded-full">
-            <VGhostityLogo />
+            <Ghostity />
           </div>
           <h1 className="text-2xl font-semibold">Privacy Policy</h1>
           <div className="text-sm">Last Updated: July 1, 2022</div>

@@ -8,7 +8,7 @@ import API from "services/API";
 import BrowseLayout from "layouts/BrowseLayout";
 
 // Images
-import VGhostityLogo from "@images/Ghostity-svg.svg";
+import Ghostity from "@logo/Ghostity.svg";
 
 // Components
 import { DefaultKeywords, DefaultOpenGraph } from "components/Head";
@@ -48,7 +48,7 @@ export default function Organizations({ orgs }: { orgs: Organization[] }) {
           <span className=" text-primary flex gap-2">
             vGhostity
             <div className="w-8 h-8 -scale-x-100 dark:fill-white">
-              <VGhostityLogo />
+              <Ghostity />
             </div>
           </span>
         </div>

@@ -6,10 +6,10 @@ import numbro from "numbro";
 
 // Icons
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import TwitchIcon from "../../public/images/TwitchGlitchPurple.svg";
-import YoutubeIcon from "../../public/images/yt_icon_rgb.png";
-import TwitterIcon from "../../public/images/TwitterBlue.svg";
-import BilibiliIcon from "../../public/images/Bilibili_logo.svg";
+import BilibiliIcon from "@icons/Bilibili.svg";
+import TwitchIcon from "@icons/TwitchGlitchPurple.svg";
+import YoutubeIcon from "@icons/Youtube.png";
+import TwitterIcon from "@icons/TwitterBlue.svg";
 // Hooks
 import useHandleFollows from "../../hooks/useHandleFollows/useHandleFollows";
 

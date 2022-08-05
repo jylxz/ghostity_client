@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image"
-import YTIcon from "@images/yt_icon_rgb.png"
+import YTIcon from "@icons/Youtube.png"
 import AnimatedButton from "@general/AnimatedButton";
 
 export default function OrganizationYouTube({
