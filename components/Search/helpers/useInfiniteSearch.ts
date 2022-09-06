@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "react-query";
-import API from "services/API";
+import API from "services/api";
 
 export default function useInfiniteSearch<T extends APINextPrev>(
   query: string,

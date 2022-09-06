@@ -7,7 +7,6 @@
       "@icons/*": ["./public/assets/icons/*"],
       "@logo/*": ["./public/assets/logo/*"]
     },
-    "types": ["@honkhonk/vite-plugin-svgr/client", "vitest/globals"],
     "target": "es2021",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -30,7 +29,9 @@
     "**/*.tsx",
     "next.config.js",
     "next-sitemap.config.mjs",
-    "services/API/*.ts"
+    "services/api/*.ts",
+    "jest.config.js",
+    "__mocks__/svg.tsx"
   ],
   "exclude": ["node_modules", "functions", "**/*.test.tsx"]
 }

@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
 // Services
-import API from "services/API";
+import API from "services/api";
 
 // Components
 import LivestreamCard from "@general/LivestreamCard";

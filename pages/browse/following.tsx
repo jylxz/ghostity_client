@@ -4,7 +4,7 @@ import Head from "next/head";
 import { useInfiniteQuery } from "react-query";
 
 // Services
-import API from "services/API";
+import API from "services/api";
 
 // Layout
 import BrowseLayout from "layouts/BrowseLayout";

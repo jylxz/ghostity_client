@@ -4,7 +4,7 @@ import Head from "next/head";
 import { motion } from "framer-motion";
 
 // Services
-import API from "services/API";
+import API from "services/api";
 
 // Layout
 import BrowseLayout from "layouts/BrowseLayout";

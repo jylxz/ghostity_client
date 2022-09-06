@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import BrowseLayout from "layouts/BrowseLayout";
 
 // Services
-import API from "services/API";
+import API from "services/api";
 
 // Components
 import { DefaultKeywords, DefaultOpenGraph } from "components/Head";

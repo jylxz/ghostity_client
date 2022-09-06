@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import API from "services/API";
+import API from "services/api";
 
 // Icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";

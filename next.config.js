@@ -1,10 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-};
-
-module.exports = {
-  compilier: {
+  compiler: {
     styledComponents: true,
   },
   images: {
@@ -18,7 +15,7 @@ module.exports = {
       "res.cloudinary.com",
       "i2.hdslb.com",
       "i1.hdslb.com",
-      "i0.hdslb.com"
+      "i0.hdslb.com",
     ],
   },
   webpack(config) {
@@ -46,3 +43,5 @@ module.exports = {
     ];
   },
 };
+
+module.exports = nextConfig

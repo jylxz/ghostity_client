@@ -3,7 +3,7 @@ import Head from "next/head";
 import { GetStaticProps } from "next";
 
 // Services
-import API from "services/API";
+import API from "services/api";
 
 // Components
 import Footer from "@general/Footer";

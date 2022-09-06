@@ -3,7 +3,7 @@ import React, { Fragment, useMemo, useState } from "react";
 import { useQuery } from "react-query";
 
 // Services
-import API from "services/API";
+import API from "services/api";
 
 // Components
 import GradientCircularProgress from "@general/GradientCircularProgress";

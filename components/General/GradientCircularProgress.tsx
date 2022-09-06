@@ -3,10 +3,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 export default function GradientCircularProgress({
   loading = true,
-  size="4rem"
+  size = "4rem",
 }: {
   loading?: boolean;
-  size?: string
+  size?: string;
 }) {
   return loading ? (
     <>
@@ -17,6 +17,7 @@ export default function GradientCircularProgress({
         </linearGradient>
       </svg>
       <CircularProgress
+        role="progressbar"
         thickness={4}
         sx={{ "svg circle": { stroke: "url(#linearColors)" } }}
         size={size}

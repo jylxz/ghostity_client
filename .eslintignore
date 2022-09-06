@@ -4,3 +4,5 @@ tailwind.config.js
 next-sitemap.config.mjs
 *.test.tsx
 vitest.setup.ts
+jest.config.js
+jest.setup.js

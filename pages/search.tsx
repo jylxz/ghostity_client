@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 // Services
-import API from "services/API";
+import API from "services/api";
 
 // Layout 
 import BrowseLayout from "layouts/BrowseLayout"
@@ -21,7 +21,7 @@ import SearchGames from "components/Search/SearchGames";
 import SearchNoResults from "components/Search/SearchNoResults";
 
 // Hooks
-import useHandleShowResults from "components/Search/hooks/useHandleShowResults";
+import useHandleShowResults from "components/Search/helpers/useHandleShowResults";
 import useElementDimensions from "hooks/useElementDimensions";
 
 // CSS

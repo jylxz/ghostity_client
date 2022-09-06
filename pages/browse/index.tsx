@@ -7,7 +7,7 @@ import { LayoutGroup, motion } from "framer-motion";
 
 
 // Services
-import API from "services/API";
+import API from "services/api";
 
 // Hooks
 import useHandleFilters from "hooks/useHandleFilters";

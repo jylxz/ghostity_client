@@ -16,10 +16,10 @@ import GridWrapper from "../General/GridWrapper";
 import GradientCircularProgress from "../General/GradientCircularProgress";
 
 // Hooks
-import useHandleCollapseAndExpand from "./hooks/useHandleCollapseAndExpand";
-import useResponseSlides from "./hooks/useResponseSlides";
-import useInfiniteSearch from "./hooks/useInfiniteSearch";
-import { ShowResultsOptions } from "./hooks/useHandleShowResults";
+import useHandleCollapseAndExpand from "./helpers/useHandleCollapseAndExpand";
+import useResponseSlides from "./helpers/useResponseSlides";
+import useInfiniteSearch from "./helpers/useInfiniteSearch";
+import { ShowResultsOptions } from "./helpers/useHandleShowResults";
 
 export default function SearchStream({
   streams,
