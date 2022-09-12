@@ -2,7 +2,7 @@
 import React, { useContext, useState } from "react";
 import { Card, CardContent, Typography } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
+import Image from "next/future/image";
 
 // Icons
 import { AiOutlineHeart, AiFillHeart, AiOutlineStop } from "react-icons/ai";
@@ -10,82 +10,66 @@ import TwitchIcon from "@icons/TwitchGlitchPurple.svg";
 import YoutubeIcon from "@icons/Youtube.png";
 
 // Contexts
-import UserContext from "../../contexts/UserContext";
-import AdminContext from "../../contexts/AdminContext";
-import BlacklistContext from "../../contexts/BlacklistContext";
+import { ChannelPreviewContext, UserContext, AdminContext, BlacklistContext } from "contexts";
 
 // Hooks
+import { useWindowDimensions } from "hooks";
 import useHandleFollows from "../../hooks/useHandleFollows/useHandleFollows";
 
 // Components
 import LinkTo from "./LinkTo";
 
-function ChannelPic({ stream }: { stream: Stream }) {
-  if (stream.platform === "twitch") {
-    return (
-      <div className="w-6 h-6">
-        <a
-          target="_blank"
-          href={`${stream.stream.url}/about`}
-          rel="noopener noreferrer"
-        >
-          <Image
-            src={stream.channel_img}
-            // priority
-            height="22"
-            width="22"
-            alt={`${stream.channel_name}'s profile img`}
-            className="rounded-full min-w-[24px] min-h-[24px]"
-          />
-        </a>
-      </div>
-    );
+function ChannelPicAndName({ stream }: { stream: Stream }) {
+  const preview = useContext(ChannelPreviewContext);
+  const { width } = useWindowDimensions();
+
+  function handleChannelPreview() {
+    if (preview && width && width > 768) {
+      preview.setPreviewChannelId(stream.channel_id);
+      preview.setShowPreview(true);
+    } else {
+      switch (stream.platform) {
+        case "youtube":
+          window.open(`https://www.youtube.com/channel/${stream.channel_id}`)
+          break
+        case "twitch":
+          window.open(`${stream.stream.url}/about`)
+          break
+        default:
+          break
+      }
+    }
   }
 
   return (
-    <div className="w-6 h-6">
-      <a
-        target="_blank"
-        href={`https://www.youtube.com/channel/${stream.channel_id}`}
-        rel="noopener noreferrer"
+    <div className="flex-1 my-auto">
+      <button
+        type="button"
+        className="flex gap-2 items-center"
+        onClick={() => handleChannelPreview()}
       >
+
         <Image
           src={stream.channel_img}
-          height="24"
-          width="24"
+          // priority
+          height="22"
+          width="22"
           alt={`${stream.channel_name}'s profile img`}
-          className="rounded-full min-w-[24px] min-h-[24px]"
+          className="rounded-full min-w-[22px] min-h-[22px] text-[0px]"
         />
-      </a>
+        <Typography className="line-clamp-1 text-sm font-bold">
+          {stream.channel_name}
+        </Typography>
+      </button>
     </div>
   );
 }
 
-function ChannelName({ stream }: { stream: Stream }) {
-  if (stream.platform === "twitch") {
-    return (
-      <a
-        target="_blank"
-        href={`${stream.stream.url}/videos`}
-        rel="noopener noreferrer"
-      >
-        <span title={stream.channel_name}>{stream.channel_name}</span>
-      </a>
-    );
-  }
-
-  return (
-    <a
-      target="_blank"
-      href={`https://www.youtube.com/channel/${stream.channel_id}`}
-      rel="noopener noreferrer"
-    >
-      <span title={stream.channel_name}>{stream.channel_name}</span>
-    </a>
-  );
-}
-
-function OrganizationIcon({ mainAffiliation }: { mainAffiliation: Stream["channel_info"]["main_affiliation"] }) {
+function OrganizationIcon({
+  mainAffiliation,
+}: {
+  mainAffiliation: Stream["channel_info"]["main_affiliation"];
+}) {
   const [hoverState, setHoverState] = useState(false);
 
   if (mainAffiliation) {
@@ -98,10 +82,7 @@ function OrganizationIcon({ mainAffiliation }: { mainAffiliation: Stream["channe
         <LinkTo
           href={`/browse/organizations/${mainAffiliation.organization_name.toLowerCase()}`}
         >
-        <button
-          type="button"
-          className="flex items-center"
-        >
+          <button type="button" className="flex items-center">
             <Image
               src={mainAffiliation.organization_logo}
               alt={`${mainAffiliation.organization_name}'s alt logo`}
@@ -109,8 +90,8 @@ function OrganizationIcon({ mainAffiliation }: { mainAffiliation: Stream["channe
               width={22}
               className="rounded-full text-xs"
             />
-        </button>
-          </LinkTo>
+          </button>
+        </LinkTo>
         {hoverState ? (
           <span className="absolute whitespace-nowrap dark:bg-secondary-dark-2 bg-secondary-alt-2 text-xs px-2 py-1 top-[24px] right-0 rounded">
             {`${mainAffiliation.organization_name} | ${mainAffiliation.full_name}`}
@@ -124,32 +105,41 @@ function OrganizationIcon({ mainAffiliation }: { mainAffiliation: Stream["channe
 }
 
 function PlatformIcon({ stream }: { stream: Stream }) {
-  if (stream.platform === "twitch")
-    return (
-      <div className="h-5 min-w-[18px] w-[18px]">
-        <a
-          target="_blank"
-          href={stream.stream.url}
-          rel="noopener noreferrer"
-          className="block"
-        >
-          <TwitchIcon />
-        </a>
-      </div>
-    );
-
-  return (
-    <div className="h-5 min-w-[20px] w-5">
-      <a
-        target="_blank"
-        href={stream.stream.url}
-        rel="noopener noreferrer"
-        className="block bg-white bg-clip-text"
-      >
-        <Image src={YoutubeIcon} height={16} width={20} alt="YouTube icon"/>
-      </a>
-    </div>
-  );
+  switch (stream.platform) {
+    case "twitch":
+      return (
+        <div className="h-5 min-w-[18px] w-[18px]">
+          <a
+            target="_blank"
+            href={stream.stream.url}
+            rel="noopener noreferrer"
+            className="block"
+          >
+            <TwitchIcon />
+          </a>
+        </div>
+      );
+    case "youtube":
+      return (
+        <div className="h-5 min-w-[20px] w-5 flex items-center">
+          <a
+            target="_blank"
+            href={stream.stream.url}
+            rel="noopener noreferrer"
+            className="block bg-white bg-clip-text"
+          >
+            <Image
+              src={YoutubeIcon}
+              height={16}
+              width={20}
+              alt="YouTube icon"
+            />
+          </a>
+        </div>
+      );
+    default: 
+      return null
+  }
 }
 
 function SimpleFollowButton({ channelId }: { channelId: string }) {
@@ -281,14 +271,10 @@ export default function LivestreamCard({ stream }: { stream: Stream }) {
         }}
       >
         <div className="flex gap-2 items-center dark:text-primary">
-          <ChannelPic stream={stream} />
-          <Typography className="line-clamp-1 text-sm font-bold flex-1">
-            <ChannelName stream={stream} />
-          </Typography>
+          <ChannelPicAndName stream={stream} />
           <OrganizationIcon
             mainAffiliation={stream.channel_info.main_affiliation}
           />
-
           <PlatformIcon stream={stream} />
         </div>
         <div className="flex justify-between items-center dark:text-text-secondary-dark text-text-secondary mt-0.5">

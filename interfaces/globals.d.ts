@@ -108,6 +108,7 @@ declare global {
         {
           organization_name: string;
           organization_id: string;
+          organization_logo?: string
         }
       ];
       social_media: [
@@ -201,5 +202,21 @@ declare global {
     more: boolean;
     total: number;
     results: T[];
+  }
+
+  interface PreviewData {
+    details: Profile;
+    videos: {
+      youtube: Video[] | null;
+      twitch: Video[] | null;
+    };
+  }
+
+  interface Video {
+    publishedAt: string;
+    title: string;
+    description: string;
+    thumbnail: string;
+    videoUrl: string
   }
 }

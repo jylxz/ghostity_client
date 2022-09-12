@@ -4,6 +4,7 @@ import SidebarContext from "./SidebarContext";
 import ThemeContext from "./ThemeContext";
 import UserContext from "./UserContext";
 import UserFollowContext from "./UserFollowContext";
+import ChannelPreviewContext from "./PreviewContext";
 
 export {
   AdminContext,
@@ -12,4 +13,5 @@ export {
   ThemeContext,
   UserContext,
   UserFollowContext,
+  ChannelPreviewContext
 };

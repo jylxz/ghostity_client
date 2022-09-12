@@ -5,7 +5,8 @@
       "@general/*": ["./components/General/*"],
       "@images/*": ["./public/assets/images/*"],
       "@icons/*": ["./public/assets/icons/*"],
-      "@logo/*": ["./public/assets/logo/*"]
+      "@logo/*": ["./public/assets/logo/*"],
+      "services/*": ["./services/*"]
     },
     "target": "es2021",
     "lib": ["dom", "dom.iterable", "esnext"],

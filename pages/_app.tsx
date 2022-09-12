@@ -57,7 +57,9 @@ import {
   BlacklistContext,
   ThemeContext,
   SidebarContext,
+  ChannelPreviewContext,
 } from "contexts";
+import { PreviewChannel } from "components/Preview";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -185,6 +187,20 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     }
   }, [showAuth, showHamburgerMenu]);
 
+  // Channel details modal
+  const [showPreview, setShowPreview] = useState(false);
+  const [previewChannelId, setPreviewChannelId] = useState("");
+
+  const channelPreviewContextValue = useMemo(
+    () => ({
+      showPreview,
+      setShowPreview,
+      previewChannelId,
+      setPreviewChannelId,
+    }),
+    [showPreview, setShowPreview, previewChannelId, setPreviewChannelId]
+  );
+
   return (
     <>
       <Favicons />
@@ -226,11 +242,20 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                         showBlacklistModal={showBlacklistModal}
                         setShowBlacklistModal={setShowBlacklistModal}
                       />
+                      <PreviewChannel
+                        channelId={previewChannelId}
+                        showPreview={showPreview}
+                        setShowPreview={setShowPreview}
+                      />
                       <BlacklistContext.Provider value={blacklistContextValue}>
                         <SidebarContext.Provider value={sideBarContextValue}>
-                          <main className={showAuth ? "overflow-hidden" : ""}>
-                            {getLayout(<Component {...pageProps} />)}
-                          </main>
+                          <ChannelPreviewContext.Provider
+                            value={channelPreviewContextValue}
+                          >
+                            <main className={showAuth ? "overflow-hidden" : ""}>
+                              {getLayout(<Component {...pageProps} />)}
+                            </main>
+                          </ChannelPreviewContext.Provider>
                         </SidebarContext.Provider>
                       </BlacklistContext.Provider>
                     </AdminContext.Provider>
