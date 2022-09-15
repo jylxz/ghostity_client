@@ -2,9 +2,9 @@ import Image from "next/image";
 import BackgroundWrapper from "@general/BackgroundWrapper";
 import React from "react";
 import { IoMdClose } from "react-icons/io";
-import YoutubeIcon from "@icons/Youtube.png";
-import  TwitchIcon from "@icons/TwitchGlitchPurple.svg"
-import PreviewChannelBannerOrgLogo from "./PreviewChannelBannerOrgLogo";
+import PreviewChannelBannerExternals from "./Externals/PreviewChannelBannerExternals";
+import PreviewChannelBannerBadgeBar from "./BadgeBar/PreviewChannelBannerBadgeBar";
+import PreviewChannelBannerFollowButton from "./FollowButton/PreviewChannelBannerFollowButton";
 
 export default function PreviewChannelBanner({
   profile,
@@ -24,12 +24,11 @@ export default function PreviewChannelBanner({
             className="rounded-full"
           />
           <div className="flex flex-col gap-1">
-            <h1 className="text-5xl ">{profile.name}</h1>
-            <div className="px-1">
-              {profile.profile.affiliations.map((org) => (
-                <PreviewChannelBannerOrgLogo key={org.organization_id} org={org} />
-              ))}
-            </div>
+            <h1 className="text-4xl flex items-center">
+              {profile.name}
+              <PreviewChannelBannerFollowButton profile={profile}/>
+            </h1>
+            <PreviewChannelBannerBadgeBar profile={profile} />
           </div>
         </div>
         <div className="flex flex-col h-full justify-between">
@@ -40,50 +39,7 @@ export default function PreviewChannelBanner({
           >
             <IoMdClose size={20} />
           </button>
-          <div className="flex flex-col gap-2 items-end">
-            {profile.channels.some(
-              (channel) => channel.platform === "youtube"
-            ) && (
-              <a
-                href={
-                  profile.channels.find(
-                    (channel) => channel.platform === "youtube"
-                  )?.link
-                }
-                target="_blank"
-                rel="noreferrer"
-              >
-                <button
-                  type="button"
-                  className="text-sm bg-secondary-alt-2 dark:bg-secondary-dark px-2 py-1 rounded flex items-center gap-2"
-                >
-                  <Image src={YoutubeIcon} width={20} height={16} />
-                  Visit YouTube Channel
-                </button>
-              </a>
-            )}
-            {profile.channels.some(
-              (channel) => channel.platform === "twitch"
-            ) && (
-              <a
-                href={
-                  profile.channels.find(
-                    (channel) => channel.platform === "twitch"
-                  )?.link
-                }
-                target="_blank"
-                rel="noreferrer"
-              >
-                <button
-                  type="button"
-                  className="text-sm bg-secondary-alt-2 dark:bg-secondary-dark px-2 py-1 rounded flex items-center gap-2"
-                >
-                  <TwitchIcon className="w-5 h-5"/>
-                  Visit Twitch Channel
-                </button>
-              </a>
-            )}
-          </div>
+          <PreviewChannelBannerExternals profile={profile} />
         </div>
       </div>
     </BackgroundWrapper>

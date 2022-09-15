@@ -112,7 +112,7 @@ function PlatformIcon({ stream }: { stream: Stream }) {
           <a
             target="_blank"
             href={stream.stream.url}
-            rel="noopener noreferrer"
+            rel="noopener nor eferrer"
             className="block"
           >
             <TwitchIcon />
@@ -152,7 +152,7 @@ function SimpleFollowButton({ channelId }: { channelId: string }) {
       <motion.button
         whileTap={{ scale: 0.7 }}
         className="absolute top-1.5 left-1.5 dark:bg-secondary-dark/80 bg-gray-400/80 text-primary px-1.5 py-0.5 mr-1 text-sm rounded"
-        onPointerDown={() => follow()}
+        onPointerDown={() => follow()}  
         onPointerEnter={() => setHoverState(true)}
         onPointerLeave={() => setHoverState(false)}
       >

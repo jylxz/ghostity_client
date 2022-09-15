@@ -5,6 +5,7 @@ import Document, {
   NextScript,
   DocumentContext,
 } from "next/document";
+import Script from "next/script"
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -17,6 +18,7 @@ class MyDocument extends Document {
       <Html>
         <Head />
         <body className="dark:bg-secondary-dark-2">
+        <Script src="https://platform.twitter.com/widgets.js" strategy="beforeInteractive"/>
           <Main />
           <NextScript />
         </body>

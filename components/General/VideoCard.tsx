@@ -33,7 +33,7 @@ export default function VideoCard({ video }: { video: Video }) {
         />
         <div className="bg-secondary-alt-2/75 dark:bg-primary-dark/90 dark:text-text-primary-dark absolute top-0 h-full text-sm p-2 flex flex-col justify-between">
           <div className="flex gap-1">
-            <div className="line-clamp-2">{video.title}</div>
+            <div className="line-clamp-2 flex-1">{video.title}</div>
             <div>{platformIcon()}</div>
           </div>
           <div className="text-xs dark:text-text-secondary-dark inline">

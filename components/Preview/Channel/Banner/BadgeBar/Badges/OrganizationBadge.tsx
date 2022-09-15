@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-export default function PreviewChannelBannerOrgLogo({
+export default function OrganizationBadge({
   org,
 }: {
   org: Profile["profile"]["affiliations"][0];
@@ -24,8 +24,8 @@ export default function PreviewChannelBannerOrgLogo({
         />
       )}
       {showOrgName && (
-        <div className="absolute left-3 top-4 bg-secondary-alt-2 dark:bg-secondary-dark py-1 px-2 rounded text-sm">
-          {org.organization_name}
+        <div className="absolute z-20 whitespace-nowrap left-3 top-4 bg-secondary-alt-2 dark:bg-secondary-dark py-1 px-2 rounded text-sm">
+          {org.organization_name} member
         </div>
       )}
     </div>

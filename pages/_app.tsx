@@ -34,6 +34,7 @@ import {
   useScrollRestoration,
   useThemeColor,
   useResponsiveBrowseBar,
+  useWindowDimensions,
 } from "hooks";
 
 // Components
@@ -187,7 +188,8 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     }
   }, [showAuth, showHamburgerMenu]);
 
-  // Channel details modal
+  // Channel preview
+  const {width} = useWindowDimensions()
   const [showPreview, setShowPreview] = useState(false);
   const [previewChannelId, setPreviewChannelId] = useState("");
 
@@ -201,8 +203,14 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     [showPreview, setShowPreview, previewChannelId, setPreviewChannelId]
   );
 
+  useEffect(() => {
+    if (width && width > 768) {
+      setShowPreview(false)
+    }
+  }, [width])
+
   return (
-    <>
+    <>   
       <Favicons />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
