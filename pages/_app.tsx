@@ -186,20 +186,6 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     }
   }, [showAuth, showHamburgerMenu]);
 
-  // Channel details modal
-  const [showPreview, setShowPreview] = useState(false);
-  const [previewChannelId, setPreviewChannelId] = useState("");
-
-  const channelPreviewContextValue = useMemo(
-    () => ({
-      showPreview,
-      setShowPreview,
-      previewChannelId,
-      setPreviewChannelId,
-    }),
-    [showPreview, setShowPreview, previewChannelId, setPreviewChannelId]
-  );
-
   return (
     <>   
       <Favicons />
