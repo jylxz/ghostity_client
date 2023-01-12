@@ -4,7 +4,6 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  experimental: { images: { allowFutureImage: true } },
   images: {
     domains: [
       "img.youtube.com",
@@ -45,4 +44,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = nextConfig

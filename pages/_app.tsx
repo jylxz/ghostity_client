@@ -58,9 +58,7 @@ import {
   BlacklistContext,
   ThemeContext,
   SidebarContext,
-  ChannelPreviewContext,
 } from "contexts";
-import { PreviewChannel } from "components/Preview";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -188,8 +186,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     }
   }, [showAuth, showHamburgerMenu]);
 
-  // Channel preview
-  const {width} = useWindowDimensions()
+  // Channel details modal
   const [showPreview, setShowPreview] = useState(false);
   const [previewChannelId, setPreviewChannelId] = useState("");
 
@@ -202,12 +199,6 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     }),
     [showPreview, setShowPreview, previewChannelId, setPreviewChannelId]
   );
-
-  useEffect(() => {
-    if (width && width > 768) {
-      setShowPreview(false)
-    }
-  }, [width])
 
   return (
     <>   
@@ -250,20 +241,11 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                         showBlacklistModal={showBlacklistModal}
                         setShowBlacklistModal={setShowBlacklistModal}
                       />
-                      <PreviewChannel
-                        channelId={previewChannelId}
-                        showPreview={showPreview}
-                        setShowPreview={setShowPreview}
-                      />
                       <BlacklistContext.Provider value={blacklistContextValue}>
                         <SidebarContext.Provider value={sideBarContextValue}>
-                          <ChannelPreviewContext.Provider
-                            value={channelPreviewContextValue}
-                          >
-                            <main className={showAuth ? "overflow-hidden" : ""}>
-                              {getLayout(<Component {...pageProps} />)}
-                            </main>
-                          </ChannelPreviewContext.Provider>
+                          <main className={showAuth ? "overflow-hidden" : ""}>
+                            {getLayout(<Component {...pageProps} />)}
+                          </main>
                         </SidebarContext.Provider>
                       </BlacklistContext.Provider>
                     </AdminContext.Provider>
