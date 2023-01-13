@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "paths": {
       "@general/*": ["./components/General/*"],
       "@images/*": ["./public/assets/images/*"],
