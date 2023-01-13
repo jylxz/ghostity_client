@@ -14,10 +14,10 @@ import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 
 // Services
-import { auth } from "services/Firebase";
+import { auth } from "@services/Firebase";
 
 // Context
-import UserContext from "contexts/UserContext";
+import UserContext from "@contexts/UserContext";
 
 // Components
 import AccountMainUpdateField from "../UpdateField/AccountMainUpdateField";

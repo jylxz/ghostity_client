@@ -11,10 +11,10 @@ import {RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 
 // Firebase
 import { FirebaseError } from "firebase/app";
-import { auth } from "services/Firebase";
+import { auth } from "@services/Firebase";
 
 // Context
-import UserContext from "contexts/UserContext";
+import UserContext from "@contexts/UserContext";
 
 // Components
 import AccountMainUpdateField from "../UpdateField/AccountMainUpdateField";

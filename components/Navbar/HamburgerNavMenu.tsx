@@ -12,7 +12,7 @@ import {
 
 // Firebase
 import { signOut } from "firebase/auth";
-import { auth } from "services/Firebase";
+import { auth } from "@services/Firebase";
 
 // Components
 import Ghostity from "@logo/Ghostity.svg";

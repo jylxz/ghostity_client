@@ -10,7 +10,7 @@ import { BsArrowLeftShort } from "react-icons/bs";
 // Firebase
 import { sendPasswordResetEmail } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
-import { auth } from "services/Firebase";
+import { auth } from "@services/Firebase";
 
 // Components
 import Ghostity from "@logo/Ghostity.svg";

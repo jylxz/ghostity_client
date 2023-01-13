@@ -3,19 +3,19 @@ import Head from "next/head";
 import { useQuery } from "react-query";
 
 // Layout
-import BrowseLayout from "layouts/BrowseLayout";
+import BrowseLayout from "@layouts/BrowseLayout";
 
 // Services
-import API from "services/api";
+import API from "@services/api";
 
 // Components
-import { DefaultKeywords, DefaultOpenGraph } from "components/Head";
+import { DefaultKeywords, DefaultOpenGraph } from "@components/Head";
 import {
   OrganizationBanner,
   OrganizationLive,
   OrganizationMembers,
   OrganizationTabsBar,
-} from "components/Organization";
+} from "@components/Organization";
 import GradientCircularProgress from "@general/GradientCircularProgress";
 import ProblemLoading from "@general/ProblemLoading";
 import BrowseWrapper from "@general/BrowseWrapper";

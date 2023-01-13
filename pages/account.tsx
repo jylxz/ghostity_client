@@ -5,7 +5,7 @@ import React, { useContext, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 
 // Contexts
-import UserContext from "contexts/UserContext";
+import UserContext from "@contexts/UserContext";
 
 // Components
 import {
@@ -13,9 +13,8 @@ import {
   AccountChangePfp,
   AccountMain,
   AccountNoUser,
-} from "components/Account";
+} from "@components/Account";
 import Footer from "@general/Footer";
-
 
 export default function Account() {
   const user = useContext(UserContext);

@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
 
 // Services
-import { auth } from "services/Firebase";
+import { auth } from "@services/Firebase";
 
 // Icons
 import { MdEdit } from "react-icons/md";
@@ -11,7 +11,7 @@ import { GoCheck } from "react-icons/go";
 import { CgProfile } from "react-icons/cg";
 
 // Contexts
-import UserContext from "contexts/UserContext";
+import UserContext from "@contexts/UserContext";
 
 // Components
 import AccountMainUpdateField from "../UpdateField/AccountMainUpdateField";

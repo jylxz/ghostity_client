@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSendEmailVerification } from "react-firebase-hooks/auth";
 import { RiErrorWarningFill } from "react-icons/ri";
-import { auth } from "services/Firebase";
+import { auth } from "@services/Firebase";
 
 export default function AccountMainResendVerification() {
   const [sendEmailVerification] = useSendEmailVerification(auth);

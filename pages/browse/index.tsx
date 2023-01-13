@@ -12,28 +12,28 @@ import { useInView } from "react-intersection-observer";
 import { LayoutGroup, motion } from "framer-motion";
 
 // Services
-import API from "services/api";
+import API from "@services/api";
 
 // Hooks
-import useHandleFilters from "hooks/useHandleFilters";
+import useHandleFilters from "@hooks/useHandleFilters";
 
 // Layout
-import BrowseLayout from "layouts/BrowseLayout";
+import BrowseLayout from "@layouts/BrowseLayout";
 
 // Components
 import {
   DefaultKeywords,
   DefaultOpenGraph,
   DefaultDescription,
-} from "components/Head";
-import { description } from "components/Head/Description";
+} from "@components/Head";
+import { description } from "@components/Head/Description";
 import LivestreamCard from "@general/LivestreamCard";
-import BrowseStreamsFilters from "components/Browse/BrowseStreamsFilters";
+import BrowseStreamsFilters from "@components/Browse/BrowseStreamsFilters";
 import GradientCircularProgress from "@general/GradientCircularProgress";
 import ProblemLoading from "@general/ProblemLoading";
 import BrowseWrapper from "@general/BrowseWrapper";
 import GridWrapper from "@general/GridWrapper";
-import MatureContext from "contexts/MatureContext";
+import MatureContext from "@contexts/MatureContext";
 
 export default function Browse() {
   const { ref, inView } = useInView();

@@ -5,13 +5,13 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { TextField } from "@mui/material";
 import { confirmPasswordReset, verifyPasswordResetCode } from "firebase/auth";
-import { auth } from "services/Firebase";
+import { auth } from "@services/Firebase";
 
 // Components
 import AnimatedButton from "@general/AnimatedButton";
 import Footer from "@general/Footer";
 import LoadingButton from "@general/LoadingButton";
-import useValidatePassword from "hooks/useValidatePassword/useValidatePassword";
+import useValidatePassword from "@hooks/useValidatePassword/useValidatePassword";
 import Ghostity from "@logo/Ghostity.svg";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

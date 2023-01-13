@@ -6,13 +6,13 @@ import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
 // Layout
-import BrowseLayout from "layouts/BrowseLayout";
+import BrowseLayout from "@layouts/BrowseLayout";
 
 // Services
-import API from "services/api";
+import API from "@services/api";
 
 // Components
-import { DefaultKeywords, DefaultOpenGraph } from "components/Head";
+import { DefaultKeywords, DefaultOpenGraph } from "@components/Head";
 import GameCard from "@general/GameCard";
 import ProblemLoading from "@general/ProblemLoading";
 import GradientCircularProgress from "@general/GradientCircularProgress";
@@ -20,7 +20,7 @@ import BrowseWrapper from "@general/BrowseWrapper";
 import GridWrapper from "@general/GridWrapper";
 
 // Hooks
-import useIsWindowSmall from "hooks/useIsWindowSmall";
+import useIsWindowSmall from "@hooks/useIsWindowSmall";
 
 export default function Games() {
   const { ref, inView } = useInView();

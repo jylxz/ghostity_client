@@ -4,10 +4,10 @@ import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import API from "services/api";
+import API from "@services/api";
 
 // Context
-import MatureContext from "contexts/MatureContext";
+import MatureContext from "@contexts/MatureContext";
 
 // Icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";

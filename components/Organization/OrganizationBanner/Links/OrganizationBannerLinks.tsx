@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import useWindowDimensions from "hooks/useWindowDimensions";
+import useWindowDimensions from "@hooks/useWindowDimensions";
 import OrganizationSocialMedia from "./OrganizationSocialMedia";
 import OrganizationWebsite from "./OrganizationWebsite";
 import OrganizationYouTube from "./OrganizationYouTube";

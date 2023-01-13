@@ -28,12 +28,6 @@ export interface Filters {
 }
 
 export default function useHandleFilters() {
-  const defaultFilters = {
-    sort: "desc",
-    platform: "all",
-    language: "all",
-    exclude: [],
-  };
   const [item, setItem] = useLocalStorage<Filters>("filters", {
     sort: "desc",
     platform: "all",

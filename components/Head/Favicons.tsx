@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import useSystemColor from "hooks/useSystemColor/useSystemColor";
+import useSystemColor from "@hooks/useSystemColor/useSystemColor";
 
 export default function Favicons() {
   const [systemColor] = useSystemColor();

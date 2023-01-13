@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion';
 import Image from "next/image";
-import useWindowDimensions from 'hooks/useWindowDimensions';
+import useWindowDimensions from '@hooks/useWindowDimensions';
 import BackgroundWrapper from '@general/BackgroundWrapper';
 
 export default function GameBanner({gameData}: {gameData: Game}) {

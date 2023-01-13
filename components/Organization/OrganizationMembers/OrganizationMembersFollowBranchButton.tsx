@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import useHandleFollows from 'hooks/useHandleFollows';
+import useHandleFollows from '@hooks/useHandleFollows';
 
 export default function OrganizationMembersFollowBranchButton({
   organization,

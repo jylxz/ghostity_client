@@ -5,24 +5,24 @@ import { useQuery } from "react-query";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 // Services
-import API from "services/api";
+import API from "@services/api";
 
 // Layout 
-import BrowseLayout from "layouts/BrowseLayout"
+import BrowseLayout from "@layouts/BrowseLayout"
 
 // Components
-import DefaultKeywords from "components/Head/Keywords";
+import DefaultKeywords from "@components/Head/Keywords";
 import BrowseWrapper from "@general/BrowseWrapper";
-import SearchBar from "components/Search/SearchBar/SearchBar";
-import SearchStream from "components/Search/SearchStream";
-import SearchProfiles from "components/Search/SearchProfiles";
-import SearchOrganizations from "components/Search/SearchOrganizations";
-import SearchGames from "components/Search/SearchGames";
-import SearchNoResults from "components/Search/SearchNoResults";
+import SearchBar from "@components/Search/SearchBar/SearchBar";
+import SearchStream from "@components/Search/SearchStream";
+import SearchProfiles from "@components/Search/SearchProfiles";
+import SearchOrganizations from "@components/Search/SearchOrganizations";
+import SearchGames from "@components/Search/SearchGames";
+import SearchNoResults from "@components/Search/SearchNoResults";
 
 // Hooks
-import useHandleShowResults from "components/Search/helpers/useHandleShowResults";
-import useElementDimensions from "hooks/useElementDimensions";
+import useHandleShowResults from "@components/Search/helpers/useHandleShowResults";
+import useElementDimensions from "@hooks/useElementDimensions";
 
 // CSS
 import "swiper/css";

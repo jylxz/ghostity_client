@@ -10,7 +10,7 @@ import VGhostityDiscovering from "@images/Ghost-discovering-ghostity.svg";
 import LinkTo from "@general/LinkTo";
 
 // Contexts
-import ThemeContext from "contexts/ThemeContext";
+import ThemeContext from "@contexts/ThemeContext";
 
 // Animation Variants
 import {

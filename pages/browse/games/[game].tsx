@@ -4,14 +4,14 @@ import Head from "next/head";
 import { motion } from "framer-motion";
 
 // Services
-import API from "services/api";
+import API from "@services/api";
 
 // Layout
-import BrowseLayout from "layouts/BrowseLayout";
+import BrowseLayout from "@layouts/BrowseLayout";
 
 // Components
-import { DefaultKeywords, DefaultOpenGraph } from "components/Head";
-import { GameBanner, GameStreams } from "components/Game";
+import { DefaultKeywords, DefaultOpenGraph } from "@components/Head";
+import { GameBanner, GameStreams } from "@components/Game";
 import BrowseWrapper from "@general/BrowseWrapper";
 
 export async function getServerSideProps(context: { query: { game: string } }) {

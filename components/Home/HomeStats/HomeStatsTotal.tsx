@@ -2,8 +2,8 @@ import { Chart as ChartJS, ChartData, ChartOptions } from "chart.js";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { format } from "date-fns";
-import useIsWindowSmall from "hooks/useIsWindowSmall";
-import ThemeContext from "contexts/ThemeContext";
+import useIsWindowSmall from "@hooks/useIsWindowSmall";
+import ThemeContext from "@contexts/ThemeContext";
 import defaultChartOptions from "./defaultChartOptions";
 
 const createGradient = (ctx: CanvasRenderingContext2D) => {

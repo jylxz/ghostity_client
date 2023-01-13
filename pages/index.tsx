@@ -3,7 +3,7 @@ import Head from "next/head";
 import { GetStaticProps } from "next";
 
 // Services
-import API from "services/api";
+import API from "@services/api";
 
 // Components
 import Footer from "@general/Footer";
@@ -14,13 +14,13 @@ import {
   HomeBrowse,
   HomeHelp,
   HomeStats,
-} from "components/Home";
+} from "@components/Home";
 import {
   DefaultDescription,
   DefaultKeywords,
   DefaultOpenGraph,
-} from "components/Head";
-import { description } from "components/Head/Description";
+} from "@components/Head";
+import { description } from "@components/Head/Description";
 
 export const getStaticProps: GetStaticProps = async () => {
   const logos = await API.get<OrganizationLogos>("/organizations/logos").then(

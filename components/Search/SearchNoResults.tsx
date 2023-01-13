@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
-import ThemeContext from "contexts/ThemeContext";
+import ThemeContext from "@contexts/ThemeContext";
 import Ghostity from "@logo/Ghostity.svg";
 import GhostityWhite from "@logo/GhostityWhite.svg";
 

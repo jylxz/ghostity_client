@@ -4,23 +4,23 @@ import Head from "next/head";
 import { useInfiniteQuery } from "react-query";
 
 // Services
-import API from "services/api";
+import API from "@services/api";
 
 // Layout
-import BrowseLayout from "layouts/BrowseLayout";
+import BrowseLayout from "@layouts/BrowseLayout";
 
 // Contexts
-import UserContext from "contexts/UserContext";
-import UserFollowContext from "contexts/UserFollowContext";
+import UserContext from "@contexts/UserContext";
+import UserFollowContext from "@contexts/UserFollowContext";
 
 // Components
-import { DefaultDescription, DefaultKeywords } from "components/Head";
+import { DefaultDescription, DefaultKeywords } from "@components/Head";
 import {
   FollowingProfiles,
   FollowingEmpty,
   FollowingStreams,
   FollowingTabsBar,
-} from "components/Following";
+} from "@components/Following";
 import BrowseWrapper from "@general/BrowseWrapper";
 import GradientCircularProgress from "@general/GradientCircularProgress";
 import ProblemLoading from "@general/ProblemLoading";

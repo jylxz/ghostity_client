@@ -13,7 +13,7 @@ import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-import { auth } from "services/Firebase";
+import { auth } from "@services/Firebase";
 
 // Components
 import googleG from "@icons/Google.png";

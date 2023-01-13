@@ -2,16 +2,16 @@ import React, { ReactElement } from "react";
 import Head from "next/head";
 
 // Services
-import API from "services/api";
+import API from "@services/api";
 
 // Layout
-import BrowseLayout from "layouts/BrowseLayout";
+import BrowseLayout from "@layouts/BrowseLayout";
 
 // Images
 import Ghostity from "@logo/Ghostity.svg";
 
 // Components
-import { DefaultKeywords, DefaultOpenGraph } from "components/Head";
+import { DefaultKeywords, DefaultOpenGraph } from "@components/Head";
 import BrowseWrapper from "@general/BrowseWrapper";
 import OrganizationCard from "@general/OrganizationCard";
 

@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import LinkTo from "@general/LinkTo";
 
 // Hooks
-import useIsWindowSmall from "hooks/useIsWindowSmall";
+import useIsWindowSmall from "@hooks/useIsWindowSmall";
 
 // CSS
 import "swiper/css";

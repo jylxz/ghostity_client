@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
-import API from "services/api";
+import API from "@services/api";
 import {
   Chart as ChartJS,
   CategoryScale,

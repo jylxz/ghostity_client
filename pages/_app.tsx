@@ -26,7 +26,7 @@ import "styles/globals.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDocument } from "react-firebase-hooks/firestore";
 import { doc } from "firebase/firestore";
-import { auth, db } from "services/Firebase";
+import { auth, db } from "@services/Firebase";
 
 // Hooks
 import {
@@ -36,19 +36,19 @@ import {
   useResponsiveBrowseBar,
   useWindowDimensions,
   useLocalStorage,
-} from "hooks";
+} from "@hooks/index";
 
 // Components
-import Navbar from "components/Navbar/Navbar";
+import Navbar from "@components/Navbar/Navbar";
 import PageProgress from "@general/PageProgress";
 import BlacklistModal from "@general/BlacklistModal";
-import HamburgerNavMenu from "components/Navbar/HamburgerNavMenu";
-import AuthModalMain from "components/Auth/AuthModalMain";
-import AuthVerifyEmail from "components/Auth/AuthVerifyEmail";
-import AuthUpdateEmail from "components/Auth/AuthUpdateEmail";
-import AuthPasswordResetMessage from "components/Auth/AuthPasswordResetMessage";
-import LiveFollowingBar from "components/Navbar/LiveFollowingBar";
-import Favicons from "components/Head/Favicons";
+import HamburgerNavMenu from "@components/Navbar/HamburgerNavMenu";
+import AuthModalMain from "@components/Auth/AuthModalMain";
+import AuthVerifyEmail from "@components/Auth/AuthVerifyEmail";
+import AuthUpdateEmail from "@components/Auth/AuthUpdateEmail";
+import AuthPasswordResetMessage from "@components/Auth/AuthPasswordResetMessage";
+import LiveFollowingBar from "@components/Navbar/LiveFollowingBar";
+import Favicons from "@components/Head/Favicons";
 import NoticeBar from "@general/NoticeBar";
 
 // Contexts
@@ -59,8 +59,8 @@ import {
   BlacklistContext,
   ThemeContext,
   SidebarContext,
-} from "contexts";
-import MatureContext from "contexts/MatureContext";
+} from "@contexts/index";
+import MatureContext from "@contexts/MatureContext";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;

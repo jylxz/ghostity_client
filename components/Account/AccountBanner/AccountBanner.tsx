@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import Image from "next/image"
 
 import BackgroundWrapper from '@general/BackgroundWrapper';
-import { UserFollowContext } from 'contexts';
+import { UserFollowContext } from '@contexts/index';
 import { format } from 'date-fns';
 import { User } from 'firebase/auth';
 import { AiFillCheckCircle } from 'react-icons/ai';

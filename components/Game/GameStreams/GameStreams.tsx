@@ -6,14 +6,14 @@ import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
 // Services
-import API from "services/api";
+import API from "@services/api";
 
 // Components
 import LivestreamCard from "@general/LivestreamCard";
 import GradientCircularProgress from "@general/GradientCircularProgress";
 import ProblemLoading from "@general/ProblemLoading";
 import GridWrapper from "@general/GridWrapper";
-import MatureContext from "contexts/MatureContext";
+import MatureContext from "@contexts/MatureContext";
 
 export default function GameStreams({ game }: { game: string }) {
   const { ref, inView } = useInView();

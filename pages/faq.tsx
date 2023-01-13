@@ -4,14 +4,14 @@ import React, { useState } from "react";
 import { LayoutGroup, motion } from "framer-motion";
 
 // Components
-import { DefaultDescription, DefaultKeywords } from "components/Head";
+import { DefaultDescription, DefaultKeywords } from "@components/Head";
 import {
   FaqBanner,
   FaqTabsMenu,
   FaqOrganization,
   FaqUser,
   FaqVtuber,
-} from "components/FAQ";
+} from "@components/FAQ";
 import Footer from "@general/Footer";
 
 export default function Faq() {
