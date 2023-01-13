@@ -35,6 +35,7 @@ import {
   useThemeColor,
   useResponsiveBrowseBar,
   useWindowDimensions,
+  useLocalStorage,
 } from "hooks";
 
 // Components
@@ -59,6 +60,7 @@ import {
   ThemeContext,
   SidebarContext,
 } from "contexts";
+import MatureContext from "contexts/MatureContext";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -186,6 +188,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     }
   }, [showAuth, showHamburgerMenu]);
 
+  // For Mature content
+  const [mature, setMature] = useLocalStorage("mature_content", false)
+
   return (
     <>   
       <Favicons />
@@ -193,51 +198,55 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <Hydrate state={pageProps.dehydratedState}>
           <StyledEngineProvider injectFirst>
             <ThemeProvider theme={MUITheme}>
-              <UserContext.Provider value={user || null}>
-                <ThemeContext.Provider value={theme}>
-                  <UserFollowContext.Provider value={followsData || null}>
-                    <AdminContext.Provider value={admin}>
-                      <AuthVerifyEmail />
-                      <AuthUpdateEmail />
-                      <AuthPasswordResetMessage />
-                      <div className="sticky sm:relative top-0 z-50 w-full">
-                        <NoticeBar />
-                        <PageProgress />
-                        <Navbar
+              <MatureContext.Provider value={mature}>
+                <UserContext.Provider value={user || null}>
+                  <ThemeContext.Provider value={theme}>
+                    <UserFollowContext.Provider value={followsData || null}>
+                      <AdminContext.Provider value={admin}>
+                        <AuthVerifyEmail />
+                        <AuthUpdateEmail />
+                        <AuthPasswordResetMessage />
+                        <div className="sticky sm:relative top-0 z-50 w-full">
+                          <NoticeBar />
+                          <PageProgress />
+                          <Navbar
+                            showAuth={showAuth}
+                            setShowAuth={setShowAuth}
+                            setShowHamburgerMenu={setShowHamburgerMenu}
+                            matureContent={mature}
+                            setMatureContent={setMature}
+                            theme={theme}
+                            overrideSystem={overrideSystem}
+                          />
+                          <LiveFollowingBar />
+                        </div>
+                        <AuthModalMain
                           showAuth={showAuth}
                           setShowAuth={setShowAuth}
-                          setShowHamburgerMenu={setShowHamburgerMenu}
-                          theme={theme}
-                          overrideSystem={overrideSystem}
                         />
-                        <LiveFollowingBar />
-                      </div>
-                      <AuthModalMain
-                        showAuth={showAuth}
-                        setShowAuth={setShowAuth}
-                      />
-                      <HamburgerNavMenu
-                        showHamburgerMenu={showHamburgerMenu}
-                        setShowHamburgerMenu={setShowHamburgerMenu}
-                        setShowAuth={setShowAuth}
-                      />
-                      <BlacklistModal
-                        channel={blacklistChannel}
-                        setBlacklistChannel={setBlacklistChannel}
-                        showBlacklistModal={showBlacklistModal}
-                        setShowBlacklistModal={setShowBlacklistModal}
-                      />
-                      <BlacklistContext.Provider value={blacklistContextValue}>
-                        <SidebarContext.Provider value={sideBarContextValue}>
-                          <main className={showAuth ? "overflow-hidden" : ""}>
-                            {getLayout(<Component {...pageProps} />)}
-                          </main>
-                        </SidebarContext.Provider>
-                      </BlacklistContext.Provider>
-                    </AdminContext.Provider>
-                  </UserFollowContext.Provider>
-                </ThemeContext.Provider>
-              </UserContext.Provider>
+                        <HamburgerNavMenu
+                          showHamburgerMenu={showHamburgerMenu}
+                          setShowHamburgerMenu={setShowHamburgerMenu}
+                          setShowAuth={setShowAuth}
+                        />
+                        <BlacklistModal
+                          channel={blacklistChannel}
+                          setBlacklistChannel={setBlacklistChannel}
+                          showBlacklistModal={showBlacklistModal}
+                          setShowBlacklistModal={setShowBlacklistModal}
+                        />
+                        <BlacklistContext.Provider value={blacklistContextValue}>
+                          <SidebarContext.Provider value={sideBarContextValue}>
+                            <main className={showAuth ? "overflow-hidden" : ""}>
+                              {getLayout(<Component {...pageProps} />)}
+                            </main>
+                          </SidebarContext.Provider>
+                        </BlacklistContext.Provider>
+                      </AdminContext.Provider>
+                    </UserFollowContext.Provider>
+                  </ThemeContext.Provider>
+                </UserContext.Provider>
+              </MatureContext.Provider>
             </ThemeProvider>
           </StyledEngineProvider>
         </Hydrate>

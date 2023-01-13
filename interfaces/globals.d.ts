@@ -23,6 +23,7 @@ declare global {
       viewers: number;
       time_started: string;
       language: string;
+      is_mature: boolean;
     };
     _id: string;
     channel_id: string;

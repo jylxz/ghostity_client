@@ -28,6 +28,12 @@ export interface Filters {
 }
 
 export default function useHandleFilters() {
+  const defaultFilters = {
+    sort: "desc",
+    platform: "all",
+    language: "all",
+    exclude: [],
+  };
   const [item, setItem] = useLocalStorage<Filters>("filters", {
     sort: "desc",
     platform: "all",
@@ -50,15 +56,21 @@ export default function useHandleFilters() {
 
   const setFilters = (filter: Filter, filterValue: string) => {
     if (filter === "sort") {
-      setSort(filterValue as Sort);
+      setItem((current) => ({
+        ...current,
+        sort: filterValue as Sort,
+      }));
     }
 
     if (filter === "platform") {
-      setPlatform(filterValue as Platform);
+      setItem((current) => ({ ...current, platform: filterValue as Platform }));
     }
 
     if (filter === "language") {
-      setLanguage(filterValue as Languages);
+      setItem((current) => ({
+        ...current,
+        language: filterValue as Languages,
+      }));
     }
 
     if (filter === "exclude") {
@@ -70,7 +82,7 @@ export default function useHandleFilters() {
         excludeList.push(filterValue as Languages);
       }
 
-      setExclude(excludeList);
+      setItem((current) => ({ ...current, exclude: excludeList }));
     }
   };
 
@@ -81,21 +93,15 @@ export default function useHandleFilters() {
     setExclude([]);
   };
 
-  const filters = useMemo(() => {
-    setItem({
+  const filters = useMemo(
+    () => ({
       sort,
       platform,
       language,
       exclude,
-    });
-
-    return {
-      sort,
-      platform,
-      language,
-      exclude,
-    };
-  }, [sort, platform, language, exclude]);
+    }),
+    [sort, platform, language, exclude]
+  );
 
   const filterString = useMemo(() => {
     let queryFilterString = "";

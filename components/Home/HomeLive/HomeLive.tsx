@@ -1,10 +1,13 @@
 // Libraries
 import { useInfiniteQuery } from "react-query";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import API from "services/api";
+
+// Context
+import MatureContext from "contexts/MatureContext";
 
 // Icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -22,6 +25,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 export default function HomeLive() {
+  const mature = useContext(MatureContext)
   const fetchStreams = async ({ pageParam = 1 }) =>
     API.get<Streams>(`/streams?page=${pageParam}`).then((res) => res.data);
 
@@ -83,6 +87,9 @@ export default function HomeLive() {
             className="py-4"
           >
             {data?.pages[0].results
+              .filter((stream) =>
+                mature ? !!stream : stream.stream.is_mature === false
+              )
               .slice(0, 16)
               .map((stream: Stream, i: number) => (
                 <SwiperSlide

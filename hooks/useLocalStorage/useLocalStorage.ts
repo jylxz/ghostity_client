@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function useLocalStorage<T>(key: string, defaultValue: T) {
-  const [item, setItem] = useState<T>();
+  const [item, setItem] = useState<T | undefined>(undefined);
   const hasWindow = typeof window !== "undefined"
 
   useEffect(() => {
@@ -18,10 +18,10 @@ export default function useLocalStorage<T>(key: string, defaultValue: T) {
   }, [hasWindow]);
 
   useEffect(() => {
-    if (item && item !== defaultValue) {
+    if (item !== undefined) {
       localStorage.setItem(key, JSON.stringify(item));
     }
-  }, [item]);
+  }, [item, setItem]);
 
   return [item, setItem] as const;
 }

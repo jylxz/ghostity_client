@@ -9,7 +9,7 @@ import Ghostity from "@logo/Ghostity.svg?component";
 import GhostityWhite from "@logo/GhostityWhite.svg?component";
 
 // Components
-import { MdOutlineDarkMode } from "react-icons/md";
+import { MdOutlineDarkMode, MdWork, MdWorkOff } from "react-icons/md";
 import { BsFillSunFill } from "react-icons/bs";
 import LinkTo from "../General/LinkTo";
 import NavbarProfileButton from "./NavbarProfile";
@@ -77,6 +77,38 @@ function ThemeButton({
   );
 }
 
+function MatureButton({
+  mature,
+  setMature,
+  theme,
+}: {
+  mature: boolean | undefined;
+  setMature: Dispatch<SetStateAction<boolean>>;
+  theme: "light" | "dark" | undefined;
+}) {
+  return (
+    <motion.button
+      whileTap={{ scale: 0.7 }}
+      type="button"
+      onClick={() => setMature(!mature)}
+      className={`px-2 text-xs flex flex-col items-center justify-center ${theme === "light" ? "text-black" : "text-white"}`}
+      aria-label="mature"
+    >
+        {!mature ? (
+          <>
+            <MdWork />
+            SFW ON
+          </>
+        ) : (
+          <>
+            <MdWorkOff />
+            SFW OFF
+          </>
+        )}
+    </motion.button>
+  );
+}
+
 function LoginButton({
   showAuth,
   setShowAuth,
@@ -97,7 +129,7 @@ function LoginButton({
       Login
     </button>
   ) : (
-    <NavbarProfileButton user={user} isWindowSmall={isWindowSmall}/>
+    <NavbarProfileButton user={user} isWindowSmall={isWindowSmall} />
   );
 }
 
@@ -129,12 +161,16 @@ export default function Navbar({
   setShowHamburgerMenu,
   theme,
   overrideSystem,
+  setMatureContent,
+  matureContent,
 }: {
   showAuth: boolean;
   setShowAuth: Dispatch<SetStateAction<boolean>>;
   setShowHamburgerMenu: Dispatch<SetStateAction<boolean>>;
+  setMatureContent: Dispatch<SetStateAction<boolean>>;
+  matureContent: boolean | undefined;
   theme: "light" | "dark" | undefined;
-  overrideSystem: () => void
+  overrideSystem: () => void;
 }) {
   const isWindowSmall = useIsWindowSmall();
 
@@ -178,7 +214,7 @@ export default function Navbar({
             >
               <motion.div variants={wiggle}>
                 {theme === "light" ? (
-                <Ghostity className="h-8 w-8" />
+                  <Ghostity className="h-8 w-8" />
                 ) : (
                   <GhostityWhite className="h-8 w-8" />
                 )}
@@ -204,6 +240,11 @@ export default function Navbar({
         </ul>
       </div>
       <div className="flex gap-3">
+        <MatureButton
+          theme={theme}
+          mature={matureContent}
+          setMature={setMatureContent}
+        />
         <ThemeButton theme={theme} overrideSystem={overrideSystem} />
         <LoginButton
           isWindowSmall={isWindowSmall}

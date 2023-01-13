@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 // Libraries
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
@@ -13,9 +13,11 @@ import LivestreamCard from "@general/LivestreamCard";
 import GradientCircularProgress from "@general/GradientCircularProgress";
 import ProblemLoading from "@general/ProblemLoading";
 import GridWrapper from "@general/GridWrapper";
+import MatureContext from "contexts/MatureContext";
 
 export default function GameStreams({ game }: { game: string }) {
   const { ref, inView } = useInView();
+  const mature = useContext(MatureContext)
 
   const fetchGameStreams = async ({ pageParam = 1 }) =>
     API.get<Streams>(
@@ -53,11 +55,15 @@ export default function GameStreams({ game }: { game: string }) {
       <GridWrapper colSize="normal">
         {data?.pages.map((group, i) => (
           <Fragment key={i}>
-            {group.results.map((stream) => (
-              <motion.span layout="position" key={stream.channel_id}>
-                <LivestreamCard key={stream.channel_id} stream={stream} />
-              </motion.span>
-            ))}
+            {group.results
+              .filter((stream) =>
+                mature ? !!stream : stream.stream.is_mature === false
+              )
+              .map((stream) => (
+                <motion.span layout="position" key={stream.channel_id}>
+                  <LivestreamCard key={stream.channel_id} stream={stream} />
+                </motion.span>
+              ))}
           </Fragment>
         ))}
       </GridWrapper>
