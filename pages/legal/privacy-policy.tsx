@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
-import Footer from "../../components/General/Footer";
 import Ghostity from "@logo/Ghostity.svg";
+import Footer from "../../components/General/Footer";
 
 export default function PrivatePolicy() {
   return (

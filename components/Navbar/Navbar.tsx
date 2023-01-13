@@ -5,8 +5,8 @@ import { AnimationProps, motion } from "framer-motion";
 
 // Icons
 import { BiMenu } from "react-icons/bi";
-import Ghostity from "@logo/Ghostity.svg?component";
-import GhostityWhite from "@logo/GhostityWhite.svg?component";
+import Ghostity from "@logo/Ghostity.svg";
+import GhostityWhite from "@logo/GhostityWhite.svg";
 
 // Components
 import { MdOutlineDarkMode, MdWork, MdWorkOff } from "react-icons/md";

@@ -4,10 +4,10 @@ import { InputAdornment } from "@mui/material";
 import { BiSearchAlt } from "react-icons/bi";
 import { MdClear } from "react-icons/md";
 import { motion } from "framer-motion";
-import Ghostity from "../../../public/assets/logo/Ghostity.svg";
-import GhostityWhite from "../../../public/assets/logo/GhostityWhite.svg";
 import ThemeContext from "contexts/ThemeContext";
 import GradientCircularProgress from "components/General/GradientCircularProgress";
+import Ghostity from "../../../public/assets/logo/Ghostity.svg";
+import GhostityWhite from "../../../public/assets/logo/GhostityWhite.svg";
 
 export default function SearchBar({
   input,

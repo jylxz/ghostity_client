@@ -3,8 +3,8 @@ import React, { useContext } from "react";
 import { AnimationProps, motion } from "framer-motion";
 
 // Images
-import VGhostityDiscoveringAlt from "@images/Ghost-discovering-ghostity-white.svg?component";
-import VGhostityDiscovering from "@images/Ghost-discovering-ghostity.svg?component";
+import VGhostityDiscoveringAlt from "@images/Ghost-discovering-ghostity-white.svg";
+import VGhostityDiscovering from "@images/Ghost-discovering-ghostity.svg";
 
 // Components
 import LinkTo from "@general/LinkTo";

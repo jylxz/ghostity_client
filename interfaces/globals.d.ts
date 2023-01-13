@@ -203,4 +203,12 @@ declare global {
     total: number;
     results: T[];
   }
+  
+  interface Video {
+    publishedAt: string;
+    title: string;
+    description: string;
+    thumbnail: string;
+    videoUrl: string;
+  }
 }
