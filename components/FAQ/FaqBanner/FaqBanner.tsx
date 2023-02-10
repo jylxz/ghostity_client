@@ -2,7 +2,6 @@ import React from 'react'
 
 // Images and Icons
 import Ghostity from "@logo/Ghostity.svg";
-import { AiOutlineMail } from 'react-icons/ai';
 import TwitterIcon from "@icons/TwitterBlue.svg";
 import DiscordIcon from "@icons/Discord.svg";
 
@@ -20,7 +19,7 @@ export default function FaqBanner() {
           Frequently Asked Questions
         </h1>
         <div className="text-sm dark:text-text-primary-dark text-gray-500">
-          Last Updated: July 6, 2022
+          Last Updated: February 10, 2023
         </div>
         <div className="mt-4 flex flex-wrap justify-center items-center gap-4 bg-gray-200/70 dark:bg-secondary-dark dark:text-text-primary-dark px-3 py-1 rounded-lg">
           <div>
@@ -48,16 +47,6 @@ export default function FaqBanner() {
                 <DiscordIcon />
               </div>
               <span>Jylx#5461</span>
-            </a>
-          </div>
-          |
-          <div>
-            <a
-              href="mailto:jylx@ghostity.com"
-              className="flex items-center text-sm gap-1"
-            >
-              <AiOutlineMail size={20} />
-              <span>Jylx@ghostity.com</span>
             </a>
           </div>
         </div>

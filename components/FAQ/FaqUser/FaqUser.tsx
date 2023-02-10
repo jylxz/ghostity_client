@@ -83,44 +83,6 @@ export default function FaqUser({ currentTab }: { currentTab: string }) {
           <Accordion>
             <FaqAccordionSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel4c-content"
-              id="panel4c-header"
-            >
-              <h3>
-                How can I support the continued development of vGhostity and
-                you?
-              </h3>
-            </FaqAccordionSummary>
-            <FaqAccordionDetails>
-              <p>
-                I currently have a BuyMeACoffee account where you can donate{" "}
-                <a
-                  href="https://www.buymeacoffee.com/jylx"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-bold underline"
-                >
-                  here.
-                </a>
-              </p>
-              <br />
-              <p>
-                Anything helps! Especially anything I can proudly tell my
-                parents about. However, don&apos;t feel pressured or obligated
-                to donate. I created vGhostity on my accord and as a portfolio
-                project as a self-taught developer.
-              </p>
-              <br />
-              <p>
-                If anything, the most I can ask you to do is share vGhostity
-                with your friends, discord homies, Vtuber enjoyers, or other
-                Vtubers! It would cool if vGhostity blew up and became popular!
-              </p>
-            </FaqAccordionDetails>
-          </Accordion>
-          <Accordion>
-            <FaqAccordionSummary
-              expandIcon={<ExpandMoreIcon />}
               aria-controls="panel5c-content"
               id="panel5c-header"
             >

@@ -159,9 +159,6 @@ function Footer() {
                     Twitter
                   </a>
                 </FooterItem>
-                <FooterItem>
-                  <a href="mailto:jylx@ghostity.com">Email</a>
-                </FooterItem>
               </div>
             </motion.div>
           </div>
